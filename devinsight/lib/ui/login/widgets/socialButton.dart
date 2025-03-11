@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SocialButton extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final VoidCallback onPressed;
 
   const SocialButton({
@@ -22,7 +23,13 @@ class SocialButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
-          child: Icon(icon, color: Colors.white, size: 30),
+          child: SvgPicture.asset(
+            icon,
+            height: 30,
+            width: 30,
+            // ignore: deprecated_member_use
+            color: const Color(0xFF1ABCFE),
+          ),
         ),
       ),
     );
