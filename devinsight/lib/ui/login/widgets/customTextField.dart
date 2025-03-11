@@ -6,11 +6,11 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     this.isPassword = false,
-  }) : super(key: key);
+  });
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -25,15 +25,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.isPassword ? !_isPasswordVisible : false,
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle:
+            const TextStyle(color: Colors.white, fontFamily: "Montserrat"),
         filled: true,
-        fillColor: Colors.black.withOpacity(0.2),
+        fillColor: const Color(0xFF1F212A),
         prefixIcon: Icon(widget.icon, color: Colors.white),
         suffixIcon: widget.isPassword
             ? IconButton(
-                icon: Icon(
-                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                  color: Colors.white,
+                icon: Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Colors.white,
+                  ),
                 ),
                 onPressed: () {
                   setState(() {
@@ -47,7 +53,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderSide: BorderSide.none,
         ),
       ),
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white, fontFamily: "Montserrat"),
     );
   }
 }
