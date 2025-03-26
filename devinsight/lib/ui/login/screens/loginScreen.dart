@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../config/routers/app_router.dart';
 import '../widgets/customButton.dart';
 import '../widgets/customTextField.dart';
 import '../widgets/socialButton.dart';
@@ -11,14 +12,11 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 20, 6, 48),
-              Color.fromARGB(255, 4, 1, 9)
-            ],
+            colors: [Colors.grey.shade800, Colors.black],
           ),
         ),
         child: Center(
@@ -48,8 +46,7 @@ class LoginScreen extends ConsumerWidget {
                 const SizedBox(height: 30),
                 const CustomTextField(label: "Usuario", icon: Icons.person),
                 const SizedBox(height: 20),
-                const CustomTextField(
-                    label: "Contraseña", icon: Icons.lock, isPassword: true),
+                const CustomTextField(label: "Contraseña", icon: Icons.lock, isPassword: true),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -91,7 +88,10 @@ class LoginScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(
-                  onTap: () => print("Crear una cuenta"),
+                  onTap: () {
+                    print("Intentando navegar a: ${AppRouter.registerUser}");
+                    ref.read(appRouterProvider).go(AppRouter.registerUser);
+                  },
                   child: const Text(
                     "Crear una cuenta",
                     style: TextStyle(

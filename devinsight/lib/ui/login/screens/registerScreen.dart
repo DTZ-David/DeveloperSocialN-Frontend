@@ -41,8 +41,7 @@ class RegisterScreen extends ConsumerWidget {
                 const SizedBox(height: 20),
                 const CustomTextField(label: "Correo", icon: Icons.email),
                 const SizedBox(height: 20),
-                const CustomTextField(
-                    label: "Contraseña", icon: Icons.lock, isPassword: true),
+                const CustomTextField(label: "Contraseña", icon: Icons.lock, isPassword: true),
 
                 const SizedBox(height: 20),
 
@@ -55,20 +54,6 @@ class RegisterScreen extends ConsumerWidget {
                 ),
 
                 const SizedBox(height: 20),
-
-                // Botones GitHub y Facebook
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialButton(
-                        icon: 'assets/icons/github.svg',
-                        onPressed: () => print("GitHub")),
-                    const SizedBox(width: 20),
-                    SocialButton(
-                        icon: 'assets/icons/google.svg',
-                        onPressed: () => print("Google")),
-                  ],
-                ),
 
                 const SizedBox(height: 20),
 
