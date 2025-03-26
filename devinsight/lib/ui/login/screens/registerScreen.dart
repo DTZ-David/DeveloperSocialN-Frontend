@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../config/routers/app_router.dart';
 import '../widgets/customButton.dart';
 import '../widgets/customTextField.dart';
 import '../widgets/socialButton.dart';
@@ -59,7 +60,9 @@ class RegisterScreen extends ConsumerWidget {
 
                 // Texto Iniciar Sesión
                 GestureDetector(
-                  onTap: () => print("Iniciar Sesión"),
+                  onTap: () {
+                    ref.read(appRouterProvider).go(AppRouter.login);
+                  },
                   child: const Text(
                     "Iniciar Sesión",
                     style: TextStyle(

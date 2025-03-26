@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../config/routers/app_router.dart';
+import '../../../config/themes/theme_storage.dart';
 import '../widgets/customButton.dart';
 import '../widgets/customTextField.dart';
 import '../widgets/socialButton.dart';
@@ -89,7 +90,6 @@ class LoginScreen extends ConsumerWidget {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    print("Intentando navegar a: ${AppRouter.registerUser}");
                     ref.read(appRouterProvider).go(AppRouter.registerUser);
                   },
                   child: const Text(

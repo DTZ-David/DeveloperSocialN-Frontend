@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'config/routers/app_router.dart';
+import 'config/themes/theme_storage.dart';
 import 'services/devinsight/storage_service.dart';
 
 void main() async {
@@ -20,22 +21,21 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'DevInsight',
-      supportedLocales: const [
-        Locale('es'), // Cambia 'es_CO' por 'es' solamente
-      ],
-      locale: const Locale('es'), // También cambia esto
+      supportedLocales: const [Locale('es')],
+      locale: const Locale('es'),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: ThemeData.light(), // Tema claro
+      darkTheme: ThemeData.dark(), // Tema oscuro
+      themeMode: themeMode, // Aplica el modo almacenado
       routerConfig: ref.watch(appRouterProvider),
     );
   }
