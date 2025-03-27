@@ -11,98 +11,129 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.grey.shade800, Colors.black],
-          ),
-        ),
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // const Icon(Icons.code, color: Color(0xFF1ABCFE), size: 100),
-                SvgPicture.asset(
-                  'assets/icons/saturn.svg',
-                  height: 100,
-                  width: 100,
-                  // ignore: deprecated_member_use
-                  color: const Color(0xFF1ABCFE),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "DevInsight",
-                  style: TextStyle(
-                    color: Color(0xFF1ABCFE),
-                    fontSize: 32,
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 30),
-                const CustomTextField(label: "Usuario", icon: Icons.person),
-                const SizedBox(height: 20),
-                const CustomTextField(label: "Contraseña", icon: Icons.lock, isPassword: true),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "¿Olvidaste tu contraseña?",
-                      style: TextStyle(
-                          color: Color(0xFF1ABCFE),
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                CustomButton(
-                  text: "Iniciar Sesión",
-                  onPressed: () {
-                    print("Iniciar Sesión presionado");
-                  },
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: SocialButton(
-                        icon: 'assets/icons/github.svg',
-                        onPressed: () => print("GitHub"),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: SocialButton(
-                        icon: 'assets/icons/google.svg',
-                        onPressed: () => print("Google"),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {
-                    ref.read(appRouterProvider).go(AppRouter.registerUser);
-                  },
-                  child: const Text(
-                    "Crear una cuenta",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      fontFamily: "Montserrat",
-                    ),
-                  ),
-                ),
-              ],
+      body: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.grey.shade800, Colors.black],
             ),
+          ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                  ),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/icons/saturn.svg',
+                                  height: 240,
+                                  width: 240,
+                                  color: const Color(0xFF1ABCFE),
+                                ),
+                                const SizedBox(height: 12),
+                                const Text(
+                                  "DevInsight",
+                                  style: TextStyle(
+                                    color: Color(0xFF1ABCFE),
+                                    fontSize: 32,
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const CustomTextField(
+                                  label: "Usuario", icon: Icons.person),
+                              const SizedBox(height: 20),
+                              const CustomTextField(
+                                  label: "Contraseña",
+                                  icon: Icons.lock,
+                                  isPassword: true),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: const Text(
+                                    "¿Olvidaste tu contraseña?",
+                                    style: TextStyle(
+                                        color: Color(0xFF1ABCFE),
+                                        fontFamily: "Montserrat",
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              CustomButton(
+                                text: "Iniciar Sesión",
+                                onPressed: () {
+                                  print("Iniciar Sesión presionado");
+                                },
+                              ),
+                              const SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: SocialButton(
+                                      icon: 'assets/icons/github.svg',
+                                      onPressed: () => print("GitHub"),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Expanded(
+                                    child: SocialButton(
+                                      icon: 'assets/icons/google.svg',
+                                      onPressed: () => print("Google"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              GestureDetector(
+                                onTap: () {
+                                  ref
+                                      .read(appRouterProvider)
+                                      .go(AppRouter.registerUser);
+                                },
+                                child: const Text(
+                                  "Crear una cuenta",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    fontFamily: "Montserrat",
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 40),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),

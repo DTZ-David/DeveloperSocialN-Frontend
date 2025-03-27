@@ -21,39 +21,44 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      obscureText: widget.isPassword ? !_isPasswordVisible : false,
-      decoration: InputDecoration(
-        labelText: widget.label,
-        labelStyle:
-            const TextStyle(color: Colors.white, fontFamily: "Montserrat"),
-        filled: true,
-        fillColor: const Color(0xFF1F212A),
-        prefixIcon: Icon(widget.icon, color: Colors.white),
-        suffixIcon: widget.isPassword
-            ? IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Icon(
-                    _isPasswordVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off,
-                    color: Colors.white,
+    return SizedBox(
+      child: TextField(
+        obscureText: widget.isPassword ? !_isPasswordVisible : false,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(vertical: 20),
+          labelText: widget.label,
+          labelStyle: const TextStyle(
+            color: Colors.white,
+            fontFamily: "Montserrat",
+          ),
+          filled: true,
+          fillColor: const Color(0xFF1F212A),
+          prefixIcon: Icon(widget.icon, color: Colors.white),
+          suffixIcon: widget.isPassword
+              ? IconButton(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isPasswordVisible = !_isPasswordVisible;
-                  });
-                },
-              )
-            : null,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                )
+              : null,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
         ),
+        style: const TextStyle(color: Colors.white, fontFamily: "Montserrat"),
       ),
-      style: const TextStyle(color: Colors.white, fontFamily: "Montserrat"),
     );
   }
 }
