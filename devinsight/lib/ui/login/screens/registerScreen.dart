@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/routers/app_router.dart';
 import '../widgets/customButton.dart';
 import '../widgets/customTextField.dart';
-import '../widgets/socialButton.dart';
 
 class RegisterScreen extends ConsumerWidget {
   const RegisterScreen({super.key});
