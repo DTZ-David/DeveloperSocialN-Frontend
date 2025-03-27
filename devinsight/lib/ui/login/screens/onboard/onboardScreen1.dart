@@ -2,7 +2,6 @@ import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../config/routers/app_router.dart';
 
 class OnboardingPage1 extends ConsumerWidget {
   const OnboardingPage1({super.key});
@@ -40,7 +39,7 @@ class OnboardingPage1 extends ConsumerWidget {
                       ),
                       const SizedBox(height: 20),
                       SvgPicture.asset(
-                        'assets/icons/saturn.svg',
+                        'assets/icons/rocket.svg',
                         height: 150,
                         width: 150,
                         color: const Color(0xFF1ABCFE),
@@ -57,11 +56,11 @@ class OnboardingPage1 extends ConsumerWidget {
                       ),
                       const SizedBox(height: 10),
                       const Text(
-                        "Te hemos enviado un código\n al correo ozark@gmail.com",
+                        "Te hemos enviado un código al correo user@gmail.com",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 15,
                           fontFamily: "Montserrat",
                         ),
                       ),
@@ -72,19 +71,18 @@ class OnboardingPage1 extends ConsumerWidget {
                           4,
                           (index) => Container(
                             margin: const EdgeInsets.symmetric(horizontal: 5),
-                            width: 63,
-                            height: 81,
+                            width: 81,
+                            height: 110,
                             decoration: BoxDecoration(
                               color: const Color.fromRGBO(31, 33, 42, 100),
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.white, width: 2),
                             ),
                             child: const Center(
                               child: Text(
                                 "X", // Aquí pondrías el número ingresado
                                 style: TextStyle(
-                                  fontSize: 24,
-                                  color: Colors.white,
+                                  fontSize: 50,
+                                  color: Color.fromARGB(255, 56, 56, 61),
                                 ),
                               ),
                             ),
@@ -113,11 +111,11 @@ class OnboardingPage1 extends ConsumerWidget {
                         print("Reenviar código presionado");
                       },
                       child: const Text(
-                        "¿No te llegó?\nReenviar código",
+                        "¿No te llegó el codigo? Reenviar código",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 17,
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.bold,
                         ),

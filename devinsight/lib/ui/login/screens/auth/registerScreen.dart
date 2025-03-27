@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../config/routers/app_router.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customTextField.dart';
-import '../../widgets/socialButton.dart';
 
 class RegisterScreen extends ConsumerWidget {
   const RegisterScreen({super.key});
@@ -13,11 +12,14 @@ class RegisterScreen extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.grey.shade800, Colors.black],
+              colors: [
+                Color.fromARGB(255, 20, 6, 48),
+                Color.fromARGB(255, 4, 1, 9)
+              ],
             ),
           ),
           child: LayoutBuilder(
