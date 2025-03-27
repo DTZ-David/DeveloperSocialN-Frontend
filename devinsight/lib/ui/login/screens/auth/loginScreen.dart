@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../config/routers/app_router.dart';
-import '../widgets/customButton.dart';
-import '../widgets/customTextField.dart';
-import '../widgets/socialButton.dart';
+import '../../../../config/routers/app_router.dart';
+import '../../widgets/customButton.dart';
+import '../../widgets/customTextField.dart';
+import '../../widgets/socialButton.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
@@ -89,25 +89,25 @@ class LoginScreen extends ConsumerWidget {
                                 },
                               ),
                               const SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: SocialButton(
-                                      icon: 'assets/icons/github.svg',
-                                      onPressed: () => print("GitHub"),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  Expanded(
-                                    child: SocialButton(
-                                      icon: 'assets/icons/google.svg',
-                                      onPressed: () => print("Google"),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 20),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     Expanded(
+                              //       child: SocialButton(
+                              //         icon: 'assets/icons/github.svg',
+                              //         onPressed: () => print("GitHub"),
+                              //       ),
+                              //     ),
+                              //     const SizedBox(width: 20),
+                              //     Expanded(
+                              //       child: SocialButton(
+                              //         icon: 'assets/icons/google.svg',
+                              //         onPressed: () => print("Google"),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              const SizedBox(height: 10),
                               GestureDetector(
                                 onTap: () {
                                   ref
