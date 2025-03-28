@@ -1,3 +1,4 @@
+import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -102,7 +103,9 @@ class OnboardingPage1 extends ConsumerWidget {
                     CustomButton(
                       text: "Continuar",
                       onPressed: () {
-                        print("Continuar presionado");
+                        ref
+                            .read(appRouterProvider)
+                            .go(AppRouter.onboard2); // Navegar a la siguiente pantalla
                       },
                     ),
                     const SizedBox(height: 20),
