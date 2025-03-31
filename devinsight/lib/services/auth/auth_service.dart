@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class AuthService {
   static const String _baseUrl =
-      'https://tu-api.com/auth/login'; // Cambia la URL según tu API
+      'https://server-api.com/auth/login';
 
   static Future<Map<String, dynamic>> login(
       String username, String password) async {
