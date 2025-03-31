@@ -1,21 +1,19 @@
+import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:flutter/material.dart';
-import 'package:devinsight/config/routers/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OnboardingPage2 extends ConsumerWidget {
-  const OnboardingPage2({super.key});
+class OnboardingPage3 extends ConsumerWidget {
+  const OnboardingPage3({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<String> languages = [
-      "Python",
-      "Java",
-      "Rust",
-      "C#",
-      "HTML",
-      "CSS",
-      "JavaScript"
+    List<String> tools = [
+      "VS Code",
+      "Figma",
+      "Sublime Text",
+      "IntelliJ IDEA",
+      "Anaconda",
     ];
 
     return Scaffold(
@@ -32,7 +30,6 @@ class OnboardingPage2 extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            // AppBar personalizado con gradiente
             Container(
               padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
               decoration: BoxDecoration(
@@ -52,7 +49,7 @@ class OnboardingPage2 extends ConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () {
-                      ref.read(appRouterProvider).go(AppRouter.onboard1);
+                      ref.read(appRouterProvider).go(AppRouter.onboard2);
                     },
                   ),
                   TextButton(
@@ -80,14 +77,14 @@ class OnboardingPage2 extends ConsumerWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Escoge de 1 a 10 lenguajes, de esta manera te vamos a proveer de contenido único en tu Feed.",
+                    "Escoge de 1 a 10 herramientas, de esta manera te vamos a proveer de contenido único en tu Feed.",
                     style: TextStyle(color: Colors.white70, fontSize: 14),
                   ),
                   SizedBox(height: 20),
                 ],
               ),
             ),
-            // Barra de búsqueda
+            // Lista de lenguajes
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
@@ -116,10 +113,9 @@ class OnboardingPage2 extends ConsumerWidget {
                   spacing: 10,
                   runSpacing: 10,
                   children: List.generate(
-                    languages.length *
-                        3, // Repite los lenguajes como en la imagen
+                    tools.length * 3, // Repite los lenguajes como en la imagen
                     (index) => ChoiceChip(
-                      label: Text(languages[index % languages.length]),
+                      label: Text(tools[index % tools.length]),
                       selected: false,
                       onSelected: (bool selected) {},
                       labelStyle: const TextStyle(color: Colors.white),
@@ -130,8 +126,6 @@ class OnboardingPage2 extends ConsumerWidget {
                 ),
               ),
             ),
-
-            // Botón Continuar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Column(
@@ -148,8 +142,6 @@ class OnboardingPage2 extends ConsumerWidget {
                 ],
               ),
             ),
-
-            // Reenviar código
           ],
         ),
       ),

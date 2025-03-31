@@ -1,14 +1,89 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
 import '../../../../config/routers/app_router.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customTextField.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
+
+  void _showErrorSnackBar(BuildContext context, String message) {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    scaffoldMessenger.clearSnackBars(); // Limpia cualquier SnackBar previo
+    scaffoldMessenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating, // Hace que el SnackBar flote
+        margin: const EdgeInsets.all(10), // Añade margen alrededor
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
+  Future<void> _login(
+      BuildContext context, String username, String password) async {
+    try {
+      print('Intentando conectar al servidor...');
+
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+      scaffoldMessenger.clearSnackBars();
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Conectando al servidor...',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.blue,
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(10),
+          duration: Duration(seconds: 2),
+        ),
+      );
+
+      final response = await http
+          .post(
+        Uri.parse('http://localhost:3000/api/auth/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'username': username,
+          'password': password,
+        }),
+      )
+          .timeout(
+        const Duration(
+            seconds: 5), // Reducido a 5 segundos para ver el error más rápido
+        onTimeout: () {
+          throw Exception('El servidor no respondió a tiempo');
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print('Login exitoso: ${response.body}');
+        // Aquí puedes guardar el token y navegar a la siguiente pantalla
+      } else {
+        print('Error del servidor: ${response.statusCode}');
+        _showErrorSnackBar(context, 'Error: Credenciales inválidas');
+      }
+    } catch (e) {
+      print('Error de conexión: $e');
+      _showErrorSnackBar(context, 'Error: No se pudo conectar con el servidor');
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Añadimos los controladores para los campos de texto
+    final TextEditingController userController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -63,13 +138,16 @@ class LoginScreen extends ConsumerWidget {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const CustomTextField(
-                                  label: "Usuario", icon: Icons.person),
+                              CustomTextField(
+                                  label: "Usuario",
+                                  icon: Icons.person,
+                                  controller: userController),
                               const SizedBox(height: 20),
-                              const CustomTextField(
+                              CustomTextField(
                                   label: "Contraseña",
                                   icon: Icons.lock,
-                                  isPassword: true),
+                                  isPassword: true,
+                                  controller: passwordController),
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
@@ -86,8 +164,12 @@ class LoginScreen extends ConsumerWidget {
                               const SizedBox(height: 10),
                               CustomButton(
                                 text: "Iniciar Sesión",
-                                onPressed: () {
-                                  print("Iniciar Sesión presionado");
+                                onPressed: () async {
+                                  final String username = userController.text;
+                                  final String password =
+                                      passwordController.text;
+
+                                  await _login(context, username, password);
                                 },
                               ),
                               const SizedBox(height: 20),

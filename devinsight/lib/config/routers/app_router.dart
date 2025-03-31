@@ -2,6 +2,7 @@ import 'package:devinsight/ui/login/screens/auth/loginScreen.dart';
 import 'package:devinsight/ui/login/screens/auth/registerScreen.dart';
 import 'package:devinsight/ui/login/screens/onboard/onboardScreen1.dart';
 import 'package:devinsight/ui/login/screens/onboard/onboardScreen2.dart';
+import 'package:devinsight/ui/login/screens/onboard/onboardScreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,6 +36,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.onboard2,
         builder: (context, state) => const OnboardingPage2(),
       ),
+      GoRoute(
+        path: AppRouter.onboard3,
+        name: AppRouter.onboard3,
+        builder: (context, state) => const OnboardingPage3(),
+      ),
     ],
   );
 });
@@ -49,4 +55,5 @@ sealed class AppRouter {
   static const login = '/login';
   static const onboard1 = '/onboard1';
   static const onboard2 = '/onboard2';
+  static const onboard3 = '/onboard3';
 }
