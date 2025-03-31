@@ -4,11 +4,55 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../config/routers/app_router.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customTextField.dart';
+import '../../../../services/auth/auth_service.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> _login() async {
+    final String user = _userController.text.trim();
+    final String password = _passwordController.text.trim();
+
+    if (user.isEmpty || password.isEmpty) {
+      _showSnackbar("Por favor, llena todos los campos", Colors.red);
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    final response = await AuthService.login(user, password);
+
+    if (response["success"]) {
+      _showSnackbar("Inicio de sesión exitoso 🎉", Colors.green);
+      // Aquí podrías guardar el token de sesión si tu API lo devuelve
+    } else {
+      _showSnackbar(response["message"], Colors.red);
+    }
+
+    setState(() => _isLoading = false);
+  }
+
+  void _showSnackbar(String message, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: color,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -63,13 +107,18 @@ class LoginScreen extends ConsumerWidget {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const CustomTextField(
-                                  label: "Usuario", icon: Icons.person),
+                              CustomTextField(
+                                label: "Usuario",
+                                icon: Icons.person,
+                                controller: _userController,
+                              ),
                               const SizedBox(height: 20),
-                              const CustomTextField(
-                                  label: "Contraseña",
-                                  icon: Icons.lock,
-                                  isPassword: true),
+                              CustomTextField(
+                                label: "Contraseña",
+                                icon: Icons.lock,
+                                isPassword: true,
+                                controller: _passwordController,
+                              ),
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
@@ -85,31 +134,12 @@ class LoginScreen extends ConsumerWidget {
                               ),
                               const SizedBox(height: 10),
                               CustomButton(
-                                text: "Iniciar Sesión",
-                                onPressed: () {
-                                  print("Iniciar Sesión presionado");
-                                },
+                                text: _isLoading
+                                    ? "Cargando..."
+                                    : "Iniciar Sesión",
+                                onPressed: _isLoading ? null : _login,
                               ),
                               const SizedBox(height: 20),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     Expanded(
-                              //       child: SocialButton(
-                              //         icon: 'assets/icons/github.svg',
-                              //         onPressed: () => print("GitHub"),
-                              //       ),
-                              //     ),
-                              //     const SizedBox(width: 20),
-                              //     Expanded(
-                              //       child: SocialButton(
-                              //         icon: 'assets/icons/google.svg',
-                              //         onPressed: () => print("Google"),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                              const SizedBox(height: 10),
                               GestureDetector(
                                 onTap: () {
                                   ref

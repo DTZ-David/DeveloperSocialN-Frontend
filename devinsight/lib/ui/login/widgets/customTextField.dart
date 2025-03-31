@@ -4,12 +4,14 @@ class CustomTextField extends StatefulWidget {
   final String label;
   final IconData icon;
   final bool isPassword;
+  final TextEditingController? controller; // 👈 Agregado
 
   const CustomTextField({
     super.key,
     required this.label,
     required this.icon,
     this.isPassword = false,
+    this.controller, // 👈 Agregado
   });
 
   @override
@@ -23,6 +25,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return SizedBox(
       child: TextField(
+        controller: widget.controller, // 👈 Asignar el controlador
         obscureText: widget.isPassword ? !_isPasswordVisible : false,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 20),

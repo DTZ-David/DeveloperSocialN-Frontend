@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButton2 extends StatelessWidget {
   final String text;
-  final Future<void> Function()? onPressed; // 👈 Cambiado
+  final VoidCallback onPressed;
 
-  const CustomButton({
+  const CustomButton2({
     super.key,
     required this.text,
     required this.onPressed,
@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      onPressed: onPressed, // 👈 Funciona con funciones async ahora
+      onPressed: onPressed,
       child: Text(
         text,
         style: const TextStyle(
