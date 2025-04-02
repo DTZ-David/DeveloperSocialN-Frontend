@@ -2,19 +2,28 @@ import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class OnboardingPage3 extends ConsumerWidget {
   const OnboardingPage3({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<String> tools = [
-      "VS Code",
-      "Figma",
-      "Sublime Text",
-      "IntelliJ IDEA",
-      "Anaconda",
-    ];
+    // Mapeo de herramientas con íconos
+    Map<String, IconData> toolIcons = {
+      "VS Code": FontAwesomeIcons.code,
+      "Figma": FontAwesomeIcons.paintBrush,
+      "Sublime Text": FontAwesomeIcons.fileCode,
+      "IntelliJ IDEA": FontAwesomeIcons.brain,
+      "Anaconda": FontAwesomeIcons.python, 
+      "Postman": FontAwesomeIcons.envelopeOpenText,
+      "Git": FontAwesomeIcons.gitAlt,
+      "Docker": FontAwesomeIcons.docker,
+      "Jupyter": FontAwesomeIcons.bookOpen,
+      "Slack": FontAwesomeIcons.slack,
+      "Trello": FontAwesomeIcons.tasks,
+      
+    };
 
     return Scaffold(
       body: Container(
@@ -30,6 +39,7 @@ class OnboardingPage3 extends ConsumerWidget {
         ),
         child: Column(
           children: [
+            // AppBar con gradiente
             Container(
               padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
               decoration: BoxDecoration(
@@ -37,7 +47,6 @@ class OnboardingPage3 extends ConsumerWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    // ignore: deprecated_member_use
                     Color.fromARGB(255, 17, 6, 48).withOpacity(0.1),
                     Color.fromARGB(255, 4, 1, 9).withOpacity(0.1),
                   ],
@@ -84,7 +93,7 @@ class OnboardingPage3 extends ConsumerWidget {
                 ],
               ),
             ),
-            // Lista de lenguajes
+            // Barra de búsqueda
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
@@ -105,27 +114,32 @@ class OnboardingPage3 extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Lista de lenguajes
+            // Lista de herramientas con íconos
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Wrap(
                   spacing: 10,
                   runSpacing: 10,
-                  children: List.generate(
-                    tools.length * 3, // Repite los lenguajes como en la imagen
-                    (index) => ChoiceChip(
-                      label: Text(tools[index % tools.length]),
+                  children: toolIcons.keys.map((tool) {
+                    return ChoiceChip(
+                      avatar: Icon(
+                        toolIcons[tool], // Ícono correspondiente
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                      label: Text(tool),
                       selected: false,
                       onSelected: (bool selected) {},
                       labelStyle: const TextStyle(color: Colors.white),
                       backgroundColor: Colors.grey[850],
                       selectedColor: Colors.blue,
-                    ),
-                  ),
+                    );
+                  }).toList(),
                 ),
               ),
             ),
+            // Botón Continuar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Column(
@@ -137,7 +151,6 @@ class OnboardingPage3 extends ConsumerWidget {
                       ref.read(appRouterProvider).go(AppRouter.onboard3);
                     },
                   ),
-                  const SizedBox(height: 20),
                   const SizedBox(height: 20),
                 ],
               ),

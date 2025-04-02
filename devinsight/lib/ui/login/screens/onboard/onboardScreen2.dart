@@ -2,21 +2,29 @@ import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:devinsight/config/routers/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class OnboardingPage2 extends ConsumerWidget {
   const OnboardingPage2({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<String> languages = [
-      "Python",
-      "Java",
-      "Rust",
-      "C#",
-      "HTML",
-      "CSS",
-      "JavaScript"
-    ];
+    // Mapeo de lenguajes y herramientas con sus respectivos íconos
+    Map<String, IconData> techIcons = {
+      "Python": FontAwesomeIcons.python,
+      "Java": FontAwesomeIcons.java,
+      "Rust": FontAwesomeIcons.rust,
+      "C#": FontAwesomeIcons.ccDiscover,
+      "HTML": FontAwesomeIcons.html5,
+      "CSS": FontAwesomeIcons.css3Alt,
+      "JavaScript": FontAwesomeIcons.js,
+      "C++": FontAwesomeIcons.cuttlefish,
+  
+      "Go": FontAwesomeIcons.golang,
+      "C": FontAwesomeIcons.cuttlefish,
+      
+      
+    };
 
     return Scaffold(
       body: Container(
@@ -40,7 +48,6 @@ class OnboardingPage2 extends ConsumerWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    // ignore: deprecated_member_use
                     Color.fromARGB(255, 17, 6, 48).withOpacity(0.1),
                     Color.fromARGB(255, 4, 1, 9).withOpacity(0.1),
                   ],
@@ -108,25 +115,28 @@ class OnboardingPage2 extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Lista de lenguajes
+            // Lista de lenguajes con íconos
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Wrap(
                   spacing: 10,
                   runSpacing: 10,
-                  children: List.generate(
-                    languages.length *
-                        3, // Repite los lenguajes como en la imagen
-                    (index) => ChoiceChip(
-                      label: Text(languages[index % languages.length]),
+                  children: techIcons.keys.map((language) {
+                    return ChoiceChip(
+                      avatar: Icon(
+                        techIcons[language], // Ícono correspondiente
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                      label: Text(language),
                       selected: false,
                       onSelected: (bool selected) {},
                       labelStyle: const TextStyle(color: Colors.white),
                       backgroundColor: Colors.grey[850],
                       selectedColor: Colors.blue,
-                    ),
-                  ),
+                    );
+                  }).toList(),
                 ),
               ),
             ),
@@ -144,12 +154,9 @@ class OnboardingPage2 extends ConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 20),
-                  const SizedBox(height: 20),
                 ],
               ),
             ),
-
-            // Reenviar código
           ],
         ),
       ),
