@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/config/routers/app_router.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -65,17 +65,16 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildHeader() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CircleAvatar(
-            
-            backgroundImage: AssetImage('assets/icons/saturno.svg'),
-          
+          SvgPicture.asset(
+            'assets/icons/riot_games.svg',
+            height: 40,
           ),
-          Text(
+          const Text(
             
             'DevInsight',
             style: TextStyle(
@@ -84,7 +83,7 @@ class HomeScreen extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Row(
+          const Row(
             children: [
               Icon(Icons.notifications, color: Colors.white),
               SizedBox(width: 10),
