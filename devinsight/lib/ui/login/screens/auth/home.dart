@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:devinsight/ui/login/widgets/navBar.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -9,18 +9,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: const Color(0xFF0E0B1F),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.message), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.article), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-        ],
-      ),
+      //barra de navegacion inferior algo pocha, hay una elevación rara
+      bottomNavigationBar: const CustomNavbar(),//aqui se llama a la barra de navegacion
       body: Column(
         children: [
           _buildHeader(),
@@ -29,8 +19,11 @@ class HomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(10),
               children: [
                 _buildPostCard(
-
-                  profileImage: '',
+                  
+                  profileImage: SvgPicture.asset(
+                    'assets/icons/saturn.svg',
+                    height: 40,
+                  ),  
                   username: 'Riot Games',
                   time: 'Hoy a las 2 PM',
                   content: 'Bienvenidos al nuevo ajuste de Astra...',
@@ -44,7 +37,10 @@ class HomeScreen extends ConsumerWidget {
                   reactions: [2, 45, 32],
                 ),
                 _buildPostCard(
-                  profileImage: '',
+                  profileImage: SvgPicture.asset(
+                    'assets/icons/saturn.svg',
+                    height: 40,
+                  ),
                   username: 'Riot Games',
                   time: 'Hoy a las 2 PM',
                   content: 'Bienvenidos al nuevo ajuste de Astra...',
@@ -61,9 +57,10 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
+    
     );
   }
-
+  //el header con perfil, notificaciones, nombre de la app y config
   Widget _buildHeader() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -71,8 +68,10 @@ class HomeScreen extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SvgPicture.asset(
-            'assets/icons/riot_games.svg',
+            'assets/icons/profile.svg',//no está cargando de momento este svg
             height: 40,
+
+            color: Colors.red,
           ),
           const Text(
             
@@ -94,9 +93,9 @@ class HomeScreen extends ConsumerWidget {
       ),
     );
   }
-
+  //los CARDS de los posts se muestran aqui, cada uno tiene su propio widget
   Widget _buildPostCard({
-    required String profileImage,
+    required Widget profileImage,
     required String username,
     required String time,
     required String content,
@@ -113,7 +112,7 @@ class HomeScreen extends ConsumerWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(backgroundImage: AssetImage(profileImage)),
+                CircleAvatar(child: profileImage),
                 const SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
