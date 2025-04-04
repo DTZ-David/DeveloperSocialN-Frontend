@@ -47,6 +47,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.home,
         builder: (context, state) => const HomeScreen(),
       ),
+      
     ],
   );
 });
@@ -63,4 +64,5 @@ sealed class AppRouter {
   static const onboard2 = '/onboard2';
   static const onboard3 = '/onboard3';
   static const home = '/home';
+  
 }

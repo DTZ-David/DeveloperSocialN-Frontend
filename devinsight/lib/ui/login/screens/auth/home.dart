@@ -1,7 +1,9 @@
+import 'package:devinsight/config/routers/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:devinsight/ui/login/widgets/navBar.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -9,34 +11,16 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: const Color(0xFF0E0B1F),
-      //barra de navegacion inferior algo pocha, hay una elevación rara
-      bottomNavigationBar: const CustomNavbar(),//aqui se llama a la barra de navegacion
+      bottomNavigationBar: const CustomNavbar(),
       body: Column(
         children: [
-          _buildHeader(),
+          _buildHeader(context, ref),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(10),
               children: [
                 _buildPostCard(
-                  
-                  profileImage: SvgPicture.asset(
-                    'assets/icons/saturn.svg',
-                    height: 40,
-                  ),  
-                  username: 'Riot Games',
-                  time: 'Hoy a las 2 PM',
-                  content: 'Bienvenidos al nuevo ajuste de Astra...',
-                  codeSnippet: """
-                  class Astra {
-                    public bool CanBypassTejoUlt { get; set; } = true;
-                    public string GetAdjustment() {
-                      return "Welcome to new adjustment of Astra.";
-                    }
-                  } """,
-                  reactions: [2, 45, 32],
-                ),
-                _buildPostCard(
+                  context,
                   profileImage: SvgPicture.asset(
                     'assets/icons/saturn.svg',
                     height: 40,
@@ -45,11 +29,53 @@ class HomeScreen extends ConsumerWidget {
                   time: 'Hoy a las 2 PM',
                   content: 'Bienvenidos al nuevo ajuste de Astra...',
                   codeSnippet: """class Astra {
-                    public bool CanBypassTejoUlt { get; set; } = true;
-                    public string GetAdjustment() {
-                      return "Welcome to new adjustment of Astra.";
-                    }
-                  } """,
+   public bool CanBypassTejoUlt { get; set; } = true;
+public string GetAdjustment() {
+   return "Welcome to new adjustment of Astra.";
+   
+ }
+};
+
+class Astra {
+   public bool CanBypassTejoUlt { get; set; } = true;
+public string GetAdjustment() {
+   return "Welcome to new adjustment of Astra.";
+   
+   """,
+                  reactions: [2, 45, 32],
+                ),
+                _buildPostCard(
+                  context,
+                  profileImage: SvgPicture.asset(
+                    'assets/icons/saturn.svg',
+                    height: 40,
+                  ),
+                  username: 'Riot Games',
+                  time: 'Hoy a las 2 PM',
+                  content: 'Bienvenidos al nuevo ajuste de Astra...',
+                  codeSnippet: """class Astra {
+   public bool CanBypassTejoUlt { get; set; } = true;
+public string GetAdjustment() {
+   return "Welcome to new adjustment of Astra.";
+ }
+};""",
+                  reactions: [2, 45, 32],
+                ),
+                _buildPostCard(
+                  context,
+                  profileImage: SvgPicture.asset(
+                    'assets/icons/saturn.svg',
+                    height: 40,
+                  ),
+                  username: 'Riot Games',
+                  time: 'Hoy a las 2 PM',
+                  content: 'Bienvenidos al nuevo ajuste de Astra...',
+                  codeSnippet: """class Astra {
+   public bool CanBypassTejoUlt { get; set; } = true;
+public string GetAdjustment() {
+   return "Welcome to new adjustment of Astra.";
+ }
+};""",
                   reactions: [2, 45, 32],
                 ),
               ],
@@ -57,44 +83,49 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-    
     );
   }
-  //el header con perfil, notificaciones, nombre de la app y config
-  Widget _buildHeader() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+
+  Widget _buildHeader(BuildContext context, WidgetRef ref) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: const BoxDecoration(
+        color: Color(0xFF1C1A30),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SvgPicture.asset(
-            'assets/icons/profile.svg',//no está cargando de momento este svg
-            height: 40,
-
-            color: Colors.red,
-          ),
-          const Text(
-            
-            'DevInsight',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                ref.read(appRouterProvider).go(AppRouter.home);
+              },
+              child: const Text(
+                'DevInsight',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
-          const Row(
-            children: [
-              Icon(Icons.notifications, color: Colors.white),
-              SizedBox(width: 10),
-              Icon(Icons.settings, color: Colors.white),
-            ],
+          IconButton(
+            icon: const Icon(Icons.notifications, color: Colors.white),
+            onPressed: () {},
           ),
         ],
       ),
     );
   }
-  //los CARDS de los posts se muestran aqui, cada uno tiene su propio widget
-  Widget _buildPostCard({
+
+  Widget _buildPostCard(
+    BuildContext context, {
     required Widget profileImage,
     required String username,
     required String time,
@@ -102,6 +133,9 @@ class HomeScreen extends ConsumerWidget {
     required String codeSnippet,
     required List<int> reactions,
   }) {
+    String previewSnippet =
+        codeSnippet.split('\n').take(5).join('\n') + '\n...';
+
     return Card(
       color: const Color(0xFF1C1A30),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -111,20 +145,94 @@ class HomeScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleAvatar(child: profileImage),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Text(username,
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
-                    Text(time,
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 12)),
+                    CircleAvatar(child: profileImage),
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(username,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        Text(time,
+                            style: const TextStyle(
+                                color: Colors.white70, fontSize: 12)),
+                      ],
+                    ),
                   ],
                 ),
+                IconButton(
+                  icon: const Icon(Icons.fullscreen, color: Colors.white),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          backgroundColor: const Color(0xFF1C1A30),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.98,
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'view code',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Align(
+                                      child: Text(
+                                        textAlign: TextAlign.left,
+                                        codeSnippet,
+                                        style: const TextStyle(
+                                          fontFamily: 'monospace',
+                                          fontSize: 12,
+                                          color: Colors.greenAccent,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text(
+                                      'Cerrar',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                )
               ],
             ),
             const SizedBox(height: 10),
@@ -137,33 +245,12 @@ class HomeScreen extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                codeSnippet,
+                previewSnippet,
                 style: const TextStyle(
-
-                    fontFamily: 'monospace', color: Colors.greenAccent),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.check_circle, color: Colors.green),
-                    Text(' ${reactions[0]}',
-                        style: const TextStyle(color: Colors.white)),
-                    const SizedBox(width: 10),
-                    const Icon(Icons.help_outline, color: Colors.yellow),
-                    Text(' ${reactions[1]}',
-                        style: const TextStyle(color: Colors.white)),
-                    const SizedBox(width: 10),
-                    const Icon(Icons.chat_bubble_outline, color: Colors.blue),
-                    Text(' ${reactions[2]}',
-                        style: const TextStyle(color: Colors.white)),
-                  ],
+                  fontFamily: 'monospace',
+                  color: Colors.greenAccent,
                 ),
-                const Icon(Icons.share, color: Colors.white),
-              ],
+              ),
             ),
           ],
         ),

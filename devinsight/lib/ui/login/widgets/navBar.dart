@@ -1,7 +1,6 @@
 import 'package:devinsight/config/routers/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:devinsight/config/routers/app_router.dart';
 
 class CustomNavbar extends StatefulWidget {
   const CustomNavbar({super.key});
