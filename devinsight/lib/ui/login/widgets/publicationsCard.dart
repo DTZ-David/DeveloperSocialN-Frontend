@@ -21,6 +21,30 @@ class Astra {
   public string GetAdjustment() {
     return "Welcome to new adjustment of Astra.";
   }
+};
+class Astra {
+  public bool CanBypassTejoUlt { get; set; } = true;
+  public string GetAdjustment() {
+    return "Welcome to new adjustment of Astra.";
+  }
+};
+class Astra {
+  public bool CanBypassTejoUlt { get; set; } = true;
+  public string GetAdjustment() {
+    return "Welcome to new adjustment of Astra.";
+  }
+};
+class Astra {
+  public bool CanBypassTejoUlt { get; set; } = true;
+  public string GetAdjustment() {
+    return "Welcome to new adjustment of Astra.";
+  }
+};
+class Astra {
+  public bool CanBypassTejoUlt { get; set; } = true;
+  public string GetAdjustment() {
+    return "Welcome to new adjustment of Astra.";
+  }
 };""";
 
     String previewSnippet =
@@ -123,76 +147,106 @@ class Astra {
                               context: context,
                               builder: (BuildContext context) {
                                 return Dialog(
+                                  //showdialog de previsualizacion de publicacion
+                                  insetPadding: const EdgeInsets.all(16),
                                   backgroundColor: const Color(0xFF1C1A30),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Container(
-                                    //height:
-                                    //MediaQuery.of(context).size.height * 0.8,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.98,
-                                    padding: const EdgeInsets.all(15),
+                                    //el contenedor como tal que tiene la publicacion
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    height: MediaQuery.of(context).size.height *
+                                        0.8,
+                                    width:
+                                        MediaQuery.of(context).size.width * 1.5,
+                                    padding: const EdgeInsets.all(8),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text(
-                                          'Previsualización del código',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
+                                        const Padding(
+                                          padding: EdgeInsets.all(3),
+                                          child: Center(
+                                            child: Text(
+                                              'Previsualización del código',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                        const SizedBox(height: 10),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.black.withOpacity(0.3),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: SingleChildScrollView(
-                                            scrollDirection: Axis.vertical,
+                                        const SizedBox(height: 15),
+                                        Expanded(
+                                          child: Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                1,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                1,
+                                            decoration: BoxDecoration(
+                                              color: const Color.fromARGB(
+                                                      255, 73, 73, 73)
+                                                  .withOpacity(0.3),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
                                             child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Text(
-                                                codeSnippet,
-                                                style: const TextStyle(
-                                                  fontFamily: 'monospace',
-                                                  fontSize: 12,
-                                                  color: Colors.greenAccent,
+                                              scrollDirection: Axis.vertical,
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  child: Text(
+                                                    codeSnippet,
+                                                    style: const TextStyle(
+                                                      fontFamily: 'monospace',
+                                                      fontSize: 12,
+                                                      color: Colors.greenAccent,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(height: 10),
+                                        const SizedBox(height: 15),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Container(
-                                              width: 100,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                color: Colors.blueAccent,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: Align(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                child: TextButton(
-                                                  onPressed: () {
-                                                    ref
-                                                        .read(appRouterProvider)
-                                                        .go(AppRouter
-                                                            .publications);
-                                                  },
-                                                  child: const Center(
+                                            //botones de cerrar y ver mas
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  ref
+                                                      .read(appRouterProvider)
+                                                      .go(AppRouter
+                                                          .publications);
+                                                },
+                                                child: Container(
+                                                  width: 120,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.blueAccent,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  child: const Align(
+                                                    alignment: Alignment.center,
                                                     child: Text(
                                                       'Ver más',
                                                       style: TextStyle(
@@ -202,24 +256,26 @@ class Astra {
                                                 ),
                                               ),
                                             ),
-                                            const SizedBox(width: 10),
-                                            Container(
-                                              width: 100,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                color: Colors.redAccent,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: Align(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                child: TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Center(
-                                                    child: Text(
+
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Container(
+                                                  
+                                                  width: 120,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.redAccent,
+                                                    borderRadius:
+                                                        BorderRadius.circular(10),
+                                                  ),
+                                                  child: const Align(
+                                                    alignment: Alignment.center,
+                                                    child:  Text(
                                                       'Cerrar',
                                                       style: TextStyle(
                                                           color: Colors.white),

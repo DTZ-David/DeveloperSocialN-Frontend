@@ -12,9 +12,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(
-          
           shadowColor: Colors.lightBlue,
-          
           elevation: 0.2,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -30,7 +28,6 @@ class HomeScreen extends ConsumerWidget {
             },
             child: Row(
               children: [
-              
                 SvgPicture.asset(
                   'assets/icons/saturn.svg',
                   width: 30,
@@ -40,7 +37,6 @@ class HomeScreen extends ConsumerWidget {
                     BlendMode.srcIn,
                   ),
                 ),
-               
                 const SizedBox(width: 10),
                 const Text(
                   "Devinsight",
