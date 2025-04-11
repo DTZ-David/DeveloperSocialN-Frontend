@@ -24,7 +24,7 @@ class HomeScreen extends ConsumerWidget {
           title: GestureDetector(
             onTap: () {
               ref.read(appRouterProvider).go(AppRouter.home);
-              print("Logo clicked");
+              
             },
             child: Row(
               children: [
@@ -39,7 +39,7 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 const SizedBox(width: 10),
                 const Text(
-                  "Devinsight",
+                  "pepigod",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -89,26 +89,25 @@ class HomeScreen extends ConsumerWidget {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: const Color(0xFF1C1A30), // Fondo opcional
-                  borderRadius: BorderRadius.circular(12), // Bordes redondeados
+                  borderRadius: BorderRadius.circular(12), 
+                  border: Border.all(
+                        
+                        width: 2,
+                      ),// Bordes redondeados
                 ),
                 padding: const EdgeInsets.all(12),
-                child: GestureDetector(
-                  onTap: () {
-                    ref.read(appRouterProvider).go(AppRouter.home);
-                  },
-                  child: const Center(
-                    child: Text(
-                      "Publicaciones",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                child: const Center(
+                  child: Text(
+                    "PUBLICACIONES",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

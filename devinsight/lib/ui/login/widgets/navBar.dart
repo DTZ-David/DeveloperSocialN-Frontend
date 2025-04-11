@@ -18,7 +18,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
     AppRouter.home,
     AppRouter.onboard1,
     AppRouter.onboard2,
-    AppRouter.registerUser,
+    AppRouter.publications,
     AppRouter.onboard3,
     
   ];
