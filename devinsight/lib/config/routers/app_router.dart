@@ -1,3 +1,4 @@
+import 'package:devinsight/ui/login/screens/auth/explorer.dart';
 import 'package:devinsight/ui/login/screens/auth/home.dart';
 import 'package:devinsight/ui/login/screens/auth/loginScreen.dart';
 import 'package:devinsight/ui/login/screens/auth/publications.dart';
@@ -53,6 +54,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.publications,
         builder: (context, state) => const Publications(),
       ),
+      GoRoute(
+        path: AppRouter.explorer,
+        name: AppRouter.explorer,
+        builder: (context, state) => const Explorer(),
+      ),
       
     ],
   );
@@ -71,5 +77,6 @@ sealed class AppRouter {
   static const onboard3 = '/onboard3';
   static const home = '/home';
   static const publications = '/publications';
+  static const explorer = '/explorer';
   
 }

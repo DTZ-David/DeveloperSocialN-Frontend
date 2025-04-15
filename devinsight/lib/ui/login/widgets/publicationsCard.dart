@@ -1,5 +1,3 @@
-
-
 import 'package:devinsight/config/routers/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,63 +51,87 @@ class Astra {
     List<int> reactions = [2, 45, 32];
 
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 1, bottom: 1),
+      padding: const EdgeInsets.only(left: 2, right: 2, top: 1, bottom: 1),
       child: Column(
         children: [
           const SizedBox(height: 10),
-          Container(
-            
-            decoration: BoxDecoration(
-              border: Border.all( style: BorderStyle.solid, width:2),
-              color: const Color(0xFF1C1A30),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: GestureDetector(
-              onTap: () {
-                const AlignTransition(
-                  alignment: AlwaysStoppedAnimation(Alignment.center),
-                  child: Text(
-                    'Publicaciones',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                );
-                ref.read(appRouterProvider).go(AppRouter.publications);
-              },
+          GestureDetector(
+            onTap: () {
+              const AlignTransition(
+                alignment: AlwaysStoppedAnimation(Alignment.center),
+                child: Text(
+                  'Publicaciones',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              );
+              ref.read(appRouterProvider).go(AppRouter.publications);
+            },
+            //ESTE ES EL CARD DE LAS PUBLICACIONES
+            child: Padding(
+              padding: const EdgeInsets.only(left: 2, right: 2, bottom: 2),
               child: Card(
-               
-                color: const Color(0xFF1C1A30),
+                borderOnForeground: true,
+                shadowColor: Colors.white,
+                color: const Color(0xFF0E0B1F),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(10),
+                  side: const BorderSide(
+                    color: Color(0xFF1f212a),
+                    width: 0.8,
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 10, right: 10, top: 10, bottom: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      //ESTE ES EL TITULO DE LA PUBLICACION
                       Row(
                         children: [
-                          CircleAvatar(
-                            child: SvgPicture.asset(
-                              'assets/icons/rocket.svg',
-                              height: 30,
+                          // Contenido expandido a la izquierda
+                          Expanded(
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  child: SvgPicture.asset(
+                                    'assets/icons/rocket.svg',
+                                    height: 30,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Flutter Code',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      'Hoy a las 2 PM',
+                                      style: TextStyle(
+                                          color: Colors.white70, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(width: 10),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Flutter Code',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold)),
-                              Text('Hoy a las 2 PM',
-                                  style: TextStyle(
-                                      color: Colors.white70, fontSize: 12)),
-                            ],
+
+                          // Ícono alineado a la derecha
+                          IconButton(
+                            icon: const Icon(Icons.more_vert,
+                                color: Colors.white),
+                            onPressed: () {},
                           ),
                         ],
                       ),
+
+                      //ESTE ES EL TITULO DE LA PUBLICACION
+
                       const SizedBox(height: 10),
                       const Text(
                         'Bienvenidos al nuevo ajuste de Astra...',
@@ -117,23 +139,76 @@ class Astra {
                       ),
                       const SizedBox(height: 10),
                       Container(
-            
-                        padding: const EdgeInsets.only(
-                            left: 15, right: 15, top: 10, bottom: 5),
+                        height: 200, // Altura fija del Container
                         decoration: BoxDecoration(
-                          
-                          border: Border.all(color: Colors.blueAccent, style: BorderStyle.solid, width:2),
-                          color: Colors.black.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          previewSnippet,
-                          style: const TextStyle(
-                              fontFamily: 'monospace',
-                            color: Color.fromARGB(255, 3, 214, 108),
+                          border: Border.all(
+                            color: const Color(0xFF1f212a),
+                            width: 1,
                           ),
+                          color: const Color(0xFF1f212a).withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              previewSnippet,
+                              style: const TextStyle(
+                                fontFamily: 'monospace',
+                                color: Color.fromARGB(255, 3, 214, 108),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+
+                            // Agrega Spacer para empujar el contenido al fondo
+                            const Spacer(),
+
+                            // Contenedor con Row al fondo
+                            GestureDetector(
+                              onTap: () {
+                                ref.read(appRouterProvider).go(AppRouter.login);
+                              },
+                              child: Container(
+                                width: double.infinity, // Ocupa todo el ancho
+                                height: 35,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0xFF24292f),
+                                    width: 1,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                  ),
+                                  color: const Color(0xFF1f212a),
+                                ),
+                                child: const Center(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize
+                                        .min, // Ajusta el Row al contenido
+                                    children: [
+                                      Text(
+                                        "Ver Más",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      SizedBox(width: 6),
+                                      Icon(Icons.keyboard_arrow_up_outlined,
+                                          color: Colors.white, size: 18),
+                                      SizedBox(
+                                          width:
+                                              6), // Espacio entre el ícono y el texto
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+
                       const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,8 +226,7 @@ class Astra {
                             ],
                           ),
                           IconButton(
-                            icon:
-                                const Icon(Icons.fullscreen, color: Colors.white),
+                            icon: const Icon(Icons.share, color: Colors.white),
                             onPressed: () {
                               showDialog(
                                 context: context,
@@ -169,10 +243,11 @@ class Astra {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(20)),
-                                      height: MediaQuery.of(context).size.height *
-                                          0.8,
-                                      width:
-                                          MediaQuery.of(context).size.width * 1.5,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.8,
+                                      width: MediaQuery.of(context).size.width *
+                                          1.5,
                                       padding: const EdgeInsets.all(8),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -217,13 +292,15 @@ class Astra {
                                                       Axis.horizontal,
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(20),
+                                                        const EdgeInsets.all(
+                                                            20),
                                                     child: Text(
                                                       codeSnippet,
                                                       style: const TextStyle(
                                                         fontFamily: 'monospace',
                                                         fontSize: 12,
-                                                        color: Colors.greenAccent,
+                                                        color:
+                                                            Colors.greenAccent,
                                                       ),
                                                     ),
                                                   ),
@@ -247,27 +324,34 @@ class Astra {
                                                         .go(AppRouter
                                                             .publications);
                                                   },
-                                                  child: Container(
-                                                    width: 120,
-                                                    height: 40,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.blueAccent,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                    ),
-                                                    child: const Align(
-                                                      alignment: Alignment.center,
-                                                      child: Text(
-                                                        'Ver más',
-                                                        style: TextStyle(
-                                                            color: Colors.white),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      
+                                                    },
+                                                    child: Container(
+                                                      width: 120,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.blueAccent,
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                10),
+                                                      ),
+                                                      child: const Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Text(
+                                                          'Ver más',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
-            
+
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.all(5.0),
@@ -276,20 +360,22 @@ class Astra {
                                                     Navigator.of(context).pop();
                                                   },
                                                   child: Container(
-                                                    
                                                     width: 120,
                                                     height: 40,
                                                     decoration: BoxDecoration(
                                                       color: Colors.redAccent,
                                                       borderRadius:
-                                                          BorderRadius.circular(10),
+                                                          BorderRadius.circular(
+                                                              10),
                                                     ),
                                                     child: const Align(
-                                                      alignment: Alignment.center,
-                                                      child:  Text(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Text(
                                                         'Cerrar',
                                                         style: TextStyle(
-                                                            color: Colors.white),
+                                                            color:
+                                                                Colors.white),
                                                       ),
                                                     ),
                                                   ),

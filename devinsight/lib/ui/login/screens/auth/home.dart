@@ -11,6 +11,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+
+        //APPBAR DE HOME
         appBar: AppBar(
           shadowColor: Colors.lightBlue,
           elevation: 0.2,
@@ -26,12 +28,14 @@ class HomeScreen extends ConsumerWidget {
               ref.read(appRouterProvider).go(AppRouter.home);
               
             },
+          
             child: Row(
               children: [
+                
                 SvgPicture.asset(
                   'assets/icons/saturn.svg',
-                  width: 30,
-                  height: 30,
+                  width: 40,
+                  height: 40,
                   colorFilter: const ColorFilter.mode(
                     Colors.lightBlue,
                     BlendMode.srcIn,
@@ -52,6 +56,38 @@ class HomeScreen extends ConsumerWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.notifications),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: const Color(0xFF1C1A30),
+                      title: const Text(
+                        "Notificaciones",
+                        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      content: const Text(
+                        "No tienes notificaciones.",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      actions: [
+                        TextButton(
+                          child: const Text(
+                            "Cerrar",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.settings),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -86,9 +122,9 @@ class HomeScreen extends ConsumerWidget {
         ),
         backgroundColor: const Color(0xFF0E0B1F),
         bottomNavigationBar: const CustomNavbar(),
-        body: Column(
+        body: const Column(
           children: [
-            Padding(
+            /*Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Container(
                 width: double.infinity,
@@ -101,7 +137,7 @@ class HomeScreen extends ConsumerWidget {
                       ),// Bordes redondeados
                 ),
                 padding: const EdgeInsets.all(12),
-                child: const Center(
+                /*child: const Center(
                   child: Text(
                     "PUBLICACIONES",
                     style: TextStyle(
@@ -110,10 +146,10 @@ class HomeScreen extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
+                ),*/
               ),
-            ),
-            const Expanded(
+            ),*/
+            Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(10),
                 child: Column(
