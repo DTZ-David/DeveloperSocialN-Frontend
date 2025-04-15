@@ -148,7 +148,9 @@ class OnboardingPage3 extends ConsumerWidget {
                   CustomButton(
                     text: "Continuar",
                     onPressed: () {
-                      ref.read(appRouterProvider).go(AppRouter.onboard3);
+                       
+                      ref.read(appRouterProvider).go(AppRouter.home);
+                      
                     },
                   ),
                   const SizedBox(height: 20),
