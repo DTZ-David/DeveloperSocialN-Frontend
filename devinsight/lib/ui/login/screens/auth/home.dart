@@ -26,12 +26,9 @@ class HomeScreen extends ConsumerWidget {
           title: GestureDetector(
             onTap: () {
               ref.read(appRouterProvider).go(AppRouter.home);
-              
             },
-          
             child: Row(
               children: [
-                
                 SvgPicture.asset(
                   'assets/icons/saturn.svg',
                   width: 40,
@@ -64,11 +61,41 @@ class HomeScreen extends ConsumerWidget {
                       backgroundColor: const Color(0xFF1C1A30),
                       title: const Text(
                         "Notificaciones",
-                        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                      ),
-                      content: const Text(
-                        "No tienes notificaciones.",
                         style: TextStyle(color: Colors.white),
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading:
+                                const Icon(Icons.email, color: Colors.blue),
+                            title: const Text('Email Notifications',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your email notifications logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.sms, color: Colors.green),
+                            title: const Text('SMS Notifications',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your SMS notifications logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.push_pin,
+                                color: Colors.orange),
+                            title: const Text('Push Notifications',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your push notifications logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       ),
                       actions: [
                         TextButton(
@@ -95,12 +122,43 @@ class HomeScreen extends ConsumerWidget {
                     return AlertDialog(
                       backgroundColor: const Color(0xFF1C1A30),
                       title: const Text(
-                        "Notificaciones",
+                        "Ajustes",
                         style: TextStyle(color: Colors.white),
                       ),
-                      content: const Text(
-                        "No tienes notificaciones.",
-                        style: TextStyle(color: Colors.white),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading: const Icon(Icons.account_circle,
+                                color: Colors.blue),
+                            title: const Text('Cuenta',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your account settings logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.notifications,
+                                color: Colors.orange),
+                            title: const Text('Notificaciones',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your notifications settings logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          ListTile(
+                            leading:
+                                const Icon(Icons.security, color: Colors.red),
+                            title: const Text('Seguridad',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your security settings logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       ),
                       actions: [
                         TextButton(
