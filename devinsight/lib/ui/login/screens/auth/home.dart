@@ -11,6 +11,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+
+        //APPBAR DE HOME
         appBar: AppBar(
           shadowColor: Colors.lightBlue,
           elevation: 0.2,
@@ -24,14 +26,13 @@ class HomeScreen extends ConsumerWidget {
           title: GestureDetector(
             onTap: () {
               ref.read(appRouterProvider).go(AppRouter.home);
-              
             },
             child: Row(
               children: [
                 SvgPicture.asset(
                   'assets/icons/saturn.svg',
-                  width: 30,
-                  height: 30,
+                  width: 40,
+                  height: 40,
                   colorFilter: const ColorFilter.mode(
                     Colors.lightBlue,
                     BlendMode.srcIn,
@@ -62,9 +63,102 @@ class HomeScreen extends ConsumerWidget {
                         "Notificaciones",
                         style: TextStyle(color: Colors.white),
                       ),
-                      content: const Text(
-                        "No tienes notificaciones.",
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading:
+                                const Icon(Icons.email, color: Colors.blue),
+                            title: const Text('Email Notifications',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your email notifications logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.sms, color: Colors.green),
+                            title: const Text('SMS Notifications',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your SMS notifications logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.push_pin,
+                                color: Colors.orange),
+                            title: const Text('Push Notifications',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your push notifications logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          child: const Text(
+                            "Cerrar",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: const Color(0xFF1C1A30),
+                      title: const Text(
+                        "Ajustes",
                         style: TextStyle(color: Colors.white),
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading: const Icon(Icons.account_circle,
+                                color: Colors.blue),
+                            title: const Text('Cuenta',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your account settings logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.notifications,
+                                color: Colors.orange),
+                            title: const Text('Notificaciones',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your notifications settings logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          ListTile(
+                            leading:
+                                const Icon(Icons.security, color: Colors.red),
+                            title: const Text('Seguridad',
+                                style: TextStyle(color: Colors.white)),
+                            onTap: () {
+                              // Add your security settings logic here
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       ),
                       actions: [
                         TextButton(
@@ -86,9 +180,9 @@ class HomeScreen extends ConsumerWidget {
         ),
         backgroundColor: const Color(0xFF0E0B1F),
         bottomNavigationBar: const CustomNavbar(),
-        body: Column(
+        body: const Column(
           children: [
-            Padding(
+            /*Padding(
               padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
               child: Container(
                 width: double.infinity,
@@ -101,7 +195,7 @@ class HomeScreen extends ConsumerWidget {
                       ),// Bordes redondeados
                 ),
                 padding: const EdgeInsets.all(12),
-                child: const Center(
+                /*child: const Center(
                   child: Text(
                     "PUBLICACIONES",
                     style: TextStyle(
@@ -110,10 +204,10 @@ class HomeScreen extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
+                ),*/
               ),
-            ),
-            const Expanded(
+            ),*/
+            Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(10),
                 child: Column(

@@ -16,7 +16,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
   //orden de las rutas de izquierda a derecha
   final List<String> _routes = [
     AppRouter.home,
-    AppRouter.onboard1,
+    AppRouter.explorer,
     AppRouter.onboard2,
     AppRouter.publications,
     AppRouter.onboard3,
