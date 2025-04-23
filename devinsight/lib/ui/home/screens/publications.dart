@@ -9,6 +9,7 @@ class Publications extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      bottomNavigationBar: const CustomNavbar(currentIndex: 1,),
       appBar: AppBar(
         title: const Text('Publicaciones'),
         backgroundColor: const Color(0xFF0E0B1F),
@@ -25,7 +26,6 @@ class Publications extends ConsumerWidget {
           style: TextStyle(fontSize: 24),
         ),
       ),
-      bottomNavigationBar: const CustomNavbar(),
     );
   }
 }

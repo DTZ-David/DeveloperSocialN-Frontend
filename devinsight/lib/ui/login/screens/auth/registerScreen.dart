@@ -79,7 +79,7 @@ class RegisterScreen extends ConsumerWidget {
                                 onPressed: () {
                                   ref
                                       .read(appRouterProvider)
-                                      .go(AppRouter.onboard1);
+                                      .go(AppRouter.onboard2);
                                 },
                               ),
                               const SizedBox(height: 30),

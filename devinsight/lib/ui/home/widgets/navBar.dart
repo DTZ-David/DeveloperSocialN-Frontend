@@ -3,39 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomNavbar extends StatefulWidget {
-  const CustomNavbar({super.key});
+  final int currentIndex;
+
+  const CustomNavbar({super.key, required this.currentIndex});
 
   @override
   State<CustomNavbar> createState() => _CustomNavbarState();
 }
 
 class _CustomNavbarState extends State<CustomNavbar> {
-  int currentPageIndex = 0;
-  NavigationDestinationLabelBehavior labelBehavior =
-      NavigationDestinationLabelBehavior.onlyShowSelected;
-  //orden de las rutas de izquierda a derecha
+  late int currentPageIndex;
+
   final List<String> _routes = [
-    AppRouter.home,
-    AppRouter.explorer,
-    AppRouter.onboard2,
-    AppRouter.publications,
-    AppRouter.onboard3,
-    
+    AppRouter.home,//home
+    AppRouter.publications,//publicationsFavorites
+    AppRouter.explorer,//explorer
+    AppRouter.publications,//home
+    AppRouter.profile,
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    currentPageIndex = widget.currentIndex;
+  }
 
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
       backgroundColor: const Color(0xFF0E0B1F),
-      labelBehavior: labelBehavior,
+      labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
       selectedIndex: currentPageIndex,
       onDestinationSelected: (int index) {
         setState(() {
           currentPageIndex = index;
         });
-        context.go(_routes[index]); 
+        context.go(_routes[index]);
       },
-      indicatorColor: Colors.blue.withOpacity(0.3), // Efecto de difuminado azul
+      indicatorColor: Colors.blue.withOpacity(0.3),
       destinations: const <NavigationDestination>[
         NavigationDestination(
           selectedIcon: Icon(Icons.home),

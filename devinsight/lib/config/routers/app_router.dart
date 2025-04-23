@@ -1,11 +1,12 @@
 import 'package:devinsight/ui/home/screens/explorer.dart';
 import 'package:devinsight/ui/home/screens/home.dart';
+import 'package:devinsight/ui/home/screens/profile.dart';
 import 'package:devinsight/ui/login/screens/auth/loginScreen.dart';
 import 'package:devinsight/ui/home/screens/publications.dart';
 import 'package:devinsight/ui/login/screens/auth/registerScreen.dart';
-import 'package:devinsight/ui/login/screens/onboard/onboardScreen1.dart';
-import 'package:devinsight/ui/login/screens/onboard/onboardScreen2.dart';
-import 'package:devinsight/ui/login/screens/onboard/onboardScreen3.dart';
+import 'package:devinsight/ui/login/views/onboardScreen1.dart';
+import 'package:devinsight/ui/login/views/onboardScreen2.dart';
+import 'package:devinsight/ui/login/views/onboardScreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -57,7 +58,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRouter.explorer,
         name: AppRouter.explorer,
-        builder: (context, state) => const Explorer(),
+        builder: (context, state) => const ExplorerPage(),
+      ),
+      GoRoute(
+        path: AppRouter.profile,
+        name: AppRouter.profile,
+        builder: (context, state) => const Profile(),
       ),
     ],
   );
@@ -77,4 +83,5 @@ sealed class AppRouter {
   static const home = '/home';
   static const publications = '/publications';
   static const explorer = '/explorer';
+  static const profile = '/profile';
 }

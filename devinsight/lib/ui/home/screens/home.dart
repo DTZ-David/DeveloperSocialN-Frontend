@@ -172,34 +172,10 @@ class HomeScreen extends ConsumerWidget {
           ],
         ),
         backgroundColor: const Color(0xFF0E0B1F),
-        bottomNavigationBar: const CustomNavbar(),
+        bottomNavigationBar: const CustomNavbar(currentIndex: 0,),
         body: const Column(
           children: [
-            /*Padding(
-              padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF1C1A30), // Fondo opcional
-                  borderRadius: BorderRadius.circular(12), 
-                  border: Border.all(
-                        
-                        width: 2,
-                      ),// Bordes redondeados
-                ),
-                padding: const EdgeInsets.all(12),
-                /*child: const Center(
-                  child: Text(
-                    "PUBLICACIONES",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),*/
-              ),
-            ),*/
+            
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(10),
