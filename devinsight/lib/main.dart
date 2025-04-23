@@ -10,8 +10,6 @@ void main() async {
   await StorageService.init();
   //await dotenv.load(fileName: '.env');
 
-
-  
   runApp(
     const ProviderScope(
       child: MyApp(),

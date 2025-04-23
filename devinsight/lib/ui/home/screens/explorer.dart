@@ -1,9 +1,9 @@
 import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/ui/login/widgets/publicationsCard.dart';
+import 'package:devinsight/ui/home/views/publicationsCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:devinsight/ui/login/widgets/navBar.dart';
+import 'package:devinsight/ui/home/widgets/navBar.dart';
 
 class Explorer extends ConsumerWidget {
   const Explorer({super.key});
@@ -24,7 +24,6 @@ class Explorer extends ConsumerWidget {
           title: GestureDetector(
             onTap: () {
               ref.read(appRouterProvider).go(AppRouter.home);
-              
             },
             child: Row(
               children: [
@@ -49,36 +48,33 @@ class Explorer extends ConsumerWidget {
               ],
             ),
           ),
-          
         ),
         backgroundColor: const Color(0xFF0E0B1F),
         bottomNavigationBar: const CustomNavbar(),
         body: const Column(
           children: [
             Padding(
-              padding:  EdgeInsets.only(top: 2, left: 30, right: 30, bottom: 10),
-              child:  TextField(
-                
-                style: TextStyle(color: Colors.white),
-                cursorColor: Colors.lightBlue,
-                decoration: InputDecoration(
-                  hintText: "Buscar", // Cambia el texto de la sugerencia aquí,
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(Icons.search, color: Colors.grey),
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.cancel, color: Colors.grey, ),
-                )
-              ),
+              padding: EdgeInsets.only(top: 2, left: 30, right: 30, bottom: 10),
+              child: TextField(
+                  style: TextStyle(color: Colors.white),
+                  cursorColor: Colors.lightBlue,
+                  decoration: InputDecoration(
+                    hintText: "Buscar", // Cambia el texto de la sugerencia aquí,
+                    hintStyle: TextStyle(color: Colors.grey),
+                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    border: OutlineInputBorder(),
+                    suffixIcon: Icon(
+                      Icons.cancel,
+                      color: Colors.grey,
+                    ),
+                  )),
             ),
-
-
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Publicationscard(),
-                    
+                    PublicationsCard(),
                   ],
                 ),
               ),

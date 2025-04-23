@@ -1,9 +1,9 @@
 import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/ui/login/widgets/publicationsCard.dart';
+import 'package:devinsight/ui/home/views/publicationsCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:devinsight/ui/login/widgets/navBar.dart';
+import 'package:devinsight/ui/home/widgets/navBar.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -67,8 +67,7 @@ class HomeScreen extends ConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ListTile(
-                            leading:
-                                const Icon(Icons.email, color: Colors.blue),
+                            leading: const Icon(Icons.email, color: Colors.blue),
                             title: const Text('Email Notifications',
                                 style: TextStyle(color: Colors.white)),
                             onTap: () {
@@ -86,8 +85,7 @@ class HomeScreen extends ConsumerWidget {
                             },
                           ),
                           ListTile(
-                            leading: const Icon(Icons.push_pin,
-                                color: Colors.orange),
+                            leading: const Icon(Icons.push_pin, color: Colors.orange),
                             title: const Text('Push Notifications',
                                 style: TextStyle(color: Colors.white)),
                             onTap: () {
@@ -129,30 +127,25 @@ class HomeScreen extends ConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ListTile(
-                            leading: const Icon(Icons.account_circle,
-                                color: Colors.blue),
-                            title: const Text('Cuenta',
-                                style: TextStyle(color: Colors.white)),
+                            leading: const Icon(Icons.account_circle, color: Colors.blue),
+                            title: const Text('Cuenta', style: TextStyle(color: Colors.white)),
                             onTap: () {
                               // Add your account settings logic here
                               Navigator.of(context).pop();
                             },
                           ),
                           ListTile(
-                            leading: const Icon(Icons.notifications,
-                                color: Colors.orange),
-                            title: const Text('Notificaciones',
-                                style: TextStyle(color: Colors.white)),
+                            leading: const Icon(Icons.notifications, color: Colors.orange),
+                            title:
+                                const Text('Notificaciones', style: TextStyle(color: Colors.white)),
                             onTap: () {
                               // Add your notifications settings logic here
                               Navigator.of(context).pop();
                             },
                           ),
                           ListTile(
-                            leading:
-                                const Icon(Icons.security, color: Colors.red),
-                            title: const Text('Seguridad',
-                                style: TextStyle(color: Colors.white)),
+                            leading: const Icon(Icons.security, color: Colors.red),
+                            title: const Text('Seguridad', style: TextStyle(color: Colors.white)),
                             onTap: () {
                               // Add your security settings logic here
                               Navigator.of(context).pop();
@@ -212,9 +205,9 @@ class HomeScreen extends ConsumerWidget {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Publicationscard(),
-                    Publicationscard(),
-                    Publicationscard(),
+                    PublicationsCard(),
+                    PublicationsCard(),
+                    PublicationsCard(),
                   ],
                 ),
               ),

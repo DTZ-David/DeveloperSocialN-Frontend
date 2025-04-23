@@ -1,7 +1,7 @@
-import 'package:devinsight/ui/login/screens/auth/explorer.dart';
-import 'package:devinsight/ui/login/screens/auth/home.dart';
+import 'package:devinsight/ui/home/screens/explorer.dart';
+import 'package:devinsight/ui/home/screens/home.dart';
 import 'package:devinsight/ui/login/screens/auth/loginScreen.dart';
-import 'package:devinsight/ui/login/screens/auth/publications.dart';
+import 'package:devinsight/ui/home/screens/publications.dart';
 import 'package:devinsight/ui/login/screens/auth/registerScreen.dart';
 import 'package:devinsight/ui/login/screens/onboard/onboardScreen1.dart';
 import 'package:devinsight/ui/login/screens/onboard/onboardScreen2.dart';
@@ -59,7 +59,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.explorer,
         builder: (context, state) => const Explorer(),
       ),
-      
     ],
   );
 });
@@ -78,5 +77,4 @@ sealed class AppRouter {
   static const home = '/home';
   static const publications = '/publications';
   static const explorer = '/explorer';
-  
 }
