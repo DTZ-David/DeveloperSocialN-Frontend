@@ -1,6 +1,6 @@
-import 'package:devinsight/ui/home/widgets/codePreviewBox.dart';
-import 'package:devinsight/ui/home/widgets/reactionsRow.dart';
-import 'package:devinsight/ui/home/widgets/publicationHeader.dart';
+import 'package:devinsight/ui/widgets/codePreviewBox.dart';
+import 'package:devinsight/ui/widgets/reactionsRow.dart';
+import 'package:devinsight/ui/widgets/publicationHeader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

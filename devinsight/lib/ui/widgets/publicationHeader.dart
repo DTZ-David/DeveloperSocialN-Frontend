@@ -1,4 +1,4 @@
-import 'package:devinsight/ui/home/widgets/optionsDialog.dart';
+import 'package:devinsight/ui/widgets/optionsDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

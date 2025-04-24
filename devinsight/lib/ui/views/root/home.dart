@@ -1,4 +1,4 @@
-import 'package:devinsight/ui/home/views/publicationsCard.dart';
+import 'package:devinsight/ui/views/root/publicationsCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

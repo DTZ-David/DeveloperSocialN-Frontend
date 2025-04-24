@@ -1,11 +1,11 @@
 import 'package:devinsight/config/routers/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/ui/home/widgets/navBar.dart';
-import 'package:devinsight/ui/home/views/home.dart';
-import 'package:devinsight/ui/home/views/explorer.dart';
-import 'package:devinsight/ui/home/views/profile.dart';
-import 'package:devinsight/ui/home/views/publications.dart';
+import 'package:devinsight/ui/widgets/navBar.dart';
+import 'package:devinsight/ui/views/root/home.dart';
+import 'package:devinsight/ui/views/root/explorer.dart';
+import 'package:devinsight/ui/views/root/profile.dart';
+import 'package:devinsight/ui/views/root/publications.dart';
 import 'package:devinsight/config/providers/navbar_index_provider.dart';
 import 'package:flutter_svg/svg.dart';
 
