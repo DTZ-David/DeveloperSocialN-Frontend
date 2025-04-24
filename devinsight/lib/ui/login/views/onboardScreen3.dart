@@ -47,8 +47,8 @@ class OnboardingPage3 extends ConsumerWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color.fromARGB(255, 17, 6, 48).withOpacity(0.1),
-                    Color.fromARGB(255, 4, 1, 9).withOpacity(0.1),
+                    const Color.fromARGB(255, 17, 6, 48).withOpacity(0.1),
+                    const Color.fromARGB(255, 4, 1, 9).withOpacity(0.1),
                   ],
                 ),
               ),

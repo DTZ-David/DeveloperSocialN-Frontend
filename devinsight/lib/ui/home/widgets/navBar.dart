@@ -15,10 +15,10 @@ class _CustomNavbarState extends State<CustomNavbar> {
   late int currentPageIndex;
 
   final List<String> _routes = [
-    AppRouter.home,//home
-    AppRouter.publications,//publicationsFavorites
-    AppRouter.explorer,//explorer
-    AppRouter.publications,//home
+    AppRouter.home, //home
+    AppRouter.publications, //publicationsFavorites
+    AppRouter.explorer, //explorer
+    AppRouter.publications, //home
     AppRouter.profile,
   ];
 
@@ -37,6 +37,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
       onDestinationSelected: (int index) {
         setState(() {
           currentPageIndex = index;
+          print(currentPageIndex);
         });
         context.go(_routes[index]);
       },

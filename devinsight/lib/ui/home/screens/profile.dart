@@ -7,7 +7,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      bottomNavigationBar: const CustomNavbar(
+      bottomNavigationBar: CustomNavbar(
         currentIndex: 4,
       ),
       body: Center(
