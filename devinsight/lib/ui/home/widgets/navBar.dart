@@ -1,48 +1,23 @@
-import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/config/providers/navbar_index_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomNavbar extends StatefulWidget {
-  final int currentIndex;
-
-  const CustomNavbar({super.key, required this.currentIndex});
+class CustomNavbar extends ConsumerWidget {
+  const CustomNavbar({super.key});
 
   @override
-  State<CustomNavbar> createState() => _CustomNavbarState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentIndex = ref.watch(navbarIndexProvider);
 
-class _CustomNavbarState extends State<CustomNavbar> {
-  late int currentPageIndex;
-
-  final List<String> _routes = [
-    AppRouter.home, //home
-    AppRouter.publications, //publicationsFavorites
-    AppRouter.explorer, //explorer
-    AppRouter.publications, //home
-    AppRouter.profile,
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    currentPageIndex = widget.currentIndex;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return NavigationBar(
       backgroundColor: const Color(0xFF0E0B1F),
       labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-      selectedIndex: currentPageIndex,
+      selectedIndex: currentIndex,
       onDestinationSelected: (int index) {
-        setState(() {
-          currentPageIndex = index;
-          print(currentPageIndex);
-        });
-        context.go(_routes[index]);
+        ref.read(navbarIndexProvider.notifier).state = index;
       },
       indicatorColor: Colors.blue.withOpacity(0.3),
-      destinations: const <NavigationDestination>[
+      destinations: const [
         NavigationDestination(
           selectedIcon: Icon(Icons.home),
           icon: Icon(Icons.home_outlined),

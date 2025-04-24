@@ -1,8 +1,8 @@
-import 'package:devinsight/ui/home/screens/explorer.dart';
-import 'package:devinsight/ui/home/screens/home.dart';
-import 'package:devinsight/ui/home/screens/profile.dart';
+import 'package:devinsight/ui/home/views/explorer.dart';
+import 'package:devinsight/ui/home/views/home.dart';
+import 'package:devinsight/ui/home/views/profile.dart';
 import 'package:devinsight/ui/login/screens/auth/loginScreen.dart';
-import 'package:devinsight/ui/home/screens/publications.dart';
+import 'package:devinsight/ui/home/views/publications.dart';
 import 'package:devinsight/ui/login/screens/auth/registerScreen.dart';
 import 'package:devinsight/ui/login/views/onboardScreen1.dart';
 import 'package:devinsight/ui/login/views/onboardScreen2.dart';
