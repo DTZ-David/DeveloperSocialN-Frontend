@@ -1,5 +1,6 @@
 import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/core/app_colors.dart';
+import 'package:devinsight/ui/theme/app_colors.dart';
+import 'package:devinsight/ui/views/root/create_post.dart';
 import 'package:devinsight/ui/widgets/auth/customNotificationIcon.dart';
 import 'package:devinsight/ui/widgets/auth/customSettingsIcon.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,9 @@ class MainScreen extends ConsumerWidget {
       case 1:
         return const Publications();
       case 2:
-        return const ExplorerPage();
+        return const CreatePostView();
       case 3:
-        return const Profile(); // otra pantalla si quieres
+        return const ExplorerPage(); // otra pantalla si quieres
       case 4:
         return const Profile();
       default:
@@ -78,7 +79,6 @@ class MainScreen extends ConsumerWidget {
           CustomNotificationIcon(),
           //Icono de configuración
           Customsettingsicon(),
-        
         ],
       ),
       body: _buildScreen(index),
