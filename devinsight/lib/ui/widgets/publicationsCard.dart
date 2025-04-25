@@ -38,10 +38,10 @@ class PublicationsCard extends StatelessWidget {
             Container(
               width: double.infinity,
               color: const Color(0xFF1E1E2F),
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
               child: Text(code,
                   style: const TextStyle(
-                      color: Color.fromARGB(255, 87, 241, 67),
+                      color: Color.fromARGB(255, 59, 252, 34),
                       fontFamily: 'monospace')),
             ),
             const SizedBox(height: 10),
