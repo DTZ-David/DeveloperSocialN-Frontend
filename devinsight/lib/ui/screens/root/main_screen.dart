@@ -105,7 +105,8 @@ class MainScreen extends ConsumerWidget {
                           },
                         ),
                         ListTile(
-                          leading: const Icon(Icons.push_pin, color: Colors.orange),
+                          leading:
+                              const Icon(Icons.push_pin, color: Colors.orange),
                           title: const Text('Push Notifications',
                               style: TextStyle(color: Colors.white)),
                           onTap: () {
@@ -147,25 +148,30 @@ class MainScreen extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
-                          leading: const Icon(Icons.account_circle, color: Colors.blue),
-                          title: const Text('Cuenta', style: TextStyle(color: Colors.white)),
+                          leading: const Icon(Icons.account_circle,
+                              color: Colors.blue),
+                          title: const Text('Cuenta',
+                              style: TextStyle(color: Colors.white)),
                           onTap: () {
                             // Add your account settings logic here
                             Navigator.of(context).pop();
                           },
                         ),
                         ListTile(
-                          leading: const Icon(Icons.notifications, color: Colors.orange),
-                          title:
-                              const Text('Notificaciones', style: TextStyle(color: Colors.white)),
+                          leading: const Icon(Icons.notifications,
+                              color: Colors.orange),
+                          title: const Text('Notificaciones',
+                              style: TextStyle(color: Colors.white)),
                           onTap: () {
                             // Add your notifications settings logic here
                             Navigator.of(context).pop();
                           },
                         ),
                         ListTile(
-                          leading: const Icon(Icons.security, color: Colors.red),
-                          title: const Text('Seguridad', style: TextStyle(color: Colors.white)),
+                          leading:
+                              const Icon(Icons.security, color: Colors.red),
+                          title: const Text('Seguridad',
+                              style: TextStyle(color: Colors.white)),
                           onTap: () {
                             // Add your security settings logic here
                             Navigator.of(context).pop();
