@@ -1,5 +1,6 @@
 import 'package:devinsight/ui/views/root/explorer.dart';
 import 'package:devinsight/ui/views/root/home.dart';
+
 import 'package:devinsight/ui/views/root/profile.dart';
 import 'package:devinsight/ui/screens/auth/loginScreen.dart';
 import 'package:devinsight/ui/views/root/publications.dart';
@@ -68,6 +69,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.onboard3,
         builder: (context, state) => const OnboardingPage3(),
       ),
+      
     ],
   );
 });
@@ -87,4 +89,5 @@ sealed class AppRouter {
   static const publications = '/publications';
   static const explorer = '/explorer';
   static const profile = '/profile';
+  
 }

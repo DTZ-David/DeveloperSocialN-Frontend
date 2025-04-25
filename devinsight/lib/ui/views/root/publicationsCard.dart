@@ -1,3 +1,4 @@
+import 'package:devinsight/core/app_colors.dart';
 import 'package:devinsight/ui/widgets/codePreviewBox.dart';
 import 'package:devinsight/ui/widgets/reactionsRow.dart';
 import 'package:devinsight/ui/widgets/publicationHeader.dart';
@@ -24,7 +25,7 @@ class PublicationsCard extends ConsumerWidget {
           const SizedBox(height: 10),
           Card(
             shadowColor: Colors.white,
-            color: const Color(0xFF0E0B1F),
+            color: AppColors.primaryColors,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
               side: const BorderSide(color: Color(0xFF1f212a), width: 0.8),

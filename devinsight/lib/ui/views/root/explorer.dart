@@ -1,3 +1,4 @@
+import 'package:devinsight/core/app_colors.dart';
 import 'package:devinsight/ui/widgets/searchNav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -62,8 +63,8 @@ class ExplorerPage extends ConsumerWidget {
                 child: FilterChip(
                   label: Text(filter),
                   labelStyle: TextStyle(color: isSelected ? Colors.white : Colors.white70),
-                  backgroundColor: Colors.grey[800],
-                  selectedColor: Colors.blueAccent,
+                  backgroundColor: AppColors.secondaryColors,
+                  selectedColor: AppColors.tertiaryColors,
                   selected: isSelected,
                   onSelected: (_) => filterNotifier.toggle(filter),
                 ),
@@ -78,7 +79,7 @@ class ExplorerPage extends ConsumerWidget {
             itemCount: 10,
             itemBuilder: (context, index) {
               return Card(
-                color: Colors.grey[850],
+                color: AppColors.secondaryColors,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 child: ListTile(
                   leading: const Icon(FontAwesomeIcons.code, color: Colors.blueAccent),
