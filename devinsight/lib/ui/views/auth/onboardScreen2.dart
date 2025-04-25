@@ -1,4 +1,5 @@
 import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/core/app_colors.dart';
 import 'package:devinsight/ui/widgets/auth/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -81,7 +82,7 @@ class OnboardingPage2 extends ConsumerWidget {
                     onPressed: () {},
                     child: const Text(
                       "Saltar",
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      style: TextStyle(color: AppColors.tertiaryColors, fontSize: 16),
                     ),
                   ),
                 ],
@@ -157,7 +158,7 @@ class OnboardingPage2 extends ConsumerWidget {
                       },
                       labelStyle: const TextStyle(color: Colors.white),
                       backgroundColor: Colors.grey[850],
-                      selectedColor: Colors.blue,
+                      selectedColor: AppColors.tertiaryColors,
                     );
                   }).toList(),
                 ),

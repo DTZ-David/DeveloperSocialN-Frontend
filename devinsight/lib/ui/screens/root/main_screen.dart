@@ -1,4 +1,7 @@
 import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/core/app_colors.dart';
+import 'package:devinsight/ui/widgets/auth/customNotificationIcon.dart';
+import 'package:devinsight/ui/widgets/auth/customSettingsIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/ui/widgets/navBar.dart';
@@ -34,7 +37,7 @@ class MainScreen extends ConsumerWidget {
     final index = ref.watch(navbarIndexProvider);
     return Scaffold(
       appBar: AppBar(
-        shadowColor: Colors.lightBlue,
+        shadowColor: AppColors.tertiaryColors,
         elevation: 0.2,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -42,7 +45,7 @@ class MainScreen extends ConsumerWidget {
             bottomRight: Radius.circular(30),
           ),
         ),
-        backgroundColor: const Color(0xFF0E0B1F),
+        backgroundColor: AppColors.primaryColors,
         title: GestureDetector(
           onTap: () {
             ref.read(appRouterProvider).go(AppRouter.home);
@@ -54,13 +57,13 @@ class MainScreen extends ConsumerWidget {
                 width: 40,
                 height: 40,
                 colorFilter: const ColorFilter.mode(
-                  Colors.lightBlue,
+                  AppColors.tertiaryColors,
                   BlendMode.srcIn,
                 ),
               ),
               const SizedBox(width: 10),
               const Text(
-                "pepigod",
+                "Devinsight",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
@@ -70,131 +73,12 @@ class MainScreen extends ConsumerWidget {
             ],
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    backgroundColor: const Color(0xFF1C1A30),
-                    title: const Text(
-                      "Notificaciones",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          leading: const Icon(Icons.email, color: Colors.blue),
-                          title: const Text('Email Notifications',
-                              style: TextStyle(color: Colors.white)),
-                          onTap: () {
-                            // Add your email notifications logic here
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        ListTile(
-                          leading: const Icon(Icons.sms, color: Colors.green),
-                          title: const Text('SMS Notifications',
-                              style: TextStyle(color: Colors.white)),
-                          onTap: () {
-                            // Add your SMS notifications logic here
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        ListTile(
-                          leading:
-                              const Icon(Icons.push_pin, color: Colors.orange),
-                          title: const Text('Push Notifications',
-                              style: TextStyle(color: Colors.white)),
-                          onTap: () {
-                            // Add your push notifications logic here
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    ),
-                    actions: [
-                      TextButton(
-                        child: const Text(
-                          "Cerrar",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    backgroundColor: const Color(0xFF1C1A30),
-                    title: const Text(
-                      "Ajustes",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          leading: const Icon(Icons.account_circle,
-                              color: Colors.blue),
-                          title: const Text('Cuenta',
-                              style: TextStyle(color: Colors.white)),
-                          onTap: () {
-                            // Add your account settings logic here
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        ListTile(
-                          leading: const Icon(Icons.notifications,
-                              color: Colors.orange),
-                          title: const Text('Notificaciones',
-                              style: TextStyle(color: Colors.white)),
-                          onTap: () {
-                            // Add your notifications settings logic here
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        ListTile(
-                          leading:
-                              const Icon(Icons.security, color: Colors.red),
-                          title: const Text('Seguridad',
-                              style: TextStyle(color: Colors.white)),
-                          onTap: () {
-                            // Add your security settings logic here
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    ),
-                    actions: [
-                      TextButton(
-                        child: const Text(
-                          "Cerrar",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
+        actions: const [
+          //Icono de notificación
+          CustomNotificationIcon(),
+          //Icono de configuración
+          Customsettingsicon(),
+        
         ],
       ),
       body: _buildScreen(index),
