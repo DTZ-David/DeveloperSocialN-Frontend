@@ -1,15 +1,31 @@
-import 'package:devinsight/ui/login/widgets/customButton.dart';
-import 'package:flutter/material.dart';
 import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/ui/widgets/auth/customButton.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+/// Proveedor de estado para los lenguajes seleccionados
+final selectedTechProvider = StateNotifierProvider<SelectedTechNotifier, Set<String>>((ref) {
+  return SelectedTechNotifier();
+});
+
+class SelectedTechNotifier extends StateNotifier<Set<String>> {
+  SelectedTechNotifier() : super({});
+
+  void toggle(String tech) {
+    if (state.contains(tech)) {
+      state = {...state}..remove(tech);
+    } else if (state.length < 10) {
+      state = {...state, tech};
+    }
+  }
+}
 
 class OnboardingPage2 extends ConsumerWidget {
   const OnboardingPage2({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Mapeo de lenguajes y herramientas con sus respectivos íconos
     Map<String, IconData> techIcons = {
       "Python": FontAwesomeIcons.python,
       "Java": FontAwesomeIcons.java,
@@ -19,12 +35,11 @@ class OnboardingPage2 extends ConsumerWidget {
       "CSS": FontAwesomeIcons.css3Alt,
       "JavaScript": FontAwesomeIcons.js,
       "C++": FontAwesomeIcons.cuttlefish,
-  
       "Go": FontAwesomeIcons.golang,
       "C": FontAwesomeIcons.cuttlefish,
-      
-      
     };
+
+    final selectedSet = ref.watch(selectedTechProvider);
 
     return Scaffold(
       body: Container(
@@ -40,7 +55,7 @@ class OnboardingPage2 extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            // AppBar personalizado con gradiente
+            // AppBar
             Container(
               padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
               decoration: BoxDecoration(
@@ -48,8 +63,8 @@ class OnboardingPage2 extends ConsumerWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color.fromARGB(255, 17, 6, 48).withOpacity(0.1),
-                    Color.fromARGB(255, 4, 1, 9).withOpacity(0.1),
+                    const Color.fromARGB(255, 17, 6, 48).withOpacity(0.1),
+                    const Color.fromARGB(255, 4, 1, 9).withOpacity(0.1),
                   ],
                 ),
               ),
@@ -72,6 +87,7 @@ class OnboardingPage2 extends ConsumerWidget {
                 ],
               ),
             ),
+            // Títulos
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
@@ -115,7 +131,8 @@ class OnboardingPage2 extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Lista de lenguajes con íconos
+
+            // Lenguajes
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -123,15 +140,21 @@ class OnboardingPage2 extends ConsumerWidget {
                   spacing: 10,
                   runSpacing: 10,
                   children: techIcons.keys.map((language) {
+                    final isSelected = selectedSet.contains(language);
+
                     return ChoiceChip(
                       avatar: Icon(
-                        techIcons[language], // Ícono correspondiente
+                        techIcons[language],
                         color: Colors.white,
                         size: 18,
                       ),
                       label: Text(language),
-                      selected: false,
-                      onSelected: (bool selected) {},
+                      selected: isSelected,
+                      onSelected: (bool selected) {
+                        final notifier = ref.read(selectedTechProvider.notifier);
+
+                        notifier.toggle(language);  // Aquí aplicamos el toggle
+                      },
                       labelStyle: const TextStyle(color: Colors.white),
                       backgroundColor: Colors.grey[850],
                       selectedColor: Colors.blue,

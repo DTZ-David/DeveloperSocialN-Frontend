@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
-import '../../../../config/routers/app_router.dart';
-import '../../widgets/customButton.dart';
-import '../../widgets/customTextField.dart';
+import '../../../config/routers/app_router.dart';
+import '../../widgets/auth/customButton.dart';
+import '../../widgets/auth/customTextField.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});

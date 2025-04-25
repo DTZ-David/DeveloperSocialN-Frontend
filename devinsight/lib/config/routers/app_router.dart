@@ -1,14 +1,16 @@
-import 'package:devinsight/ui/home/screens/explorer.dart';
-import 'package:devinsight/ui/home/screens/home.dart';
-import 'package:devinsight/ui/login/screens/auth/loginScreen.dart';
-import 'package:devinsight/ui/home/screens/publications.dart';
-import 'package:devinsight/ui/login/screens/auth/registerScreen.dart';
-import 'package:devinsight/ui/login/screens/onboard/onboardScreen1.dart';
-import 'package:devinsight/ui/login/screens/onboard/onboardScreen2.dart';
-import 'package:devinsight/ui/login/screens/onboard/onboardScreen3.dart';
+import 'package:devinsight/ui/views/root/explorer.dart';
+import 'package:devinsight/ui/views/root/home.dart';
+import 'package:devinsight/ui/views/root/profile.dart';
+import 'package:devinsight/ui/screens/auth/loginScreen.dart';
+import 'package:devinsight/ui/views/root/publications.dart';
+import 'package:devinsight/ui/screens/auth/registerScreen.dart';
+import 'package:devinsight/ui/views/auth/onboardScreen1.dart';
+import 'package:devinsight/ui/views/auth/onboardScreen2.dart';
+import 'package:devinsight/ui/views/auth/onboardScreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:devinsight/ui/screens/root/main_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -17,7 +19,29 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRouter.initial,
         name: AppRouter.initial,
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => const MainScreen(),
+        routes: [
+          GoRoute(
+            path: AppRouter.home,
+            name: AppRouter.home,
+            builder: (context, state) => const HomeScreen(),
+          ),
+          GoRoute(
+            path: AppRouter.publications,
+            name: AppRouter.publications,
+            builder: (context, state) => const Publications(),
+          ),
+          GoRoute(
+            path: AppRouter.explorer,
+            name: AppRouter.explorer,
+            builder: (context, state) => const ExplorerPage(),
+          ),
+          GoRoute(
+            path: AppRouter.profile,
+            name: AppRouter.profile,
+            builder: (context, state) => const Profile(),
+          ),
+        ],
       ),
       GoRoute(
         path: AppRouter.registerUser,
@@ -44,21 +68,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.onboard3,
         builder: (context, state) => const OnboardingPage3(),
       ),
-      GoRoute(
-        path: AppRouter.home,
-        name: AppRouter.home,
-        builder: (context, state) => const HomeScreen(),
-      ),
-      GoRoute(
-        path: AppRouter.publications,
-        name: AppRouter.publications,
-        builder: (context, state) => const Publications(),
-      ),
-      GoRoute(
-        path: AppRouter.explorer,
-        name: AppRouter.explorer,
-        builder: (context, state) => const Explorer(),
-      ),
     ],
   );
 });
@@ -68,7 +77,7 @@ final navigatorKeyProvider = Provider<GlobalKey<NavigatorState>>((ref) {
 });
 
 sealed class AppRouter {
-  static const initial = '/';
+  static const initial = '/main';
   static const registerUser = '/registerUser';
   static const login = '/login';
   static const onboard1 = '/onboard1';
@@ -77,4 +86,5 @@ sealed class AppRouter {
   static const home = '/home';
   static const publications = '/publications';
   static const explorer = '/explorer';
+  static const profile = '/profile';
 }

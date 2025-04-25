@@ -1,5 +1,5 @@
 import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/ui/login/widgets/customButton.dart';
+import 'package:devinsight/ui/widgets/auth/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
