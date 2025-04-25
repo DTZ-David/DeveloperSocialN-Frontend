@@ -11,17 +11,17 @@ class CodePreviewBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(8),
+        color: const Color(0xFF000000),
+        borderRadius: BorderRadius.circular(10),
       ),
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       width: double.infinity,
       child: HighlightView(
         code,
         language: 'csharp',
         theme: monokaiSublimeTheme,
         padding: const EdgeInsets.all(8),
-        textStyle: const TextStyle(fontFamily: 'Courier New', fontSize: 13),
+        textStyle: const TextStyle(fontFamily: 'Courier New', fontSize: 15),
       ),
     );
   }

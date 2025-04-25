@@ -1,5 +1,5 @@
 import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/core/app_colors.dart';
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/widgets/auth/customNotificationIcon.dart';
 import 'package:devinsight/ui/widgets/auth/customSettingsIcon.dart';
 import 'package:flutter/material.dart';

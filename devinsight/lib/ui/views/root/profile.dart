@@ -1,4 +1,4 @@
-import 'package:devinsight/core/app_colors.dart';
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {

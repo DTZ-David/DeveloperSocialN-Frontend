@@ -1,38 +1,37 @@
-import 'package:devinsight/ui/widgets/optionsDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PublicationHeader extends StatelessWidget {
-  const PublicationHeader({super.key});
+  final String userName;
+  final String subtitle;
+  final String iconPath;
+
+  const PublicationHeader({
+    super.key,
+    required this.userName,
+    required this.subtitle,
+    required this.iconPath,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: Row(
-            children: [
-              CircleAvatar(
-                child: SvgPicture.asset('assets/icons/rocket.svg', height: 30),
-              ),
-              const SizedBox(width: 10),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Flutter Code',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  Text('Hoy a las 2 PM', style: TextStyle(color: Colors.white70, fontSize: 12)),
-                ],
-              ),
-            ],
-          ),
+        CircleAvatar(
+          child: SvgPicture.asset(iconPath, height: 30, color: Colors.white),
         ),
-        IconButton(
-          icon: const Icon(Icons.more_vert, color: Colors.white),
-          onPressed: () => showDialog(
-            context: context,
-            builder: (context) => const OptionsDialog(),
-          ),
+        const SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(userName,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16)),
+            Text(subtitle,
+                style: const TextStyle(color: Colors.white70, fontSize: 12)),
+          ],
         ),
       ],
     );
