@@ -1,21 +1,25 @@
+import 'package:devinsight/ui/widgets/codePreviewBox.dart';
 import 'package:devinsight/ui/widgets/publicationHeader.dart';
+import 'package:devinsight/ui/widgets/reactionsRow.dart';
 import 'package:flutter/material.dart';
 
 class PublicationsCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String iconPath;
+  final String userName;
+  final String sentAt;
+  final String userIcon;
   final String description;
   final String code;
+  final String language;
   final List<int> reactions;
 
   const PublicationsCard({
     super.key,
-    required this.title,
-    required this.subtitle,
-    required this.iconPath,
+    required this.userName,
+    required this.sentAt,
+    required this.userIcon,
     required this.description,
     required this.code,
+    required this.language,
     required this.reactions,
   });
 
@@ -24,36 +28,31 @@ class PublicationsCard extends StatelessWidget {
     return Card(
       color: const Color(0xFF000000),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(18),
         child: Column(
           children: [
             PublicationHeader(
-              userName: title,
-              subtitle: subtitle,
-              iconPath: iconPath,
+              userName: userName,
+              sentAt: sentAt,
+              userIcon: userIcon,
             ),
             const SizedBox(height: 10),
-            Text(description, style: const TextStyle(color: Colors.white)),
-            const SizedBox(height: 10),
-            Container(
-              width: double.infinity,
-              color: const Color(0xFF1E1E2F),
-              padding: const EdgeInsets.all(12),
-              child: Text(code,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 59, 252, 34),
-                      fontFamily: 'monospace')),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                description,
+                style: const TextStyle(color: Colors.white, fontSize: 14),
+              ),
             ),
             const SizedBox(height: 10),
-            Row(
-              children: reactions
-                  .map((e) => Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Text('🔥 $e',
-                            style: const TextStyle(color: Colors.white70)),
-                      ))
-                  .toList(),
-            ),
+            SizedBox(
+                width: double.infinity,
+                child: CodePreviewBox(
+                  code: code,
+                  language: language,
+                )),
+            const SizedBox(height: 10),
+            ReactionsRow(reactions: reactions),
           ],
         ),
       ),

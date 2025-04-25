@@ -19,14 +19,15 @@ class HomeScreen extends ConsumerWidget {
         return Column(
           children: [
             PublicationsCard(
-              title: data['title'],
-              subtitle: data['subtitle'],
-              iconPath: data['iconPath'],
+              userName: data['user_name'],
+              sentAt: data['sent_at'],
+              userIcon: data['user_icon'],
               description: data['description'],
               code: data['code'],
+              language: data['language'],
               reactions: List<int>.from(data['reactions']),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 4),
           ],
         );
       },
