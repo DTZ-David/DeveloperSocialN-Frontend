@@ -41,7 +41,11 @@ class PublicationsCard extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 description,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w500),
               ),
             ),
             const SizedBox(height: 10),

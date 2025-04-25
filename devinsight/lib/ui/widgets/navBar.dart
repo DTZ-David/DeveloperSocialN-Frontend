@@ -95,6 +95,8 @@ class CustomNavbar extends ConsumerWidget {
               color: isSelected ? const Color(0xFF1ABCFE) : Colors.white,
               fontSize: 10,
               overflow: TextOverflow.ellipsis,
+              fontFamily: 'Montserrat',
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],

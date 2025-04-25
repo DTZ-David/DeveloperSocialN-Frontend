@@ -36,6 +36,7 @@ class PublicationHeader extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
                       fontSize: 16,
                     ),
                   ),
@@ -44,6 +45,8 @@ class PublicationHeader extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 12,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
