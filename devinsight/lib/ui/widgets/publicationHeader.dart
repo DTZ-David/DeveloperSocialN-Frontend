@@ -24,7 +24,7 @@ class PublicationHeader extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage(userIcon),
+                backgroundImage: NetworkImage(userIcon),
                 radius: 20, // Adjust the size as needed
               ),
               const SizedBox(width: 10), // Space between icon and text

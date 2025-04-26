@@ -7,7 +7,12 @@ final publicationsProvider =
     StateNotifierProvider<PublicationsNotifier, List<Map<String, dynamic>>>(
   (ref) => PublicationsNotifier()..loadPublications(),
 );
-
+final myProfilePublicationsProvider = Provider<List<Map<String, dynamic>>>((ref) {
+  final allPublications = ref.watch(publicationsProvider);
+  return allPublications
+      .where((pub) => pub['user_name'] == 'Ssaylem Murillo')
+      .toList();
+});
 class PublicationsNotifier extends StateNotifier<List<Map<String, dynamic>>> {
   PublicationsNotifier() : super([]);
 

@@ -106,7 +106,8 @@ class _SimplePostCardState extends State<SimplePostCard> {
                   onPressed: () {},
                   icon: const Icon(Icons.comment_outlined, color: Colors.white),
                 ),
-                Text(
+                Text( 
+                  
                   '$comments',
                   style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
