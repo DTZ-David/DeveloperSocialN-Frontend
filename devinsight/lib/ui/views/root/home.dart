@@ -11,26 +11,30 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final publications = ref.watch(publicationsProvider);
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(10),
-      itemCount: publications.length,
-      itemBuilder: (context, index) {
-        final data = publications[index];
-        return Column(
-          children: [
-            PublicationsCard(
-              userName: data['user_name'],
-              sentAt: data['sent_at'],
-              userIcon: data['user_icon'],
-              description: data['description'],
-              code: data['code'],
-              language: data['language'],
-              reactions: List<int>.from(data['reactions']),
-            ),
-            const SizedBox(height: 4),
-          ],
-        );
-      },
+    return Container(
+      color: const Color.fromARGB(255, 24, 23, 23),
+      child: ListView.builder(
+        padding: const EdgeInsets.all(10),
+        itemCount: publications.length,
+        itemBuilder: (context, index) {
+          final data = publications[index];
+          return Column(
+            children: [
+              PublicationsCard(
+                userName: data['user_name'],
+                sentAt: data['sent_at'],
+                userIcon: data['user_icon'],
+                description: data['description'],
+                code: data['code'],
+                language: data['language'],
+                reactions: List<int>.from(data['reactions']),
+                tags: List<String>.from(data['tags']),
+              ),
+              const SizedBox(height: 4),
+            ],
+          );
+        },
+      ),
     );
   }
 }

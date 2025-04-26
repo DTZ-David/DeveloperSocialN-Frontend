@@ -46,7 +46,7 @@ class MainScreen extends ConsumerWidget {
             bottomRight: Radius.circular(30),
           ),
         ),
-        backgroundColor: AppColors.primaryColors,
+        backgroundColor: Colors.black,
         title: GestureDetector(
           onTap: () {
             ref.read(appRouterProvider).go(AppRouter.home);

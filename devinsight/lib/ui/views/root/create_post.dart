@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreatePostView extends ConsumerWidget {
-  const CreatePostView({Key? key}) : super(key: key);
+  const CreatePostView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,7 +54,7 @@ class CreatePostView extends ConsumerWidget {
             const SizedBox(height: 16),
             const TextField(
               maxLines: 5,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Escribe tu contenido del Post aqui...',
                 labelText: 'Contenido',
               ),

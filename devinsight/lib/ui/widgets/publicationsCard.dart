@@ -11,6 +11,7 @@ class PublicationsCard extends StatelessWidget {
   final String code;
   final String language;
   final List<int> reactions;
+  final List<String> tags;
 
   const PublicationsCard({
     super.key,
@@ -21,6 +22,7 @@ class PublicationsCard extends StatelessWidget {
     required this.code,
     required this.language,
     required this.reactions,
+    required this.tags,
   });
 
   @override
@@ -49,14 +51,40 @@ class PublicationsCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: tags
+                    .map((tag) => Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Row(
+                            children: [
+                              Text(
+                                tag,
+                                style: const TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 14,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ))
+                    .toList(),
+              ),
+            ),
             SizedBox(
                 width: double.infinity,
                 child: CodePreviewBox(
                   code: code,
                   language: language,
                 )),
-            const SizedBox(height: 10),
-            ReactionsRow(reactions: reactions),
+            const SizedBox(height: 8),
+            ReactionsRow(
+              reactions: reactions,
+            ),
+            const SizedBox(height: 8),
           ],
         ),
       ),
