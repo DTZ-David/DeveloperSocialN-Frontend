@@ -1,19 +1,22 @@
+import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/widgets/navProfile.dart';
-import 'package:devinsight/ui/widgets/simplePostCard.dart';
+import 'package:devinsight/ui/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/widgets/socialButtom.dart';
 import 'package:devinsight/ui/widgets/socialFollowers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // <- Asegúrate de importar esto
 
-class Profile extends StatelessWidget {
+class Profile extends ConsumerWidget {
   const Profile({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final publications = ref.watch(myProfilePublicationsProvider);
+
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
             width: 500,
@@ -27,14 +30,13 @@ class Profile extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: const DecorationImage(
                       image: NetworkImage(
-                          "https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg"), // o NetworkImage()
+                          "https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg"),
                       fit: BoxFit.cover,
                     ),
                     color: AppColors.secondaryColors,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                // CircleAvatar sobresaliendo por debajo
                 const Positioned(
                   bottom: -40,
                   child: CircleAvatar(
@@ -53,33 +55,42 @@ class Profile extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 70), // espacio para el avatar y texto
-          const Socialfollowers(),
-          const SocialButton(),
-          const Navprofile(),
-          const Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SimplePostCard(
-                    userName: 'Ssaylem Murillo',
-                    sentAt: 'Hace 1 hora',
-                    userIcon: 'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg',
-                    description:
-                        'Necesito 2 programadores urgentes para un proyecto de backend con FastAPI.\n\n#python #fastapi #programming #work #hectorsk4',
-                    
+          const SizedBox(height: 70),
+          Expanded(
+            child: CustomScrollView(
+              slivers: [
+                const SliverToBoxAdapter(child: Socialfollowers()),
+                const SliverToBoxAdapter(child: SocialButton()),
+                const SliverToBoxAdapter(child: Navprofile()),
+                const SliverToBoxAdapter(
+                  child: SizedBox(height: 10), // Adjust spacing as needed
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final data = publications[index];
+                      return Padding(
+                        // Add padding around each card if needed
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        child: PublicationsCard(
+                          userName: data['user_name'],
+                          sentAt: data['sent_at'],
+                          userIcon: data['user_icon'],
+                          description: data['description'],
+                          code: data['code'],
+                          language: data['language'],
+                          tags: List<String>.from(data['tags']),
+                          // Ensure you have 'likes' and 'comments' in your data
+                          reactions: [],
+                          // Your options dialog logic here
+                          // Pass reactions if needed
+                        ),
+                      );
+                    },
+                    childCount: publications.length,
                   ),
-                  SizedBox(height: 10),
-                  SimplePostCard(
-                    userName: 'María Gómez',
-                    sentAt: 'Hace 2 horas',
-                    userIcon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4PcqJxjZUZopdG2u3196bPgKzeHAbTj8b_Q&s',
-                    description:
-                        'Busco diseñador UX/UI para colaboración remota.\n\n#design #uxui #freelance',
-                    
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

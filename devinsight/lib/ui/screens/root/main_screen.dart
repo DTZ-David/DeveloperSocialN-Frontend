@@ -47,32 +47,27 @@ class MainScreen extends ConsumerWidget {
           ),
         ),
         backgroundColor: Colors.black,
-        title: GestureDetector(
-          onTap: () {
-            ref.read(appRouterProvider).go(AppRouter.home);
-          },
-          child: Row(
-            children: [
-              SvgPicture.asset(
-                'assets/icons/saturn.svg',
-                width: 40,
-                height: 40,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.tertiaryColors,
-                  BlendMode.srcIn,
-                ),
+        title: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/icons/saturn.svg',
+              width: 40,
+              height: 40,
+              colorFilter: const ColorFilter.mode(
+                AppColors.tertiaryColors,
+                BlendMode.srcIn,
               ),
-              const SizedBox(width: 10),
-              const Text(
-                "Devinsight",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              "Devinsight",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         actions: const [
           //Icono de notificación
