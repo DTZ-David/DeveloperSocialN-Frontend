@@ -7,4 +7,6 @@ class AppColors {
   //components and others
   static const Color tertiaryColors = Color(0xFF448AFF);
   static const Color quaternaryColors = Color(0xFF4CAF50);
+  static const Color components =  Color(0xFF1ECAFF);
+  
 }
