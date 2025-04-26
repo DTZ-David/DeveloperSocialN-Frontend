@@ -8,6 +8,7 @@ import '../../../repositories/auth_repository.dart';
 import '../../../services/login/auth_service.dart';
 import '../../widgets/auth/customButton.dart';
 import '../../widgets/auth/customTextField.dart';
+import '../../widgets/auth/progressDialog.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
@@ -136,6 +137,7 @@ class LoginScreen extends ConsumerWidget {
                               CustomButton(
                                 text: "Iniciar Sesión",
                                 onPressed: () async {
+                                  await ProgressDialog.show(context);
                                   final String username = userController.text;
                                   final String password = passwordController.text;
                                   await _login(context, ref, username, password);
