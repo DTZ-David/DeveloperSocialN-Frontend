@@ -5,96 +5,116 @@ import 'package:devinsight/ui/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/widgets/socialButtom.dart';
 import 'package:devinsight/ui/widgets/socialFollowers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // <- Asegúrate de importar esto
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+// Import if you want to hide the scrollbar
+// import 'package:devinsight/ui/utils/no_scrollbar_behavior.dart';
 
 class Profile extends ConsumerWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final publications = ref.watch(myProfilePublicationsProvider);
+    final publications = ref.watch(publicationsProvider);
 
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Column(
-        children: [
-          SizedBox(
-            width: 500,
-            height: 100,
-            child: Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.bottomCenter,
-              children: [
-                Container(
-                  height: 90,
-                  decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      image: NetworkImage(
-                          "https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg"),
-                      fit: BoxFit.cover,
+    // Replace Padding and Column with CustomScrollView
+    return CustomScrollView(
+      slivers: [
+        // --- Top Banner and Avatar Section (now scrollable) ---
+        SliverToBoxAdapter(
+          child: Padding(
+            // Apply horizontal padding here
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: SizedBox(
+              width: 500, // Consider making width responsive
+              height: 100,
+              child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Container(
+                    height: 90,
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        image: NetworkImage(
+                            "https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                      color: AppColors.secondaryColors,
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    color: AppColors.secondaryColors,
-                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-                const Positioned(
-                  bottom: -40,
-                  child: CircleAvatar(
-                    radius: 35,
-                    backgroundImage: NetworkImage(
-                        "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"),
+                  const Positioned(
+                    bottom: -40,
+                    child: CircleAvatar(
+                      radius: 35,
+                      backgroundImage: NetworkImage(
+                          "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"),
+                    ),
                   ),
-                ),
-                const Positioned(
-                  bottom: -60,
-                  child: Text(
-                    'Ssaylem Murillo',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  const Positioned(
+                    bottom: -60,
+                    child: Text(
+                      'Ssaylem Murillo',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-          const SizedBox(height: 70),
-          Expanded(
-            child: CustomScrollView(
-              slivers: [
-                const SliverToBoxAdapter(child: Socialfollowers()),
-                const SliverToBoxAdapter(child: SocialButton()),
-                const SliverToBoxAdapter(child: Navprofile()),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 10), // Adjust spacing as needed
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final data = publications[index];
-                      return Padding(
-                        // Add padding around each card if needed
-                        padding: const EdgeInsets.only(bottom: 4.0),
-                        child: PublicationsCard(
-                          userName: data['user_name'],
-                          sentAt: data['sent_at'],
-                          userIcon: data['user_icon'],
-                          description: data['description'],
-                          code: data['code'],
-                          language: data['language'],
-                          tags: List<String>.from(data['tags']),
-                          // Ensure you have 'likes' and 'comments' in your data
-                          reactions: [],
-                          // Your options dialog logic here
-                          // Pass reactions if needed
-                        ),
-                      );
-                    },
-                    childCount: publications.length,
+        ),
+
+        // --- Spacing below Avatar (now scrollable) ---
+        const SliverToBoxAdapter(
+          child: SizedBox(height: 70),
+        ),
+
+        // --- Social Followers, Buttons, Nav (now scrollable) ---
+        SliverToBoxAdapter(child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: const Socialfollowers(),
+        )),
+        SliverToBoxAdapter(child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: const SocialButton(),
+        )),
+        SliverToBoxAdapter(child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: const Navprofile(),
+        )),
+
+        // --- Spacing before list ---
+        const SliverToBoxAdapter(
+          child: SizedBox(height: 10),
+        ),
+
+        // --- Publications List (scrollable) ---
+        SliverPadding( // Use SliverPadding for list padding
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final data = publications[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: PublicationsCard(
+                    userName: data['user_name'],
+                    sentAt: data['sent_at'],
+                    userIcon: data['user_icon'],
+                    description: data['description'],
+                    code: data['code'],
+                    language: data['language'],
+                    tags: List<String>.from(data['tags']),
+                    reactions: [], // Pass actual reactions
+                    // Add onOptionsPressed if needed
                   ),
-                ),
-              ],
+                );
+              },
+              childCount: publications.length,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
