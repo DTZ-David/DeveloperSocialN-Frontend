@@ -1,4 +1,3 @@
-import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/views/root/create_post.dart';
 import 'package:devinsight/ui/widgets/auth/customNotificationIcon.dart';
