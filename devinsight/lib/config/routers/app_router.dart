@@ -15,8 +15,18 @@ import 'package:devinsight/ui/screens/root/main_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation: AppRouter.initial,
+    initialLocation: AppRouter.login,
     routes: [
+      GoRoute(
+        path: AppRouter.login,
+        name: AppRouter.login,
+        builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRouter.registerUser,
+        name: AppRouter.registerUser,
+        builder: (context, state) => const RegisterScreen(),
+      ),
       GoRoute(
         path: AppRouter.initial,
         name: AppRouter.initial,
@@ -45,16 +55,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(
-        path: AppRouter.registerUser,
-        name: AppRouter.registerUser,
-        builder: (context, state) => const RegisterScreen(),
-      ),
-      GoRoute(
-        path: AppRouter.login,
-        name: AppRouter.login,
-        builder: (context, state) => const LoginScreen(),
-      ),
-      GoRoute(
         path: AppRouter.onboard1,
         name: AppRouter.onboard1,
         builder: (context, state) => const OnboardingPage1(),
@@ -69,7 +69,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.onboard3,
         builder: (context, state) => const OnboardingPage3(),
       ),
-      
     ],
   );
 });
@@ -89,5 +88,4 @@ sealed class AppRouter {
   static const publications = '/publications';
   static const explorer = '/explorer';
   static const profile = '/profile';
-  
 }

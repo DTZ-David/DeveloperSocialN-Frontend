@@ -16,14 +16,13 @@ class OnboardingPage3 extends ConsumerWidget {
       "Figma": FontAwesomeIcons.paintBrush,
       "Sublime Text": FontAwesomeIcons.fileCode,
       "IntelliJ IDEA": FontAwesomeIcons.brain,
-      "Anaconda": FontAwesomeIcons.python, 
+      "Anaconda": FontAwesomeIcons.python,
       "Postman": FontAwesomeIcons.envelopeOpenText,
       "Git": FontAwesomeIcons.gitAlt,
       "Docker": FontAwesomeIcons.docker,
       "Jupyter": FontAwesomeIcons.bookOpen,
       "Slack": FontAwesomeIcons.slack,
       "Trello": FontAwesomeIcons.tasks,
-      
     };
 
     return Scaffold(
@@ -149,9 +148,7 @@ class OnboardingPage3 extends ConsumerWidget {
                   CustomButton(
                     text: "Continuar",
                     onPressed: () {
-                    
-                      ref.read(appRouterProvider).go(AppRouter.home);
-                      
+                      ref.read(appRouterProvider).go(AppRouter.initial);
                     },
                   ),
                   const SizedBox(height: 20),

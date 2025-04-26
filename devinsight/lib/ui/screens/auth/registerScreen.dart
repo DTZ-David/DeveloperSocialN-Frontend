@@ -16,10 +16,7 @@ class RegisterScreen extends ConsumerWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color.fromARGB(255, 20, 6, 48),
-                Color.fromARGB(255, 4, 1, 9)
-              ],
+              colors: [Color.fromARGB(255, 20, 6, 48), Color.fromARGB(255, 4, 1, 9)],
             ),
           ),
           child: LayoutBuilder(
@@ -58,36 +55,27 @@ class RegisterScreen extends ConsumerWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const CustomTextField(
-                                  label: "Usuario", icon: Icons.person),
+                              const CustomTextField(label: "Usuario", icon: Icons.person),
+                              const SizedBox(height: 20),
+                              const CustomTextField(label: "Correo", icon: Icons.email),
                               const SizedBox(height: 20),
                               const CustomTextField(
-                                  label: "Correo", icon: Icons.email),
-                              const SizedBox(height: 20),
-                              const CustomTextField(
-                                  label: "Contraseña",
-                                  icon: Icons.lock,
-                                  isPassword: true),
+                                  label: "Contraseña", icon: Icons.lock, isPassword: true),
                               const SizedBox(height: 40),
                               CustomButton(
                                 text: "Registrarse",
                                 onPressed: () {
-                                  ref
-                                      .read(appRouterProvider)
-                                      .go(AppRouter.onboard2);
+                                  ref.read(appRouterProvider).go(AppRouter.onboard2);
                                 },
                               ),
                               const SizedBox(height: 30),
                               GestureDetector(
                                 onTap: () {
-                                  ref
-                                      .read(appRouterProvider)
-                                      .go(AppRouter.login);
+                                  ref.read(appRouterProvider).go(AppRouter.login);
                                 },
                                 child: const Text(
                                   "¿Ya tienes una cuenta? Inicia sesión",
