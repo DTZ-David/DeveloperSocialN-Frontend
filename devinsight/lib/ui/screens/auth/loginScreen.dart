@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../config/providers/auth_provider.dart';
 import '../../../config/routers/app_router.dart';
 import '../../../repositories/auth_repository.dart';
 import '../../../services/login/auth_service.dart';
@@ -37,10 +38,12 @@ class LoginScreen extends ConsumerWidget {
       final (user, token) = await _authRepository.login(username, password);
 
       print('Token recibido: $token');
+      print('Usuario: ${user.username}');
+      print('Foto de perfil: ${user.profilePicture}');
+      print('Biografía: ${user.bio}');
 
-      // Si tuvieras un AuthProvider aquí lo puedes guardar
-      // ref.read(authProvider.notifier).setUser(user);
-      // ref.read(authProvider.notifier).setToken(token);
+      ref.read(authProvider.notifier).setUser(user);
+      ref.read(authProvider.notifier).setToken(token);
 
       ref.read(appRouterProvider).go(AppRouter.initial);
     } catch (e) {

@@ -1,5 +1,5 @@
-import 'package:devinsight/models/user/user.dart';
-import 'package:devinsight/services/login/auth_service.dart';
+import '../models/user/user.dart';
+import '../services/login/auth_service.dart';
 
 class AuthRepository {
   final AuthService _authService;
@@ -11,7 +11,15 @@ class AuthRepository {
 
     if (response['isSuccess'] == true) {
       final String token = response['data']['token'];
-      final user = User(id: 0, name: '', email: '');
+      final user = User(
+        id: 0, // Si tienes un campo 'id' en la respuesta, úsalo aquí
+        username: response['data']['username'],
+        email: username, // Usando el email que pasaste al login
+        profilePicture: response['data']['profilePicture'],
+        bio: response['data']['bio'],
+        postsCount: response['data']['postsCount'], // Número de publicaciones
+        followersCount: response['data']['followersCount'], // Número de seguidores
+      );
       return (user, token);
     } else {
       throw Exception('Login fallido');

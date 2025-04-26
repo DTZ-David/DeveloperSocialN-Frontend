@@ -21,8 +21,13 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get profilePicture => throw _privateConstructorUsedError;
+  String get bio => throw _privateConstructorUsedError;
+  int get postsCount =>
+      throw _privateConstructorUsedError; // Para el número de publicaciones
+  int get followersCount => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +43,14 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({int id, String name, String email});
+  $Res call(
+      {int id,
+      String username,
+      String email,
+      String profilePicture,
+      String bio,
+      int postsCount,
+      int followersCount});
 }
 
 /// @nodoc
@@ -57,22 +69,42 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? username = null,
     Object? email = null,
+    Object? profilePicture = null,
+    Object? bio = null,
+    Object? postsCount = null,
+    Object? followersCount = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      profilePicture: null == profilePicture
+          ? _value.profilePicture
+          : profilePicture // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String,
+      postsCount: null == postsCount
+          ? _value.postsCount
+          : postsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      followersCount: null == followersCount
+          ? _value.followersCount
+          : followersCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -84,7 +116,14 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String email});
+  $Res call(
+      {int id,
+      String username,
+      String email,
+      String profilePicture,
+      String bio,
+      int postsCount,
+      int followersCount});
 }
 
 /// @nodoc
@@ -100,22 +139,42 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? username = null,
     Object? email = null,
+    Object? profilePicture = null,
+    Object? bio = null,
+    Object? postsCount = null,
+    Object? followersCount = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      profilePicture: null == profilePicture
+          ? _value.profilePicture
+          : profilePicture // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String,
+      postsCount: null == postsCount
+          ? _value.postsCount
+          : postsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      followersCount: null == followersCount
+          ? _value.followersCount
+          : followersCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -123,7 +182,14 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserImpl implements _User {
-  const _$UserImpl({required this.id, this.name = '', required this.email});
+  const _$UserImpl(
+      {required this.id,
+      this.username = '',
+      this.email = '',
+      this.profilePicture = '',
+      this.bio = '',
+      this.postsCount = 0,
+      this.followersCount = 0});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -132,13 +198,27 @@ class _$UserImpl implements _User {
   final int id;
   @override
   @JsonKey()
-  final String name;
+  final String username;
   @override
+  @JsonKey()
   final String email;
+  @override
+  @JsonKey()
+  final String profilePicture;
+  @override
+  @JsonKey()
+  final String bio;
+  @override
+  @JsonKey()
+  final int postsCount;
+// Para el número de publicaciones
+  @override
+  @JsonKey()
+  final int followersCount;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email)';
+    return 'User(id: $id, username: $username, email: $email, profilePicture: $profilePicture, bio: $bio, postsCount: $postsCount, followersCount: $followersCount)';
   }
 
   @override
@@ -147,13 +227,22 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.profilePicture, profilePicture) ||
+                other.profilePicture == profilePicture) &&
+            (identical(other.bio, bio) || other.bio == bio) &&
+            (identical(other.postsCount, postsCount) ||
+                other.postsCount == postsCount) &&
+            (identical(other.followersCount, followersCount) ||
+                other.followersCount == followersCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email);
+  int get hashCode => Object.hash(runtimeType, id, username, email,
+      profilePicture, bio, postsCount, followersCount);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -174,17 +263,29 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final int id,
-      final String name,
-      required final String email}) = _$UserImpl;
+      final String username,
+      final String email,
+      final String profilePicture,
+      final String bio,
+      final int postsCount,
+      final int followersCount}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
   int get id;
   @override
-  String get name;
+  String get username;
   @override
   String get email;
+  @override
+  String get profilePicture;
+  @override
+  String get bio;
+  @override
+  int get postsCount; // Para el número de publicaciones
+  @override
+  int get followersCount;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
