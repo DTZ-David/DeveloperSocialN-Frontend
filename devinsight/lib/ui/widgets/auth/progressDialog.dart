@@ -17,7 +17,7 @@ class ProgressDialog extends StatelessWidget {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // No permite cerrar tocando fuera
-      builder: (BuildContext context) => ProgressDialog(),
+      builder: (BuildContext context) => const ProgressDialog(),
     );
   }
 
