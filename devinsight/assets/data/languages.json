@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Python",
+        "icon": "python"
+    },
+    {
+        "name": "Java",
+        "icon": "java"
+    },
+    {
+        "name": "Rust",
+        "icon": "rust"
+    },
+    {
+        "name": "C#",
+        "icon": "code"
+    },
+    {
+        "name": "HTML",
+        "icon": "html5"
+    },
+    {
+        "name": "CSS",
+        "icon": "css3Alt"
+    },
+    {
+        "name": "JavaScript",
+        "icon": "js"
+    },
+    {
+        "name": "C++",
+        "icon": "code"
+    },
+    {
+        "name": "Go",
+        "icon": "code"
+    },
+    {
+        "name": "CC",
+        "icon": "code"
+    }
+]

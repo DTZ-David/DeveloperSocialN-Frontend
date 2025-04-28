@@ -1,28 +1,16 @@
+
+import 'package:devinsight/config/providers/selectedProvider.dart';
 import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/ui/login/widgets/customChoiceChip.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../config/providers/register_provider.dart';
+
 
 /// Proveedor de estado para los lenguajes seleccionados
-final selectedTechProvider = StateNotifierProvider<SelectedTechNotifier, Set<String>>((ref) {
-  return SelectedTechNotifier();
-});
-
-class SelectedTechNotifier extends StateNotifier<Set<String>> {
-  SelectedTechNotifier() : super({});
-
-  void toggle(String tech) {
-    if (state.contains(tech)) {
-      state = {...state}..remove(tech);
-    } else if (state.length < 10) {
-      state = {...state, tech};
-    }
-  }
-}
 
 class OnboardingPage2 extends ConsumerWidget {
   const OnboardingPage2({super.key});
@@ -33,13 +21,13 @@ class OnboardingPage2 extends ConsumerWidget {
       "Python": FontAwesomeIcons.python,
       "Java": FontAwesomeIcons.java,
       "Rust": FontAwesomeIcons.rust,
-      "C#": FontAwesomeIcons.ccDiscover,
+      "C#": FontAwesomeIcons.codeBranch, // no hay icono oficial de C#
       "HTML": FontAwesomeIcons.html5,
       "CSS": FontAwesomeIcons.css3Alt,
       "JavaScript": FontAwesomeIcons.js,
-      "C++": FontAwesomeIcons.cuttlefish,
+      "C++": FontAwesomeIcons.code, // alternativo
       "Go": FontAwesomeIcons.golang,
-      "C": FontAwesomeIcons.cuttlefish,
+      "C": FontAwesomeIcons.code, // alternativo
     };
 
     final selectedSet = ref.watch(selectedTechProvider);
@@ -81,10 +69,13 @@ class OnboardingPage2 extends ConsumerWidget {
                     },
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ref.read(appRouterProvider).go(AppRouter.initial);
+                    },
                     child: const Text(
                       "Saltar",
-                      style: TextStyle(color: AppColors.tertiaryColors, fontSize: 16),
+                      style: TextStyle(
+                          color: AppColors.tertiaryColors, fontSize: 16),
                     ),
                   ),
                 ],
@@ -145,47 +136,27 @@ class OnboardingPage2 extends ConsumerWidget {
                   children: techIcons.keys.map((language) {
                     final isSelected = selectedSet.contains(language);
 
-                    return ChoiceChip(
-                      avatar: Icon(
-                        techIcons[language],
-                        color: Colors.white,
-                        size: 18,
-                      ),
-                      label: Text(language),
-                      selected: isSelected,
-                      onSelected: (bool selected) {
-                        final notifier = ref.read(selectedTechProvider.notifier);
-
+                    return CustomChoiceChip(
+                      label: language,
+                      isSelected: isSelected,
+                      icon: techIcons[language]!,
+                      onSelected: () {
+                        final notifier =
+                            ref.read(selectedTechProvider.notifier);
                         notifier.toggle(language);
                       },
-                      labelStyle: const TextStyle(color: Colors.white),
-                      backgroundColor: Colors.grey[850],
-                      selectedColor: AppColors.tertiaryColors,
                     );
                   }).toList(),
                 ),
               ),
             ),
-
-            // Botón Continuar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomButton(
-                    text: "Continuar",
-                    onPressed: () {
-                      final selectedLanguages = ref.read(selectedTechProvider);
-                      final registerNotifier = ref.read(registerProvider.notifier);
-
-                      registerNotifier.setProgrammingLanguages(selectedLanguages.toList());
-
-                      ref.read(appRouterProvider).go(AppRouter.onboard3);
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                ],
+              child: CustomButton(
+                text: "continuar",
+                onPressed: () {
+                  ref.read(appRouterProvider).go(AppRouter.onboard3);
+                },
               ),
             ),
           ],
