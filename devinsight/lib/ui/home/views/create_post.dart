@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:devinsight/ui/widgets/tags_list.dart';
+import 'package:devinsight/ui/home/widgets/tags_list.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -206,7 +206,8 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                                     fontWeight: FontWeight.w500)),
                             trailing: IconButton(
                               icon: const Icon(Icons.close, color: Colors.red),
-                              onPressed: () => _removeAttachment(file, isImage: false),
+                              onPressed: () =>
+                                  _removeAttachment(file, isImage: false),
                             ),
                           );
                         }).toList(),
