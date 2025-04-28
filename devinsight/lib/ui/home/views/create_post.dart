@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/ui/widgets/post_toolbar.dart';
-import 'package:devinsight/ui/widgets/post_textfield.dart';
-import 'package:devinsight/ui/widgets/auth/customButton.dart';
+import 'package:devinsight/ui/home/widgets/post_toolbar.dart';
+import 'package:devinsight/ui/home/widgets/post_textfield.dart';
+import 'package:devinsight/ui/login/widgets/customButton.dart';
 
 class CreatePostView extends ConsumerStatefulWidget {
   const CreatePostView({super.key});
@@ -50,8 +50,7 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
     if (selection.isCollapsed) {
       _insertText("**negrita**");
     } else {
-      final selectedText =
-          _controller.text.substring(selection.start, selection.end);
+      final selectedText = _controller.text.substring(selection.start, selection.end);
       _insertText("**$selectedText**");
     }
   }
@@ -62,8 +61,7 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
     if (selection.isCollapsed) {
       _insertText("*cursiva*");
     } else {
-      final selectedText =
-          _controller.text.substring(selection.start, selection.end);
+      final selectedText = _controller.text.substring(selection.start, selection.end);
       _insertText("*$selectedText*");
     }
   }
@@ -122,9 +120,7 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
         title: const Center(
           child: Text('Crear un Post',
               style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600)),
+                  color: Colors.white, fontFamily: 'Montserrat', fontWeight: FontWeight.w600)),
         ),
       ),
       body: Padding(
@@ -176,8 +172,7 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                       const SizedBox(height: 8),
                       Wrap(
                         spacing: 8,
-                        alignment: WrapAlignment
-                            .end, // Alinea los elementos a la izquierda
+                        alignment: WrapAlignment.end, // Alinea los elementos a la izquierda
                         children: attachedImages.map((img) {
                           return Stack(
                             children: [
@@ -235,8 +230,7 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                                     fontWeight: FontWeight.w500)),
                             trailing: IconButton(
                               icon: const Icon(Icons.close, color: Colors.red),
-                              onPressed: () =>
-                                  _removeAttachment(file, isImage: false),
+                              onPressed: () => _removeAttachment(file, isImage: false),
                             ),
                           );
                         }).toList(),

@@ -1,9 +1,9 @@
 import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/widgets/navProfile.dart';
-import 'package:devinsight/ui/widgets/publicationsCard.dart';
-import 'package:devinsight/ui/widgets/socialButtom.dart';
-import 'package:devinsight/ui/widgets/socialFollowers.dart';
+import 'package:devinsight/ui/home/widgets/navProfile.dart';
+import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
+import 'package:devinsight/ui/home/widgets/socialButtom.dart';
+import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Import if you want to hide the scrollbar
@@ -70,15 +70,18 @@ class Profile extends ConsumerWidget {
         ),
 
         // --- Social Followers, Buttons, Nav (now scrollable) ---
-        const SliverToBoxAdapter(child: Padding(
+        const SliverToBoxAdapter(
+            child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Socialfollowers(),
         )),
-        const SliverToBoxAdapter(child: Padding(
+        const SliverToBoxAdapter(
+            child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: SocialButton(),
         )),
-        const SliverToBoxAdapter(child: Padding(
+        const SliverToBoxAdapter(
+            child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Navprofile(),
         )),
@@ -89,7 +92,8 @@ class Profile extends ConsumerWidget {
         ),
 
         // --- Publications List (scrollable) ---
-        SliverPadding( // Use SliverPadding for list padding
+        SliverPadding(
+          // Use SliverPadding for list padding
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(

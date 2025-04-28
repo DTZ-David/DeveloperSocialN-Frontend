@@ -2,7 +2,7 @@
 import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/ui/widgets/publicationsCard.dart';
+import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../config/routers/app_router.dart';
-import '../../widgets/auth/customButton.dart';
-import '../../widgets/auth/customTextField.dart';
+import '../widgets/widgets_login.dart';
 
 class RegisterScreen extends ConsumerWidget {
   const RegisterScreen({super.key});

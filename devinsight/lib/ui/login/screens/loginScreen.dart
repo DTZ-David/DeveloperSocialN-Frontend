@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import '../widgets/widgets_login.dart';
 import '../../../config/providers/auth_provider.dart';
 import '../../../config/routers/app_router.dart';
 import '../../../repositories/auth_repository.dart';
 import '../../../services/login/auth_service.dart';
-import '../../widgets/auth/customButton.dart';
-import '../../widgets/auth/customTextField.dart';
-import '../../widgets/auth/progressDialog.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});

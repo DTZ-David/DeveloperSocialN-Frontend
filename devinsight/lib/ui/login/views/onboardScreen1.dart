@@ -1,8 +1,8 @@
-import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/ui/widgets/auth/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../../config/routers/app_router.dart';
+import '../widgets/widgets_login.dart';
 
 class OnboardingPage1 extends ConsumerWidget {
   const OnboardingPage1({super.key});
@@ -16,10 +16,7 @@ class OnboardingPage1 extends ConsumerWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color.fromARGB(255, 20, 6, 48),
-                Color.fromARGB(255, 4, 1, 9)
-              ],
+              colors: [Color.fromARGB(255, 20, 6, 48), Color.fromARGB(255, 4, 1, 9)],
             ),
           ),
           child: Column(
@@ -95,8 +92,7 @@ class OnboardingPage1 extends ConsumerWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

@@ -1,17 +1,17 @@
-import 'package:devinsight/ui/views/root/explorer.dart';
-import 'package:devinsight/ui/views/root/home.dart';
-
-import 'package:devinsight/ui/views/root/profile.dart';
-import 'package:devinsight/ui/screens/auth/loginScreen.dart';
-import 'package:devinsight/ui/views/root/publications.dart';
-import 'package:devinsight/ui/screens/auth/registerScreen.dart';
-import 'package:devinsight/ui/views/auth/onboardScreen1.dart';
-import 'package:devinsight/ui/views/auth/onboardScreen2.dart';
-import 'package:devinsight/ui/views/auth/onboardScreen3.dart';
+import 'package:devinsight/ui/login/screens/loginScreen.dart';
+import 'package:devinsight/ui/login/screens/registerScreen.dart';
+import 'package:devinsight/ui/login/views/onboardScreen1.dart';
+import 'package:devinsight/ui/login/views/onboardScreen2.dart';
+import 'package:devinsight/ui/login/views/onboardScreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/ui/screens/root/main_screen.dart';
+import 'package:devinsight/ui/home/screens/main_screen.dart';
+
+import '../../ui/home/views/explorer.dart';
+import '../../ui/home/views/home.dart';
+import '../../ui/home/views/profile.dart';
+import '../../ui/home/views/publications.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
