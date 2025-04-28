@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:devinsight/ui/home/widgets/tags_list.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,44 +27,6 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
     setState(() {
       _charCount = _controller.text.length;
     });
-  }
-
-  void _insertText(String insertedText) {
-    final text = _controller.text;
-    final selection = _controller.selection;
-
-    final newText = text.replaceRange(
-      selection.start,
-      selection.end,
-      insertedText,
-    );
-
-    _controller.text = newText;
-    _controller.selection = TextSelection.collapsed(
-      offset: selection.start + insertedText.length,
-    );
-  }
-
-  void _applyBold() {
-    final selection = _controller.selection;
-    if (!selection.isValid) return;
-    if (selection.isCollapsed) {
-      _insertText("**negrita**");
-    } else {
-      final selectedText = _controller.text.substring(selection.start, selection.end);
-      _insertText("**$selectedText**");
-    }
-  }
-
-  void _applyItalic() {
-    final selection = _controller.selection;
-    if (!selection.isValid) return;
-    if (selection.isCollapsed) {
-      _insertText("*cursiva*");
-    } else {
-      final selectedText = _controller.text.substring(selection.start, selection.end);
-      _insertText("*$selectedText*");
-    }
   }
 
   Future<void> _attachImage() async {
@@ -115,41 +78,39 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Center(
-          child: Text('Crear un Post',
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Montserrat', fontWeight: FontWeight.w600)),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             PostToolbar(
-              onBoldPressed: _applyBold,
-              onItalicPressed: _applyItalic,
-              onEmojiPressed: () {},
-              onLinkPressed: () {},
-              onListPressed: () {},
-              onAlignLeftPressed: () {},
-              onUndoPressed: () {},
-              onRedoPressed: () {},
               onImageAttach: _attachImage,
               onFileAttach: _attachFile,
-              onTagAdd: _addTag,
-              charCount: _charCount, // << Añadido aquí
-              maxChars: _maxChars, // << Añadido aquí
+              charCount: _charCount,
+              maxChars: _maxChars,
             ),
             const SizedBox(height: 8),
-            Text(
-              '$_charCount/$_maxChars',
-              style: TextStyle(
-                color: _charCount >= _maxChars ? Colors.red : Colors.grey,
-                fontSize: 12,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Contenido de tu post:",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  '$_charCount/$_maxChars',
+                  style: TextStyle(
+                    color: _charCount >= _maxChars ? Colors.red : Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
             ),
+            const SizedBox(height: 12),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -158,6 +119,14 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                       controller: _controller,
                       maxLength: _maxChars,
                       onChanged: (_) => _updateCharCount(),
+                    ),
+                    TagList(
+                      tags: tags,
+                      onTagAdded: (newTag) {
+                        setState(() {
+                          tags.add(newTag);
+                        });
+                      },
                     ),
                     const SizedBox(height: 12),
                     if (attachedImages.isNotEmpty) ...[
@@ -170,42 +139,49 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                                 fontWeight: FontWeight.bold)),
                       ),
                       const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        alignment: WrapAlignment.end, // Alinea los elementos a la izquierda
-                        children: attachedImages.map((img) {
-                          return Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.file(
-                                  img,
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                right: 0,
-                                top: 0,
-                                child: GestureDetector(
-                                  onTap: () => _removeAttachment(img),
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.red,
-                                    ),
-                                    child: const Icon(
-                                      Icons.close,
-                                      size: 24,
-                                      color: Colors.white,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Wrap(
+                          spacing: 8,
+                          children: attachedImages.map((img) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 2.0, vertical: 6.0),
+                              child: Stack(
+                                alignment: Alignment.centerLeft,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.file(
+                                      img,
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                ),
+                                  Positioned(
+                                    right: 0,
+                                    top: 0,
+                                    child: GestureDetector(
+                                      onTap: () => _removeAttachment(img),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.red,
+                                        ),
+                                        child: const Icon(
+                                          Icons.close,
+                                          size: 24,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          );
-                        }).toList(),
+                            );
+                          }).toList(),
+                        ),
                       ),
                       const SizedBox(height: 16),
                     ],
@@ -230,7 +206,8 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                                     fontWeight: FontWeight.w500)),
                             trailing: IconButton(
                               icon: const Icon(Icons.close, color: Colors.red),
-                              onPressed: () => _removeAttachment(file, isImage: false),
+                              onPressed: () =>
+                                  _removeAttachment(file, isImage: false),
                             ),
                           );
                         }).toList(),
