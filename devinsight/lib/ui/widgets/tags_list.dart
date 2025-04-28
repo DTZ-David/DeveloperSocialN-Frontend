@@ -6,10 +6,10 @@ class TagList extends StatefulWidget {
   final void Function(String) onTagAdded;
 
   const TagList({
-    Key? key,
+    super.key,
     required this.tags,
     required this.onTagAdded,
-  }) : super(key: key);
+  });
 
   @override
   State<TagList> createState() => _TagListState();
@@ -31,6 +31,7 @@ class _TagListState extends State<TagList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 14),
         const Text(
           'Tags:',
           style: TextStyle(
@@ -45,10 +46,10 @@ class _TagListState extends State<TagList> {
           controller: _tagController,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
-            hintText: "Agrega un tag y presiona Enter",
+            hintText: "Agrega un tag y presiona enter",
             hintStyle: const TextStyle(color: Colors.grey),
             filled: true,
-            fillColor: Colors.blueGrey.withOpacity(0.3),
+            fillColor: const Color.fromARGB(255, 97, 98, 98).withOpacity(0.3),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide.none,
@@ -66,12 +67,12 @@ class _TagListState extends State<TagList> {
               label: Text(
                 tag,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Montserrat',
-                  fontSize: 12,
-                ),
+                    color: Colors.white,
+                    fontFamily: 'Montserrat',
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
               ),
-              backgroundColor: Colors.blueGrey,
+              backgroundColor: const Color(0xFF1ABCFE),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             );
           }).toList(),
