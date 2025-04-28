@@ -11,8 +11,8 @@ class User with _$User {
     @Default('') String email,
     @Default('') String profilePicture,
     @Default('') String bio,
-    @Default(0) int postsCount, // Para el número de publicaciones
-    @Default(0) int followersCount, // Para el número de seguidores
+    @Default(0) int postsCount,
+    @Default(0) int followersCount,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

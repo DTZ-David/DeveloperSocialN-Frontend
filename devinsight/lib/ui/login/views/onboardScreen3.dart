@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../config/providers/register_provider.dart';
+import '../../../services/login/auth_service.dart';
+import 'onboardScreen2.dart';
+
 class OnboardingPage3 extends ConsumerWidget {
   const OnboardingPage3({super.key});
 
@@ -24,6 +28,7 @@ class OnboardingPage3 extends ConsumerWidget {
       "Slack": FontAwesomeIcons.slack,
       "Trello": FontAwesomeIcons.tasks,
     };
+    final selectedSet = ref.watch(selectedTechProvider);
 
     return Scaffold(
       body: Container(
@@ -130,7 +135,11 @@ class OnboardingPage3 extends ConsumerWidget {
                       ),
                       label: Text(tool),
                       selected: false,
-                      onSelected: (bool selected) {},
+                      onSelected: (bool selected) {
+                        final notifier = ref.read(selectedTechProvider.notifier);
+
+                        notifier.toggle(tool);
+                      },
                       labelStyle: const TextStyle(color: Colors.white),
                       backgroundColor: Colors.grey[850],
                       selectedColor: AppColors.tertiaryColors,
@@ -147,8 +156,46 @@ class OnboardingPage3 extends ConsumerWidget {
                 children: [
                   CustomButton(
                     text: "Continuar",
-                    onPressed: () {
-                      ref.read(appRouterProvider).go(AppRouter.initial);
+                    onPressed: () async {
+                      final selectedLanguages = ref.read(selectedTechProvider);
+                      final registerNotifier = ref.read(registerProvider.notifier);
+
+                      registerNotifier.setProgrammingLanguages(selectedLanguages.toList());
+
+                      final registerState = ref.read(registerProvider);
+
+                      final authService = AuthService(); // Instanciar el servicio de autenticación
+
+                      try {
+                        await authService.register(
+                          username: registerState.username,
+                          email: registerState.email,
+                          password: registerState.password,
+                          bio: registerState.bio,
+                          profilePicture: registerState.profilePicture,
+                          programmingLanguages: registerState.programmingLanguages,
+                        );
+
+                        // Mostrar SnackBar de éxito
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Registro exitoso 🎉'),
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+
+                        // Esperar 2 segundos antes de navegar
+                        await Future.delayed(const Duration(seconds: 2));
+
+                        // Ahora sí, navegar al home
+                        ref.read(appRouterProvider).go(AppRouter.initial);
+                      } catch (e) {
+                        // Mostrar error si falla
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error en el registro: $e')),
+                        );
+                      }
                     },
                   ),
                   const SizedBox(height: 20),

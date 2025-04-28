@@ -23,4 +23,36 @@ class AuthService {
       throw Exception('Error en login: ${response.statusCode}');
     }
   }
+
+  Future<void> register({
+    required String username,
+    required String email,
+    required String password,
+    required String bio,
+    required String profilePicture,
+    required List<String> programmingLanguages,
+  }) async {
+    final url = Uri.parse('$_baseUrl/registeruser');
+
+    final body = {
+      "email": email,
+      "userName": username,
+      "password": password,
+      "bio": bio,
+      "profilePicture": profilePicture,
+      "preferences": {
+        "programmingLanguages": programmingLanguages,
+      }
+    };
+
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(body),
+    );
+
+    if (response.statusCode != 201) {
+      throw Exception('Error en registro: ${response.statusCode}');
+    }
+  }
 }

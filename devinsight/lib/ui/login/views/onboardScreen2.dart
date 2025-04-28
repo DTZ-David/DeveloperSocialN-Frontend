@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../config/providers/register_provider.dart';
+
 /// Proveedor de estado para los lenguajes seleccionados
 final selectedTechProvider = StateNotifierProvider<SelectedTechNotifier, Set<String>>((ref) {
   return SelectedTechNotifier();
@@ -154,7 +156,7 @@ class OnboardingPage2 extends ConsumerWidget {
                       onSelected: (bool selected) {
                         final notifier = ref.read(selectedTechProvider.notifier);
 
-                        notifier.toggle(language); // Aquí aplicamos el toggle
+                        notifier.toggle(language);
                       },
                       labelStyle: const TextStyle(color: Colors.white),
                       backgroundColor: Colors.grey[850],
@@ -174,6 +176,11 @@ class OnboardingPage2 extends ConsumerWidget {
                   CustomButton(
                     text: "Continuar",
                     onPressed: () {
+                      final selectedLanguages = ref.read(selectedTechProvider);
+                      final registerNotifier = ref.read(registerProvider.notifier);
+
+                      registerNotifier.setProgrammingLanguages(selectedLanguages.toList());
+
                       ref.read(appRouterProvider).go(AppRouter.onboard3);
                     },
                   ),
