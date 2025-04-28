@@ -1,17 +1,16 @@
-import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/views/root/create_post.dart';
-import 'package:devinsight/ui/widgets/auth/customNotificationIcon.dart';
-import 'package:devinsight/ui/widgets/auth/customSettingsIcon.dart';
+import 'package:devinsight/ui/login/widgets/customNotificationIcon.dart';
+import 'package:devinsight/ui/login/widgets/customSettingsIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/ui/widgets/navBar.dart';
-import 'package:devinsight/ui/views/root/home.dart';
-import 'package:devinsight/ui/views/root/explorer.dart';
-import 'package:devinsight/ui/views/root/profile.dart';
-import 'package:devinsight/ui/views/root/publications.dart';
+import 'package:devinsight/ui/home/widgets/navBar.dart';
 import 'package:devinsight/config/providers/navbar_index_provider.dart';
 import 'package:flutter_svg/svg.dart';
+import '../views/create_post.dart';
+import '../views/explorer.dart';
+import '../views/home.dart';
+import '../views/profile.dart';
+import '../views/publications.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});

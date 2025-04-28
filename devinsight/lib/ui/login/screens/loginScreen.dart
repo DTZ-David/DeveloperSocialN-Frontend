@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:async';
+import '../widgets/widgets_login.dart';
+import '../../../config/providers/auth_provider.dart';
 import '../../../config/routers/app_router.dart';
-import '../../widgets/auth/customButton.dart';
-import '../../widgets/auth/customTextField.dart';
+import '../../../repositories/auth_repository.dart';
+import '../../../services/login/auth_service.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
+  // Instancias fuera del método para no recrearlas siempre
+  static final AuthService _authService = AuthService();
+  static final AuthRepository _authRepository = AuthRepository(_authService);
+
   void _showErrorSnackBar(BuildContext context, String message) {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
-    scaffoldMessenger.clearSnackBars(); // Limpia cualquier SnackBar previo
+    scaffoldMessenger.clearSnackBars();
     scaffoldMessenger.showSnackBar(
       SnackBar(
         content: Text(
@@ -21,66 +24,34 @@ class LoginScreen extends ConsumerWidget {
           style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
-        behavior: SnackBarBehavior.floating, // Hace que el SnackBar flote
-        margin: const EdgeInsets.all(10), // Añade margen alrededor
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.all(10),
         duration: const Duration(seconds: 3),
       ),
     );
   }
 
-  Future<void> _login(
-      BuildContext context, String username, String password) async {
+  Future<void> _login(BuildContext context, WidgetRef ref, String username, String password) async {
     try {
-      print('Intentando conectar al servidor...');
+      final (user, token) = await _authRepository.login(username, password);
 
-      final scaffoldMessenger = ScaffoldMessenger.of(context);
-      scaffoldMessenger.clearSnackBars();
-      scaffoldMessenger.showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Conectando al servidor...',
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.blue,
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
-          duration: Duration(seconds: 2),
-        ),
-      );
+      print('Token recibido: $token');
+      print('Usuario: ${user.username}');
+      print('Foto de perfil: ${user.profilePicture}');
+      print('Biografía: ${user.bio}');
 
-      final response = await http
-          .post(
-        Uri.parse('http://localhost:3000/api/auth/login'),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'username': username,
-          'password': password,
-        }),
-      )
-          .timeout(
-        const Duration(
-            seconds: 5), // Reducido a 5 segundos para ver el error más rápido
-        onTimeout: () {
-          throw Exception('El servidor no respondió a tiempo');
-        },
-      );
+      ref.read(authProvider.notifier).setUser(user);
+      ref.read(authProvider.notifier).setToken(token);
 
-      if (response.statusCode == 200) {
-        print('Login exitoso: ${response.body}');
-        // Aquí puedes guardar el token y navegar a la siguiente pantalla
-      } else {
-        print('Error del servidor: ${response.statusCode}');
-        _showErrorSnackBar(context, 'Error: Credenciales inválidas');
-      }
+      ref.read(appRouterProvider).go(AppRouter.initial);
     } catch (e) {
       print('Error de conexión: $e');
-      _showErrorSnackBar(context, 'Error: No se pudo conectar con el servidor');
+      _showErrorSnackBar(context, 'Error: No se pudo iniciar sesión');
     }
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Añadimos los controladores para los campos de texto
     final TextEditingController userController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
@@ -91,10 +62,7 @@ class LoginScreen extends ConsumerWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color.fromARGB(255, 20, 6, 48),
-                Color.fromARGB(255, 4, 1, 9)
-              ],
+              colors: [Color.fromARGB(255, 20, 6, 48), Color.fromARGB(255, 4, 1, 9)],
             ),
           ),
           child: LayoutBuilder(
@@ -114,8 +82,8 @@ class LoginScreen extends ConsumerWidget {
                               children: [
                                 SvgPicture.asset(
                                   'assets/icons/saturn.svg',
-                                  height: 240,
-                                  width: 240,
+                                  height: 210,
+                                  width: 210,
                                   color: const Color(0xFF1ABCFE),
                                 ),
                                 const SizedBox(height: 12),
@@ -133,21 +101,22 @@ class LoginScreen extends ConsumerWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               CustomTextField(
-                                  label: "Usuario",
-                                  icon: Icons.person,
-                                  controller: userController),
+                                label: "Usuario",
+                                icon: Icons.person,
+                                controller: userController,
+                              ),
                               const SizedBox(height: 20),
                               CustomTextField(
-                                  label: "Contraseña",
-                                  icon: Icons.lock,
-                                  isPassword: true,
-                                  controller: passwordController),
+                                label: "Contraseña",
+                                icon: Icons.lock,
+                                isPassword: true,
+                                controller: passwordController,
+                              ),
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
@@ -165,38 +134,16 @@ class LoginScreen extends ConsumerWidget {
                               CustomButton(
                                 text: "Iniciar Sesión",
                                 onPressed: () async {
+                                  await ProgressDialog.show(context);
                                   final String username = userController.text;
-                                  final String password =
-                                      passwordController.text;
-
-                                  await _login(context, username, password);
+                                  final String password = passwordController.text;
+                                  await _login(context, ref, username, password);
                                 },
                               ),
                               const SizedBox(height: 20),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     Expanded(
-                              //       child: SocialButton(
-                              //         icon: 'assets/icons/github.svg',
-                              //         onPressed: () => print("GitHub"),
-                              //       ),
-                              //     ),
-                              //     const SizedBox(width: 20),
-                              //     Expanded(
-                              //       child: SocialButton(
-                              //         icon: 'assets/icons/google.svg',
-                              //         onPressed: () => print("Google"),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                              const SizedBox(height: 10),
                               GestureDetector(
                                 onTap: () {
-                                  ref
-                                      .read(appRouterProvider)
-                                      .go(AppRouter.registerUser);
+                                  ref.read(appRouterProvider).go(AppRouter.registerUser);
                                 },
                                 child: const Text(
                                   "Crear una cuenta",

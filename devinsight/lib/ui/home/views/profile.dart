@@ -1,9 +1,9 @@
 import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/widgets/navProfile.dart';
-import 'package:devinsight/ui/widgets/publicationsCard.dart';
-import 'package:devinsight/ui/widgets/socialButtom.dart';
-import 'package:devinsight/ui/widgets/socialFollowers.dart';
+import 'package:devinsight/ui/home/widgets/navProfile.dart';
+import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
+import 'package:devinsight/ui/home/widgets/socialButtom.dart';
+import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Import if you want to hide the scrollbar
@@ -69,17 +69,20 @@ class Profile extends ConsumerWidget {
         ),
 
         // --- Social Followers, Buttons, Nav (now scrollable) ---
-        SliverToBoxAdapter(child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: const Socialfollowers(),
+        const SliverToBoxAdapter(
+            child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Socialfollowers(),
         )),
-        SliverToBoxAdapter(child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: const SocialButton(),
+        const SliverToBoxAdapter(
+            child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: SocialButton(),
         )),
-        SliverToBoxAdapter(child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: const Navprofile(),
+        const SliverToBoxAdapter(
+            child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Navprofile(),
         )),
 
         // --- Spacing before list ---
@@ -88,7 +91,8 @@ class Profile extends ConsumerWidget {
         ),
 
         // --- Publications List (scrollable) ---
-        SliverPadding( // Use SliverPadding for list padding
+        SliverPadding(
+          // Use SliverPadding for list padding
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -104,7 +108,7 @@ class Profile extends ConsumerWidget {
                     code: data['code'],
                     language: data['language'],
                     tags: List<String>.from(data['tags']),
-                    reactions: [], // Pass actual reactions
+                    reactions: const [], // Pass actual reactions
                     // Add onOptionsPressed if needed
                   ),
                 );

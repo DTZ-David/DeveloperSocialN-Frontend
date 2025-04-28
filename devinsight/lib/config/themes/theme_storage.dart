@@ -18,9 +18,9 @@ class ThemeStorage {
       case 'ThemeMode.dark':
         return ThemeMode.dark;
       case 'ThemeMode.light':
-        return ThemeMode.light;
+        return ThemeMode.dark;
       default:
-        return ThemeMode.system;
+        return ThemeMode.dark;
     }
   }
 }

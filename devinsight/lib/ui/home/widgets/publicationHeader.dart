@@ -1,4 +1,4 @@
-import 'package:devinsight/ui/widgets/optionsDialog.dart';
+import 'package:devinsight/ui/home/widgets/optionsDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -57,8 +57,7 @@ class PublicationHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3.0),
             child: GestureDetector(
               onTap: () => {
-                showDialog(
-                    context: context, builder: (_) => const OptionsDialog()),
+                showDialog(context: context, builder: (_) => const OptionsDialog()),
               },
               child: SvgPicture.asset(
                 'assets/icons/verticaldots.svg',
