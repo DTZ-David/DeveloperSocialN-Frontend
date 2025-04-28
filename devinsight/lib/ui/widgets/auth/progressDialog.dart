@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ProgressDialog extends StatelessWidget {
+  const ProgressDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return const Dialog(
       backgroundColor: Colors.transparent,
       child: Center(
         child: CircularProgressIndicator(),
@@ -15,7 +17,7 @@ class ProgressDialog extends StatelessWidget {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // No permite cerrar tocando fuera
-      builder: (BuildContext context) => ProgressDialog(),
+      builder: (BuildContext context) => const ProgressDialog(),
     );
   }
 

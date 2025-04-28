@@ -70,17 +70,17 @@ class Profile extends ConsumerWidget {
         ),
 
         // --- Social Followers, Buttons, Nav (now scrollable) ---
-        SliverToBoxAdapter(child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: const Socialfollowers(),
+        const SliverToBoxAdapter(child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Socialfollowers(),
         )),
-        SliverToBoxAdapter(child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: const SocialButton(),
+        const SliverToBoxAdapter(child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: SocialButton(),
         )),
-        SliverToBoxAdapter(child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: const Navprofile(),
+        const SliverToBoxAdapter(child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Navprofile(),
         )),
 
         // --- Spacing before list ---
@@ -105,7 +105,7 @@ class Profile extends ConsumerWidget {
                     code: data['code'],
                     language: data['language'],
                     tags: List<String>.from(data['tags']),
-                    reactions: [], // Pass actual reactions
+                    reactions: const [], // Pass actual reactions
                     // Add onOptionsPressed if needed
                   ),
                 );
