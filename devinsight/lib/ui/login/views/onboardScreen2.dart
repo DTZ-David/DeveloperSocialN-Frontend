@@ -1,6 +1,6 @@
 import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/widgets/auth/customButton.dart';
+import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -154,7 +154,7 @@ class OnboardingPage2 extends ConsumerWidget {
                       onSelected: (bool selected) {
                         final notifier = ref.read(selectedTechProvider.notifier);
 
-                        notifier.toggle(language);  // Aquí aplicamos el toggle
+                        notifier.toggle(language); // Aquí aplicamos el toggle
                       },
                       labelStyle: const TextStyle(color: Colors.white),
                       backgroundColor: Colors.grey[850],
