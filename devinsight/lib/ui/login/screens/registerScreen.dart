@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../config/routers/app_router.dart';
-import '../../widgets/auth/customButton.dart';
-import '../../widgets/auth/customTextField.dart';
+import '../widgets/customButton.dart';
+import '../widgets/customTextField.dart';
+import '../../../config/providers/register_provider.dart';
 
 class RegisterScreen extends ConsumerWidget {
   const RegisterScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Controladores para los campos de texto
+    final usernameController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -59,17 +66,63 @@ class RegisterScreen extends ConsumerWidget {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const CustomTextField(label: "Usuario", icon: Icons.person),
+                              CustomTextField(
+                                label: "Usuario",
+                                icon: Icons.person,
+                                controller: usernameController,
+                              ),
                               const SizedBox(height: 20),
-                              const CustomTextField(label: "Correo", icon: Icons.email),
+                              CustomTextField(
+                                label: "Correo",
+                                icon: Icons.email,
+                                controller: emailController,
+                              ),
                               const SizedBox(height: 20),
-                              const CustomTextField(
-                                  label: "Contraseña", icon: Icons.lock, isPassword: true),
+                              CustomTextField(
+                                label: "Contraseña",
+                                icon: Icons.lock,
+                                isPassword: true,
+                                controller: passwordController,
+                              ),
                               const SizedBox(height: 40),
                               CustomButton(
                                 text: "Registrarse",
                                 onPressed: () {
-                                  ref.read(appRouterProvider).go(AppRouter.onboard2);
+                                  // Obtener los valores de los controladores
+                                  final username = usernameController.text;
+                                  final email = emailController.text;
+                                  final password = passwordController.text;
+
+                                  if (username.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Por favor ingresa un nombre de usuario')),
+                                    );
+                                    return;
+                                  }
+                                  if (email.isEmpty ||
+                                      !RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                          .hasMatch(email)) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              'Por favor ingresa un correo electrónico válido')),
+                                    );
+                                    return;
+                                  }
+                                  if (password.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Por favor ingresa una contraseña')),
+                                    );
+                                    return;
+                                  }
+
+                                  ref.read(registerProvider.notifier).setUsername(username);
+                                  ref.read(registerProvider.notifier).setEmail(email);
+                                  ref.read(registerProvider.notifier).setPassword(password);
+
+                                  ref.read(appRouterProvider).go(AppRouter.onboard1);
                                 },
                               ),
                               const SizedBox(height: 30),

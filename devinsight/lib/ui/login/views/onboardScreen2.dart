@@ -1,29 +1,48 @@
 import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/widgets/auth/customButton.dart';
+import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class OnboardingPage3 extends ConsumerWidget {
-  const OnboardingPage3({super.key});
+import '../../../config/providers/register_provider.dart';
+
+/// Proveedor de estado para los lenguajes seleccionados
+final selectedTechProvider = StateNotifierProvider<SelectedTechNotifier, Set<String>>((ref) {
+  return SelectedTechNotifier();
+});
+
+class SelectedTechNotifier extends StateNotifier<Set<String>> {
+  SelectedTechNotifier() : super({});
+
+  void toggle(String tech) {
+    if (state.contains(tech)) {
+      state = {...state}..remove(tech);
+    } else if (state.length < 10) {
+      state = {...state, tech};
+    }
+  }
+}
+
+class OnboardingPage2 extends ConsumerWidget {
+  const OnboardingPage2({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Mapeo de herramientas con íconos
-    Map<String, IconData> toolIcons = {
-      "VS Code": FontAwesomeIcons.code,
-      "Figma": FontAwesomeIcons.paintBrush,
-      "Sublime Text": FontAwesomeIcons.fileCode,
-      "IntelliJ IDEA": FontAwesomeIcons.brain,
-      "Anaconda": FontAwesomeIcons.python,
-      "Postman": FontAwesomeIcons.envelopeOpenText,
-      "Git": FontAwesomeIcons.gitAlt,
-      "Docker": FontAwesomeIcons.docker,
-      "Jupyter": FontAwesomeIcons.bookOpen,
-      "Slack": FontAwesomeIcons.slack,
-      "Trello": FontAwesomeIcons.tasks,
+    Map<String, IconData> techIcons = {
+      "Python": FontAwesomeIcons.python,
+      "Java": FontAwesomeIcons.java,
+      "Rust": FontAwesomeIcons.rust,
+      "C#": FontAwesomeIcons.ccDiscover,
+      "HTML": FontAwesomeIcons.html5,
+      "CSS": FontAwesomeIcons.css3Alt,
+      "JavaScript": FontAwesomeIcons.js,
+      "C++": FontAwesomeIcons.cuttlefish,
+      "Go": FontAwesomeIcons.golang,
+      "C": FontAwesomeIcons.cuttlefish,
     };
+
+    final selectedSet = ref.watch(selectedTechProvider);
 
     return Scaffold(
       body: Container(
@@ -39,7 +58,7 @@ class OnboardingPage3 extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            // AppBar con gradiente
+            // AppBar
             Container(
               padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
               decoration: BoxDecoration(
@@ -58,7 +77,7 @@ class OnboardingPage3 extends ConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () {
-                      ref.read(appRouterProvider).go(AppRouter.onboard2);
+                      ref.read(appRouterProvider).go(AppRouter.onboard1);
                     },
                   ),
                   TextButton(
@@ -71,6 +90,7 @@ class OnboardingPage3 extends ConsumerWidget {
                 ],
               ),
             ),
+            // Títulos
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
@@ -86,7 +106,7 @@ class OnboardingPage3 extends ConsumerWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Escoge de 1 a 10 herramientas, de esta manera te vamos a proveer de contenido único en tu Feed.",
+                    "Escoge de 1 a 10 lenguajes, de esta manera te vamos a proveer de contenido único en tu Feed.",
                     style: TextStyle(color: Colors.white70, fontSize: 14),
                   ),
                   SizedBox(height: 20),
@@ -114,23 +134,30 @@ class OnboardingPage3 extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Lista de herramientas con íconos
+
+            // Lenguajes
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Wrap(
                   spacing: 10,
                   runSpacing: 10,
-                  children: toolIcons.keys.map((tool) {
+                  children: techIcons.keys.map((language) {
+                    final isSelected = selectedSet.contains(language);
+
                     return ChoiceChip(
                       avatar: Icon(
-                        toolIcons[tool], // Ícono correspondiente
+                        techIcons[language],
                         color: Colors.white,
                         size: 18,
                       ),
-                      label: Text(tool),
-                      selected: false,
-                      onSelected: (bool selected) {},
+                      label: Text(language),
+                      selected: isSelected,
+                      onSelected: (bool selected) {
+                        final notifier = ref.read(selectedTechProvider.notifier);
+
+                        notifier.toggle(language);
+                      },
                       labelStyle: const TextStyle(color: Colors.white),
                       backgroundColor: Colors.grey[850],
                       selectedColor: AppColors.tertiaryColors,
@@ -139,6 +166,7 @@ class OnboardingPage3 extends ConsumerWidget {
                 ),
               ),
             ),
+
             // Botón Continuar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -148,7 +176,12 @@ class OnboardingPage3 extends ConsumerWidget {
                   CustomButton(
                     text: "Continuar",
                     onPressed: () {
-                      ref.read(appRouterProvider).go(AppRouter.initial);
+                      final selectedLanguages = ref.read(selectedTechProvider);
+                      final registerNotifier = ref.read(registerProvider.notifier);
+
+                      registerNotifier.setProgrammingLanguages(selectedLanguages.toList());
+
+                      ref.read(appRouterProvider).go(AppRouter.onboard3);
                     },
                   ),
                   const SizedBox(height: 20),

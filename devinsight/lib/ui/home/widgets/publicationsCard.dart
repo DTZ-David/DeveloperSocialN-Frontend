@@ -1,16 +1,17 @@
-import 'package:devinsight/ui/widgets/codePreviewBox.dart';
-import 'package:devinsight/ui/widgets/publicationHeader.dart';
-import 'package:devinsight/ui/widgets/reactionsRow.dart';
+import 'package:devinsight/ui/home/widgets/codePreviewBox.dart';
+import 'package:devinsight/ui/home/widgets/publicationHeader.dart';
+import 'package:devinsight/ui/home/widgets/reactionsRow.dart';
 import 'package:flutter/material.dart';
+
 class PublicationsCard extends StatelessWidget {
   final String userName;
   final String sentAt;
   final String userIcon;
   final String description;
-  final String? code;      // opcional
-  final String? language;  // opcional
-  final List<int>? reactions;  // opcional
-  final List<String>? tags;    // opcional
+  final String? code; // opcional
+  final String? language; // opcional
+  final List<int>? reactions; // opcional
+  final List<String>? tags; // opcional
 
   const PublicationsCard({
     super.key,
