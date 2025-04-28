@@ -14,8 +14,7 @@ class Profile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final publications = ref.watch(publicationsProvider);
-
+    final publications = ref.watch(myProfilePublicationsProvider);
     // Replace Padding and Column with CustomScrollView
     return CustomScrollView(
       slivers: [
