@@ -25,8 +25,7 @@ mixin _$User {
   String get email => throw _privateConstructorUsedError;
   String get profilePicture => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
-  int get postsCount =>
-      throw _privateConstructorUsedError; // Para el número de publicaciones
+  int get postsCount => throw _privateConstructorUsedError;
   int get followersCount => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
@@ -211,7 +210,6 @@ class _$UserImpl implements _User {
   @override
   @JsonKey()
   final int postsCount;
-// Para el número de publicaciones
   @override
   @JsonKey()
   final int followersCount;
@@ -283,7 +281,7 @@ abstract class _User implements User {
   @override
   String get bio;
   @override
-  int get postsCount; // Para el número de publicaciones
+  int get postsCount;
   @override
   int get followersCount;
 

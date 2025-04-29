@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../controller/feedController.dart';
+import '../../../controller/loginController.dart';
 import '../widgets/widgets_login.dart';
 import '../../../config/providers/auth_provider.dart';
 import '../../../config/routers/app_router.dart';
@@ -29,25 +31,6 @@ class LoginScreen extends ConsumerWidget {
         duration: const Duration(seconds: 3),
       ),
     );
-  }
-
-  Future<void> _login(BuildContext context, WidgetRef ref, String username, String password) async {
-    try {
-      final (user, token) = await _authRepository.login(username, password);
-
-      print('Token recibido: $token');
-      print('Usuario: ${user.username}');
-      print('Foto de perfil: ${user.profilePicture}');
-      print('Biografía: ${user.bio}');
-
-      ref.read(authProvider.notifier).setUser(user);
-      ref.read(authProvider.notifier).setToken(token);
-
-      ref.read(appRouterProvider).go(AppRouter.initial);
-    } catch (e) {
-      print('Error de conexión: $e');
-      _showErrorSnackBar(context, 'Error: No se pudo iniciar sesión');
-    }
   }
 
   @override
@@ -134,10 +117,19 @@ class LoginScreen extends ConsumerWidget {
                               CustomButton(
                                 text: "Iniciar Sesión",
                                 onPressed: () async {
-                                  await ProgressDialog.show(context);
-                                  final String username = userController.text;
-                                  final String password = passwordController.text;
-                                  await _login(context, ref, username, password);
+                                  final username = userController.text.trim();
+                                  final password = passwordController.text.trim();
+
+                                  final controller = ref.read(loginControllerProvider);
+
+                                  final success = await controller.login(username, password);
+
+                                  if (success) {
+                                    ref.read(feedControllerProvider.notifier).loadFeed();
+                                    ref.read(appRouterProvider).go(AppRouter.initial);
+                                  } else {
+                                    _showErrorSnackBar(context, 'Error: No se pudo iniciar sesión');
+                                  }
                                 },
                               ),
                               const SizedBox(height: 20),
