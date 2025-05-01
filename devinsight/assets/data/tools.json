@@ -1,46 +1,46 @@
-[
-    {
-        "name": "VS Code",
-        "icon": "code"
-    },
-    {
-        "name": "Figma",
-        "icon": "paintBrush"
-    },
-    {
-        "name": "Sublime Text",
-        "icon": "fileCode"
-    },
-    {
-        "name": "IntelliJ IDEA",
-        "icon": "brain"
-    },
-    {
-        "name": "Anaconda",
-        "icon": "python"
-    },
-    {
-        "name": "Postman",
-        "icon": "envelopeOpenText"
-    },
-    {
-        "name": "Git",
-        "icon": "gitAlt"
-    },
-    {
-        "name": "Docker",
-        "icon": "docker"
-    },
-    {
-        "name": "Jupyter",
-        "icon": "bookOpen"
-    },
-    {
-        "name": "Slack",
-        "icon": "slack"
-    },
-    {
-        "name": "Trello",
-        "icon": "tasks"
-    }
-]
+    [
+        {
+            "name": "VS Code",
+            "icon": "code"
+        },
+        {
+            "name": "Figma",
+            "icon": "paintBrush"
+        },
+        {
+            "name": "Sublime Text",
+            "icon": "fileCode"
+        },
+        {
+            "name": "IntelliJ IDEA",
+            "icon": "brain"
+        },
+        {
+            "name": "Anaconda",
+            "icon": "python"
+        },
+        {
+            "name": "Postman",
+            "icon": "envelopeOpenText"
+        },
+        {
+            "name": "Git",
+            "icon": "gitAlt"
+        },
+        {
+            "name": "Docker",
+            "icon": "docker"
+        },
+        {
+            "name": "Jupyter",
+            "icon": "bookOpen"
+        },
+        {
+            "name": "Slack",
+            "icon": "slack"
+        },
+        {
+            "name": "Trello",
+            "icon": "tasks"
+        }
+    ]
