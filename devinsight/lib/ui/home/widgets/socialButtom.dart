@@ -1,3 +1,4 @@
+import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +32,9 @@ class SocialButton extends ConsumerWidget {
 
           // Botón de Mensaje
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              ref.read(appRouterProvider).go(AppRouter.message);
+            },
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(150, 40),
               backgroundColor: AppColors.secondaryColors,

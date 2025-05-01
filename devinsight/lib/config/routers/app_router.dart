@@ -1,3 +1,4 @@
+import 'package:devinsight/ui/home/views/messageProfile.dart';
 import 'package:devinsight/ui/login/screens/loginScreen.dart';
 import 'package:devinsight/ui/login/screens/registerScreen.dart';
 import 'package:devinsight/ui/login/views/onboardScreen1.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/ui/home/screens/main_screen.dart';
+
 
 import '../../ui/home/views/explorer.dart';
 import '../../ui/home/views/home.dart';
@@ -69,6 +71,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.onboard3,
         builder: (context, state) => const OnboardingPage3(),
       ),
+      GoRoute(
+        path: AppRouter.message,
+        name: AppRouter.message,
+        builder: (context, state) => const MessageProfile(),
+      ),
     ],
   );
 });
@@ -88,4 +95,5 @@ sealed class AppRouter {
   static const publications = '/publications';
   static const explorer = '/explorer';
   static const profile = '/profile';
+  static const message = '/message';
 }
