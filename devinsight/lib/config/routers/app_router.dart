@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/ui/home/screens/main_screen.dart';
 
-
 import '../../ui/home/views/explorer.dart';
 import '../../ui/home/views/home.dart';
 import '../../ui/home/views/profile.dart';
@@ -22,7 +21,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRouter.login,
         name: AppRouter.login,
-        builder: (context, state) => const LoginScreen(),
+        // CHANGE THIS AGAIN TO LOGIN SCREEN WHENEVER YOURE DONE WITH YOUR TASKS
+        builder: (context, state) => const MainScreen(),
       ),
       GoRoute(
         path: AppRouter.registerUser,

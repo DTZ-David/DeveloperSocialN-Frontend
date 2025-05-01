@@ -17,10 +17,6 @@ class FeedController extends StateNotifier<AsyncValue<List<Post>>> {
 
   Future<void> loadFeed() async {
     final token = ref.read(authProvider).token;
-    if (token == null) {
-      state = AsyncValue.error('Token no disponible', StackTrace.current);
-      return;
-    }
 
     try {
       final feed = await _feedRepository.getFeed(token);

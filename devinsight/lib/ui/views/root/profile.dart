@@ -46,15 +46,17 @@ class Profile extends ConsumerWidget {
                     bottom: -40,
                     child: CircleAvatar(
                       radius: 35,
-                      backgroundImage: NetworkImage(
-                          "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"),
+                      backgroundImage: NetworkImage(""),
                     ),
                   ),
                   const Positioned(
                     bottom: -60,
                     child: Text(
                       'Ssaylem Murillo',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 10,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -69,24 +71,27 @@ class Profile extends ConsumerWidget {
         ),
 
         // --- Social Followers, Buttons, Nav (now scrollable) ---
-        const SliverToBoxAdapter(child: Padding(
+        const SliverToBoxAdapter(
+            child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Socialfollowers(),
         )),
-        const SliverToBoxAdapter(child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 20.0),
-          child:  SocialButton(),
+        const SliverToBoxAdapter(
+            child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: SocialButton(),
         )),
-        const SliverToBoxAdapter(child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 20.0),
-          child:  Navprofile(),
+        const SliverToBoxAdapter(
+            child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Navprofile(),
         )),
 
         const SliverToBoxAdapter(
           child: SizedBox(height: 10),
         ),
 
-        SliverPadding( 
+        SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -102,7 +107,7 @@ class Profile extends ConsumerWidget {
                     code: data['code'],
                     language: data['language'],
                     tags: List<String>.from(data['tags']),
-                    reactions: [], // Pass actual reactions
+                    reactions: const [], // Pass actual reactions
                     // Add onOptionsPressed if needed
                   ),
                 );

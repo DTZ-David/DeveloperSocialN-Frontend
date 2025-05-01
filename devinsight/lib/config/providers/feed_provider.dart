@@ -10,7 +10,7 @@ final feedRepositoryProvider = Provider<FeedRepository>((ref) {
 
 final feedProvider = FutureProvider.autoDispose((ref) async {
   final token = ref.watch(authProvider.select((auth) => auth.token));
-  if (token == null || token.isEmpty) throw Exception('No token');
+  if (token.isEmpty) throw Exception('No token');
 
   final repo = ref.watch(feedRepositoryProvider);
   return await repo.getFeed(token);
