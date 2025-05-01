@@ -1,3 +1,4 @@
+import 'package:devinsight/config/providers/nav_profile_provider.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,10 +16,11 @@ class _NavProfileState extends ConsumerState<NavProfile> {
   int _selectedIndex = 0;
 
   void _onButtonPressed(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  setState(() {
+    _selectedIndex = index;
+  });
+  ref.read(selectedProfileTabProvider.notifier).state = index;
+}
 
   @override
   Widget build(BuildContext context) {
