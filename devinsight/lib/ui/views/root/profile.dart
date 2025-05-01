@@ -2,7 +2,6 @@ import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
 import 'package:devinsight/ui/home/widgets/navProfile.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:flutter/material.dart';
