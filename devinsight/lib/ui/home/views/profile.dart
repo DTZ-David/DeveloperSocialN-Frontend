@@ -1,4 +1,10 @@
+import 'package:devinsight/config/providers/conectionsProvider.dart';
+import 'package:devinsight/config/providers/interaction_provider.dart';
+import 'package:devinsight/config/providers/mediaProvider.dart';
 import 'package:devinsight/config/providers/publications_provider.dart';
+import 'package:devinsight/ui/home/widgets/conectionsCard.dart';
+import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
+import 'package:devinsight/ui/home/widgets/mediaCard.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/home/widgets/navProfile.dart';
 import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
@@ -6,79 +12,119 @@ import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:devinsight/config/providers/nav_profile_provider.dart';
 
 class Profile extends ConsumerWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selectedTab = ref.watch(selectedProfileTabProvider);
+    final interactions = ref.watch(interactionsProvider);
     final publications = ref.watch(myProfilePublicationsProvider);
+    final connections = ref.watch(connectionsProvider);
+    ref.watch(mediaProvider);
 
     return CustomScrollView(
       slivers: [
-        // --- Top Banner and Avatar Section ---
         const UserProfile(),
-
+        const SliverToBoxAdapter(child: SizedBox(height: 80)),
         const SliverToBoxAdapter(
-          child: SizedBox(height: 80),
-        ),
-
-        // --- Social Followers, Buttons, Nav---
-        const SliverToBoxAdapter(
-            child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Socialfollowers(),
-        )),
-        const SliverToBoxAdapter(
-            child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: SocialButton(),
-        )),
-        const SliverToBoxAdapter(
-            child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: NavProfile(),
-        )),
-
-        const SliverToBoxAdapter(
-          child: SizedBox(height: 10),
-        ),
-
-        // --- Publications List (scrollable) ---
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final data = publications[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 4.0),
-                  child: PublicationsCard(
-                    userName: data['user_name'],
-                    sentAt: data['sent_at'],
-                    userIcon: data['user_icon'],
-                    description: data['description'],
-                    code: data['code'],
-                    language: data['language'],
-                    tags: List<String>.from(data['tags']),
-                    reactions: const [], // Pass actual reactions
-                    // Add onOptionsPressed if needed
-                  ),
-                );
-              },
-              childCount: publications.length,
-            ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Socialfollowers(),
           ),
         ),
+        const SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: SocialButton(),
+          ),
+        ),
+        const SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: NavProfile(),
+          ),
+        ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+
+        // Contenido dinámico según la pestaña seleccionada
+        if (selectedTab == 0)
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final data = publications[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 4.0),
+                    child: PublicationsCard(
+                      userName: data['user_name'],
+                      sentAt: data['sent_at'],
+                      userIcon: data['user_icon'],
+                      description: data['description'],
+                      code: data['code'],
+                      language: data['language'],
+                      tags: List<String>.from(data['tags']),
+                      reactions: const [],
+                    ),
+                  );
+                },
+                childCount: publications.length,
+              ),
+            ),
+          )
+        else if (selectedTab == 1)
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final data = interactions[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 4.0),
+                    child: InteractionCard(
+                      tipo: data['tipo'],
+                      id: data['id'],
+                      mensaje: data['mensaje'],
+                    ),
+                  );
+                },
+                childCount: interactions.length,
+              ),
+            ),
+          )
+        else if (selectedTab == 2)
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final data = connections[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 4.0),
+                    child: CustomCard(
+                      title: data['title'],
+                      subtitle: data['subtitle'],
+                      iconAsset: data['iconAsset'],
+                    ),
+                  );
+                },
+                childCount: connections.length,
+              ),
+            ),
+          )
+        else if (selectedTab == 3)
+          const MediaGallery()
+        
       ],
     );
   }
 }
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({
-    super.key,
-  });
+  const UserProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +132,8 @@ class UserProfile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: SizedBox(
-          width: double.infinity, // Make width responsive
-          height: 150, // Adjusted height for better spacing
+          width: double.infinity,
+          height: 150,
           child: Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.bottomCenter,
@@ -97,7 +143,8 @@ class UserProfile extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: const DecorationImage(
                     image: NetworkImage(
-                        "https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg"),
+                      "https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg",
+                    ),
                     fit: BoxFit.cover,
                   ),
                   color: AppColors.secondaryColors,
@@ -109,7 +156,8 @@ class UserProfile extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 35,
                   backgroundImage: NetworkImage(
-                      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"),
+                    "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+                  ),
                 ),
               ),
               const Positioned(
@@ -117,9 +165,10 @@ class UserProfile extends StatelessWidget {
                 child: Text(
                   'Ssaylem Murillo',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                      fontSize: 15),
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                  ),
                 ),
               ),
             ],
