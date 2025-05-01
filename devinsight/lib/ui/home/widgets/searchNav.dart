@@ -8,10 +8,10 @@ class MinimalSearchField extends ConsumerWidget {
   final StateProvider<String> searchQueryProvider;
 
   const MinimalSearchField({
-    Key? key,
+    super.key,
     required this.searchQueryProvider,
     this.hintText = 'Buscar...',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
