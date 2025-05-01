@@ -25,100 +25,124 @@ class Profile extends ConsumerWidget {
     final connections = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
 
-    return CustomScrollView(
-      slivers: [
-        const UserProfile(),
-        const SliverToBoxAdapter(child: SizedBox(height: 80)),
-        const SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Socialfollowers(),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        shadowColor: AppColors.tertiaryColors,
+        elevation: 0.2,
+        backgroundColor: AppColors.primaryColors,
+        title: const Row(
+          children: [
+            SizedBox(width: 16),
+            Text(
+              "Perfil",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+          ],
         ),
-        const SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: SocialButton(),
+        actions: const [
+          SizedBox(width: 16),
+        ],
+      ),
+      backgroundColor: AppColors.thirdColors,
+      body: CustomScrollView(
+        slivers: [
+          const UserProfile(),
+          const SliverToBoxAdapter(child: SizedBox(height: 80)),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Socialfollowers(),
+            ),
           ),
-        ),
-        const SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: NavProfile(),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: SocialButton(),
+            ),
           ),
-        ),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: NavProfile(),
+            ),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 10)),
 
-        // Contenido dinámico según la pestaña seleccionada
-        if (selectedTab == 0)
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final data = publications[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: PublicationsCard(
-                      userName: data['user_name'],
-                      sentAt: data['sent_at'],
-                      userIcon: data['user_icon'],
-                      description: data['description'],
-                      code: data['code'],
-                      language: data['language'],
-                      tags: List<String>.from(data['tags']),
-                      reactions: const [],
-                    ),
-                  );
-                },
-                childCount: publications.length,
+          // Contenido dinámico según la pestaña seleccionada
+          if (selectedTab == 0)
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final data = publications[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: PublicationsCard(
+                        userName: data['user_name'],
+                        sentAt: data['sent_at'],
+                        userIcon: data['user_icon'],
+                        description: data['description'],
+                        code: data['code'],
+                        language: data['language'],
+                        tags: List<String>.from(data['tags']),
+                        reactions: const [],
+                      ),
+                    );
+                  },
+                  childCount: publications.length,
+                ),
               ),
-            ),
-          )
-        else if (selectedTab == 1)
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final data = interactions[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: InteractionCard(
-                      tipo: data['tipo'],
-                      id: data['id'],
-                      mensaje: data['mensaje'],
-                    ),
-                  );
-                },
-                childCount: interactions.length,
+            )
+          else if (selectedTab == 1)
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final data = interactions[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: InteractionCard(
+                        tipo: data['tipo'],
+                        id: data['id'],
+                        mensaje: data['mensaje'],
+                      ),
+                    );
+                  },
+                  childCount: interactions.length,
+                ),
               ),
-            ),
-          )
-        else if (selectedTab == 2)
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final data = connections[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: CustomCard(
-                      title: data['title'],
-                      subtitle: data['subtitle'],
-                      iconAsset: data['iconAsset'],
-                    ),
-                  );
-                },
-                childCount: connections.length,
+            )
+          else if (selectedTab == 2)
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final data = connections[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: CustomCard(
+                        title: data['title'],
+                        subtitle: data['subtitle'],
+                        iconAsset: data['iconAsset'],
+                      ),
+                    );
+                  },
+                  childCount: connections.length,
+                ),
               ),
-            ),
-          )
-        else if (selectedTab == 3)
-          const MediaGallery()
-        
-      ],
+            )
+          else if (selectedTab == 3)
+            const MediaGallery()
+        ],
+      ),
     );
   }
 }

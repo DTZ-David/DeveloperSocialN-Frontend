@@ -79,13 +79,13 @@ class _NavButton extends StatelessWidget {
           iconPath,
           height: 20,
           width: 20,
-          color: isSelected ? AppColors.components : Colors.white,
+          color: isSelected ? AppColors.accent : Colors.white,
         ),
         label: Text(
           label,
           style: TextStyle(
             fontSize: 10,
-            color: isSelected ? AppColors.components : Colors.white,
+            color: isSelected ? AppColors.accent : Colors.white,
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
           ),

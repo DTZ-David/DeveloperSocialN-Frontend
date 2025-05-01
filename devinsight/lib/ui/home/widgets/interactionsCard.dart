@@ -55,8 +55,8 @@ class InteractionCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       child: SizedBox(
-        width: 200,
-        height: 100,
+        width: 150,
+        height: 80,
         child: Card(
           margin: EdgeInsets.zero,
           elevation: 2,
@@ -83,7 +83,10 @@ class InteractionCard extends StatelessWidget {
                     const Spacer(),
                     Text(
                       '#$id',
-                      style: const TextStyle(color: Colors.blueAccent,fontFamily: 'Montserrat',),
+                      style: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
                     const SizedBox(width: 8),
                     GestureDetector(
@@ -98,7 +101,11 @@ class InteractionCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-                Text(mensaje, style: const TextStyle(fontSize: 14,fontFamily: 'Montserrat',)),
+                Text(mensaje,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Montserrat',
+                    )),
               ],
             ),
           ),

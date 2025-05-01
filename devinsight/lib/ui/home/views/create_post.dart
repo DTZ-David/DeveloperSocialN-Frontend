@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/ui/home/widgets/post_textfield.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CreatePostView extends ConsumerStatefulWidget {
   const CreatePostView({super.key});
@@ -143,7 +144,7 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
 
     return Scaffold(
       appBar: _buildAppBar(),
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 21, 20, 20),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -194,25 +195,29 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
     return AppBar(
       shadowColor: AppColors.tertiaryColors,
       elevation: 0.2,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
-        ),
-      ),
-      backgroundColor: Colors.black,
-      title: const Text(
-        "Crear Post",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.bold,
-        ),
+      backgroundColor: AppColors.primaryColors,
+      title: const Row(
+        children: [
+          SizedBox(width: 16),
+          Text(
+            "Crear Post",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat',
+            ),
+          ),
+        ],
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.image, size: 20, color: Colors.white),
+          icon: SvgPicture.asset(
+            'assets/icons/image.svg',
+            color: Colors.white,
+            width: 20,
+            height: 20,
+          ),
           onPressed: () => _attachFile(ref, isImage: true),
         ),
         IconButton(

@@ -1,3 +1,4 @@
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TagList extends StatefulWidget {
@@ -85,6 +86,7 @@ class _TagListState extends State<TagList> {
               _isFocused ? Colors.blue : const Color.fromARGB(255, 36, 37, 37),
           width: 2,
         ),
+        color: AppColors.background,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: TextField(

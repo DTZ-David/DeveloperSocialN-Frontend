@@ -68,7 +68,6 @@ class CustomCard extends StatelessWidget {
                         fontFamily: 'Montserrat',
                       ),
                     ),
-                    const SizedBox(height: 4),
                     Text(
                       subtitle,
                       style: const TextStyle(
@@ -81,13 +80,13 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
               _buildIconContainer(
-                'assets/icons/saturn.svg',
-                AppColors.tertiaryColors,
+                'assets/icons/user_add_profile.svg',
+                AppColors.accent,
               ),
               const SizedBox(width: 10),
               _buildIconContainer(
-                'assets/icons/saturn.svg',
-                const Color.fromARGB(255, 184, 57, 57),
+                'assets/icons/message_profile.svg',
+                AppColors.secondaryColors,
               ),
             ],
           ),

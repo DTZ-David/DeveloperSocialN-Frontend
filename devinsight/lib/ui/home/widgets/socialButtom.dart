@@ -17,7 +17,7 @@ class SocialButton extends ConsumerWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(150, 40),
-              backgroundColor: AppColors.components,
+              backgroundColor: AppColors.accent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
