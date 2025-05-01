@@ -61,6 +61,12 @@ class PostNotifier extends StateNotifier<PostState> {
   void clear() {
     state = PostState();
   }
+
+  void removeTag(String tag) {
+    state = state.copyWith(
+      tags: state.tags.where((t) => t != tag).toList(),
+    );
+  }
 }
 
 final postProvider = StateNotifierProvider<PostNotifier, PostState>((ref) {
