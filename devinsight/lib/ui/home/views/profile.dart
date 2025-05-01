@@ -1,8 +1,10 @@
 import 'package:devinsight/config/providers/conectionsProvider.dart';
 import 'package:devinsight/config/providers/interaction_provider.dart';
+import 'package:devinsight/config/providers/mediaProvider.dart';
 import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:devinsight/ui/home/widgets/conectionsCard.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
+import 'package:devinsight/ui/home/widgets/mediaCard.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/home/widgets/navProfile.dart';
 import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
@@ -21,6 +23,7 @@ class Profile extends ConsumerWidget {
     final interactions = ref.watch(interactionsProvider);
     final publications = ref.watch(myProfilePublicationsProvider);
     final connections = ref.watch(connectionsProvider);
+    ref.watch(mediaProvider);
 
     return CustomScrollView(
       slivers: [
@@ -105,7 +108,6 @@ class Profile extends ConsumerWidget {
                       title: data['title'],
                       subtitle: data['subtitle'],
                       iconAsset: data['iconAsset'],
-                      
                     ),
                   );
                 },
@@ -114,35 +116,8 @@ class Profile extends ConsumerWidget {
             ),
           )
         else if (selectedTab == 3)
-          const SliverToBoxAdapter(
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Text(
-                  'Contenido no disponible aún',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-          )
-        else
-          const SliverToBoxAdapter(
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Text(
-                  'Contenido no disponible aún',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          const MediaGallery()
+        
       ],
     );
   }

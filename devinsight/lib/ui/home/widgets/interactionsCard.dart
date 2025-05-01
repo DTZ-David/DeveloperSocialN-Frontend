@@ -53,7 +53,7 @@ class InteractionCard extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       child: SizedBox(
         width: 200,
         height: 100,
@@ -74,18 +74,23 @@ class InteractionCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       tipo,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, color: color),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: color,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
                     const Spacer(),
                     Text(
                       '#$id',
-                      style: const TextStyle(color: Colors.blueAccent),
+                      style: const TextStyle(color: Colors.blueAccent,fontFamily: 'Montserrat',),
                     ),
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
-                        showDialog(context: context, builder: (_) => const OptionsDialog());
+                        showDialog(
+                            context: context,
+                            builder: (_) => const OptionsDialog());
                       },
                       child: const Icon(Icons.more_vert,
                           size: 20, color: Colors.grey),
@@ -93,7 +98,7 @@ class InteractionCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-                Text(mensaje, style: const TextStyle(fontSize: 14)),
+                Text(mensaje, style: const TextStyle(fontSize: 14,fontFamily: 'Montserrat',)),
               ],
             ),
           ),
