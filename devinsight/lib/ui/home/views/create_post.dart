@@ -160,6 +160,9 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                       onChanged: (val) =>
                           ref.read(postProvider.notifier).updateContent(val),
                     ),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     PostImageGallery(images: post.images),
                     PostFileList(files: post.files),
                     TagList(
