@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../controller/feedController.dart';
 import '../../../controller/loginController.dart';
 import '../widgets/widgets_login.dart';
-import '../../../config/providers/auth_provider.dart';
 import '../../../config/routers/app_router.dart';
 import '../../../repositories/auth_repository.dart';
 import '../../../services/login/auth_service.dart';

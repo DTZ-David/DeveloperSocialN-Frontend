@@ -11,12 +11,10 @@ class SocialButton extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ElevatedButton(
-            onPressed: () {
-            
-            },
+            onPressed: () {},
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(150, 40),
               backgroundColor: AppColors.components,
@@ -26,7 +24,12 @@ class SocialButton extends ConsumerWidget {
             ),
             child: const Text(
               'Seguir',
-              style: TextStyle(color: Colors.white, fontSize: 12),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
 
@@ -44,7 +47,12 @@ class SocialButton extends ConsumerWidget {
             ),
             child: const Text(
               'Mensaje',
-              style: TextStyle(color: Colors.white, fontSize: 12),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

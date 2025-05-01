@@ -1,20 +1,19 @@
-import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/ui/home/widgets/a.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Import Riverpod
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class Navprofile extends ConsumerStatefulWidget { // Change to ConsumerStatefulWidget
-  const Navprofile({super.key});
+class NavProfile extends ConsumerStatefulWidget {
+  const NavProfile({super.key});
 
   @override
-  _NavprofileState createState() => _NavprofileState();
+  // ignore: library_private_types_in_public_api
+  _NavProfileState createState() => _NavProfileState();
 }
 
-class _NavprofileState extends ConsumerState<Navprofile> { // Change to ConsumerState
-  int _selectedIndex = 0; // Variable para controlar qué botón está seleccionado
+class _NavProfileState extends ConsumerState<NavProfile> {
+  int _selectedIndex = 0;
 
-  // Función para actualizar el índice seleccionado
   void _onButtonPressed(int index) {
     setState(() {
       _selectedIndex = index;
@@ -23,117 +22,77 @@ class _NavprofileState extends ConsumerState<Navprofile> { // Change to Consumer
 
   @override
   Widget build(BuildContext context) {
+    final List<_NavButtonData> buttons = [
+      _NavButtonData("Posts", 'assets/icons/post_profile.svg'),
+      _NavButtonData("Interacciones", 'assets/icons/interactions_profile.svg'),
+      _NavButtonData("Conexiones", 'assets/icons/connections_profile.svg'),
+      _NavButtonData("Media", 'assets/icons/video_profile.svg'),
+    ];
+
     return SizedBox(
       width: 300,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          
-          TextButton.icon(
-            onPressed: () => _onButtonPressed(0),
-            icon: Icon(
-              Icons.post_add,
-              color: _selectedIndex == 0
-                  ? AppColors.components
-                  : Colors.white,
-              size: 20,
-            ),
-            label: Text(
-              "Posts",
-              style: TextStyle(
-                fontSize: 10,
-                color: _selectedIndex == 0
-                    ? AppColors.components
-                    : Colors.white,
-              ),
-            ),
-            style: TextButton.styleFrom(
-              minimumSize: const Size(60, 50),
-              padding: EdgeInsets.zero,
-              backgroundColor: Colors.transparent, // Sin fondo
-            ),
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(buttons.length, (index) {
+          final button = buttons[index];
+          return _NavButton(
+            label: button.label,
+            iconPath: button.iconPath,
+            isSelected: _selectedIndex == index,
+            onPressed: () => _onButtonPressed(index),
+          );
+        }),
+      ),
+    );
+  }
+}
+
+class _NavButtonData {
+  final String label;
+  final String iconPath;
+
+  _NavButtonData(this.label, this.iconPath);
+}
+
+class _NavButton extends StatelessWidget {
+  final String label;
+  final String iconPath;
+  final bool isSelected;
+  final VoidCallback onPressed;
+
+  const _NavButton({
+    required this.label,
+    required this.iconPath,
+    required this.isSelected,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextButton.icon(
+        onPressed: onPressed,
+        icon: SvgPicture.asset(
+          iconPath,
+          height: 20,
+          width: 20,
+          color: isSelected ? AppColors.components : Colors.white,
+        ),
+        label: Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            color: isSelected ? AppColors.components : Colors.white,
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.bold,
           ),
-          const SizedBox(width: 5),
-          GestureDetector(
-            onTap: () {
-              //ref.read(appRouterProvider).go(AppRouter.a);
-            },
-            child: TextButton.icon(
-              onPressed: () => _onButtonPressed(1),
-              icon: Icon(
-                Icons.touch_app,
-                color: _selectedIndex == 1
-                    ? AppColors.components
-                    : Colors.white,
-                size: 18,
-              ),
-              label: Text(
-                "Interacciones",
-                style: TextStyle(
-                  fontSize: 10,
-                  color: _selectedIndex == 1
-                      ? AppColors.components
-                      : Colors.white,
-                ),
-              ),
-              style: TextButton.styleFrom(
-                minimumSize: const Size(60, 50),
-                padding: EdgeInsets.zero,
-                backgroundColor: Colors.transparent, // Sin fondo
-              ),
-            ),
-          ),
-          const SizedBox(width: 5),
-          TextButton.icon(
-            onPressed: () => _onButtonPressed(2),
-            icon: Icon(
-              Icons.network_ping,
-              color: _selectedIndex == 2
-                  ? AppColors.components
-                  : Colors.white,
-              size: 18,
-            ),
-            label: Text(
-              "Conexiones",
-              style: TextStyle(
-                fontSize: 10,
-                color: _selectedIndex == 2
-                    ? AppColors.components
-                    : Colors.white,
-              ),
-            ),
-            style: TextButton.styleFrom(
-              minimumSize: const Size(60, 50),
-              padding: EdgeInsets.zero,
-              backgroundColor: Colors.transparent, // Sin fondo
-            ),
-          ),
-          const SizedBox(width: 5),
-          TextButton.icon(
-            onPressed: () => _onButtonPressed(3),
-            icon: Icon(
-              Icons.videocam_outlined,
-              color: _selectedIndex == 3
-                  ? AppColors.components
-                  : Colors.white,
-              size: 18,
-            ),
-            label: Text(
-              "Media",
-              style: TextStyle(
-                fontSize: 10,
-                color: _selectedIndex == 3
-                    ? AppColors.components
-                    : Colors.white,
-              ),
-            ),
-            style: TextButton.styleFrom(
-              minimumSize: const Size(60, 50),
-              padding: EdgeInsets.zero,
-              backgroundColor: Colors.transparent, // Sin fondo
-            ),
-          ),
-        ],
+        ),
+        style: TextButton.styleFrom(
+          minimumSize: const Size(60, 50),
+          padding: EdgeInsets.zero,
+          backgroundColor: Colors.transparent,
+        ),
       ),
     );
   }
