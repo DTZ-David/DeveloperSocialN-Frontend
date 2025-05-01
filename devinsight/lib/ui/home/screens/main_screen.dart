@@ -1,11 +1,7 @@
-import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/login/widgets/customNotificationIcon.dart';
-import 'package:devinsight/ui/login/widgets/customSettingsIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/ui/home/widgets/navBar.dart';
 import 'package:devinsight/config/providers/navbar_index_provider.dart';
-import 'package:flutter_svg/svg.dart';
 import '../views/create_post.dart';
 import '../views/explorer.dart';
 import '../views/home.dart';
@@ -36,45 +32,6 @@ class MainScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(navbarIndexProvider);
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: AppColors.tertiaryColors,
-        elevation: 0.2,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
-        ),
-        backgroundColor: Colors.black,
-        title: Row(
-          children: [
-            SvgPicture.asset(
-              'assets/icons/saturn.svg',
-              width: 40,
-              height: 40,
-              colorFilter: const ColorFilter.mode(
-                AppColors.tertiaryColors,
-                BlendMode.srcIn,
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              "Devinsight",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        actions: const [
-          //Icono de notificación
-          CustomNotificationIcon(),
-          //Icono de configuración
-          Customsettingsicon(),
-        ],
-      ),
       body: _buildScreen(index),
       bottomNavigationBar: const CustomNavbar(),
     );

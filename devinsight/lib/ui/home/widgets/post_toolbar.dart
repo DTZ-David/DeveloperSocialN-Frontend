@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 class PostToolbar extends StatelessWidget {
   final VoidCallback onImageAttach;
   final VoidCallback onFileAttach;
-  final int charCount;
-  final int maxChars;
 
   const PostToolbar({
     super.key,
     required this.onImageAttach,
     required this.onFileAttach,
-    required this.charCount,
-    required this.maxChars,
   });
 
   Widget _buildButton(IconData icon, VoidCallback onPressed) {
