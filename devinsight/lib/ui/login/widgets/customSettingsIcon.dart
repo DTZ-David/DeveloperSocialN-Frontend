@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Customsettingsicon extends StatelessWidget {
   const Customsettingsicon({super.key});
@@ -6,7 +7,12 @@ class Customsettingsicon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.settings),
+      icon: SvgPicture.asset(
+        'assets/icons/settings.svg',
+        color: Colors.white,
+        width: 24,
+        height: 24,
+      ),
       onPressed: () {
         showDialog(
           context: context,

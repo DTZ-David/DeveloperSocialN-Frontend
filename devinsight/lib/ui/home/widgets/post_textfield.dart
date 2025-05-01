@@ -1,3 +1,4 @@
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class PostTextField extends StatefulWidget {
@@ -40,6 +41,7 @@ class _PostTextFieldState extends State<PostTextField> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: AppColors.background,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color:
