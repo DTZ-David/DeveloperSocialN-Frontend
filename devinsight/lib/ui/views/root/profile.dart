@@ -1,6 +1,6 @@
 import 'package:devinsight/config/providers/publications_provider.dart';
-import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/home/widgets/navProfile.dart';
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
@@ -84,7 +84,7 @@ class Profile extends ConsumerWidget {
         const SliverToBoxAdapter(
             child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Navprofile(),
+          child: NavProfile(),
         )),
 
         const SliverToBoxAdapter(
