@@ -1,4 +1,5 @@
 import 'package:devinsight/config/providers/publications_provider.dart';
+import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
 import 'package:devinsight/ui/home/widgets/navProfile.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
@@ -18,10 +19,10 @@ class Profile extends ConsumerWidget {
     // Replace Padding and Column with CustomScrollView
     return CustomScrollView(
       slivers: [
-        // --- Top Banner and Avatar Section (now scrollable) ---
+  
         SliverToBoxAdapter(
           child: Padding(
-            // Apply horizontal padding here
+          
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: SizedBox(
               width: 500, // Consider making width responsive
@@ -33,6 +34,7 @@ class Profile extends ConsumerWidget {
                   Container(
                     height: 90,
                     decoration: BoxDecoration(
+
                       image: const DecorationImage(
                         image: NetworkImage(
                             "https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg"),
@@ -52,7 +54,7 @@ class Profile extends ConsumerWidget {
                   const Positioned(
                     bottom: -60,
                     child: Text(
-                      'Ssaylem Murillo',
+                      'SKDJAKLDA',
                       style: TextStyle(
                           fontSize: 10,
                           fontFamily: 'Montserrat',
@@ -90,7 +92,27 @@ class Profile extends ConsumerWidget {
         const SliverToBoxAdapter(
           child: SizedBox(height: 10),
         ),
-
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final data = publications[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: InteractionCard(
+                    tipo: data['tipo'],
+                    mensaje: data['mensaje'],
+                    id: data['id'],
+                    
+                  ),
+                );
+              },
+              
+            ),
+          ),
+        ),
+        /*
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           sliver: SliverList(
@@ -116,6 +138,7 @@ class Profile extends ConsumerWidget {
             ),
           ),
         ),
+        */
       ],
     );
   }

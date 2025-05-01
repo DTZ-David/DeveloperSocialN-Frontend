@@ -44,7 +44,26 @@ class Profile extends ConsumerWidget {
           child: SizedBox(height: 10),
         ),
 
-        // --- Publications List (scrollable) ---
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final data = publications[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: InteractionCard(
+                    tipo: data['tipo'],
+                    mensaje: data['mensaje'],
+                    id: data['id'],
+                    
+                  ),
+                );
+              },
+              
+            ),
+          ),
+        ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           sliver: SliverList(
@@ -115,7 +134,7 @@ class UserProfile extends StatelessWidget {
               const Positioned(
                 bottom: -70,
                 child: Text(
-                  'Ssaylem Murillo',
+                  'da Murillo',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Montserrat',
