@@ -1,11 +1,7 @@
-import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/login/widgets/customNotificationIcon.dart';
-import 'package:devinsight/ui/login/widgets/customSettingsIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/ui/home/widgets/navBar.dart';
 import 'package:devinsight/config/providers/navbar_index_provider.dart';
-import 'package:flutter_svg/svg.dart';
 import '../views/create_post.dart';
 import '../views/explorer.dart';
 import '../views/home.dart';

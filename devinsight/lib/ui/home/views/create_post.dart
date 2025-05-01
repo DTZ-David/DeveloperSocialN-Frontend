@@ -1,203 +1,175 @@
-// create_post_view.dart
 import 'dart:io';
 import 'package:devinsight/config/providers/post_state.dart';
+import 'package:devinsight/ui/home/widgets/post_file_list.dart';
+import 'package:devinsight/ui/home/widgets/post_image_gallery.dart';
 import 'package:devinsight/ui/home/widgets/tags_list.dart';
-import 'package:devinsight/ui/login/widgets/customNotificationIcon.dart';
-import 'package:devinsight/ui/login/widgets/customSettingsIcon.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/ui/home/widgets/post_toolbar.dart';
 import 'package:devinsight/ui/home/widgets/post_textfield.dart';
-import 'package:devinsight/ui/login/widgets/customButton.dart';
-import 'package:flutter_svg/svg.dart';
 
-class CreatePostView extends ConsumerWidget {
+class CreatePostView extends ConsumerStatefulWidget {
   const CreatePostView({super.key});
+
+  @override
+  ConsumerState<CreatePostView> createState() => _CreatePostViewState();
+}
+
+class _CreatePostViewState extends ConsumerState<CreatePostView> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  static const _snackBarStyle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+
+  static const _dialogTextStyle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.bold,
+    color: Colors.white70,
+  );
 
   Future<void> _attachFile(WidgetRef ref, {bool isImage = false}) async {
     final result = await FilePicker.platform.pickFiles(
       type: isImage ? FileType.image : FileType.any,
     );
-    if (result != null && result.files.single.path != null) {
-      final file = File(result.files.single.path!);
-      isImage
-          ? ref.read(postProvider.notifier).addImage(file)
-          : ref.read(postProvider.notifier).addFile(file);
+    if (result?.files.single.path != null) {
+      final file = File(result!.files.single.path!);
+      final notifier = ref.read(postProvider.notifier);
+      isImage ? notifier.addImage(file) : notifier.addFile(file);
     }
   }
 
-  void _sendPost(WidgetRef ref) {
+  void _sendPost(BuildContext context, WidgetRef ref) {
     final post = ref.read(postProvider);
-    final postJson = {
-      "content": post.content,
-      "images": post.images.map((f) => f.path).toList(),
-      "files": post.files.map((f) => f.path).toList(),
-      "tags": post.tags,
-      "createdAt": DateTime.now().toIso8601String(),
-    };
-    print("Post enviado: $postJson");
+    if (post.content.isEmpty) {
+      _showSnackBar(context, "El contenido del post no puede estar vacío");
+      return;
+    }
+
+    _showConfirmationDialog(
+      context,
+      title: 'Estás a punto de enviar un post',
+      content: '¿Estás seguro?',
+      onConfirm: () {
+        final postJson = {
+          "content": post.content,
+          "images": post.images.map((f) => f.path).toList(),
+          "files": post.files.map((f) => f.path).toList(),
+          "tags": post.tags,
+          "createdAt": DateTime.now().toIso8601String(),
+        };
+        print("Post enviado: $postJson");
+
+        ref.read(postProvider.notifier).clear();
+        _controller.clear();
+
+        Navigator.of(context).pop();
+        _showSnackBar(context, "¡Post enviado con éxito!");
+      },
+    );
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message, style: _snackBarStyle),
+        backgroundColor: const Color.fromARGB(255, 24, 24, 24),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
+    );
+  }
+
+  void _showConfirmationDialog(
+    BuildContext context, {
+    required String title,
+    required String content,
+    required VoidCallback onConfirm,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color.fromARGB(255, 24, 24, 24),
+        title: Center(child: Text(title, style: _snackBarStyle)),
+        content: Text(content, style: _dialogTextStyle),
+        actions: [
+          _dialogButton(
+            label: 'Cancelar',
+            color: Colors.redAccent,
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          _dialogButton(
+            label: 'Enviar',
+            color: Colors.white,
+            onPressed: onConfirm,
+          ),
+        ],
+      ),
+    );
+  }
+
+  TextButton _dialogButton({
+    required String label,
+    required Color color,
+    required VoidCallback onPressed,
+  }) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(
+        label,
+        style: TextStyle(
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.bold,
+          color: color,
+        ),
+      ),
+    );
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final post = ref.watch(postProvider);
     final charCount = post.content.length;
 
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: AppColors.tertiaryColors,
-        elevation: 0.2,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
-        ),
-        backgroundColor: Colors.black,
-        title: Row(
-          children: [
-            SvgPicture.asset(
-              'assets/icons/saturn.svg',
-              width: 40,
-              height: 40,
-              colorFilter: const ColorFilter.mode(
-                AppColors.tertiaryColors,
-                BlendMode.srcIn,
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              "Devinsight",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        actions: const [
-          //Icono de notificación
-          CustomNotificationIcon(),
-          //Icono de configuración
-          Customsettingsicon(),
-        ],
-      ),
+      appBar: _buildAppBar(),
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            PostToolbar(
-              onImageAttach: () => _attachFile(ref, isImage: true),
-              onFileAttach: () => _attachFile(ref),
-              charCount: charCount,
-              maxChars: 200,
-            ),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Contenido de tu post:",
-                    style: TextStyle(color: Colors.white, fontSize: 12)),
-                const SizedBox(width: 8),
-                Text('$charCount/200',
-                    style: TextStyle(
-                      color: charCount >= 200 ? Colors.red : Colors.grey,
-                      fontSize: 12,
-                    )),
-              ],
-            ),
+            _buildCharacterCounter(charCount),
             const SizedBox(height: 12),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     PostTextField(
-                      controller: TextEditingController(text: post.content),
-                      maxLength: 200,
+                      maxLength: 400,
+                      controller: _controller,
                       onChanged: (val) =>
                           ref.read(postProvider.notifier).updateContent(val),
                     ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    PostImageGallery(images: post.images),
+                    PostFileList(files: post.files),
                     TagList(
                       tags: post.tags,
-                      onTagAdded: (newTag) {
-                        ref.read(postProvider.notifier).addTag(newTag);
-                      },
+                      onTagAdded: ref.read(postProvider.notifier).addTag,
+                      onTagRemoved: ref.read(postProvider.notifier).removeTag,
                     ),
-                    const SizedBox(height: 12),
-                    if (post.images.isNotEmpty) ...[
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('Imágenes:',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        children: post.images.map((img) {
-                          return Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.file(
-                                  img,
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                right: 0,
-                                top: 0,
-                                child: GestureDetector(
-                                  onTap: () => ref
-                                      .read(postProvider.notifier)
-                                      .removeImage(img),
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.red,
-                                    ),
-                                    child: const Icon(
-                                      Icons.close,
-                                      size: 24,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                    const SizedBox(height: 16),
-                    if (post.files.isNotEmpty) ...[
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('Archivos:',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                      Column(
-                        children: post.files.map((file) {
-                          return ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            title: Text(file.path.split('/').last,
-                                style: const TextStyle(color: Colors.white)),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.close, color: Colors.red),
-                              onPressed: () => ref
-                                  .read(postProvider.notifier)
-                                  .removeFile(file),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ]
                   ],
                 ),
               ),
@@ -205,13 +177,77 @@ class CreatePostView extends ConsumerWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-        child: CustomButton(
-          text: "Enviar post",
-          onPressed: () => _sendPost(ref),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+          side: const BorderSide(color: Colors.white, width: 1),
+        ),
+        elevation: 1,
+        onPressed: () => _sendPost(context, ref),
+        backgroundColor: Colors.black,
+        child: const Icon(Icons.send, color: Colors.white, size: 28),
+      ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      shadowColor: AppColors.tertiaryColors,
+      elevation: 0.2,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
         ),
       ),
+      backgroundColor: Colors.black,
+      title: const Text(
+        "Crear Post",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.image, size: 20, color: Colors.white),
+          onPressed: () => _attachFile(ref, isImage: true),
+        ),
+        IconButton(
+          icon: const Icon(Icons.attach_file, size: 20, color: Colors.white),
+          onPressed: () => _attachFile(ref),
+        ),
+        const SizedBox(width: 16),
+      ],
+    );
+  }
+
+  Widget _buildCharacterCounter(int charCount) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          "Caracteres:",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          '$charCount/400',
+          style: TextStyle(
+            color: charCount >= 400 ? Colors.red : Colors.grey,
+            fontSize: 12,
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }
