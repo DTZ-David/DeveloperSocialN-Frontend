@@ -34,10 +34,11 @@ class CustomNavbar extends ConsumerWidget {
               children: [
                 _navItem(ref, 'assets/icons/navbar/homep.svg', 'Inicio', 0,
                     currentIndex),
-                _navItem(ref, 'assets/icons/navbar/savep.svg', 'Guardados', 1,
-                    currentIndex),
-                const SizedBox(width: 80), // espacio para botón central
                 _navItem(ref, 'assets/icons/navbar/searchp.svg', 'Explorar', 3,
+                    currentIndex),
+
+                const SizedBox(width: 80), // espacio para botón central
+                _navItem(ref, 'assets/icons/navbar/savep.svg', 'Guardados', 1,
                     currentIndex),
                 _navItem(ref, 'assets/icons/navbar/userp.svg', 'Perfil', 4,
                     currentIndex),
@@ -53,7 +54,7 @@ class CustomNavbar extends ConsumerWidget {
             onTap: () => _onTap(ref, 2),
             child: Container(
               height: 56,
-              width: 120,
+              width: 100,
               decoration: BoxDecoration(
                 color: const Color(0xFF1ECAFF),
                 borderRadius: BorderRadius.circular(28),

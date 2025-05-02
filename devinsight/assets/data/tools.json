@@ -1,31 +1,31 @@
     [
         {
             "name": "VS Code",
-            "icon": "code"
+            "icon": "vscode"
         },
         {
             "name": "Figma",
-            "icon": "paintBrush"
+            "icon": "figma"
         },
         {
             "name": "Sublime Text",
-            "icon": "fileCode"
+            "icon": "sublime"
         },
         {
             "name": "IntelliJ IDEA",
-            "icon": "brain"
+            "icon": "intellij"
         },
         {
             "name": "Anaconda",
-            "icon": "python"
+            "icon": "anaconda"
         },
         {
             "name": "Postman",
-            "icon": "envelopeOpenText"
+            "icon": "postman"
         },
         {
             "name": "Git",
-            "icon": "gitAlt"
+            "icon": "git"
         },
         {
             "name": "Docker",
@@ -33,7 +33,7 @@
         },
         {
             "name": "Jupyter",
-            "icon": "bookOpen"
+            "icon": "jupyter"
         },
         {
             "name": "Slack",
@@ -41,6 +41,10 @@
         },
         {
             "name": "Trello",
-            "icon": "tasks"
+            "icon": "trello"
+        },
+        {
+            "name": "GitHub",
+            "icon": "github"
         }
     ]

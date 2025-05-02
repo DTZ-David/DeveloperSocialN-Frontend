@@ -64,12 +64,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRouter.onboard2,
         name: AppRouter.onboard2,
-        builder: (context, state) => const OnboardingPage2(),
+        builder: (context, state) => const OnboardingLanguagesPage(),
       ),
       GoRoute(
         path: AppRouter.onboard3,
         name: AppRouter.onboard3,
-        builder: (context, state) => const OnboardingPage3(),
+        builder: (context, state) => const OnboardingToolsPage(),
       ),
       GoRoute(
         path: AppRouter.message,

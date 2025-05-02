@@ -1,167 +1,49 @@
-
 import 'package:devinsight/config/providers/selectedProvider.dart';
-import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/ui/login/widgets/customChoiceChip.dart';
-import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/ui/login/widgets/customButton.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:devinsight/ui/login/widgets/selectable_items_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart';
 
-
-
-/// Proveedor de estado para los lenguajes seleccionados
-
-class OnboardingPage2 extends ConsumerWidget {
-  const OnboardingPage2({super.key});
+class OnboardingLanguagesPage extends StatelessWidget {
+  const OnboardingLanguagesPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    Map<String, IconData> techIcons = {
-      "Python": FontAwesomeIcons.python,
-      "Java": FontAwesomeIcons.java,
-      "Rust": FontAwesomeIcons.rust,
-      "C#": FontAwesomeIcons.codeBranch, // no hay icono oficial de C#
-      "HTML": FontAwesomeIcons.html5,
-      "CSS": FontAwesomeIcons.css3Alt,
-      "JavaScript": FontAwesomeIcons.js,
-      "C++": FontAwesomeIcons.code, // alternativo
-      "Go": FontAwesomeIcons.golang,
-      "C": FontAwesomeIcons.code, // alternativo
-    };
-
-    final selectedSet = ref.watch(selectedTechProvider);
-
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 17, 6, 48),
-              Color.fromARGB(255, 4, 1, 9),
-            ],
-          ),
-        ),
-        child: Column(
-          children: [
-            // AppBar
-            Container(
-              padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    const Color.fromARGB(255, 17, 6, 48).withOpacity(0.1),
-                    const Color.fromARGB(255, 4, 1, 9).withOpacity(0.1),
-                  ],
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () {
-                      ref.read(appRouterProvider).go(AppRouter.onboard1);
-                    },
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      ref.read(appRouterProvider).go(AppRouter.initial);
-                    },
-                    child: const Text(
-                      "Saltar",
-                      style: TextStyle(
-                          color: AppColors.tertiaryColors, fontSize: 16),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Títulos
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Veamos tus intereses",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "Escoge de 1 a 10 lenguajes, de esta manera te vamos a proveer de contenido único en tu Feed.",
-                    style: TextStyle(color: Colors.white70, fontSize: 14),
-                  ),
-                  SizedBox(height: 20),
-                ],
-              ),
-            ),
-            // Barra de búsqueda
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.4),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search, color: Colors.white),
-                    hintText: "Buscar",
-                    hintStyle: TextStyle(color: Colors.white70),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(vertical: 15),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Lenguajes
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: techIcons.keys.map((language) {
-                    final isSelected = selectedSet.contains(language);
-
-                    return CustomChoiceChip(
-                      label: language,
-                      isSelected: isSelected,
-                      icon: techIcons[language]!,
-                      onSelected: () {
-                        final notifier =
-                            ref.read(selectedTechProvider.notifier);
-                        notifier.toggle(language);
-                      },
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              child: CustomButton(
-                text: "continuar",
-                onPressed: () {
-                  ref.read(appRouterProvider).go(AppRouter.onboard3);
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+  Widget build(BuildContext context) {
+    return SelectableItemsPage(
+      title: "Veamos tus intereses",
+      description:
+          "Escoge de 1 a 10 lenguajes, de esta manera te vamos a proveer de contenido único en tu Feed.",
+      jsonAssetPath: "assets/data/languages.json",
+      selectedProvider: selectedLanguagesProvider,
+      iconMap: const {
+        "python": FontAwesomeIcons.python,
+        "java": FontAwesomeIcons.java,
+        "rust": FontAwesomeIcons.rust,
+        "c#": FontAwesomeIcons.c,
+        "html": FontAwesomeIcons.html5,
+        "css": FontAwesomeIcons.css3Alt,
+        "javascript": FontAwesomeIcons.js,
+        "c++": FontAwesomeIcons.code,
+        "go": FontAwesomeIcons.golang,
+        "c": FontAwesomeIcons.c,
+        "php": FontAwesomeIcons.php,
+        "ruby": FontAwesomeIcons.gem,
+        "swift": FontAwesomeIcons.swift,
+        "kotlin": FontAwesomeIcons.korvue,
+        "dart": FontAwesomeIcons.d,
+        "typescript": FontAwesomeIcons.fileCode,
+        "scala": FontAwesomeIcons.scribd,
+        "shell": FontAwesomeIcons.terminal,
+        "r": FontAwesomeIcons.rProject,
+        "perl": FontAwesomeIcons.peace,
+        "lua": FontAwesomeIcons.moon,
+        "haskell": FontAwesomeIcons.hackerrank,
+        "elixir": FontAwesomeIcons.flask,
+        "erlang": FontAwesomeIcons.codeBranch,
+        "objective-c": FontAwesomeIcons.apple,
+        "visual basic .net": FontAwesomeIcons.codeBranch,
+      },
+      backRoute: "/onboard1",
+      nextRoute: "/onboard3",
     );
   }
 }
