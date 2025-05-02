@@ -59,9 +59,9 @@ class Profile extends ConsumerWidget {
               child: Socialfollowers(),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: SocialButton(),
             ),
           ),
@@ -157,7 +157,7 @@ class UserProfile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: SizedBox(
           width: double.infinity,
-          height: 150,
+          height: 110,
           child: Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.bottomCenter,

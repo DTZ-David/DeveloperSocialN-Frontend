@@ -1,92 +1,130 @@
 import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/ui/home/widgets/optionsDialog.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:devinsight/config/providers/message_provider.dart';
 
 class MessageProfile extends ConsumerWidget {
   const MessageProfile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final messageList = ref.watch(messageListProvider);
+    final textController = TextEditingController();
+
+    void sendMessage() {
+      final message = textController.text.trim();
+      if (message.isNotEmpty) {
+        ref.read(messageListProvider.notifier).addMessage(message);
+        textController.clear();
+      }
+    }
+
     return Scaffold(
       backgroundColor: AppColors.secondaryColors,
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.precision_manufacturing_outlined,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              ref.read(appRouterProvider).go(AppRouter.login);
-            },
-          ),
-        ],
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        elevation: 1,
-        backgroundColor: AppColors.tertiaryColors,
-        title: GestureDetector(
-          onTap: () {
-            ref.read(appRouterProvider).go(AppRouter.profile);
-          },
-          child: Image.asset(
-            alignment: Alignment.center,
-            'assets/icons/user1.png',
-            fit: BoxFit.fill,
-            height: 45,
-            width: 45,
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: const Column(
+      appBar: _buildAppBar(context, ref),
+      body: Column(
         children: [
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Hola, soy ChecoDev\nun desarrollador apasionado.",
-                  textAlign: TextAlign.center,
-                ),
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage('assets/icons/user1.png'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.star, color: Colors.yellow),
-                    Icon(Icons.star, color: Colors.yellow),
-                  ],
-                )
-              ],
-            ),
+          _buildMessageList(messageList),
+          _buildMessageInput(textController, sendMessage),
+        ],
+      ),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context, WidgetRef ref) {
+    return AppBar(
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.more_vert_sharp, color: Colors.white),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (_) => const OptionsDialog(),
+            );
+          },
+        ),
+      ],
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.white),
+        onPressed: () => ref.read(appRouterProvider).go(AppRouter.initial),
+      ),
+      elevation: 1,
+      backgroundColor: AppColors.primaryColors,
+      title: const CircleAvatar(
+        radius: 22,
+        backgroundImage: NetworkImage(
+            'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg'),
+        backgroundColor: Colors.transparent,
+      ),
+      centerTitle: true,
+    );
+  }
+
+  Expanded _buildMessageList(List<String> messageList) {
+    return Expanded(
+      child: ListView.builder(
+        reverse: true,
+        itemCount: messageList.length,
+        itemBuilder: (context, index) {
+          final message = messageList[index];
+          return _buildMessageBubble(message);
+        },
+      ),
+    );
+  }
+
+  Padding _buildMessageBubble(String message) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,
+            borderRadius: BorderRadius.circular(15),
           ),
+          child: Text(
+            message,
+            style: const TextStyle(color: Colors.white, fontSize: 14),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Padding _buildMessageInput(
+      TextEditingController textController, VoidCallback sendMessage) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
           Expanded(
-            child: SingleChildScrollView(
-              reverse:
-                  true, // Ensures the view scrolls to the bottom when the keyboard appears
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-              ),
-            ),
-          ),
-          // TextField at the bottom
-          Padding(
-            padding: EdgeInsets.all(4.0),
             child: TextField(
+              controller: textController,
+              autofocus: true,
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.send),
-                border: OutlineInputBorder(),
-                labelText: 'Mensaje',
+                suffixIcon: IconButton(
+                  color: AppColors.accent,
+                  icon: const Icon(Icons.send),
+                  onPressed: sendMessage,
+                ),
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                hintText: "Escribe un mensaje...",
+                hintStyle: const TextStyle(color: Colors.black),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16,
               ),
             ),
           ),

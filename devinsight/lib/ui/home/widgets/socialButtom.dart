@@ -4,31 +4,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SocialButton extends ConsumerWidget {
-  const SocialButton({super.key});
+  SocialButton({super.key});
+  final isFollowingProvider = StateProvider<bool>((ref) => false);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isFollowing = ref.watch(isFollowingProvider);
+    final isFollowingNotifier = ref.read(isFollowingProvider.notifier);
+
     return Padding(
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(150, 40),
-              backgroundColor: AppColors.accent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+          // Botón de Seguir / Seguido
+          ElevatedButton.icon(
+            onPressed: () {
+              isFollowingNotifier.state = !isFollowing;
+            },
+            icon: Icon(
+              isFollowing ? Icons.check : Icons.person_add,
+              color: Colors.white,
+              size: 16,
             ),
-            child: const Text(
-              'Seguir',
-              style: TextStyle(
+            label: Text(
+              isFollowing ? 'Siguiendo' : 'Seguir',
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(150, 40),
+              backgroundColor: isFollowing ? Colors.grey : Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),
@@ -55,6 +67,8 @@ class SocialButton extends ConsumerWidget {
               ),
             ),
           ),
+
+          // Botón de Seguir / Seguido
         ],
       ),
     );
