@@ -1,12 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final selectedTechProvider =
-    StateNotifierProvider<SelectedTechNotifier, Set<String>>((ref) {
-  return SelectedTechNotifier();
-});
-
+/// Notifier reutilizable para cualquier tipo de selección
 class SelectedTechNotifier extends StateNotifier<Set<String>> {
-  
   SelectedTechNotifier() : super({});
 
   void toggle(String tech) {
@@ -16,5 +11,18 @@ class SelectedTechNotifier extends StateNotifier<Set<String>> {
       state = {...state, tech};
     }
   }
-  
+
+  void reset() {
+    state = {};
+  }
 }
+
+/// Selección de lenguajes
+final selectedLanguagesProvider =
+    StateNotifierProvider<SelectedTechNotifier, Set<String>>(
+        (ref) => SelectedTechNotifier());
+
+/// Selección de herramientas
+final selectedToolsProvider =
+    StateNotifierProvider<SelectedTechNotifier, Set<String>>(
+        (ref) => SelectedTechNotifier());

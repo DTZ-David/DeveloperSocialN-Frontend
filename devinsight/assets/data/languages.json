@@ -13,30 +13,94 @@
     },
     {
         "name": "C#",
-        "icon": "code"
+        "icon": "c#"
     },
     {
         "name": "HTML",
-        "icon": "html5"
+        "icon": "html"
     },
     {
         "name": "CSS",
-        "icon": "css3Alt"
+        "icon": "css"
     },
     {
         "name": "JavaScript",
-        "icon": "js"
+        "icon": "javascript"
     },
     {
         "name": "C++",
-        "icon": "code"
+        "icon": "c++"
     },
     {
         "name": "Go",
-        "icon": "code"
+        "icon": "go"
     },
     {
-        "name": "CC",
-        "icon": "code"
+        "name": "C",
+        "icon": "c"
+    },
+    {
+        "name": "PHP",
+        "icon": "php"
+    },
+    {
+        "name": "Ruby",
+        "icon": "ruby"
+    },
+    {
+        "name": "Swift",
+        "icon": "swift"
+    },
+    {
+        "name": "Kotlin",
+        "icon": "kotlin"
+    },
+    {
+        "name": "Dart",
+        "icon": "dart"
+    },
+    {
+        "name": "TypeScript",
+        "icon": "tpyescript"
+    },
+    {
+        "name": "Scala",
+        "icon": "scala"
+    },
+    {
+        "name": "Shell",
+        "icon": "shell"
+    },
+    {
+        "name": "R",
+        "icon": "r"
+    },
+    {
+        "name": "Perl",
+        "icon": "perl"
+    },
+    {
+        "name": "Lua",
+        "icon": "lua"
+    },
+    {
+        "name": "Haskell",
+        "icon": "haskell"
+    },
+    {
+        "name": "Elixir",
+        "icon": "elixir"
+    },
+    {
+        "name": "Erlang",
+        "icon": "erlang"
+    },
+    {
+        "name": "Objective-C",
+        "icon": "objective-c"
+    },
+    {
+        "name": "Visual Basic .NET",
+        "icon": "visual basic .net"
     }
 ]

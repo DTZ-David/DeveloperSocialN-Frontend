@@ -1,3 +1,4 @@
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomChoiceChip extends StatelessWidget {
@@ -19,15 +20,22 @@ class CustomChoiceChip extends StatelessWidget {
     return ChoiceChip(
       avatar: Icon(
         icon,
-        color: Colors.white,
+        color: AppColors.accent,
         size: 18,
       ),
       label: Text(label),
       selected: isSelected,
       onSelected: (_) => onSelected(),
-      labelStyle: const TextStyle(color: Colors.white),
+      labelStyle: const TextStyle(
+          color: Colors.white,
+          fontFamily: "Montserrat",
+          fontWeight: FontWeight.bold),
       backgroundColor: Colors.grey[850],
-      selectedColor: Colors.deepPurpleAccent, // Puedes parametrizar también si quieres
+      selectedColor: AppColors.accent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(100),
+        side: const BorderSide(color: Colors.transparent),
+      ),
     );
   }
 }
