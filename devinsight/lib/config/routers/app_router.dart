@@ -52,7 +52,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRouter.profile,
             name: AppRouter.profile,
-            builder: (context, state) => const Profile(),
+            builder: (context, state) => const Profile(
+              showSocialButton: false,
+            ),
           ),
         ],
       ),
