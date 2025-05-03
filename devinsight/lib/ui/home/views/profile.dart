@@ -1,6 +1,7 @@
 import 'package:devinsight/config/providers/conectionsProvider.dart';
 import 'package:devinsight/config/providers/interaction_provider.dart';
 import 'package:devinsight/config/providers/mediaProvider.dart';
+import 'package:devinsight/config/providers/nav_profile_provider.dart';
 import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:devinsight/ui/home/widgets/conectionsCard.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
@@ -12,16 +13,26 @@ import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/config/providers/nav_profile_provider.dart';
 
 class Profile extends ConsumerWidget {
-  const Profile({super.key});
+  final String bannerUrl;
+  final String profileImageUrl;
+  final bool showSocialButton;
+
+  // Recibimos los parámetros a través del constructor
+  const Profile({
+    super.key,
+    this.bannerUrl = 'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg',
+    this.profileImageUrl = 'https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg',
+    required this.showSocialButton,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final interactions = ref.watch(interactionsProvider);
-    final publications = ref.watch(myProfilePublicationsProvider);
+    final publications = ref.watch(myProfilePublicationsProvider('ChecoDev'));
+
     final connections = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
 
@@ -51,20 +62,26 @@ class Profile extends ConsumerWidget {
       backgroundColor: AppColors.thirdColors,
       body: CustomScrollView(
         slivers: [
-          const UserProfile(),
+          UserProfile(
+            bannerUrl: bannerUrl, 
+            profileImageUrl: profileImageUrl,
+            showSocialButton: showSocialButton,
+          ),
           const SliverToBoxAdapter(child: SizedBox(height: 80)),
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Socialfollowers(),
+          if (showSocialButton) ...[
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Socialfollowers(),
+              ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SocialButton(),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: SocialButton(),
+              ),
             ),
-          ),
+          ],
           const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -148,7 +165,17 @@ class Profile extends ConsumerWidget {
 }
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({super.key});
+  final String bannerUrl;
+  final String profileImageUrl;
+  final bool showSocialButton;
+
+  // Recibimos los parámetros a través del constructor
+  const UserProfile({
+    super.key,
+    required this.bannerUrl,
+    required this.profileImageUrl,
+    required this.showSocialButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -165,23 +192,19 @@ class UserProfile extends StatelessWidget {
               Container(
                 height: 100,
                 decoration: BoxDecoration(
-                  image: const DecorationImage(
-                    image: NetworkImage(
-                      "https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg",
-                    ),
+                  image: DecorationImage(
+                    image: NetworkImage(bannerUrl), // Usamos el parámetro
                     fit: BoxFit.cover,
                   ),
                   color: AppColors.secondaryColors,
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 bottom: -40,
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: NetworkImage(
-                    "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
-                  ),
+                  backgroundImage: NetworkImage(profileImageUrl), // Usamos el parámetro
                 ),
               ),
               const Positioned(

@@ -22,7 +22,9 @@ class MainScreen extends ConsumerWidget {
       case 3:
         return const ExplorerPage(); // otra pantalla si quieres
       case 4:
-        return const Profile();
+        return const Profile(
+          showSocialButton: false,
+        );
       default:
         return const Center(child: Text('Pantalla no encontrada'));
     }
