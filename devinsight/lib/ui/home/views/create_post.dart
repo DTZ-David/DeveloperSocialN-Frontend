@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:devinsight/config/providers/post_state.dart';
 import 'package:devinsight/ui/home/widgets/post_file_list.dart';
 import 'package:devinsight/ui/home/widgets/post_image_gallery.dart';
 import 'package:devinsight/ui/home/widgets/tags_list.dart';
@@ -9,6 +8,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/ui/home/widgets/post_textfield.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../config/providers/post_provider.dart';
+import '../../../controller/postRequestController.dart';
+import '../../../models/publication/post_request.dart';
+
+Future<String> readFileContent(File file) async {
+  return await file.readAsString();
+}
 
 class CreatePostView extends ConsumerStatefulWidget {
   const CreatePostView({super.key});
@@ -45,38 +52,40 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
     if (result?.files.single.path != null) {
       final file = File(result!.files.single.path!);
       final notifier = ref.read(postProvider.notifier);
-      isImage ? notifier.addImage(file) : notifier.addFile(file);
+      if (isImage) {
+        notifier.addImage(file);
+      } else {
+        final code = await file.readAsString();
+        notifier.setCodeSnippet(code);
+        notifier.addFile(file);
+      }
     }
   }
 
-  void _sendPost(BuildContext context, WidgetRef ref) {
+  void _sendPost(BuildContext context, WidgetRef ref) async {
     final post = ref.read(postProvider);
-    if (post.content.isEmpty) {
-      _showSnackBar(context, "El contenido del post no puede estar vacío");
+    if (post.content.isEmpty && post.files.isEmpty) {
+      _showSnackBar(context, "El contenido o archivo no puede estar vacío");
       return;
     }
 
-    _showConfirmationDialog(
-      context,
-      title: 'Estás a punto de enviar un post',
-      content: '¿Estás seguro?',
-      onConfirm: () {
-        final postJson = {
-          "content": post.content,
-          "images": post.images.map((f) => f.path).toList(),
-          "files": post.files.map((f) => f.path).toList(),
-          "tags": post.tags,
-          "createdAt": DateTime.now().toIso8601String(),
-        };
-        print("Post enviado: $postJson");
+    String code = post.codeSnippet;
 
-        ref.read(postProvider.notifier).clear();
-        _controller.clear();
+    if (code.isEmpty && post.files.isNotEmpty) {
+      code = await readFileContent(post.files.first);
+    }
 
-        Navigator.of(context).pop();
-        _showSnackBar(context, "¡Post enviado con éxito!");
-      },
+    final postRequest = PostRequest(
+      codeSnippet: code,
+      description: post.content,
+      tags: post.tags,
     );
+
+    await ref.read(postControllerProvider.notifier).createPost(postRequest);
+
+    ref.read(postProvider.notifier).clear();
+    _controller.clear();
+    _showSnackBar(context, "¡Post creado con éxito!");
   }
 
   void _showSnackBar(BuildContext context, String message) {
@@ -158,8 +167,7 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                     PostTextField(
                       maxLength: 400,
                       controller: _controller,
-                      onChanged: (val) =>
-                          ref.read(postProvider.notifier).updateContent(val),
+                      onChanged: (val) => ref.read(postProvider.notifier).updateContent(val),
                     ),
                     const SizedBox(
                       height: 8,

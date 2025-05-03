@@ -48,20 +48,16 @@ class HomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(10),
             itemCount: publications.length,
             itemBuilder: (context, index) {
-              final post =
-                  publications[index]; // El tipo 'Post' ahora es más claro
+              final post = publications[index]; // El tipo 'Post' ahora es más claro
               return Column(
                 children: [
                   PublicationsCard(
-                    userName: post.userName, // O el campo que corresponda
-                    sentAt: post.likes
-                        .toString(), // Reemplaza con la fecha si es necesario
-                    userIcon: post
-                        .profilePicture, // Puedes poner el campo de la foto de usuario si existe
+                    userName: post.userName,
+                    sentAt: post.likes.toString(),
+                    userIcon: post.profilePicture,
                     description: post.description,
                     code: post.codeSnippet,
-                    language:
-                        '', // Puedes agregar el lenguaje si lo tienes en el modelo
+                    language: '', // Puedes agregar el lenguaje si lo tienes en el modelo
                     // reactions: ,
                     tags: post.tags,
                   ),
@@ -71,10 +67,9 @@ class HomeScreen extends ConsumerWidget {
             },
           );
         },
-        loading: () => const Center(
-            child: CircularProgressIndicator()), // Indicador de carga
-        error: (e, stackTrace) => Center(
-            child: Text('Error: $e')), // Muestra el error si ocurre alguno
+        loading: () => const Center(child: CircularProgressIndicator()), // Indicador de carga
+        error: (e, stackTrace) =>
+            Center(child: Text('Error: $e')), // Muestra el error si ocurre alguno
       ),
     );
   }

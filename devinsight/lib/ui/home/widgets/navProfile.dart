@@ -16,11 +16,11 @@ class _NavProfileState extends ConsumerState<NavProfile> {
   int _selectedIndex = 0;
 
   void _onButtonPressed(int index) {
-  setState(() {
-    _selectedIndex = index;
-  });
-  ref.read(selectedProfileTabProvider.notifier).state = index;
-}
+    setState(() {
+      _selectedIndex = index;
+    });
+    ref.read(selectedProfileTabProvider.notifier).state = index;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,8 @@ class _NavProfileState extends ConsumerState<NavProfile> {
       _NavButtonData("Media", 'assets/icons/video_profile.svg'),
     ];
 
-    return SizedBox(
-      width: 300,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(buttons.length, (index) {
