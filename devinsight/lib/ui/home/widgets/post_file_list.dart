@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/config/providers/post_state.dart';
+
+import '../../../config/providers/post_provider.dart';
 
 class PostFileList extends ConsumerWidget {
   final List<File> files;

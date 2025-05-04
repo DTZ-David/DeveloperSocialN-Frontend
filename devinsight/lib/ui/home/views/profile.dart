@@ -23,8 +23,10 @@ class Profile extends ConsumerWidget {
   // Recibimos los parámetros a través del constructor
   const Profile({
     super.key,
-    this.bannerUrl = 'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg',
-    this.profileImageUrl = 'https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg',
+    this.bannerUrl =
+        'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg',
+    this.profileImageUrl =
+        'https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg',
     required this.showSocialButton,
   });
 
@@ -75,7 +77,7 @@ class Profile extends ConsumerWidget {
       body: CustomScrollView(
         slivers: [
           UserProfile(
-            bannerUrl: bannerUrl, 
+            bannerUrl: bannerUrl,
             profileImageUrl: profileImageUrl,
             showSocialButton: showSocialButton,
           ),
@@ -136,7 +138,7 @@ class Profile extends ConsumerWidget {
                   (context, index) {
                     final data = interactions[index];
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 4.0),
+                      padding: const EdgeInsets.only(bottom: 5.0),
                       child: InteractionCard(
                         tipo: data['tipo'],
                         id: data['id'],

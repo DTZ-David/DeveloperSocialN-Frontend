@@ -54,15 +54,12 @@ class InteractionCard extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-      child: SizedBox(
-        width: 150,
-        height: 80,
+      child: Expanded(
         child: Card(
           color: Colors.black,
           margin: EdgeInsets.zero,
           elevation: 2,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Column(
@@ -92,12 +89,9 @@ class InteractionCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) => const OptionsDialog());
+                        showDialog(context: context, builder: (_) => const OptionsDialog());
                       },
-                      child: const Icon(Icons.more_vert,
-                          size: 20, color: Colors.grey),
+                      child: const Icon(Icons.more_vert, size: 20, color: Colors.grey),
                     ),
                   ],
                 ),
