@@ -50,6 +50,7 @@ class CustomCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {},
         child: Card(
+          color: Colors.black,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           elevation: 3,
           child: Padding(

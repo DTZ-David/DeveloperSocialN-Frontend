@@ -4,10 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/config/providers/navbar_index_provider.dart';
 
 class CustomNavbar extends ConsumerWidget {
-  const CustomNavbar({super.key});
+  final Function(int) onTap; // Callback para manejar el cambio de página
+
+  const CustomNavbar({super.key, required this.onTap});
 
   void _onTap(WidgetRef ref, int index) {
     ref.read(navbarIndexProvider.notifier).state = index;
+    onTap(index); // Llama al callback para sincronizar con el PageView
     if (index == 2) {
       print("Botón central presionado");
       // Aquí puedes abrir modal o lo que desees
@@ -34,11 +37,10 @@ class CustomNavbar extends ConsumerWidget {
               children: [
                 _navItem(ref, 'assets/icons/navbar/homep.svg', 'Inicio', 0,
                     currentIndex),
-                _navItem(ref, 'assets/icons/navbar/searchp.svg', 'Explorar', 3,
+                _navItem(ref, 'assets/icons/navbar/searchp.svg', 'Explorar', 1,
                     currentIndex),
-
                 const SizedBox(width: 80), // espacio para botón central
-                _navItem(ref, 'assets/icons/navbar/savep.svg', 'Guardados', 1,
+                _navItem(ref, 'assets/icons/navbar/savep.svg', 'Guardados', 3,
                     currentIndex),
                 _navItem(ref, 'assets/icons/navbar/userp.svg', 'Perfil', 4,
                     currentIndex),
