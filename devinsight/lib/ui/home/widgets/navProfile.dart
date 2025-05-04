@@ -34,7 +34,7 @@ class _NavProfileState extends ConsumerState<NavProfile> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(buttons.length, (index) {
           final button = buttons[index];
           return _NavButton(

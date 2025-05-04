@@ -28,6 +28,8 @@ class MainScreen extends ConsumerWidget {
           ExplorerPage(),
           CreatePostView(),
           Publications(),
+        
+          
           Profile(showSocialButton: false),
         ],
       ),

@@ -62,7 +62,7 @@ class HomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(10),
             itemCount: publications.length,
             itemBuilder: (context, index) {
-              final post = publications[index];
+              final post = publications[index]; // El tipo 'Post' ahora es más claro
 
               return Column(
                 children: [
