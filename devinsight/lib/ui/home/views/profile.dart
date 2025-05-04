@@ -3,6 +3,7 @@ import 'package:devinsight/config/providers/interaction_provider.dart';
 import 'package:devinsight/config/providers/mediaProvider.dart';
 import 'package:devinsight/config/providers/nav_profile_provider.dart';
 import 'package:devinsight/config/providers/publications_provider.dart';
+import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/home/widgets/conectionsCard.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
 import 'package:devinsight/ui/home/widgets/mediaCard.dart';
@@ -35,8 +36,19 @@ class Profile extends ConsumerWidget {
 
     final connections = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
-
+    
     return Scaffold(
+      
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+        backgroundColor: AppColors.primaryColors,
+        onPressed: () {
+          ref.read(appRouterProvider).go(AppRouter.message);
+        },
+        child: const Icon(Icons.message_outlined, color: Colors.white),
+      ),
       appBar: AppBar(
         shadowColor: AppColors.tertiaryColors,
         elevation: 0.2,

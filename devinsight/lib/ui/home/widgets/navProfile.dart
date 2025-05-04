@@ -28,7 +28,7 @@ class _NavProfileState extends ConsumerState<NavProfile> {
       _NavButtonData("Posts", 'assets/icons/post_profile.svg'),
       _NavButtonData("Interacciones", 'assets/icons/interactions_profile.svg'),
       _NavButtonData("Conexiones", 'assets/icons/connections_profile.svg'),
-      _NavButtonData("Media", 'assets/icons/video_profile.svg'),
+      //_NavButtonData("Media", 'assets/icons/video_profile.svg'),
     ];
 
     return SizedBox(

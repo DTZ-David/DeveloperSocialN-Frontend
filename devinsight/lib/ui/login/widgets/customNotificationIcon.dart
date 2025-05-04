@@ -33,27 +33,18 @@ class CustomNotificationIcon extends StatelessWidget {
                     title: const Text('Email Notifications',
                         style: TextStyle(color: Colors.white)),
                     onTap: () {
-                      // Add your email notifications logic here
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.sms,
-                        color: AppColors.quaternaryColors),
-                    title: const Text('SMS Notifications',
-                        style: TextStyle(color: Colors.white)),
-                    onTap: () {
-                      // Add your SMS notifications logic here
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.push_pin, color: Colors.orange),
-                    title: const Text('Push Notifications',
-                        style: TextStyle(color: Colors.white)),
-                    onTap: () {
-                      // Add your push notifications logic here
-                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text('No tienes notificaciones nuevas'),
+                          action: SnackBarAction(
+                            label: 'Ocultar',
+                            textColor: Colors.black,
+                            onPressed: () {
+                              
+                            },
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ],

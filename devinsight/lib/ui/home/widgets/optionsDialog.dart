@@ -6,22 +6,43 @@ class OptionsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Row(
+                mainAxisSize: MainAxisSize.max,
+                children:  [
+                  Icon(Icons.close, color: Colors.white, size: 20),
+                  SizedBox(width: 6),
+                  Text(
+                    'Cerrar',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
       title: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:  [
+        children: [
           Text(
-            'Opciones',
+            'Publicación',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           SizedBox(height: 4),
           Divider(color: Colors.black26),
         ],
       ),
-      backgroundColor: Colors.white, // Fondo blanco para un look limpio
+      backgroundColor: Colors.black, // Fondo blanco para un look limpio
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       content: Column(
@@ -31,37 +52,37 @@ class OptionsDialog extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.of(context).pop(),
             child: const Padding(
-              padding:  EdgeInsets.symmetric(vertical: 12),
+              padding: EdgeInsets.symmetric(vertical: 12),
               child: Row(
-                children:  [
-                  Icon(Icons.edit, color: Colors.blueAccent),
+                children: [
+                  Icon(Icons.save, color: Colors.blueAccent),
                   SizedBox(width: 12),
                   Text(
-                    'Opción #1',
+                    'Guardar publicación',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          
+
           // Opción 2
           GestureDetector(
             onTap: () => Navigator.of(context).pop(),
             child: const Padding(
-              padding:  EdgeInsets.symmetric(vertical: 12),
+              padding: EdgeInsets.symmetric(vertical: 12),
               child: Row(
-                children:  [
-                  Icon(Icons.delete, color: Colors.redAccent),
+                children: [
+                  Icon(Icons.report_problem_sharp, color: Colors.redAccent),
                   SizedBox(width: 12),
                   Text(
-                    'Opción #2',
+                    'Reportar publicación',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ],
