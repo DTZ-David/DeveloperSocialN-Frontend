@@ -11,31 +11,33 @@ import '../views/publications.dart';
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
 
-  Widget _buildScreen(int index) {
-    switch (index) {
-      case 0:
-        return const HomeScreen();
-      case 1:
-        return const Publications();
-      case 2:
-        return const CreatePostView();
-      case 3:
-        return const ExplorerPage(); // otra pantalla si quieres
-      case 4:
-        return const Profile(
-          showSocialButton: false,
-        );
-      default:
-        return const Center(child: Text('Pantalla no encontrada'));
-    }
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(navbarIndexProvider);
+    final pageController = PageController(initialPage: index);
+
     return Scaffold(
-      body: _buildScreen(index),
-      bottomNavigationBar: const CustomNavbar(),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (newIndex) {
+          // Actualiza el índice del navbar cuando se desliza
+          ref.read(navbarIndexProvider.notifier).state = newIndex;
+        },
+        children: const [
+          HomeScreen(),
+          ExplorerPage(),
+          CreatePostView(),
+          Publications(),
+          Profile(showSocialButton: false),
+        ],
+      ),
+      bottomNavigationBar: CustomNavbar(
+        onTap: (newIndex) {
+          // Cambia la página del PageView cuando se selecciona un ítem del navbar
+          pageController.jumpToPage(newIndex);
+          ref.read(navbarIndexProvider.notifier).state = newIndex;
+        },
+      ),
     );
   }
 }

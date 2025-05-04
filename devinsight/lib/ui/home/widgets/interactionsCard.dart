@@ -58,6 +58,7 @@ class InteractionCard extends StatelessWidget {
         width: 150,
         height: 80,
         child: Card(
+          color: Colors.black,
           margin: EdgeInsets.zero,
           elevation: 2,
           shape:
