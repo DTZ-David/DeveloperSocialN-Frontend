@@ -48,11 +48,8 @@ class CustomCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       child: GestureDetector(
-        onTap: () {
-          
-        },
+        onTap: () {},
         child: Card(
-          
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           elevation: 3,
           child: Padding(
