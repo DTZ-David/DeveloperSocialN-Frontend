@@ -64,7 +64,6 @@ class HomeScreen extends ConsumerWidget {
             itemBuilder: (context, index) {
               final post = publications[index];
 
-
               return Column(
                 children: [
                   PublicationsCard(
