@@ -1,11 +1,13 @@
+import 'package:devinsight/config/routers/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Customsettingsicon extends StatelessWidget {
-  const Customsettingsicon({super.key});
+class CustomSettingsIcon extends ConsumerWidget {
+  const CustomSettingsIcon({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       icon: SvgPicture.asset(
         'assets/icons/settings.svg',
@@ -18,9 +20,9 @@ class Customsettingsicon extends StatelessWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
-              backgroundColor: const Color(0xFF1C1A30),
+              backgroundColor: Colors.black,
               title: const Text(
-                "Ajustes",
+                "Cerrar sesión",
                 style: TextStyle(color: Colors.white),
               ),
               content: Column(
@@ -28,31 +30,22 @@ class Customsettingsicon extends StatelessWidget {
                 children: [
                   ListTile(
                     leading:
-                        const Icon(Icons.account_circle, color: Colors.blue),
-                    title: const Text('Cuenta',
+                        const Icon(Icons.logout_outlined, color: Colors.blue),
+                    title: const Text('Cerrar sesión',
                         style: TextStyle(color: Colors.white)),
                     onTap: () {
-                      // Add your account settings logic here
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  ListTile(
-                    leading:
-                        const Icon(Icons.notifications, color: Colors.orange),
-                    title: const Text('Notificaciones',
-                        style: TextStyle(color: Colors.white)),
-                    onTap: () {
-                      // Add your notifications settings logic here
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.security, color: Colors.red),
-                    title: const Text('Seguridad',
-                        style: TextStyle(color: Colors.white)),
-                    onTap: () {
-                      // Add your security settings logic here
-                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text('Se ha cerrado sesión'),
+                          action: SnackBarAction(
+                            label: 'Ocultar',
+                            textColor: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                      );
+
+                      ref.read(appRouterProvider).go(AppRouter.login);
                     },
                   ),
                 ],

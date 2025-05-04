@@ -1,3 +1,4 @@
+import 'package:devinsight/ui/home/widgets/showModalBottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -40,17 +41,17 @@ class ReactionsRow extends StatelessWidget {
                             reaction['icon'],
                             height: 24,
                             width: 24,
-                            // ignore: deprecated_member_use
                             color: reaction['color'],
                           ),
                           const SizedBox(width: 4),
                           Text(
                             '${reaction['count']}',
                             style: TextStyle(
-                                color: reaction['color'],
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat'),
+                              color: reaction['color'],
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                            ),
                           ),
                         ],
                       ),
@@ -60,7 +61,18 @@ class ReactionsRow extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2.0),
             child: GestureDetector(
-              onTap: () => {print("Comentar")},
+              onTap: () async {
+                final comment = await CommentModal.show(context);
+                if (comment != null) {
+                  print("Comentario recibido: $comment");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Comentario guardado'),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              },
               child: Container(
                 color: const Color(0xFF000000),
                 padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
@@ -70,16 +82,18 @@ class ReactionsRow extends StatelessWidget {
                       'assets/icons/comments.svg',
                       height: 24,
                       width: 24,
-                      // ignore: deprecated_member_use
                       color: Colors.white,
                     ),
                     const SizedBox(width: 6),
-                    const Text("Comentar",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Montserrat")),
+                    const Text(
+                      "Comentar",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Montserrat",
+                      ),
+                    ),
                   ],
                 ),
               ),

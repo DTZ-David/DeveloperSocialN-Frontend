@@ -16,7 +16,7 @@ class Publications extends ConsumerWidget {
           children: [
             SizedBox(width: 16),
             Text(
-              "Pubs Guardadas",
+              "Favoritos",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,

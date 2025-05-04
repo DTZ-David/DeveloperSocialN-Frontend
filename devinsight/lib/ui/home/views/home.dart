@@ -17,15 +17,29 @@ class HomeScreen extends ConsumerWidget {
     final feedState = ref.watch(feedControllerProvider);
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+        onPressed: () {
+          print('Botón de refresh presionado');
+
+          // ignore: unused_result
+          ref.refresh(feedControllerProvider);
+        },
+        backgroundColor: AppColors.primaryColors,
+        child: const Icon(
+          Icons.replay_circle_filled_outlined,
+          size: 30,
+        ),
+      ),
       appBar: AppBar(
-        shadowColor: AppColors.tertiaryColors,
-        elevation: 0.2,
         backgroundColor: AppColors.primaryColors,
         title: const Row(
           children: [
             SizedBox(width: 16),
             Text(
-              "Home",
+              "Inicio",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -37,7 +51,7 @@ class HomeScreen extends ConsumerWidget {
         ),
         actions: const [
           CustomNotificationIcon(),
-          Customsettingsicon(),
+          CustomSettingsIcon(),
           SizedBox(width: 16),
         ],
       ),
@@ -48,7 +62,10 @@ class HomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(10),
             itemCount: publications.length,
             itemBuilder: (context, index) {
+
+              final post = publications[index];
               final post = publications[index]; // El tipo 'Post' ahora es más claro
+
               return Column(
                 children: [
                   PublicationsCard(
@@ -57,8 +74,10 @@ class HomeScreen extends ConsumerWidget {
                     userIcon: post.profilePicture,
                     description: post.description,
                     code: post.codeSnippet,
-                    language: '', // Puedes agregar el lenguaje si lo tienes en el modelo
-                    // reactions: ,
+
+                    language: '',
+               
+
                     tags: post.tags,
                   ),
                   const SizedBox(height: 4),
