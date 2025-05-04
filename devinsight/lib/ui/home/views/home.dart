@@ -62,9 +62,8 @@ class HomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(10),
             itemCount: publications.length,
             itemBuilder: (context, index) {
-
               final post = publications[index];
-              final post = publications[index]; // El tipo 'Post' ahora es más claro
+
 
               return Column(
                 children: [
@@ -74,10 +73,7 @@ class HomeScreen extends ConsumerWidget {
                     userIcon: post.profilePicture,
                     description: post.description,
                     code: post.codeSnippet,
-
                     language: '',
-               
-
                     tags: post.tags,
                   ),
                   const SizedBox(height: 4),
@@ -86,9 +82,10 @@ class HomeScreen extends ConsumerWidget {
             },
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()), // Indicador de carga
-        error: (e, stackTrace) =>
-            Center(child: Text('Error: $e')), // Muestra el error si ocurre alguno
+        loading: () => const Center(
+            child: CircularProgressIndicator()), // Indicador de carga
+        error: (e, stackTrace) => Center(
+            child: Text('Error: $e')), // Muestra el error si ocurre alguno
       ),
     );
   }
