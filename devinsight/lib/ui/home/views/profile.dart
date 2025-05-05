@@ -45,7 +45,8 @@ class Profile extends ConsumerWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
         ),
-        backgroundColor: AppColors.primaryColors,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         onPressed: () {
           ref.read(appRouterProvider).go(AppRouter.message);
         },
