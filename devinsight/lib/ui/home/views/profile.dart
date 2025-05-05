@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/config/providers/conectionsProvider.dart';
 import 'package:devinsight/config/providers/interaction_provider.dart';
 import 'package:devinsight/config/providers/mediaProvider.dart';
@@ -7,20 +9,19 @@ import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/home/widgets/conectionsCard.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
 import 'package:devinsight/ui/home/widgets/mediaCard.dart';
-import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/ui/home/widgets/navProfile.dart';
 import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:devinsight/ui/theme/app_colors.dart';
+
+const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
 
 class Profile extends ConsumerWidget {
   final String bannerUrl;
   final String profileImageUrl;
   final bool showSocialButton;
 
-  // Recibimos los parámetros a través del constructor
   const Profile({
     super.key,
     this.bannerUrl =
@@ -35,43 +36,30 @@ class Profile extends ConsumerWidget {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final interactions = ref.watch(interactionsProvider);
     final publications = ref.watch(myProfilePublicationsProvider('ChecoDev'));
-
     final connections = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
-    
+
     return Scaffold(
-      
       floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
-        backgroundColor: AppColors.primaryColors,
-        onPressed: () {
-          ref.read(appRouterProvider).go(AppRouter.message);
-        },
+        shape: const CircleBorder(),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        onPressed: () => ref.read(appRouterProvider).go(AppRouter.message),
         child: const Icon(Icons.message_outlined, color: Colors.white),
       ),
       appBar: AppBar(
         shadowColor: AppColors.tertiaryColors,
         elevation: 0.2,
         backgroundColor: AppColors.primaryColors,
-        title: const Row(
-          children: [
-            SizedBox(width: 16),
-            Text(
-              "Perfil",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Montserrat',
-              ),
-            ),
-          ],
+        title: const Text(
+          "Perfil",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+          ),
         ),
-        actions: const [
-          SizedBox(width: 16),
-        ],
       ),
       backgroundColor: AppColors.thirdColors,
       body: CustomScrollView(
@@ -85,94 +73,82 @@ class Profile extends ConsumerWidget {
           if (showSocialButton) ...[
             const SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: _horizontalPadding,
                 child: Socialfollowers(),
               ),
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: _horizontalPadding,
                 child: SocialButton(),
               ),
             ),
           ],
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: _horizontalPadding,
               child: NavProfile(),
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 10)),
-
-          // Contenido dinámico según la pestaña seleccionada
-          if (selectedTab == 0)
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final data = publications[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 4.0),
-                      child: PublicationsCard(
-                        userName: data['user_name'],
-                        sentAt: data['sent_at'],
-                        userIcon: data['user_icon'],
-                        description: data['description'],
-                        code: data['code'],
-                        language: data['language'],
-                        tags: List<String>.from(data['tags']),
-                        reactions: const [],
-                      ),
-                    );
-                  },
-                  childCount: publications.length,
-                ),
-              ),
-            )
-          else if (selectedTab == 1)
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final data = interactions[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 5.0),
-                      child: InteractionCard(
-                        tipo: data['tipo'],
-                        id: data['id'],
-                        mensaje: data['mensaje'],
-                      ),
-                    );
-                  },
-                  childCount: interactions.length,
-                ),
-              ),
-            )
-          else if (selectedTab == 2)
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final data = connections[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 4.0),
-                      child: CustomCard(
-                        title: data['title'],
-                        subtitle: data['subtitle'],
-                        iconAsset: data['iconAsset'],
-                      ),
-                    );
-                  },
-                  childCount: connections.length,
-                ),
-              ),
-            )
-          else if (selectedTab == 3)
-            const MediaGallery()
+          const SliverToBoxAdapter(child: SizedBox(height: 1)),
+          _buildTabContent(selectedTab, publications, interactions, connections),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTabContent(int selectedTab, List publications, List interactions, List connections) {
+    switch (selectedTab) {
+      case 0:
+        return _buildSliverList(
+          publications,
+          (data) => PublicationsCard(
+            userName: data['user_name'],
+            sentAt: data['sent_at'],
+            userIcon: data['user_icon'],
+            description: data['description'],
+            code: data['code'],
+            language: data['language'],
+            tags: List<String>.from(data['tags']),
+            reactions: const [],
+          ),
+        );
+      case 1:
+        return _buildSliverList(
+          interactions,
+          (data) => InteractionCard(
+            tipo: data['tipo'],
+            id: data['id'],
+            mensaje: data['mensaje'],
+          ),
+        );
+      case 2:
+        return _buildSliverList(
+          connections,
+          (data) => CustomCard(
+            title: data['title'],
+            subtitle: data['subtitle'],
+            iconAsset: data['iconAsset'],
+          ),
+        );
+      case 3:
+        return const MediaGallery();
+      default:
+        return const SliverToBoxAdapter();
+    }
+  }
+
+  Widget _buildSliverList(List data, Widget Function(Map<String, dynamic>) itemBuilder) {
+    return SliverPadding(
+      padding: _horizontalPadding,
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => Padding(
+            padding: const EdgeInsets.only(bottom: 4.0),
+            child: itemBuilder(data[index]),
+          ),
+          childCount: data.length,
+        ),
       ),
     );
   }
@@ -183,7 +159,6 @@ class UserProfile extends StatelessWidget {
   final String profileImageUrl;
   final bool showSocialButton;
 
-  // Recibimos los parámetros a través del constructor
   const UserProfile({
     super.key,
     required this.bannerUrl,
@@ -195,7 +170,7 @@ class UserProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: _horizontalPadding,
         child: SizedBox(
           width: double.infinity,
           height: 110,
@@ -207,7 +182,7 @@ class UserProfile extends StatelessWidget {
                 height: 100,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(bannerUrl), // Usamos el parámetro
+                    image: NetworkImage(bannerUrl),
                     fit: BoxFit.cover,
                   ),
                   color: AppColors.secondaryColors,
@@ -218,7 +193,7 @@ class UserProfile extends StatelessWidget {
                 bottom: -40,
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: NetworkImage(profileImageUrl), // Usamos el parámetro
+                  backgroundImage: NetworkImage(profileImageUrl),
                 ),
               ),
               const Positioned(

@@ -25,16 +25,16 @@ class _NavProfileState extends ConsumerState<NavProfile> {
   @override
   Widget build(BuildContext context) {
     final List<_NavButtonData> buttons = [
-      _NavButtonData("Posts", 'assets/icons/post_profile.svg'),
+      _NavButtonData("Publicaciones", 'assets/icons/post_profile.svg'),
       _NavButtonData("Interacciones", 'assets/icons/interactions_profile.svg'),
       _NavButtonData("Conexiones", 'assets/icons/connections_profile.svg'),
       //_NavButtonData("Media", 'assets/icons/video_profile.svg'),
     ];
 
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //scrollDirection: Axis.horizontal,
+      child: Row( 
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(buttons.length, (index) {
           final button = buttons[index];
           return _NavButton(
