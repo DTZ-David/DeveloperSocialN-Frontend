@@ -112,7 +112,7 @@ class ExplorerPage extends ConsumerWidget {
               itemCount: 10,
               itemBuilder: (context, index) {
                 return Card(
-                  color: AppColors.secondaryColors,
+                  color: AppColors.primaryColors,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
                   child: ListTile(
