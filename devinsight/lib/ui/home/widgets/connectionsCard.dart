@@ -22,30 +22,30 @@ class CustomUserCard extends ConsumerWidget {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(user.profilePicture),
-                radius: 24,
+              GestureDetector(
+                onTap: () {
+                  ref.read(appRouterProvider).goNamed(
+                    'user_profile',
+                    pathParameters: {'id': user.id},
+                  );
+                },
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(user.profilePicture),
+                  radius: 24,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        ref.read(appRouterProvider).goNamed(
-                          'user_profile',
-                          pathParameters: {'id': user.id},
-                        );
-                      },
-                      child: Text(
-                        user.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'Montserrat',
-                          color: Colors.white,
-                        ),
+                    Text(
+                      user.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontFamily: 'Montserrat',
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 4),
