@@ -47,26 +47,28 @@ class ExplorerPage extends ConsumerWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedView == 'Usuarios'
-                      ? AppColors.primaryColors
-                      : AppColors.secondaryColors,
+                      ? AppColors.accent
+                      : AppColors.primaryColors,
                 ),
                 onPressed: () => selectedViewNotifier.state = 'Usuarios',
                 child: const Text(
                   'Usuarios',
-                  style: TextStyle(fontFamily: 'Montserrat'),
+                  style:
+                      TextStyle(fontFamily: 'Montserrat', color: Colors.white),
                 ),
               ),
               const SizedBox(width: 12),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedView == 'Publicaciones'
-                      ? AppColors.primaryColors
-                      : AppColors.secondaryColors,
+                      ? AppColors.accent
+                      : AppColors.primaryColors,
                 ),
                 onPressed: () => selectedViewNotifier.state = 'Publicaciones',
                 child: const Text(
                   'Publicaciones',
-                  style: TextStyle(fontFamily: 'Montserrat'),
+                  style:
+                      TextStyle(fontFamily: 'Montserrat', color: Colors.white),
                 ),
               ),
             ],
@@ -76,7 +78,9 @@ class ExplorerPage extends ConsumerWidget {
 
           Expanded(
             child: selectedView == 'Usuarios'
-                ? UserList(searchQuery: searchQuery)
+                ? UserList(
+                    searchQuery:
+                        searchQuery) // ← searchQuery se pasa correctamente
                 : const Center(
                     child: Text(
                       "Aquí van las publicaciones",
