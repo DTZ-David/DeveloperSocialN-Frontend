@@ -1,5 +1,5 @@
-import 'package:devinsight/config/providers/users_provider.dart';
 import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/models/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +26,7 @@ class CustomUserCard extends ConsumerWidget {
                 onTap: () {
                   ref.read(appRouterProvider).goNamed(
                     'user_profile',
-                    pathParameters: {'id': user.id},
+                    pathParameters: {'id': user.id.toString()},
                   );
                 },
                 child: CircleAvatar(
@@ -40,7 +40,7 @@ class CustomUserCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      user.name,
+                      user.username,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -50,7 +50,7 @@ class CustomUserCard extends ConsumerWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      user.description,
+                      user.bio,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
