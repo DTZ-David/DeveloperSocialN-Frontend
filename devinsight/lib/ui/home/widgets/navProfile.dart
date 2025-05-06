@@ -72,7 +72,7 @@ class _NavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(2),
       child: TextButton.icon(
         onPressed: onPressed,
         icon: SvgPicture.asset(

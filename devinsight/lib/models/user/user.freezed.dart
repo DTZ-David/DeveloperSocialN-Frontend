@@ -256,6 +256,10 @@ class _$UserImpl implements _User {
       this,
     );
   }
+  
+  @override
+  // TODO: implement name
+  get name => throw UnimplementedError();
 }
 
 abstract class _User implements User {

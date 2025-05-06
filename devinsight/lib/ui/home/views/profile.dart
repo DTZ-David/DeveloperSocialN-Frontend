@@ -14,7 +14,6 @@ import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
 
@@ -43,18 +42,10 @@ class Profile extends ConsumerWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: AppColors.background,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         onPressed: () => ref.read(appRouterProvider).go(AppRouter.message),
-        child: SvgPicture.asset(
-          'assets/icons/message_profile.svg',
-          colorFilter: const ColorFilter.mode(
-            Colors.white,
-            BlendMode.srcIn,
-          ),
-          height: 25,
-          width: 25,
-        ),
+        child: const Icon(Icons.message_outlined, color: Colors.white),
       ),
       appBar: AppBar(
         shadowColor: AppColors.tertiaryColors,
@@ -119,7 +110,7 @@ class Profile extends ConsumerWidget {
           ),
         );
       case 2:
-        return const SliverFillRemaining(child: UserList());
+        return const SliverFillRemaining(child: UserList(searchQuery: "",));
       case 3:
         return const MediaGallery();
       default:
