@@ -9,7 +9,7 @@ class UsersProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userAsync = ref.watch(userByIdProvider(userId));
+    final userAsync = ref.watch(userByIdProvider(int.parse(userId)));
 
     return Scaffold(
       appBar: AppBar(
@@ -26,11 +26,11 @@ class UsersProfileView extends ConsumerWidget {
                 radius: 40,
               ),
               const SizedBox(height: 12),
-              Text(user.name,
+              Text(user.username,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
-              Text(user.description),
+              Text(user.bio),
             ],
           ),
         ),
