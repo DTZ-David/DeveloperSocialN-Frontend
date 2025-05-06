@@ -14,7 +14,6 @@ import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
 
@@ -43,18 +42,10 @@ class Profile extends ConsumerWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: AppColors.background,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         onPressed: () => ref.read(appRouterProvider).go(AppRouter.message),
-        child: SvgPicture.asset(
-          'assets/icons/message_profile.svg',
-          colorFilter: const ColorFilter.mode(
-            Colors.white,
-            BlendMode.srcIn,
-          ),
-          height: 25,
-          width: 25,
-        ),
+        child: const Icon(Icons.message_outlined, color: Colors.white),
       ),
       appBar: AppBar(
         shadowColor: AppColors.tertiaryColors,
@@ -71,24 +62,22 @@ class Profile extends ConsumerWidget {
         ),
       ),
       backgroundColor: AppColors.thirdColors,
-      body: Column(
-        children: [
+      body: CustomScrollView(
+        slivers: [
           UserProfile(
             bannerUrl: bannerUrl,
             profileImageUrl: profileImageUrl,
             showSocialButton: showSocialButton,
           ),
-          const SizedBox(height: 80),
+          const SliverToBoxAdapter(child: SizedBox(height: 80)),
           if (showSocialButton) ...[
             const _PaddedWidget(child: Socialfollowers()),
             _PaddedWidget(child: SocialButton()),
           ],
           const _PaddedWidget(child: NavProfile()),
-          const SizedBox(height: 1),
-          Expanded(
-            child: _buildTabContent(
-                selectedTab, publications, interactions, connections),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 1)),
+          _buildTabContent(
+              selectedTab, publications, interactions, connections),
         ],
       ),
     );
@@ -121,24 +110,26 @@ class Profile extends ConsumerWidget {
           ),
         );
       case 2:
-        return const UserList(
-          searchQuery: '', 
-        );
+        return const SliverFillRemaining(child: UserList(searchQuery: "",));
       case 3:
         return const MediaGallery();
       default:
-        return const SizedBox.shrink();
+        return const SliverToBoxAdapter();
     }
   }
 
   Widget _buildSliverList(
       List data, Widget Function(Map<String, dynamic>) itemBuilder) {
-    return ListView.builder(
+    return SliverPadding(
       padding: _horizontalPadding,
-      itemCount: data.length,
-      itemBuilder: (context, index) => Padding(
-        padding: const EdgeInsets.only(bottom: 4.0),
-        child: itemBuilder(data[index]),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => Padding(
+            padding: const EdgeInsets.only(bottom: 4.0),
+            child: itemBuilder(data[index]),
+          ),
+          childCount: data.length,
+        ),
       ),
     );
   }
@@ -158,45 +149,47 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: _horizontalPadding,
-      child: SizedBox(
-        width: double.infinity,
-        height: 110,
-        child: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.bottomCenter,
-          children: [
-            Container(
-              height: 100,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(bannerUrl),
-                  fit: BoxFit.cover,
-                ),
-                color: AppColors.secondaryColors,
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            Positioned(
-              bottom: -40,
-              child: CircleAvatar(
-                radius: 35,
-                backgroundImage: NetworkImage(profileImageUrl),
-              ),
-            ),
-            const Positioned(
-              bottom: -70,
-              child: Text(
-                'Ssaylem Murillo',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                  fontSize: 15,
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: _horizontalPadding,
+        child: SizedBox(
+          width: double.infinity,
+          height: 110,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.bottomCenter,
+            children: [
+              Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(bannerUrl),
+                    fit: BoxFit.cover,
+                  ),
+                  color: AppColors.secondaryColors,
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                bottom: -40,
+                child: CircleAvatar(
+                  radius: 35,
+                  backgroundImage: NetworkImage(profileImageUrl),
+                ),
+              ),
+              const Positioned(
+                bottom: -70,
+                child: Text(
+                  'Ssaylem Murillo',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -210,9 +203,11 @@ class _PaddedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: _horizontalPadding,
-      child: child,
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: _horizontalPadding,
+        child: child,
+      ),
     );
   }
 }
