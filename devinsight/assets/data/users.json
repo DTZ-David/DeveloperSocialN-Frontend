@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Pepi Developer",
+        "description": "Passionate about creating interactive and responsive web applications.",
+        "profile_pic": "https://picsum.photos/id/8/367/267"
+    },
+    {
+        "id": 2,
+        "name": "Juan Perez",
+        "description": "Specializes in server-side logic and database management.",
+        "profile_pic": "https://picsum.photos/id/10/367/267"
+    },
+    {
+        "id": 3,
+        "name": "Andrea Bueno",
+        "description": "Experienced in both frontend and backend development.",
+        "profile_pic": "https://picsum.photos/id/13/367/267"
+    },
+    {
+        "id": 4,
+        "name": "Reir Para No Llorar",
+        "description": "Focuses on crafting user-friendly and visually appealing designs.",
+        "profile_pic": "https://picsum.photos/id/38/367/267"
+    },
+    {
+        "id": 5,
+        "name": "Marcos Pren",
+        "description": "Expert in automating and streamlining development processes.",
+        "profile_pic": "https://picsum.photos/id/40/367/267"
+    },
+    {
+        "id": 6,
+        "name": "Sophia Smith",
+        "description": "Loves building scalable and efficient cloud-based solutions.",
+        "profile_pic": "https://picsum.photos/id/50/367/267"
+    },
+    {
+        "id": 7,
+        "name": "Liam Johnson",
+        "description": "Enthusiastic about AI and machine learning technologies.",
+        "profile_pic": "https://picsum.photos/id/60/367/267"
+    },
+    {
+        "id": 8,
+        "name": "Emma Brown",
+        "description": "Enjoys creating seamless mobile application experiences.",
+        "profile_pic": "https://picsum.photos/id/70/367/267"
+    },
+    {
+        "id": 9,
+        "name": "Noah Davis",
+        "description": "Specialist in cybersecurity and ethical hacking.",
+        "profile_pic": "https://picsum.photos/id/80/367/267"
+    },
+    {
+        "id": 10,
+        "name": "Olivia Wilson",
+        "description": "Dedicated to improving accessibility in web development.",
+        "profile_pic": "https://picsum.photos/id/90/367/267"
+    }
+]

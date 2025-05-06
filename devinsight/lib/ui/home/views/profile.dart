@@ -1,3 +1,4 @@
+import 'package:devinsight/ui/home/widgets/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/config/providers/conectionsProvider.dart';
@@ -6,7 +7,6 @@ import 'package:devinsight/config/providers/mediaProvider.dart';
 import 'package:devinsight/config/providers/nav_profile_provider.dart';
 import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/ui/home/widgets/conectionsCard.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
 import 'package:devinsight/ui/home/widgets/mediaCard.dart';
 import 'package:devinsight/ui/home/widgets/navProfile.dart';
@@ -71,33 +71,20 @@ class Profile extends ConsumerWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 80)),
           if (showSocialButton) ...[
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: _horizontalPadding,
-                child: Socialfollowers(),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: _horizontalPadding,
-                child: SocialButton(),
-              ),
-            ),
+            const _PaddedWidget(child: Socialfollowers()),
+            _PaddedWidget(child: SocialButton()),
           ],
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: _horizontalPadding,
-              child: NavProfile(),
-            ),
-          ),
+          const _PaddedWidget(child: NavProfile()),
           const SliverToBoxAdapter(child: SizedBox(height: 1)),
-          _buildTabContent(selectedTab, publications, interactions, connections),
+          _buildTabContent(
+              selectedTab, publications, interactions, connections),
         ],
       ),
     );
   }
 
-  Widget _buildTabContent(int selectedTab, List publications, List interactions, List connections) {
+  Widget _buildTabContent(
+      int selectedTab, List publications, List interactions, List connections) {
     switch (selectedTab) {
       case 0:
         return _buildSliverList(
@@ -123,14 +110,7 @@ class Profile extends ConsumerWidget {
           ),
         );
       case 2:
-        return _buildSliverList(
-          connections,
-          (data) => CustomCard(
-            title: data['title'],
-            subtitle: data['subtitle'],
-            iconAsset: data['iconAsset'],
-          ),
-        );
+        return const SliverFillRemaining(child: UserList());
       case 3:
         return const MediaGallery();
       default:
@@ -138,7 +118,8 @@ class Profile extends ConsumerWidget {
     }
   }
 
-  Widget _buildSliverList(List data, Widget Function(Map<String, dynamic>) itemBuilder) {
+  Widget _buildSliverList(
+      List data, Widget Function(Map<String, dynamic>) itemBuilder) {
     return SliverPadding(
       padding: _horizontalPadding,
       sliver: SliverList(
@@ -210,6 +191,22 @@ class UserProfile extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _PaddedWidget extends StatelessWidget {
+  final Widget child;
+
+  const _PaddedWidget({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: _horizontalPadding,
+        child: child,
       ),
     );
   }

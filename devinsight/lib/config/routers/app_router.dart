@@ -1,4 +1,5 @@
 import 'package:devinsight/ui/home/views/messageProfile.dart';
+import 'package:devinsight/ui/home/views/users_profile.dart';
 import 'package:devinsight/ui/login/screens/loginScreen.dart';
 import 'package:devinsight/ui/login/screens/registerScreen.dart';
 import 'package:devinsight/ui/login/views/onboardScreen1.dart';
@@ -55,6 +56,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const Profile(
               showSocialButton: false,
             ),
+          ),
+          GoRoute(
+            path: '/users/:id',
+            name: 'user_profile',
+            builder: (context, state) {
+              final userId = state.pathParameters['id']!;
+              return UsersProfileView(userId: userId);
+            },
           ),
         ],
       ),
