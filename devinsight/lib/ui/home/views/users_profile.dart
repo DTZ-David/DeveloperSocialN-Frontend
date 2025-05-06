@@ -1,4 +1,5 @@
 import 'package:devinsight/config/providers/users_provider.dart';
+import 'package:devinsight/ui/home/widgets/navProfile.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,9 +25,8 @@ class UsersProfileView extends ConsumerWidget {
             children: [
               _ProfileHeader(user: user),
               const SizedBox(height: 10),
-              
-              _OptionsList(),
-              
+              _UserBio(bio: user.bio),
+              const NavProfile(),
             ],
           ),
         ),
@@ -251,28 +251,38 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-class _OptionsList extends StatelessWidget {
-  const _OptionsList();
+class _UserBio extends StatelessWidget {
+  final String bio;
+
+  const _UserBio({required this.bio});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          leading: const Icon(Icons.settings),
-          title: const Text("Personal settings"),
-          onTap: () {
-            // Handle settings tap
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.menu_book),
-          title: const Text("Our training guide"),
-          onTap: () {
-            // Handle guide tap
-          },
-        ),
-      ],
+    if (bio.trim().isEmpty) return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 0.0),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.thirdColors,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              bio,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontFamily: "Montserrat",
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
