@@ -28,6 +28,7 @@ class PublicationsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      
       color: const Color(0xFF000000),
       child: Padding(
         padding: const EdgeInsets.all(18),

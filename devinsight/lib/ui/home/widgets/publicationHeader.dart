@@ -66,7 +66,9 @@ class PublicationHeader extends StatelessWidget {
                 // ignore: deprecated_member_use
                 color: Colors.white,
               ),
+              
             ),
+            
           ),
         ],
       ),

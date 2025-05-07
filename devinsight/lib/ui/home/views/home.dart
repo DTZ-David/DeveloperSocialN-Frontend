@@ -17,22 +17,6 @@ class HomeScreen extends ConsumerWidget {
     final feedState = ref.watch(feedControllerProvider);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
-        onPressed: () {
-          print('Botón de refresh presionado');
-
-          // ignore: unused_result
-          ref.refresh(feedControllerProvider);
-        },
-        backgroundColor: AppColors.primaryColors,
-        child: const Icon(
-          Icons.replay_circle_filled_outlined,
-          size: 30,
-        ),
-      ),
       appBar: AppBar(
         backgroundColor: AppColors.primaryColors,
         title: const Row(
@@ -56,35 +40,41 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
       backgroundColor: AppColors.thirdColors,
-      body: feedState.when(
-        data: (publications) {
-          return ListView.builder(
-            padding: const EdgeInsets.all(10),
-            itemCount: publications.length,
-            itemBuilder: (context, index) {
-              final post = publications[index]; // El tipo 'Post' ahora es más claro
-
-              return Column(
-                children: [
-                  PublicationsCard(
-                    userName: post.userName,
-                    sentAt: post.likes.toString(),
-                    userIcon: post.profilePicture,
-                    description: post.description,
-                    code: post.codeSnippet,
-                    language: '',
-                    tags: post.tags,
-                  ),
-                  const SizedBox(height: 4),
-                ],
-              );
-            },
-          );
+      body: RefreshIndicator(
+        onRefresh: () async {
+          // Aquí refrescas el feed cuando se realiza el pull to refresh
+          ref.refresh(feedControllerProvider);
         },
-        loading: () => const Center(
-            child: CircularProgressIndicator()), // Indicador de carga
-        error: (e, stackTrace) => Center(
-            child: Text('Error: $e')), // Muestra el error si ocurre alguno
+        child: feedState.when(
+          data: (publications) {
+            return ListView.builder(
+              padding: const EdgeInsets.all(10),
+              itemCount: publications.length,
+              itemBuilder: (context, index) {
+                final post = publications[index]; // El tipo 'Post' ahora es más claro
+
+                return Column(
+                  children: [
+                    PublicationsCard(
+                      userName: post.userName,
+                      sentAt: post.likes.toString(),
+                      userIcon: post.profilePicture,
+                      description: post.description,
+                      code: post.codeSnippet,
+                      language: '',
+                      tags: post.tags,
+                    ),
+                    const SizedBox(height: 4),
+                  ],
+                );
+              },
+            );
+          },
+          loading: () => const Center(
+              child: CircularProgressIndicator()), // Indicador de carga
+          error: (e, stackTrace) => Center(
+              child: Text('Error: $e')), // Muestra el error si ocurre alguno
+        ),
       ),
     );
   }

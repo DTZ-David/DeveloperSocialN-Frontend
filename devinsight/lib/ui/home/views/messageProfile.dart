@@ -35,17 +35,7 @@ class MessageProfile extends ConsumerWidget {
 
   AppBar _buildAppBar(BuildContext context, WidgetRef ref) {
     return AppBar(
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.more_vert_sharp, color: Colors.white),
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (_) => const OptionsDialog(),
-            );
-          },
-        ),
-      ],
+      
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => ref.read(appRouterProvider).go(AppRouter.initial),
