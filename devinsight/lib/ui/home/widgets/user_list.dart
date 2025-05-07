@@ -1,34 +1,37 @@
-import 'package:devinsight/config/providers/users_provider.dart';
+import 'package:devinsight/models/user/user_mapper.dart';
 import 'package:devinsight/ui/home/widgets/connectionsCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../controller/usernameController.dart';
+
 class UserList extends ConsumerWidget {
   final String searchQuery;
 
-  const UserList(
-      {super.key, required this.searchQuery}); // ← usar this.searchQuery
+  const UserList({super.key, required this.searchQuery});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final usersAsync = ref.watch(usersProvider);
+    final userAsync = ref
+        .watch(userSearchControllerProvider(searchQuery)); // ⚠️ Asumiendo que ya le pasas el nombre
 
-    return usersAsync.when(
-      data: (users) {
-        // Filtrar usuarios por nombre
-        final filteredUsers = users.where((user) {
-          return user.username
-              .toLowerCase()
-              .contains(searchQuery.toLowerCase());
-        }).toList();
+    return userAsync.when(
+      data: (user) {
+        // Mostrar solo si el nombre coincide
+        if (!user.userName.toLowerCase().contains(searchQuery.toLowerCase())) {
+          return const Center(child: Text("Sin resultados"));
+        }
 
-        return ListView.builder(
-          itemCount: filteredUsers.length,
-          itemBuilder: (context, index) {
-            final user = filteredUsers[index];
-
-            return CustomUserCard(user: user);
-          },
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Column(
+              children: [
+                CustomUserCard(user: user.toDomain()),
+                // otros widgets si quieres en el futuro
+              ],
+            ),
+          ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),

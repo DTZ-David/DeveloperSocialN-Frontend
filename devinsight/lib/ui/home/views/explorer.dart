@@ -39,48 +39,38 @@ class ExplorerPage extends ConsumerWidget {
               searchQueryProvider: searchQueryProvider,
             ),
           ),
-
-          // ✅ BOTONES
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: selectedView == 'Usuarios'
-                      ? AppColors.accent
-                      : AppColors.primaryColors,
+                  backgroundColor:
+                      selectedView == 'Usuarios' ? AppColors.accent : AppColors.primaryColors,
                 ),
                 onPressed: () => selectedViewNotifier.state = 'Usuarios',
                 child: const Text(
                   'Usuarios',
-                  style:
-                      TextStyle(fontFamily: 'Montserrat', color: Colors.white),
+                  style: TextStyle(fontFamily: 'Montserrat', color: Colors.white),
                 ),
               ),
               const SizedBox(width: 12),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: selectedView == 'Publicaciones'
-                      ? AppColors.accent
-                      : AppColors.primaryColors,
+                  backgroundColor:
+                      selectedView == 'Publicaciones' ? AppColors.accent : AppColors.primaryColors,
                 ),
                 onPressed: () => selectedViewNotifier.state = 'Publicaciones',
                 child: const Text(
                   'Publicaciones',
-                  style:
-                      TextStyle(fontFamily: 'Montserrat', color: Colors.white),
+                  style: TextStyle(fontFamily: 'Montserrat', color: Colors.white),
                 ),
               ),
             ],
           ),
-
           const SizedBox(height: 10),
-
           Expanded(
             child: selectedView == 'Usuarios'
-                ? UserList(
-                    searchQuery:
-                        searchQuery) // ← searchQuery se pasa correctamente
+                ? UserList(searchQuery: searchQuery) // ← searchQuery se pasa correctamente
                 : const Center(
                     child: Text(
                       "Aquí van las publicaciones",
