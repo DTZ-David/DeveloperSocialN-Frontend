@@ -70,7 +70,7 @@ class ExplorerPage extends ConsumerWidget {
           const SizedBox(height: 10),
           Expanded(
             child: selectedView == 'Usuarios'
-                ? UserList(searchQuery: searchQuery) // ← searchQuery se pasa correctamente
+                ? UserList(searchQuery: searchQuery)
                 : const Center(
                     child: Text(
                       "Aquí van las publicaciones",

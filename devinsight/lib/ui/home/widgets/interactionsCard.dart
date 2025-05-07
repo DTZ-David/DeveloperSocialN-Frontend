@@ -54,59 +54,57 @@ class InteractionCard extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-      child: Expanded(
-        child: Card(
-          color: Colors.black,
-          margin: EdgeInsets.zero,
-          elevation: 2,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    iconWidget,
-                    const SizedBox(width: 8),
-                    Text(
-                      tipo,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: color,
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      '#$id',
-                      style: const TextStyle(
-                        color: Colors.blueAccent,
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) => const OptionsDialog());
-                      },
-                      child: const Icon(Icons.more_vert,
-                          size: 20, color: Colors.grey),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(mensaje,
-                    style: const TextStyle(
-                      fontSize: 14,
+      child: Card(
+        color: Colors.black,
+        margin: EdgeInsets.zero,
+        elevation: 2,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  iconWidget,
+                  const SizedBox(width: 8),
+                  Text(
+                    tipo,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: color,
                       fontFamily: 'Montserrat',
-                    )),
-              ],
-            ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    '#$id',
+                    style: const TextStyle(
+                      color: Colors.blueAccent,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) => const OptionsDialog());
+                    },
+                    child: const Icon(Icons.more_vert,
+                        size: 20, color: Colors.grey),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(mensaje,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Montserrat',
+                  )),
+            ],
           ),
         ),
       ),
