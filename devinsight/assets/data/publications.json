@@ -1,94 +1,62 @@
-[   
-    {
-      "user_name": "Ssaylem Murillo",
-      "sent_at": "Hace 2 min",
-      "user_icon": "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
-      "description": "Se busca desarrolladores flutter para trabajar en la gobernación",
-      "code": "number = 1\nprint(f'Hello, Python! {number}');",
-      "language": "python",
-      "reactions": [12, 45, 7],
-      "tags": ["#python", "#programming"]
-    },
-    {
-      "user_name": "Ssaylem Murillo",
-      "sent_at": "Hace 2 min",
-      "user_icon": "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
-      "description": "Se busca desarrolladores flutter para trabajar en la gobernación",
-      "code": "number = 1\nprint(f'Hello, Python! {number}');",
-      "language": "python",
-      "reactions": [12, 45, 7],
-      "tags": ["#python", "#programming"]
-    },
-    {
-      "user_name": "Ssaylem Murillo",
-      "sent_at": "Hace 2 min",
-      "user_icon": "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
-      "description": "Se busca desarrolladores flutter para trabajar en la gobernación",
-      "code": "number = 1\nprint(f'Hello, Python! {number}');",
-      "language": "python",
-      "reactions": [12, 45, 7],
-      "tags": ["#python", "#programming"]
-    },
-    {
-      "user_name": "ChecoDev",
-      "sent_at": "Hace 2 min",
-      "user_icon": "https://images.squarespace-cdn.com/content/v1/5e10bdc20efb8f0d169f85f9/09943d85-b8c7-4d64-af31-1a27d1b76698/arrow.png",
-      "description": "Mi primer código en Python",
-      "code": "number = 1\nprint(f'Hello, Python! {number}');",
-      "language": "python",
-      "reactions": [12, 45, 7],
-      "tags": ["#python", "#programming"]
-    },
-    {
-      "user_name": "ChecoDev",
-      "sent_at": "Hace 10 min",
-      "user_icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFpZEA_sLRYagN_e3iyA8vYk9_IKVTxHpwDA&s",
-      "description": "¿Sabías que Python es la mejor forma para empezar a programar?",
-      "code": "number = 1\nprint(f'Hello, Python! {number}');",
-      "language": "python",
-      "reactions": [12, 45, 7],
-      "tags": ["#python", "#programming"]
-    },
-    
-    {
-      "user_name": "Socram - Dart Tips",
-      "sent_at": "Ayer a las 6 PM",
-      "user_icon": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Random_Radio_Bruno_Festival_di_Sanremo_2021.png",
-      "description": "Pequeños tips para mejorar tu código con Dart.",
-      "code": "extension StringCasingExtension on String {\n  String toCapitalized() => \n      length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';\n}",
-      "language": "dart",
-      "reactions": [5, 18, 4],
-      "tags": ["#dart", "#flutter"]
-    },
-    {
-      "user_name": "UI Designeering",
-      "sent_at": "Hace 2 horas",
-      "user_icon": "https://i.redd.it/qm55rusoit1c1.png",
-      "description": "Integrando diseño de Figma a Flutter con precisión.",
-      "code": "Container(\n  padding: const EdgeInsets.all(16),\n  decoration: BoxDecoration(\n     color: Colors.white,\n    borderRadius: BorderRadius.circular(10),\n  ),\n  child: const Text('Diseño limpio'),\n)",
-      "language": "dart",
-      "reactions": [23, 12, 30],
-      "tags": ["#flutter", "#figma"]
-    },
-    {
-      "user_name": "Pepi the Goat",
-      "sent_at": "Hace 3 días",
-      "user_icon": "https://art.ngfiles.com/images/2532000/2532420_idontfail_random-stuff.jpg?f1653167333",
-      "description": "Separa tu lógica de presentación con una arquitectura escalable.",
-      "code": "abstract class UseCase<Type, Params> {\n  Future<Type> call(Params params);\n}",
-      "language": "dart",
-      "reactions": [9, 14, 5],
-      "tags": ["#flutter", "#dart"]
-    },
-    {
-      "user_name": "Firebase Dev",
-      "sent_at": "Hoy a las 11 AM",
-      "user_icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQlzbaJ18Auh7YnoUd9gch4Y9v9CfUswdONUR1Yv78vqHzIKYqKJ-9kWGs-aU2w-V_Coo&usqp=CAU",
-      "description": "Implementar login con Google usando Firebase Auth en segundos.",
-      "code": "final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();",
-      "language": "dart",
-      "reactions": [40, 33, 11],
-      "tags": ["#flutter", "#firebase"]
+[
+  {
+    "postId": 1,
+    "authorId": 42,
+    "sentAt": "2025-10-01T12:00:00Z",
+    "profilePicture": "https://cdn.example.com/avatar.png",
+    "authorUsername": "Ssaylem Murillo",
+    "description": "Esto es un código de ejemplo.",
+    "tags": ["#flutter", "#dart"],
+    "codeSnippet": "print('Hola mundo');",
+    "shares": 3,
+    "reactionCounts": {
+      "careful": 32,
+      "verified": 21
     }
-  ]
-  
+  },
+  {
+    "postId": 2,
+    "authorId": 42,
+    "sentAt": "2025-01-05T14:00:00Z",
+    "profilePicture": "https://cdn.example.com/avatar2.png",
+    "authorUsername": "Ssaylem Murillo",
+    "description": "Un ejemplo de código en Python.",
+    "tags": ["#python", "#example"],
+    "codeSnippet": "print('Hello, world!')",
+    "shares": 5,
+    "reactionCounts": {
+      "careful": 15,
+      "verified": 10
+    }
+  },
+  {
+    "postId": 3,
+    "authorId": 42,
+    "sentAt": "2025-02-03T16:00:00Z",
+    "profilePicture": "https://cdn.example.com/avatar3.png",
+    "authorUsername": "Ssaylem Murillo",
+    "description": "Snippet de JavaScript para principiantes.",
+    "tags": ["#javascript", "#beginner"],
+    "codeSnippet": "console.log('Hello, world!');",
+    "shares": 8,
+    "reactionCounts": {
+      "careful": 20,
+      "verified": 25
+    }
+  },
+  {
+    "postId": 4,
+    "authorId": 45,
+    "sentAt": "2023-10-04T18:00:00Z",
+    "profilePicture": "https://cdn.example.com/avatar4.png",
+    "authorUsername": "Techie",
+    "description": "Ejemplo de código en Java.",
+    "tags": ["#java", "#example"],
+    "codeSnippet": "System.out.println('Hello, world!');",
+    "shares": 2,
+    "reactionCounts": {
+      "careful": 12,
+      "verified": 8
+    }
+  }
+]

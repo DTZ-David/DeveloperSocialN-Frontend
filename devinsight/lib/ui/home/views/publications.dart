@@ -36,15 +36,15 @@ class Publications extends ConsumerWidget {
           child: Padding(
         padding: EdgeInsets.only(top: 20, left: 20, right: 20),
         child: Column(
-          children: [
-            PublicationsCard(
-              userName: "user_name",
-              sentAt: "sent_at",
-              userIcon:
-                  "https://images.squarespace-cdn.com/content/v1/5e10bdc20efb8f0d169f85f9/09943d85-b8c7-4d64-af31-1a27d1b76698/arrow.png",
-              description: "description",
-            ),
-          ],
+            // children: [
+            //   PublicationsCard(
+            //     userName: "user_name",
+            //     sentAt: "sent_at",
+            //     userIcon:
+            //         "https://images.squarespace-cdn.com/content/v1/5e10bdc20efb8f0d169f85f9/09943d85-b8c7-4d64-af31-1a27d1b76698/arrow.png",
+            //     description: "description",
+            //   ),
+          //],
         ),
       )),
     );

@@ -1,6 +1,23 @@
 import 'package:devinsight/ui/home/widgets/optionsDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'package:intl/intl.dart';
+
+String formatSentAt(String sentAtString) {
+  final dateTime = DateTime.parse(sentAtString).toLocal(); // Convierte a local
+  final now = DateTime.now();
+
+  final difference = now.difference(dateTime);
+
+  if (difference.inHours < 24) {
+    // Si es hoy, muestra la hora con AM/PM
+    return DateFormat('hh:mm a').format(dateTime);
+  } else {
+    // Si no, usa timeago
+    return timeago.format(dateTime, locale: 'es');
+  }
+}
 
 class PublicationHeader extends StatelessWidget {
   final String userName;
@@ -41,7 +58,7 @@ class PublicationHeader extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    sentAt,
+                    formatSentAt(sentAt),
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 12,
@@ -57,7 +74,8 @@ class PublicationHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3.0),
             child: GestureDetector(
               onTap: () => {
-                showDialog(context: context, builder: (_) => const OptionsDialog()),
+                showDialog(
+                    context: context, builder: (_) => const OptionsDialog()),
               },
               child: SvgPicture.asset(
                 'assets/icons/verticaldots.svg',
@@ -66,9 +84,7 @@ class PublicationHeader extends StatelessWidget {
                 // ignore: deprecated_member_use
                 color: Colors.white,
               ),
-              
             ),
-            
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:devinsight/models/publication/post_refactor.dart';
 import 'package:devinsight/ui/home/widgets/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +15,7 @@ import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
+import 'package:devinsight/config/providers/pub_refactor_provider.dart';
 
 const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
 
@@ -35,7 +37,8 @@ class Profile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final interactions = ref.watch(interactionsProvider);
-    final publications = ref.watch(myProfilePublicationsProvider('ChecoDev'));
+    final publications =
+        ref.watch(myProfilePostRefactorProvider('Ssaylem Murillo'));
     final connections = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
 
@@ -83,23 +86,17 @@ class Profile extends ConsumerWidget {
     );
   }
 
-  Widget _buildTabContent(
-      int selectedTab, List publications, List interactions, List connections) {
+  Widget _buildTabContent(int selectedTab, List<PostRefactor> publications,
+      List interactions, List connections) {
     switch (selectedTab) {
       case 0:
-        return _buildSliverList(
+        return _buildSliverList<PostRefactor>(
           publications,
-          (data) => PublicationsCard(
-            userName: data['user_name'],
-            sentAt: data['sent_at'],
-            userIcon: data['user_icon'],
-            description: data['description'],
-            code: data['code'],
-            language: data['language'],
-            tags: List<String>.from(data['tags']),
-            reactions: const [],
+          (post) => PublicationsCard(
+            post: post,
           ),
         );
+
       case 1:
         return _buildSliverList(
           interactions,
@@ -110,7 +107,10 @@ class Profile extends ConsumerWidget {
           ),
         );
       case 2:
-        return const SliverFillRemaining(child: UserList(searchQuery: "",));
+        return const SliverFillRemaining(
+            child: UserList(
+          searchQuery: "",
+        ));
       case 3:
         return const MediaGallery();
       default:
@@ -118,8 +118,7 @@ class Profile extends ConsumerWidget {
     }
   }
 
-  Widget _buildSliverList(
-      List data, Widget Function(Map<String, dynamic>) itemBuilder) {
+  Widget _buildSliverList<T>(List<T> data, Widget Function(T) itemBuilder) {
     return SliverPadding(
       padding: _horizontalPadding,
       sliver: SliverList(
