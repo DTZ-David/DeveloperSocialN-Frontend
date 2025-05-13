@@ -69,7 +69,6 @@ class ReactionsRow extends StatelessWidget {
               }
             },
             child: Container(
-              color: const Color(0xFF000000),
               padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
               child: Row(
                 children: [

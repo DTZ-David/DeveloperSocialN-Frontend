@@ -2,222 +2,189 @@ import 'package:devinsight/config/providers/interaction_provider.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class CommentModal {
-  static const int maxWords = 50;
-
-  static Future<String?> show(BuildContext context) async {
-    IconData selectedIcon = Icons.comment;
-    final TextEditingController commentController = TextEditingController();
-
-    return await showModalBottomSheet<String>(
-        elevation: 2,
-        barrierColor: Colors.white.withOpacity(0.33),
-        enableDrag: false,
-        isDismissible: false,
-        transitionAnimationController: AnimationController(
-          vsync: Navigator.of(context),
-          duration: const Duration(milliseconds: 1000),
-        ),
-        showDragHandle: true,
-        context: context,
-        isScrollControlled: true,
-        backgroundColor: Colors.black,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        builder: (context) {
-          return FractionallySizedBox(
-            heightFactor: 0.9,
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-                left: 16,
-                right: 16,
-                top: 20,
-              ),
-              child: Consumer(
-                builder: (context, ref, _) {
-                  final interactions = ref.watch(interactionsProvider);
-
-                  return StatefulBuilder(
-                    builder: (context, setState) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: IconButton(
-                              icon:
-                                  const Icon(Icons.close, color: Colors.white),
-                              onPressed: () async {
-                                bool discard =
-                                    await _showConfirmationDialog(context);
-                                if (discard) Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Expanded(
-                            child: ListView.separated(
-                              separatorBuilder: (_, __) =>
-                                  const SizedBox(height: 10),
-                              itemCount: interactions.length,
-                              itemBuilder: (context, index) {
-                                final interaction = interactions[index];
-                                return InteractionCard(
-                                  tipo: interaction['tipo'],
-                                  id: interaction['id'],
-                                  mensaje: interaction['mensaje'],
-                                );
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          const Text(
-                            'Agregar comentario',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              // ComboBox con íconos
-                              DropdownButtonHideUnderline(
-                                child: DropdownButton<IconData>(
-                                  value: selectedIcon,
-                                  items: [
-                                    Icons.comment,
-                                    Icons.star,
-                                    Icons.warning,
-                                    Icons.lightbulb,
-                                  ].map((iconData) {
-                                    return DropdownMenuItem<IconData>(
-                                      value: iconData,
-                                      child:
-                                          Icon(iconData, color: Colors.white),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    if (value != null) {
-                                      setState(() {
-                                        selectedIcon = value;
-                                      });
-                                    }
-                                  },
-                                  dropdownColor: Colors.grey[850],
-                                  iconEnabledColor: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-
-                              // TextField más pequeño
-                              Expanded(
-                                child: SizedBox(
-                                  height: 40, // Altura controlada
-                                  child: TextField(
-                                    controller: commentController,
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 14),
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 12, vertical: 8),
-                                      hintText: 'Escribe tu comentario...',
-                                      hintStyle:
-                                          const TextStyle(color: Colors.grey),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: const BorderSide(
-                                            color: Colors.blueAccent),
-                                      ),
-                                      fillColor: Colors.black,
-                                      filled: true,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              
-                            ],
-                          ),
-                          const SizedBox(height: 12),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blueAccent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            onPressed: () {
-                              final comment = commentController.text.trim();
-                              if (comment.isNotEmpty) {
-                                Navigator.pop(context, comment);
-                              }
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 24, vertical: 10),
-                              child: Text(
-                                'Publicar',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-          );
-        });
+class CommentModal extends ConsumerWidget {
+  static Future<Map<String, String>?> show(BuildContext context) async {
+    return await showModalBottomSheet<Map<String, String>>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.black,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => const CommentModal(),
+    );
   }
 
-  static Future<bool> _showConfirmationDialog(BuildContext context) async {
-    return await showDialog<bool>(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              backgroundColor: Colors.black,
-              title: const Text('Descartar comentario'),
-              content: const Text(
-                  '¿Estás seguro de que deseas descartar el comentario?'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
-                  child: const Text(
-                    'Cancelar',
-                    style: TextStyle(color: Colors.white),
-                  ),
+  const CommentModal({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController commentController = TextEditingController();
+    final Map<String, String> iconsMap = {
+      'assets/icons/careful.svg': 'Mejora',
+      'assets/icons/verified.svg': 'Verificar',
+    };
+    final interactions = ref.watch(interactionsProvider);
+
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 16,
+        right: 16,
+        top: 12,
+      ),
+      child: StatefulBuilder(
+        builder: (context, setState) {
+          String selectedSvg = iconsMap.keys.first;
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Drag handle
+              Container(
+                width: 40,
+                height: 5,
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey[700],
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, true);
+              ),
+
+              // Interactions list
+              Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: interactions.length,
+                  itemBuilder: (context, index) {
+                    final interaction = interactions[index];
+                    return InteractionCard(
+                      tipo: interaction['tipo'],
+                      id: interaction['id'],
+                      mensaje: interaction['mensaje'],
+                    );
                   },
-                  child: const Text(
-                    'Descartar',
-                    style: TextStyle(color: Colors.white),
-                  ),
                 ),
-              ],
-            );
-          },
-        ) ??
-        false;
+              ),
+
+              const SizedBox(height: 12),
+
+              // Enhanced comment input with icon
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1E1E1E),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    // SVG dropdown
+                    PopupMenuButton<String>(
+                      onSelected: (value) {
+                        setState(() {
+                          selectedSvg = value;
+                          print(selectedSvg);
+                        });
+                      },
+                      color: const Color(0xFF1E1E1E),
+                      icon: SvgPicture.asset(
+                        selectedSvg,
+                        height: 24,
+                        width: 24,
+                        color: Colors.white,
+                      ),
+                      itemBuilder: (context) => iconsMap.entries
+                          .map((entry) => PopupMenuItem<String>(
+                                value: entry.key,
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      entry.key,
+                                      height: 24,
+                                      width: 24,
+                                      color: entry.value == 'Mejora'
+                                          ? Colors.yellow
+                                          : Colors.green,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      entry.value,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ))
+                          .toList(),
+                    ),
+
+                    const SizedBox(width: 8),
+
+                    // Text input
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 12.0),
+                        child: TextField(
+                          controller: commentController,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            hintText: 'Escribe tu comentario...',
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                            ),
+                            border: InputBorder.none,
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // Submit button
+                    GestureDetector(
+                      onTap: () {
+                        final comment = commentController.text.trim();
+                        if (comment.isNotEmpty) {
+                          final result = {
+                            'tipo': iconsMap[selectedSvg]!,
+                            'comentario': comment,
+                          };
+                          Navigator.pop(context, result);
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: SvgPicture.asset(
+                          'assets/icons/send.svg',
+                          height: 24,
+                          width: 24,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+            ],
+          );
+        },
+      ),
+    );
   }
 }
