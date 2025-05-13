@@ -1,92 +1,92 @@
 [
-    {
-        "id": 1,
-        "username": "Andrew Mathews",
-        "email": "andrewmathews@gmail.com",
-        "profilePicture": "https://picsum.photos/id/8/367/267",
-        "bio": "Passionate about creating interactive and responsive web applications.",
-        "postsCount": 23,
-        "followersCount": 1
-    },
-    {
-        "id": 2,
-        "username": "Dave Smith",
-        "email": "davesmith@gmail.com",
-        "profilePicture": "https://picsum.photos/id/10/367/267",
-        "bio": "Specializes in server-side logic and database management.",
-        "postsCount": 15,
-        "followersCount": 45
-    },
-    {
-        "id": 3,
-        "username": "Sarah Johnson",
-        "email": "sarajohnson@gmail.com",
-        "profilePicture": "https://picsum.photos/id/13/367/267",
-        "bio": "Experienced in both frontend and backend development.",
-        "postsCount": 3,
-        "followersCount": 12
-    },
-    {
-        "id": 4,
-        "username": "Dave Grohl",
-        "email": "foofighters@unicesar.edu.co",
-        "profilePicture": "https://picsum.photos/id/38/367/267",
-        "bio": "Focuses on crafting user-friendly and visually appealing designs.",
-        "postsCount": 32,
-        "followersCount": 45000
-    },
-    {
-        "id": 5,
-        "username": "Marcos Gonzalez",
-        "email": "marcosgonzales@unilibre.edu.co",
-        "profilePicture": "https://picsum.photos/id/40/367/267",
-        "bio": "Expert in automating and streamlining development processes.",
-        "postsCount": 123,
-        "followersCount": 321
-    },
-    {
-        "id": 6,
-        "username": "John Doe",
-        "email": "johnyjohnito@yahoo.es",
-        "profilePicture": "https://picsum.photos/id/50/367/267",
-        "bio": "Loves building scalable and efficient cloud-based solutions.",
-        "postsCount": 444,
-        "followersCount": 16
-    },
-    {
-        "id": 7,
-        "username": "Mathew King",
-        "email": "martjerjajk@corpocesar.co",
-        "profilePicture": "https://picsum.photos/id/60/367/267",
-        "bio": "Enthusiastic about AI and machine learning technologies.",
-        "postsCount": 12,
-        "followersCount": 34
-    },
-    {
-        "id": 8,
-        "username": "Alex Smith",
-        "email": "lsadlasdllsda123W@clacla.cooo",
-        "profilePicture": "https://picsum.photos/id/70/367/267",
-        "bio": "Enjoys creating seamless mobile application experiences.",
-        "postsCount": 52,
-        "followersCount": 15
-    },
-    {
-        "id": 9,
-        "username": "Ssaylem Gonzalez",
-        "email": "asdasdaS123123123@sixtynine.com",
-        "profilePicture": "https://picsum.photos/id/80/367/267",
-        "bio": "Specialist in cybersecurity and ethical hacking.",
-        "postsCount": 11,
-        "followersCount": 61
-    },
-    {
-        "id": 10,
-        "username": "Ben Stiller",
-        "email": "benstiller@gmail.com",
-        "profilePicture": "https://picsum.photos/id/90/367/267",
-        "bio": "Dedicated to improving accessibility in web development.",
-        "postsCount": 65,
-        "followersCount": 512
-    }
+  {
+    "id": "42",
+    "username": "Ssaylem Murillo",
+    "email": "andrewmathews@gmail.com",
+    "profilePicture": "https://picsum.photos/id/8/367/267",
+    "bio": "Passionate about creating interactive and responsive web applications.",
+    "postsCount": 23,
+    "followersCount": 1
+  },
+  {
+    "id": "2",
+    "username": "Dave Smith",
+    "email": "davesmith@gmail.com",
+    "profilePicture": "https://picsum.photos/id/10/367/267",
+    "bio": "Specializes in server-side logic and database management.",
+    "postsCount": 15,
+    "followersCount": 45
+  },
+  {
+    "id": "3",
+    "username": "Sarah Johnson",
+    "email": "sarajohnson@gmail.com",
+    "profilePicture": "https://picsum.photos/id/13/367/267",
+    "bio": "Experienced in both frontend and backend development.",
+    "postsCount": 3,
+    "followersCount": 12
+  },
+  {
+    "id": "4",
+    "username": "Dave Grohl",
+    "email": "foofighters@unicesar.edu.co",
+    "profilePicture": "https://picsum.photos/id/38/367/267",
+    "bio": "Focuses on crafting user-friendly and visually appealing designs.",
+    "postsCount": 32,
+    "followersCount": 45000
+  },
+  {
+    "id": "5",
+    "username": "Marcos Gonzalez",
+    "email": "marcosgonzales@unilibre.edu.co",
+    "profilePicture": "https://picsum.photos/id/40/367/267",
+    "bio": "Expert in automating and streamlining development processes.",
+    "postsCount": 123,
+    "followersCount": 321
+  },
+  {
+    "id": "6",
+    "username": "John Doe",
+    "email": "johnyjohnito@yahoo.es",
+    "profilePicture": "https://picsum.photos/id/50/367/267",
+    "bio": "Loves building scalable and efficient cloud-based solutions.",
+    "postsCount": 444,
+    "followersCount": 16
+  },
+  {
+    "id": "7",
+    "username": "Mathew King",
+    "email": "martjerjajk@corpocesar.co",
+    "profilePicture": "https://picsum.photos/id/60/367/267",
+    "bio": "Enthusiastic about AI and machine learning technologies.",
+    "postsCount": 12,
+    "followersCount": 34
+  },
+  {
+    "id": "8",
+    "username": "Alex Smith",
+    "email": "lsadlasdllsda123W@clacla.cooo",
+    "profilePicture": "https://picsum.photos/id/70/367/267",
+    "bio": "Enjoys creating seamless mobile application experiences.",
+    "postsCount": 52,
+    "followersCount": 15
+  },
+  {
+    "id": "9",
+    "username": "Ben Gonzalez",
+    "email": "asdasdaS123123123@sixtynine.com",
+    "profilePicture": "https://picsum.photos/id/80/367/267",
+    "bio": "Specialist in cybersecurity and ethical hacking.",
+    "postsCount": 11,
+    "followersCount": 61
+  },
+  {
+    "id": "10",
+    "username": "Ben Stiller",
+    "email": "benstiller@gmail.com",
+    "profilePicture": "https://picsum.photos/id/90/367/267",
+    "bio": "Dedicated to improving accessibility in web development.",
+    "postsCount": 65,
+    "followersCount": 512
+  }
 ]

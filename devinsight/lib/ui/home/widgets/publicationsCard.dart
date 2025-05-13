@@ -1,49 +1,35 @@
+import 'package:flutter/material.dart';
+import 'package:devinsight/models/publication/post_refactor.dart';
 import 'package:devinsight/ui/home/widgets/codePreviewBox.dart';
 import 'package:devinsight/ui/home/widgets/publicationHeader.dart';
 import 'package:devinsight/ui/home/widgets/reactionsRow.dart';
-import 'package:flutter/material.dart';
 
 class PublicationsCard extends StatelessWidget {
-  final String userName;
-  final String sentAt;
-  final String userIcon;
-  final String description;
-  final String? code; // opcional
-  final String? language; // opcional
-  final List<int>? reactions; // opcional
-  final List<String>? tags; // opcional
+  final PostRefactor post;
 
   const PublicationsCard({
     super.key,
-    required this.userName,
-    required this.sentAt,
-    required this.userIcon,
-    required this.description,
-    this.code,
-    this.language,
-    this.reactions,
-    this.tags,
+    required this.post,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      
       color: const Color(0xFF000000),
       child: Padding(
         padding: const EdgeInsets.all(18),
         child: Column(
           children: [
             PublicationHeader(
-              userName: userName,
-              sentAt: sentAt,
-              userIcon: userIcon,
+              userName: post.authorUsername,
+              sentAt: post.sentAt,
+              userIcon: post.profilePicture,
             ),
             const SizedBox(height: 10),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                description,
+                post.description,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,
@@ -53,11 +39,11 @@ class PublicationsCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            if (tags != null && tags!.isNotEmpty) ...[
+            if (post.tags.isNotEmpty) ...[
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Row(
-                  children: tags!
+                  children: post.tags
                       .map((tag) => Padding(
                             padding: const EdgeInsets.only(right: 8),
                             child: Text(
@@ -74,22 +60,18 @@ class PublicationsCard extends StatelessWidget {
                 ),
               ),
             ],
-            if (code != null && language != null) ...[
+            if (post.codeSnippet.isNotEmpty) ...[
               SizedBox(
                 width: double.infinity,
                 child: CodePreviewBox(
-                  code: code!,
-                  language: language!,
+                  code: post.codeSnippet,
+                  language: post.codeLanguage, // o lo que sea apropiado
                 ),
               ),
               const SizedBox(height: 8),
             ],
-            if (reactions != null) ...[
-              ReactionsRow(
-                reactions: reactions!,
-              ),
-              const SizedBox(height: 8),
-            ],
+            ReactionsRow(reactionCounts: post.reactionCounts),
+            const SizedBox(height: 8),
           ],
         ),
       ),

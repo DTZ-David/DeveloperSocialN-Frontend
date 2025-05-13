@@ -1,10 +1,11 @@
-import 'package:devinsight/ui/home/widgets/showModalBottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:devinsight/ui/home/widgets/showModalBottomSheet.dart';
 
 class ReactionsRow extends StatelessWidget {
-  final List<int> reactions; // [approved, liked, curious]
-  const ReactionsRow({required this.reactions, super.key});
+  final Map<String, int> reactionCounts;
+
+  const ReactionsRow({super.key, required this.reactionCounts});
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +13,14 @@ class ReactionsRow extends StatelessWidget {
       {
         'icon': 'assets/icons/verified.svg',
         'color': Colors.greenAccent,
-        'count': reactions.isNotEmpty ? reactions[0] : 0,
+        'label': 'verified',
+        'count': reactionCounts['verified'] ?? 0,
       },
       {
         'icon': 'assets/icons/careful.svg',
         'color': Colors.yellow,
-        'count': reactions.length > 1 ? reactions[1] : 0,
-      },
-      {
-        'icon': 'assets/icons/share.svg',
-        'color': Colors.white,
-        'count': reactions.length > 2 ? reactions[2] : 0,
+        'label': 'careful',
+        'count': reactionCounts['careful'] ?? 0,
       },
     ];
 
@@ -32,70 +30,66 @@ class ReactionsRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            children: reactionTypes
-                .map((reaction) => Padding(
-                      padding: const EdgeInsets.only(right: 14),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            reaction['icon'],
-                            height: 24,
-                            width: 24,
-                            color: reaction['color'],
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${reaction['count']}',
-                            style: TextStyle(
-                              color: reaction['color'],
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ))
-                .toList(),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2.0),
-            child: GestureDetector(
-              onTap: () async {
-                final comment = await CommentModal.show(context);
-                if (comment != null) {
-                  print("Comentario recibido: $comment");
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Comentario guardado'),
-                      behavior: SnackBarBehavior.floating,
-                    ),
-                  );
-                }
-              },
-              child: Container(
-                color: const Color(0xFF000000),
-                padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+            children: reactionTypes.map((reaction) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 14),
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      'assets/icons/comments.svg',
+                      reaction['icon'],
                       height: 24,
                       width: 24,
-                      color: Colors.white,
+                      color: reaction['color'],
                     ),
-                    const SizedBox(width: 6),
-                    const Text(
-                      "Comentar",
+                    const SizedBox(width: 4),
+                    Text(
+                      '${reaction['count']}',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
+                        color: reaction['color'],
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        fontFamily: "Montserrat",
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                   ],
                 ),
+              );
+            }).toList(),
+          ),
+          GestureDetector(
+            onTap: () async {
+              final comment = await CommentModal.show(context);
+              if (comment != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Comentario guardado'),
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              }
+            },
+            child: Container(
+              color: const Color(0xFF000000),
+              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/comments.svg',
+                    height: 24,
+                    width: 24,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(width: 6),
+                  const Text(
+                    "Comentar",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Montserrat",
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
