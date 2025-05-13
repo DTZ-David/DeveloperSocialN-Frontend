@@ -1,6 +1,6 @@
 [
   {
-    "id": 42,
+    "id": "42",
     "username": "Ssaylem Murillo",
     "email": "andrewmathews@gmail.com",
     "profilePicture": "https://picsum.photos/id/8/367/267",
@@ -9,7 +9,7 @@
     "followersCount": 1
   },
   {
-    "id": 2,
+    "id": "2",
     "username": "Dave Smith",
     "email": "davesmith@gmail.com",
     "profilePicture": "https://picsum.photos/id/10/367/267",
@@ -18,7 +18,7 @@
     "followersCount": 45
   },
   {
-    "id": 3,
+    "id": "3",
     "username": "Sarah Johnson",
     "email": "sarajohnson@gmail.com",
     "profilePicture": "https://picsum.photos/id/13/367/267",
@@ -27,7 +27,7 @@
     "followersCount": 12
   },
   {
-    "id": 4,
+    "id": "4",
     "username": "Dave Grohl",
     "email": "foofighters@unicesar.edu.co",
     "profilePicture": "https://picsum.photos/id/38/367/267",
@@ -36,7 +36,7 @@
     "followersCount": 45000
   },
   {
-    "id": 5,
+    "id": "5",
     "username": "Marcos Gonzalez",
     "email": "marcosgonzales@unilibre.edu.co",
     "profilePicture": "https://picsum.photos/id/40/367/267",
@@ -45,7 +45,7 @@
     "followersCount": 321
   },
   {
-    "id": 6,
+    "id": "6",
     "username": "John Doe",
     "email": "johnyjohnito@yahoo.es",
     "profilePicture": "https://picsum.photos/id/50/367/267",
@@ -54,7 +54,7 @@
     "followersCount": 16
   },
   {
-    "id": 7,
+    "id": "7",
     "username": "Mathew King",
     "email": "martjerjajk@corpocesar.co",
     "profilePicture": "https://picsum.photos/id/60/367/267",
@@ -63,7 +63,7 @@
     "followersCount": 34
   },
   {
-    "id": 8,
+    "id": "8",
     "username": "Alex Smith",
     "email": "lsadlasdllsda123W@clacla.cooo",
     "profilePicture": "https://picsum.photos/id/70/367/267",
@@ -72,7 +72,7 @@
     "followersCount": 15
   },
   {
-    "id": 9,
+    "id": "9",
     "username": "Ben Gonzalez",
     "email": "asdasdaS123123123@sixtynine.com",
     "profilePicture": "https://picsum.photos/id/80/367/267",
@@ -81,7 +81,7 @@
     "followersCount": 61
   },
   {
-    "id": 10,
+    "id": "10",
     "username": "Ben Stiller",
     "email": "benstiller@gmail.com",
     "profilePicture": "https://picsum.photos/id/90/367/267",

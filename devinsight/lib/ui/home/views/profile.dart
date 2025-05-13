@@ -6,7 +6,6 @@ import 'package:devinsight/config/providers/conectionsProvider.dart';
 import 'package:devinsight/config/providers/interaction_provider.dart';
 import 'package:devinsight/config/providers/mediaProvider.dart';
 import 'package:devinsight/config/providers/nav_profile_provider.dart';
-import 'package:devinsight/config/providers/publications_provider.dart';
 import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
 import 'package:devinsight/ui/home/widgets/mediaCard.dart';
@@ -37,8 +36,7 @@ class Profile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final interactions = ref.watch(interactionsProvider);
-    final publications =
-        ref.watch(myProfilePostRefactorProvider('Ssaylem Murillo'));
+    final publications = ref.watch(myProfilePostRefactorProvider("42"));
     final connections = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
 

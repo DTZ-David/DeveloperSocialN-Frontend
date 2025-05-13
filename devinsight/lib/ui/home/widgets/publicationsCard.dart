@@ -65,7 +65,7 @@ class PublicationsCard extends StatelessWidget {
                 width: double.infinity,
                 child: CodePreviewBox(
                   code: post.codeSnippet,
-                  language: 'dart', // o lo que sea apropiado
+                  language: post.codeLanguage, // o lo que sea apropiado
                 ),
               ),
               const SizedBox(height: 8),

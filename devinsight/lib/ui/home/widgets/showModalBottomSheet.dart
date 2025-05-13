@@ -7,8 +7,8 @@ class CommentModal {
   static const int maxWords = 50;
 
   static Future<String?> show(BuildContext context) async {
-    IconData _selectedIcon = Icons.comment;
-    final TextEditingController _commentController = TextEditingController();
+    IconData selectedIcon = Icons.comment;
+    final TextEditingController commentController = TextEditingController();
 
     return await showModalBottomSheet<String>(
         elevation: 2,
@@ -89,7 +89,7 @@ class CommentModal {
                               // ComboBox con íconos
                               DropdownButtonHideUnderline(
                                 child: DropdownButton<IconData>(
-                                  value: _selectedIcon,
+                                  value: selectedIcon,
                                   items: [
                                     Icons.comment,
                                     Icons.star,
@@ -105,7 +105,7 @@ class CommentModal {
                                   onChanged: (value) {
                                     if (value != null) {
                                       setState(() {
-                                        _selectedIcon = value;
+                                        selectedIcon = value;
                                       });
                                     }
                                   },
@@ -120,7 +120,7 @@ class CommentModal {
                                 child: SizedBox(
                                   height: 40, // Altura controlada
                                   child: TextField(
-                                    controller: _commentController,
+                                    controller: commentController,
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 14),
                                     decoration: InputDecoration(
@@ -156,7 +156,7 @@ class CommentModal {
                               ),
                             ),
                             onPressed: () {
-                              final comment = _commentController.text.trim();
+                              final comment = commentController.text.trim();
                               if (comment.isNotEmpty) {
                                 Navigator.pop(context, comment);
                               }

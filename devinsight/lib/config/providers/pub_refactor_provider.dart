@@ -10,9 +10,9 @@ final postRefactorProvider =
 );
 
 final myProfilePostRefactorProvider =
-    Provider.family<List<PostRefactor>, String>((ref, userName) {
+    Provider.family<List<PostRefactor>, String>((ref, userId) {
   final allPosts = ref.watch(postRefactorProvider);
-  return allPosts.where((post) => post.authorUsername == userName).toList();
+  return allPosts.where((post) => post.authorId == userId).toList();
 });
 
 class PostRefactorNotifier extends StateNotifier<List<PostRefactor>> {
@@ -26,6 +26,7 @@ class PostRefactorNotifier extends StateNotifier<List<PostRefactor>> {
       state = jsonList
           .map((json) => PostRefactor.fromJson(json as Map<String, dynamic>))
           .toList();
+      print(jsonList);
     } catch (e) {
       print('Error al cargar publicaciones refactorizadas: $e');
     }

@@ -1,13 +1,14 @@
 [
   {
-    "postId": 1,
-    "authorId": 42,
+    "postId": "1",
+    "authorId": "42",
     "sentAt": "2025-10-01T12:00:00Z",
     "profilePicture": "https://cdn.example.com/avatar.png",
     "authorUsername": "Ssaylem Murillo",
     "description": "Esto es un código de ejemplo.",
     "tags": ["#flutter", "#dart"],
     "codeSnippet": "print('Hola mundo');",
+    "codeLanguage": "dart",
     "shares": 3,
     "reactionCounts": {
       "careful": 32,
@@ -15,14 +16,15 @@
     }
   },
   {
-    "postId": 2,
-    "authorId": 42,
+    "postId": "2",
+    "authorId": "42",
     "sentAt": "2025-01-05T14:00:00Z",
     "profilePicture": "https://cdn.example.com/avatar2.png",
     "authorUsername": "Ssaylem Murillo",
     "description": "Un ejemplo de código en Python.",
     "tags": ["#python", "#example"],
     "codeSnippet": "print('Hello, world!')",
+    "codeLanguage": "python",
     "shares": 5,
     "reactionCounts": {
       "careful": 15,
@@ -30,14 +32,15 @@
     }
   },
   {
-    "postId": 3,
-    "authorId": 42,
+    "postId": "3",
+    "authorId": "42",
     "sentAt": "2025-02-03T16:00:00Z",
     "profilePicture": "https://cdn.example.com/avatar3.png",
     "authorUsername": "Ssaylem Murillo",
     "description": "Snippet de JavaScript para principiantes.",
     "tags": ["#javascript", "#beginner"],
     "codeSnippet": "console.log('Hello, world!');",
+    "codeLanguage": "javascript",
     "shares": 8,
     "reactionCounts": {
       "careful": 20,
@@ -45,14 +48,15 @@
     }
   },
   {
-    "postId": 4,
-    "authorId": 45,
+    "postId": "4",
+    "authorId": "45",
     "sentAt": "2023-10-04T18:00:00Z",
     "profilePicture": "https://cdn.example.com/avatar4.png",
     "authorUsername": "Techie",
     "description": "Ejemplo de código en Java.",
     "tags": ["#java", "#example"],
     "codeSnippet": "System.out.println('Hello, world!');",
+    "codeLanguage": "java",
     "shares": 2,
     "reactionCounts": {
       "careful": 12,

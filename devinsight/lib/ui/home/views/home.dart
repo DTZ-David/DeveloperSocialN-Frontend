@@ -56,15 +56,10 @@ class HomeScreen extends ConsumerWidget {
 
                 return const Column(
                   children: [
-                    // PublicationsCard(
-                    //   userName: post.userName,
-                    //   sentAt: post.likes.toString(),
-                    //   userIcon: post.profilePicture,
-                    //   description: post.description,
-                    //   code: post.codeSnippet,
-                    //   language: '',
-                    //   tags: post.tags,
-                    // ),
+                    // CAMBIAR EL PROVIDER PARA UTILIZAR UN MODELO POSTREFACTOR
+                    // PUBLICATIONSCARD RECIBE UN OBJETO DE TIPO POSTREFACTOR 
+
+                    // PublicationsCard(post: post,),
                     SizedBox(height: 4),
                   ],
                 );

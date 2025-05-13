@@ -20,14 +20,15 @@ PostRefactor _$PostRefactorFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PostRefactor {
-  int get postId => throw _privateConstructorUsedError;
-  int get authorId => throw _privateConstructorUsedError;
+  String get postId => throw _privateConstructorUsedError;
+  String get authorId => throw _privateConstructorUsedError;
   String get sentAt => throw _privateConstructorUsedError;
   String get profilePicture => throw _privateConstructorUsedError;
   String get authorUsername => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   String get codeSnippet => throw _privateConstructorUsedError;
+  String get codeLanguage => throw _privateConstructorUsedError;
   int get shares => throw _privateConstructorUsedError;
   Map<String, int> get reactionCounts => throw _privateConstructorUsedError;
 
@@ -48,14 +49,15 @@ abstract class $PostRefactorCopyWith<$Res> {
       _$PostRefactorCopyWithImpl<$Res, PostRefactor>;
   @useResult
   $Res call(
-      {int postId,
-      int authorId,
+      {String postId,
+      String authorId,
       String sentAt,
       String profilePicture,
       String authorUsername,
       String description,
       List<String> tags,
       String codeSnippet,
+      String codeLanguage,
       int shares,
       Map<String, int> reactionCounts});
 }
@@ -83,6 +85,7 @@ class _$PostRefactorCopyWithImpl<$Res, $Val extends PostRefactor>
     Object? description = null,
     Object? tags = null,
     Object? codeSnippet = null,
+    Object? codeLanguage = null,
     Object? shares = null,
     Object? reactionCounts = null,
   }) {
@@ -90,11 +93,11 @@ class _$PostRefactorCopyWithImpl<$Res, $Val extends PostRefactor>
       postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       authorId: null == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       sentAt: null == sentAt
           ? _value.sentAt
           : sentAt // ignore: cast_nullable_to_non_nullable
@@ -119,6 +122,10 @@ class _$PostRefactorCopyWithImpl<$Res, $Val extends PostRefactor>
           ? _value.codeSnippet
           : codeSnippet // ignore: cast_nullable_to_non_nullable
               as String,
+      codeLanguage: null == codeLanguage
+          ? _value.codeLanguage
+          : codeLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
       shares: null == shares
           ? _value.shares
           : shares // ignore: cast_nullable_to_non_nullable
@@ -140,14 +147,15 @@ abstract class _$$PostRefactorImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int postId,
-      int authorId,
+      {String postId,
+      String authorId,
       String sentAt,
       String profilePicture,
       String authorUsername,
       String description,
       List<String> tags,
       String codeSnippet,
+      String codeLanguage,
       int shares,
       Map<String, int> reactionCounts});
 }
@@ -173,6 +181,7 @@ class __$$PostRefactorImplCopyWithImpl<$Res>
     Object? description = null,
     Object? tags = null,
     Object? codeSnippet = null,
+    Object? codeLanguage = null,
     Object? shares = null,
     Object? reactionCounts = null,
   }) {
@@ -180,11 +189,11 @@ class __$$PostRefactorImplCopyWithImpl<$Res>
       postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       authorId: null == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       sentAt: null == sentAt
           ? _value.sentAt
           : sentAt // ignore: cast_nullable_to_non_nullable
@@ -208,6 +217,10 @@ class __$$PostRefactorImplCopyWithImpl<$Res>
       codeSnippet: null == codeSnippet
           ? _value.codeSnippet
           : codeSnippet // ignore: cast_nullable_to_non_nullable
+              as String,
+      codeLanguage: null == codeLanguage
+          ? _value.codeLanguage
+          : codeLanguage // ignore: cast_nullable_to_non_nullable
               as String,
       shares: null == shares
           ? _value.shares
@@ -233,6 +246,7 @@ class _$PostRefactorImpl implements _PostRefactor {
       required this.description,
       required final List<String> tags,
       required this.codeSnippet,
+      required this.codeLanguage,
       required this.shares,
       final Map<String, int> reactionCounts = const {}})
       : _tags = tags,
@@ -242,9 +256,9 @@ class _$PostRefactorImpl implements _PostRefactor {
       _$$PostRefactorImplFromJson(json);
 
   @override
-  final int postId;
+  final String postId;
   @override
-  final int authorId;
+  final String authorId;
   @override
   final String sentAt;
   @override
@@ -264,6 +278,8 @@ class _$PostRefactorImpl implements _PostRefactor {
   @override
   final String codeSnippet;
   @override
+  final String codeLanguage;
+  @override
   final int shares;
   final Map<String, int> _reactionCounts;
   @override
@@ -276,7 +292,7 @@ class _$PostRefactorImpl implements _PostRefactor {
 
   @override
   String toString() {
-    return 'PostRefactor(postId: $postId, authorId: $authorId, sentAt: $sentAt, profilePicture: $profilePicture, authorUsername: $authorUsername, description: $description, tags: $tags, codeSnippet: $codeSnippet, shares: $shares, reactionCounts: $reactionCounts)';
+    return 'PostRefactor(postId: $postId, authorId: $authorId, sentAt: $sentAt, profilePicture: $profilePicture, authorUsername: $authorUsername, description: $description, tags: $tags, codeSnippet: $codeSnippet, codeLanguage: $codeLanguage, shares: $shares, reactionCounts: $reactionCounts)';
   }
 
   @override
@@ -297,6 +313,8 @@ class _$PostRefactorImpl implements _PostRefactor {
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.codeSnippet, codeSnippet) ||
                 other.codeSnippet == codeSnippet) &&
+            (identical(other.codeLanguage, codeLanguage) ||
+                other.codeLanguage == codeLanguage) &&
             (identical(other.shares, shares) || other.shares == shares) &&
             const DeepCollectionEquality()
                 .equals(other._reactionCounts, _reactionCounts));
@@ -314,6 +332,7 @@ class _$PostRefactorImpl implements _PostRefactor {
       description,
       const DeepCollectionEquality().hash(_tags),
       codeSnippet,
+      codeLanguage,
       shares,
       const DeepCollectionEquality().hash(_reactionCounts));
 
@@ -335,14 +354,15 @@ class _$PostRefactorImpl implements _PostRefactor {
 
 abstract class _PostRefactor implements PostRefactor {
   const factory _PostRefactor(
-      {required final int postId,
-      required final int authorId,
+      {required final String postId,
+      required final String authorId,
       required final String sentAt,
       required final String profilePicture,
       required final String authorUsername,
       required final String description,
       required final List<String> tags,
       required final String codeSnippet,
+      required final String codeLanguage,
       required final int shares,
       final Map<String, int> reactionCounts}) = _$PostRefactorImpl;
 
@@ -350,9 +370,9 @@ abstract class _PostRefactor implements PostRefactor {
       _$PostRefactorImpl.fromJson;
 
   @override
-  int get postId;
+  String get postId;
   @override
-  int get authorId;
+  String get authorId;
   @override
   String get sentAt;
   @override
@@ -365,6 +385,8 @@ abstract class _PostRefactor implements PostRefactor {
   List<String> get tags;
   @override
   String get codeSnippet;
+  @override
+  String get codeLanguage;
   @override
   int get shares;
   @override
