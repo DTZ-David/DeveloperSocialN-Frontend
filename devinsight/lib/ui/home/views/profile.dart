@@ -15,6 +15,7 @@ import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/config/providers/pub_refactor_provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
 
@@ -43,10 +44,14 @@ class Profile extends ConsumerWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.primaryColors,
         elevation: 0,
         onPressed: () => ref.read(appRouterProvider).go(AppRouter.message),
-        child: const Icon(Icons.message_outlined, color: Colors.white),
+        child: SvgPicture.asset(
+          'assets/icons/message_profile.svg',
+          width: 24,
+          height: 24,
+        ),
       ),
       appBar: AppBar(
         shadowColor: AppColors.tertiaryColors,
