@@ -1,4 +1,4 @@
-import 'package:devinsight/models/publication/post_refactor.dart';
+import 'package:devinsight/models/publication/post.dart';
 import 'package:devinsight/ui/home/widgets/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +16,8 @@ import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/config/providers/pub_refactor_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../controller/profileFeedController.dart';
 
 const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
 
@@ -37,7 +39,7 @@ class Profile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final interactions = ref.watch(interactionsProvider);
-    final publications = ref.watch(myProfilePostRefactorProvider("42"));
+    final feedState = ref.watch(profileFeedControllerProvider);
     final connections = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
 
@@ -82,18 +84,28 @@ class Profile extends ConsumerWidget {
           ],
           const _PaddedWidget(child: NavProfile()),
           const SliverToBoxAdapter(child: SizedBox(height: 1)),
-          _buildTabContent(
-              selectedTab, publications, interactions, connections),
+          feedState.when(
+            data: (posts) => _buildTabContent(selectedTab, posts, interactions, connections),
+            loading: () => const SliverToBoxAdapter(
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (error, stack) => SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Text('Error al cargar publicaciones: $error'),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildTabContent(int selectedTab, List<PostRefactor> publications,
-      List interactions, List connections) {
+  Widget _buildTabContent(
+      int selectedTab, List<Post> publications, List interactions, List connections) {
     switch (selectedTab) {
       case 0:
-        return _buildSliverList<PostRefactor>(
+        return _buildSliverList<Post>(
           publications,
           (post) => PublicationsCard(
             post: post,

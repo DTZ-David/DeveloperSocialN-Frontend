@@ -4,10 +4,10 @@ import 'dart:convert';
 import '../../config/constants/app.dart';
 import '../../models/publication/post.dart';
 
-class FeedService {
-  Future<List<Post>> fetchFeed(String token) async {
+class ProfileService {
+  Future<List<Post>> fetchProfileFeed(String token) async {
     final response = await http.get(
-      Uri.parse('${AppConfig.baseUrl}/userposts/getfeed'),
+      Uri.parse('${AppConfig.baseUrl}/userposts/getuserpostbyid'),
       headers: {
         'Authorization': 'Bearer $token',
       },

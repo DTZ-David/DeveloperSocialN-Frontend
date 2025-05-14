@@ -9,6 +9,7 @@ class PostState {
   final String content;
   final List<File> images;
   final List<File> files;
+  final String codeLanguage;
   final List<String> tags;
   final String codeSnippet;
 
@@ -16,12 +17,14 @@ class PostState {
     required this.content,
     required this.images,
     required this.files,
+    required this.codeLanguage,
     required this.tags,
     required this.codeSnippet,
   });
 
   PostState copyWith({
     String? content,
+    String? codeLanguage,
     List<File>? images,
     List<File>? files,
     List<String>? tags,
@@ -30,6 +33,7 @@ class PostState {
     return PostState(
       content: content ?? this.content,
       images: images ?? this.images,
+      codeLanguage: codeLanguage ?? this.codeLanguage,
       files: files ?? this.files,
       tags: tags ?? this.tags,
       codeSnippet: codeSnippet ?? this.codeSnippet,
@@ -38,7 +42,9 @@ class PostState {
 }
 
 class PostNotifier extends StateNotifier<PostState> {
-  PostNotifier() : super(PostState(content: '', images: [], files: [], tags: [], codeSnippet: ''));
+  PostNotifier()
+      : super(PostState(
+            content: '', images: [], codeLanguage: '', files: [], tags: [], codeSnippet: ''));
 
   void updateContent(String newContent) {
     state = state.copyWith(content: newContent);
@@ -46,6 +52,10 @@ class PostNotifier extends StateNotifier<PostState> {
 
   void setCodeSnippet(String snippet) {
     state = state.copyWith(codeSnippet: snippet);
+  }
+
+  void setCodeLanguage(String codeLanguage) {
+    state = state.copyWith(codeLanguage: codeLanguage);
   }
 
   void addFile(File file) {
@@ -73,7 +83,8 @@ class PostNotifier extends StateNotifier<PostState> {
   }
 
   void clear() {
-    state = PostState(content: '', images: [], files: [], tags: [], codeSnippet: '');
+    state =
+        PostState(content: '', images: [], files: [], tags: [], codeSnippet: '', codeLanguage: '');
   }
 }
 

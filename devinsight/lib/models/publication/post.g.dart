@@ -8,31 +8,34 @@ part of 'post.dart';
 
 _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       authorId: json['authorId'] as String,
+      fechaPublicacion: json['fechaPublicacion'] as String,
+      codeLanguage: json['codeLanguage'] as String,
       codeSnippet: json['codeSnippet'] as String,
+      comments: (json['comments'] as List<dynamic>)
+          .map((e) => Comment.fromJson(e as Map<String, dynamic>))
+          .toList(),
       description: json['description'] as String,
+      tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
+      shares: (json['shares'] as num?)?.toInt() ?? 0,
       userName: json['userName'] as String,
       profilePicture: json['profilePicture'] as String,
-      likes: (json['likes'] as num).toInt(),
-      tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
-      comments: (json['comments'] as List<dynamic>?)
-              ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      reactions: (json['reactions'] as List<dynamic>?)
-              ?.map((e) => Reaction.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      reactions: (json['reactions'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, (e as num).toInt()),
+          ) ??
+          const {},
     );
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
     <String, dynamic>{
       'authorId': instance.authorId,
+      'fechaPublicacion': instance.fechaPublicacion,
+      'codeLanguage': instance.codeLanguage,
       'codeSnippet': instance.codeSnippet,
+      'comments': instance.comments,
       'description': instance.description,
+      'tags': instance.tags,
+      'shares': instance.shares,
       'userName': instance.userName,
       'profilePicture': instance.profilePicture,
-      'likes': instance.likes,
-      'tags': instance.tags,
-      'comments': instance.comments,
       'reactions': instance.reactions,
     };

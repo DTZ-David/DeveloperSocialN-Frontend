@@ -5,7 +5,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
 
 String formatSentAt(String sentAtString) {
-  final dateTime = DateTime.parse(sentAtString).toLocal(); // Convierte a local
+  final dateTime = DateFormat('d/M/yyyy HH:mm:ss').parse(sentAtString).toLocal();
   final now = DateTime.now();
 
   final difference = now.difference(dateTime);
@@ -74,8 +74,7 @@ class PublicationHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3.0),
             child: GestureDetector(
               onTap: () => {
-                showDialog(
-                    context: context, builder: (_) => const OptionsDialog()),
+                showDialog(context: context, builder: (_) => const OptionsDialog()),
               },
               child: SvgPicture.asset(
                 'assets/icons/verticaldots.svg',

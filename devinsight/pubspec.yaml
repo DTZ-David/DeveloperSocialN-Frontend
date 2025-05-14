@@ -1,12 +1,12 @@
 name: devinsight
-description: "A new Flutter project."
+description: 'A new Flutter project.'
 
-publish_to: "none" # Comenta o elimina si da error
+publish_to: 'none' # Comenta o elimina si da error
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.5.4 <4.0.0" # Asegura compatibilidad con futuras versiones
+  sdk: '>=3.5.4 <4.0.0' # Asegura compatibilidad con futuras versiones
 
 dependencies:
   font_awesome_flutter: ^10.6.0
@@ -25,7 +25,7 @@ dependencies:
   image_picker: ^1.1.2
   json_annotation: ^4.9.0
   flutter_staggered_grid_view: ^0.7.0
-  timeago:
+  timeago: ^3.7.1
 
 dev_dependencies:
   flutter_test:

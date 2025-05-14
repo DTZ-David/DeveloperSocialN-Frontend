@@ -44,10 +44,7 @@ class LoginScreen extends ConsumerWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color.fromARGB(255, 20, 6, 48),
-                Color.fromARGB(255, 4, 1, 9)
-              ],
+              colors: [Color.fromARGB(255, 20, 6, 48), Color.fromARGB(255, 4, 1, 9)],
             ),
           ),
           child: LayoutBuilder(
@@ -86,8 +83,7 @@ class LoginScreen extends ConsumerWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -121,34 +117,25 @@ class LoginScreen extends ConsumerWidget {
                                 text: "Iniciar Sesión",
                                 onPressed: () async {
                                   final username = userController.text.trim();
-                                  final password =
-                                      passwordController.text.trim();
+                                  final password = passwordController.text.trim();
 
-                                  final controller =
-                                      ref.read(loginControllerProvider);
+                                  final controller = ref.read(loginControllerProvider);
 
-                                  final success = await controller.login(
-                                      username, password);
+                                  final success =
+                                      await controller.login("dev123@example.com", "SecurePass123");
 
                                   if (success) {
-                                    ref
-                                        .read(feedControllerProvider.notifier)
-                                        .loadFeed();
-                                    ref
-                                        .read(appRouterProvider)
-                                        .go(AppRouter.initial);
+                                    ref.read(feedControllerProvider.notifier).loadFeed();
+                                    ref.read(appRouterProvider).go(AppRouter.initial);
                                   } else {
-                                    _showErrorSnackBar(context,
-                                        'Error: No se pudo iniciar sesión');
+                                    _showErrorSnackBar(context, 'Error: No se pudo iniciar sesión');
                                   }
                                 },
                               ),
                               const SizedBox(height: 20),
                               GestureDetector(
                                 onTap: () {
-                                  ref
-                                      .read(appRouterProvider)
-                                      .go(AppRouter.registerUser);
+                                  ref.read(appRouterProvider).go(AppRouter.registerUser);
                                 },
                                 child: const Text(
                                   "Crear una cuenta",

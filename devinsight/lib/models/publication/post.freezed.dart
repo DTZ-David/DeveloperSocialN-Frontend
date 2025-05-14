@@ -21,14 +21,17 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Post {
   String get authorId => throw _privateConstructorUsedError;
+  String get fechaPublicacion => throw _privateConstructorUsedError;
+  String get codeLanguage => throw _privateConstructorUsedError;
   String get codeSnippet => throw _privateConstructorUsedError;
+  List<Comment> get comments => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
+  int get shares =>
+      throw _privateConstructorUsedError; // Como no viene, le damos 0 por defecto
   String get userName => throw _privateConstructorUsedError;
   String get profilePicture => throw _privateConstructorUsedError;
-  int get likes => throw _privateConstructorUsedError;
-  List<String> get tags => throw _privateConstructorUsedError;
-  List<Comment> get comments => throw _privateConstructorUsedError;
-  List<Reaction> get reactions => throw _privateConstructorUsedError;
+  Map<String, int> get reactions => throw _privateConstructorUsedError;
 
   /// Serializes this Post to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,14 +49,16 @@ abstract class $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {String authorId,
+      String fechaPublicacion,
+      String codeLanguage,
       String codeSnippet,
+      List<Comment> comments,
       String description,
+      List<String> tags,
+      int shares,
       String userName,
       String profilePicture,
-      int likes,
-      List<String> tags,
-      List<Comment> comments,
-      List<Reaction> reactions});
+      Map<String, int> reactions});
 }
 
 /// @nodoc
@@ -72,13 +77,15 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @override
   $Res call({
     Object? authorId = null,
+    Object? fechaPublicacion = null,
+    Object? codeLanguage = null,
     Object? codeSnippet = null,
+    Object? comments = null,
     Object? description = null,
+    Object? tags = null,
+    Object? shares = null,
     Object? userName = null,
     Object? profilePicture = null,
-    Object? likes = null,
-    Object? tags = null,
-    Object? comments = null,
     Object? reactions = null,
   }) {
     return _then(_value.copyWith(
@@ -86,14 +93,34 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String,
+      fechaPublicacion: null == fechaPublicacion
+          ? _value.fechaPublicacion
+          : fechaPublicacion // ignore: cast_nullable_to_non_nullable
+              as String,
+      codeLanguage: null == codeLanguage
+          ? _value.codeLanguage
+          : codeLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
       codeSnippet: null == codeSnippet
           ? _value.codeSnippet
           : codeSnippet // ignore: cast_nullable_to_non_nullable
               as String,
+      comments: null == comments
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      shares: null == shares
+          ? _value.shares
+          : shares // ignore: cast_nullable_to_non_nullable
+              as int,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -102,22 +129,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
               as String,
-      likes: null == likes
-          ? _value.likes
-          : likes // ignore: cast_nullable_to_non_nullable
-              as int,
-      tags: null == tags
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      comments: null == comments
-          ? _value.comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>,
       reactions: null == reactions
           ? _value.reactions
           : reactions // ignore: cast_nullable_to_non_nullable
-              as List<Reaction>,
+              as Map<String, int>,
     ) as $Val);
   }
 }
@@ -131,14 +146,16 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {String authorId,
+      String fechaPublicacion,
+      String codeLanguage,
       String codeSnippet,
+      List<Comment> comments,
       String description,
+      List<String> tags,
+      int shares,
       String userName,
       String profilePicture,
-      int likes,
-      List<String> tags,
-      List<Comment> comments,
-      List<Reaction> reactions});
+      Map<String, int> reactions});
 }
 
 /// @nodoc
@@ -154,13 +171,15 @@ class __$$PostImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? authorId = null,
+    Object? fechaPublicacion = null,
+    Object? codeLanguage = null,
     Object? codeSnippet = null,
+    Object? comments = null,
     Object? description = null,
+    Object? tags = null,
+    Object? shares = null,
     Object? userName = null,
     Object? profilePicture = null,
-    Object? likes = null,
-    Object? tags = null,
-    Object? comments = null,
     Object? reactions = null,
   }) {
     return _then(_$PostImpl(
@@ -168,14 +187,34 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String,
+      fechaPublicacion: null == fechaPublicacion
+          ? _value.fechaPublicacion
+          : fechaPublicacion // ignore: cast_nullable_to_non_nullable
+              as String,
+      codeLanguage: null == codeLanguage
+          ? _value.codeLanguage
+          : codeLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
       codeSnippet: null == codeSnippet
           ? _value.codeSnippet
           : codeSnippet // ignore: cast_nullable_to_non_nullable
               as String,
+      comments: null == comments
+          ? _value._comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      shares: null == shares
+          ? _value.shares
+          : shares // ignore: cast_nullable_to_non_nullable
+              as int,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -184,22 +223,10 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
               as String,
-      likes: null == likes
-          ? _value.likes
-          : likes // ignore: cast_nullable_to_non_nullable
-              as int,
-      tags: null == tags
-          ? _value._tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      comments: null == comments
-          ? _value._comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>,
       reactions: null == reactions
           ? _value._reactions
           : reactions // ignore: cast_nullable_to_non_nullable
-              as List<Reaction>,
+              as Map<String, int>,
     ));
   }
 }
@@ -209,16 +236,18 @@ class __$$PostImplCopyWithImpl<$Res>
 class _$PostImpl implements _Post {
   const _$PostImpl(
       {required this.authorId,
+      required this.fechaPublicacion,
+      required this.codeLanguage,
       required this.codeSnippet,
+      required final List<Comment> comments,
       required this.description,
+      required final List<String> tags,
+      this.shares = 0,
       required this.userName,
       required this.profilePicture,
-      required this.likes,
-      required final List<String> tags,
-      final List<Comment> comments = const [],
-      final List<Reaction> reactions = const []})
-      : _tags = tags,
-        _comments = comments,
+      final Map<String, int> reactions = const {}})
+      : _comments = comments,
+        _tags = tags,
         _reactions = reactions;
 
   factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
@@ -227,15 +256,21 @@ class _$PostImpl implements _Post {
   @override
   final String authorId;
   @override
+  final String fechaPublicacion;
+  @override
+  final String codeLanguage;
+  @override
   final String codeSnippet;
+  final List<Comment> _comments;
+  @override
+  List<Comment> get comments {
+    if (_comments is EqualUnmodifiableListView) return _comments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_comments);
+  }
+
   @override
   final String description;
-  @override
-  final String userName;
-  @override
-  final String profilePicture;
-  @override
-  final int likes;
   final List<String> _tags;
   @override
   List<String> get tags {
@@ -244,27 +279,26 @@ class _$PostImpl implements _Post {
     return EqualUnmodifiableListView(_tags);
   }
 
-  final List<Comment> _comments;
   @override
   @JsonKey()
-  List<Comment> get comments {
-    if (_comments is EqualUnmodifiableListView) return _comments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_comments);
-  }
-
-  final List<Reaction> _reactions;
+  final int shares;
+// Como no viene, le damos 0 por defecto
+  @override
+  final String userName;
+  @override
+  final String profilePicture;
+  final Map<String, int> _reactions;
   @override
   @JsonKey()
-  List<Reaction> get reactions {
-    if (_reactions is EqualUnmodifiableListView) return _reactions;
+  Map<String, int> get reactions {
+    if (_reactions is EqualUnmodifiableMapView) return _reactions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reactions);
+    return EqualUnmodifiableMapView(_reactions);
   }
 
   @override
   String toString() {
-    return 'Post(authorId: $authorId, codeSnippet: $codeSnippet, description: $description, userName: $userName, profilePicture: $profilePicture, likes: $likes, tags: $tags, comments: $comments, reactions: $reactions)';
+    return 'Post(authorId: $authorId, fechaPublicacion: $fechaPublicacion, codeLanguage: $codeLanguage, codeSnippet: $codeSnippet, comments: $comments, description: $description, tags: $tags, shares: $shares, userName: $userName, profilePicture: $profilePicture, reactions: $reactions)';
   }
 
   @override
@@ -274,17 +308,21 @@ class _$PostImpl implements _Post {
             other is _$PostImpl &&
             (identical(other.authorId, authorId) ||
                 other.authorId == authorId) &&
+            (identical(other.fechaPublicacion, fechaPublicacion) ||
+                other.fechaPublicacion == fechaPublicacion) &&
+            (identical(other.codeLanguage, codeLanguage) ||
+                other.codeLanguage == codeLanguage) &&
             (identical(other.codeSnippet, codeSnippet) ||
                 other.codeSnippet == codeSnippet) &&
+            const DeepCollectionEquality().equals(other._comments, _comments) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(other.shares, shares) || other.shares == shares) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.profilePicture, profilePicture) ||
                 other.profilePicture == profilePicture) &&
-            (identical(other.likes, likes) || other.likes == likes) &&
-            const DeepCollectionEquality().equals(other._tags, _tags) &&
-            const DeepCollectionEquality().equals(other._comments, _comments) &&
             const DeepCollectionEquality()
                 .equals(other._reactions, _reactions));
   }
@@ -294,13 +332,15 @@ class _$PostImpl implements _Post {
   int get hashCode => Object.hash(
       runtimeType,
       authorId,
+      fechaPublicacion,
+      codeLanguage,
       codeSnippet,
+      const DeepCollectionEquality().hash(_comments),
       description,
+      const DeepCollectionEquality().hash(_tags),
+      shares,
       userName,
       profilePicture,
-      likes,
-      const DeepCollectionEquality().hash(_tags),
-      const DeepCollectionEquality().hash(_comments),
       const DeepCollectionEquality().hash(_reactions));
 
   /// Create a copy of Post
@@ -322,35 +362,41 @@ class _$PostImpl implements _Post {
 abstract class _Post implements Post {
   const factory _Post(
       {required final String authorId,
+      required final String fechaPublicacion,
+      required final String codeLanguage,
       required final String codeSnippet,
+      required final List<Comment> comments,
       required final String description,
+      required final List<String> tags,
+      final int shares,
       required final String userName,
       required final String profilePicture,
-      required final int likes,
-      required final List<String> tags,
-      final List<Comment> comments,
-      final List<Reaction> reactions}) = _$PostImpl;
+      final Map<String, int> reactions}) = _$PostImpl;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
 
   @override
   String get authorId;
   @override
+  String get fechaPublicacion;
+  @override
+  String get codeLanguage;
+  @override
   String get codeSnippet;
   @override
+  List<Comment> get comments;
+  @override
   String get description;
+  @override
+  List<String> get tags;
+  @override
+  int get shares; // Como no viene, le damos 0 por defecto
   @override
   String get userName;
   @override
   String get profilePicture;
   @override
-  int get likes;
-  @override
-  List<String> get tags;
-  @override
-  List<Comment> get comments;
-  @override
-  List<Reaction> get reactions;
+  Map<String, int> get reactions;
 
   /// Create a copy of Post
   /// with the given fields replaced by the non-null parameter values.

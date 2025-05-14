@@ -4,7 +4,8 @@ import '../../../config/providers/auth_provider.dart';
 import '../config/providers/feed_provider.dart';
 import '../models/publication/post.dart';
 
-final feedControllerProvider = StateNotifierProvider<FeedController, AsyncValue<List<Post>>>((ref) {
+final profileFeedControllerProvider =
+    StateNotifierProvider<FeedController, AsyncValue<List<Post>>>((ref) {
   final feedRepository = ref.read(feedRepositoryProvider);
   return FeedController(feedRepository, ref);
 });

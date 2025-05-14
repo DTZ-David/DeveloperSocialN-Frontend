@@ -12,7 +12,7 @@ class UsersProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userAsync = ref.watch(userByIdProvider(int.parse(userId)));
+    final userAsync = ref.watch(userByIdProvider(int.parse("1")));
 
     return Scaffold(
       appBar: _buildAppBar(),
@@ -68,9 +68,7 @@ class _ProfileHeader extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 40,
-            backgroundImage: user.profilePicture != null
-                ? NetworkImage(user.profilePicture)
-                : null,
+            backgroundImage: user.profilePicture != null ? NetworkImage(user.profilePicture) : null,
             child: user.profilePicture == null
                 ? const Icon(Icons.person, size: 40, color: Colors.white)
                 : null,

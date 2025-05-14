@@ -8,6 +8,7 @@ part of 'post_request.dart';
 
 _$PostRequestImpl _$$PostRequestImplFromJson(Map<String, dynamic> json) =>
     _$PostRequestImpl(
+      codeLanguage: json['codeLanguage'] as String,
       codeSnippet: json['codeSnippet'] as String,
       description: json['description'] as String,
       tags:
@@ -17,6 +18,7 @@ _$PostRequestImpl _$$PostRequestImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$PostRequestImplToJson(_$PostRequestImpl instance) =>
     <String, dynamic>{
+      'codeLanguage': instance.codeLanguage,
       'codeSnippet': instance.codeSnippet,
       'description': instance.description,
       'tags': instance.tags,

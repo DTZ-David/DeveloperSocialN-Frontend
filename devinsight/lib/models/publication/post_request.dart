@@ -6,6 +6,7 @@ part 'post_request.g.dart';
 @freezed
 class PostRequest with _$PostRequest {
   const factory PostRequest({
+    required String codeLanguage,
     required String codeSnippet,
     required String description,
     @Default([]) List<String> tags,

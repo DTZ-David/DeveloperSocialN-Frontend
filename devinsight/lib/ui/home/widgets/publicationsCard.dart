@@ -1,12 +1,12 @@
+import 'package:devinsight/models/publication/post.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:devinsight/models/publication/post_refactor.dart';
 import 'package:devinsight/ui/home/widgets/codePreviewBox.dart';
 import 'package:devinsight/ui/home/widgets/publicationHeader.dart';
 import 'package:devinsight/ui/home/widgets/reactionsRow.dart';
 
 class PublicationsCard extends StatelessWidget {
-  final PostRefactor post;
+  final Post post;
 
   const PublicationsCard({
     super.key,
@@ -32,8 +32,8 @@ class PublicationsCard extends StatelessWidget {
             child: Column(
               children: [
                 PublicationHeader(
-                  userName: post.authorUsername,
-                  sentAt: post.sentAt,
+                  userName: post.userName,
+                  sentAt: post.fechaPublicacion,
                   userIcon: post.profilePicture,
                 ),
                 const SizedBox(height: 10),
@@ -92,7 +92,7 @@ class PublicationsCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                 ],
-                ReactionsRow(reactionCounts: post.reactionCounts),
+                ReactionsRow(reactionCounts: post.reactions),
                 const SizedBox(height: 8),
               ],
             ),

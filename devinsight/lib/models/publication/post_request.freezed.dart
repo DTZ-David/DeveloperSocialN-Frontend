@@ -20,6 +20,7 @@ PostRequest _$PostRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PostRequest {
+  String get codeLanguage => throw _privateConstructorUsedError;
   String get codeSnippet => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
@@ -40,7 +41,11 @@ abstract class $PostRequestCopyWith<$Res> {
           PostRequest value, $Res Function(PostRequest) then) =
       _$PostRequestCopyWithImpl<$Res, PostRequest>;
   @useResult
-  $Res call({String codeSnippet, String description, List<String> tags});
+  $Res call(
+      {String codeLanguage,
+      String codeSnippet,
+      String description,
+      List<String> tags});
 }
 
 /// @nodoc
@@ -58,11 +63,16 @@ class _$PostRequestCopyWithImpl<$Res, $Val extends PostRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? codeLanguage = null,
     Object? codeSnippet = null,
     Object? description = null,
     Object? tags = null,
   }) {
     return _then(_value.copyWith(
+      codeLanguage: null == codeLanguage
+          ? _value.codeLanguage
+          : codeLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
       codeSnippet: null == codeSnippet
           ? _value.codeSnippet
           : codeSnippet // ignore: cast_nullable_to_non_nullable
@@ -87,7 +97,11 @@ abstract class _$$PostRequestImplCopyWith<$Res>
       __$$PostRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String codeSnippet, String description, List<String> tags});
+  $Res call(
+      {String codeLanguage,
+      String codeSnippet,
+      String description,
+      List<String> tags});
 }
 
 /// @nodoc
@@ -103,11 +117,16 @@ class __$$PostRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? codeLanguage = null,
     Object? codeSnippet = null,
     Object? description = null,
     Object? tags = null,
   }) {
     return _then(_$PostRequestImpl(
+      codeLanguage: null == codeLanguage
+          ? _value.codeLanguage
+          : codeLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
       codeSnippet: null == codeSnippet
           ? _value.codeSnippet
           : codeSnippet // ignore: cast_nullable_to_non_nullable
@@ -128,7 +147,8 @@ class __$$PostRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PostRequestImpl implements _PostRequest {
   const _$PostRequestImpl(
-      {required this.codeSnippet,
+      {required this.codeLanguage,
+      required this.codeSnippet,
       required this.description,
       final List<String> tags = const []})
       : _tags = tags;
@@ -136,6 +156,8 @@ class _$PostRequestImpl implements _PostRequest {
   factory _$PostRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostRequestImplFromJson(json);
 
+  @override
+  final String codeLanguage;
   @override
   final String codeSnippet;
   @override
@@ -151,7 +173,7 @@ class _$PostRequestImpl implements _PostRequest {
 
   @override
   String toString() {
-    return 'PostRequest(codeSnippet: $codeSnippet, description: $description, tags: $tags)';
+    return 'PostRequest(codeLanguage: $codeLanguage, codeSnippet: $codeSnippet, description: $description, tags: $tags)';
   }
 
   @override
@@ -159,6 +181,8 @@ class _$PostRequestImpl implements _PostRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostRequestImpl &&
+            (identical(other.codeLanguage, codeLanguage) ||
+                other.codeLanguage == codeLanguage) &&
             (identical(other.codeSnippet, codeSnippet) ||
                 other.codeSnippet == codeSnippet) &&
             (identical(other.description, description) ||
@@ -168,8 +192,8 @@ class _$PostRequestImpl implements _PostRequest {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, codeSnippet, description,
-      const DeepCollectionEquality().hash(_tags));
+  int get hashCode => Object.hash(runtimeType, codeLanguage, codeSnippet,
+      description, const DeepCollectionEquality().hash(_tags));
 
   /// Create a copy of PostRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -189,13 +213,16 @@ class _$PostRequestImpl implements _PostRequest {
 
 abstract class _PostRequest implements PostRequest {
   const factory _PostRequest(
-      {required final String codeSnippet,
+      {required final String codeLanguage,
+      required final String codeSnippet,
       required final String description,
       final List<String> tags}) = _$PostRequestImpl;
 
   factory _PostRequest.fromJson(Map<String, dynamic> json) =
       _$PostRequestImpl.fromJson;
 
+  @override
+  String get codeLanguage;
   @override
   String get codeSnippet;
   @override

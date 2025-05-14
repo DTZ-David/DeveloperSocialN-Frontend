@@ -1,5 +1,4 @@
 // lib/ui/views/root/home.dart
-import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/login/widgets/customNotificationIcon.dart';
 import 'package:devinsight/ui/login/widgets/customSettingsIcon.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../controller/feedController.dart';
+import '../widgets/publicationsCard.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -42,8 +42,15 @@ class HomeScreen extends ConsumerWidget {
       backgroundColor: AppColors.thirdColors,
       body: RefreshIndicator(
         onRefresh: () async {
-          // Aquí refrescas el feed cuando se realiza el pull to refresh
-          ref.refresh(feedControllerProvider);
+          await ref.read(feedControllerProvider.notifier).loadFeed();
+
+          // Muestra un SnackBar
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Feed actualizado'),
+              duration: Duration(seconds: 2),
+            ),
+          );
         },
         child: feedState.when(
           data: (publications) {
@@ -51,25 +58,23 @@ class HomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(10),
               itemCount: publications.length,
               itemBuilder: (context, index) {
-                final post =
-                    publications[index]; // El tipo 'Post' ahora es más claro
+                final post = publications[index]; // El tipo 'Post' ahora es más claro
 
-                return const Column(
+                return Column(
                   children: [
                     // CAMBIAR EL PROVIDER PARA UTILIZAR UN MODELO POSTREFACTOR
-                    // PUBLICATIONSCARD RECIBE UN OBJETO DE TIPO POSTREFACTOR 
+                    // PUBLICATIONSCARD RECIBE UN OBJETO DE TIPO POSTREFACTOR
 
-                    // PublicationsCard(post: post,),
-                    SizedBox(height: 4),
+                    PublicationsCard(post: post),
+                    const SizedBox(height: 4),
                   ],
                 );
               },
             );
           },
-          loading: () => const Center(
-              child: CircularProgressIndicator()), // Indicador de carga
-          error: (e, stackTrace) => Center(
-              child: Text('Error: $e')), // Muestra el error si ocurre alguno
+          loading: () => const Center(child: CircularProgressIndicator()), // Indicador de carga
+          error: (e, stackTrace) =>
+              Center(child: Text('Error: $e')), // Muestra el error si ocurre alguno
         ),
       ),
     );

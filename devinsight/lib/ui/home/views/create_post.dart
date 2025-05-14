@@ -76,6 +76,7 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
     }
 
     final postRequest = PostRequest(
+      codeLanguage: post.codeLanguage,
       codeSnippet: code,
       description: post.content,
       tags: post.tags,
@@ -178,6 +179,21 @@ class _CreatePostViewState extends ConsumerState<CreatePostView> {
                       tags: post.tags,
                       onTagAdded: ref.read(postProvider.notifier).addTag,
                       onTagRemoved: ref.read(postProvider.notifier).removeTag,
+                    ),
+                    TextFormField(
+                      initialValue: post.codeLanguage,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                        labelText: 'Lenguaje de programación',
+                        labelStyle: TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                      ),
+                      onChanged: (value) => ref.read(postProvider.notifier).setCodeLanguage(value),
                     ),
                   ],
                 ),
