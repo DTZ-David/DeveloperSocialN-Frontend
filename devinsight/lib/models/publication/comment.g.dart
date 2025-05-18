@@ -9,13 +9,25 @@ part of 'comment.dart';
 _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
     _$CommentImpl(
       id: json['id'] as String,
+      postId: json['postId'] as String,
       authorId: json['authorId'] as String,
-      comment: json['comment'] as String,
+      interactionType: json['interactionType'] as String,
+      commentText: json['commentText'] as String,
+      authorProfilePic: json['authorProfilePic'] as String,
+      userName: json['userName'] as String,
+      sentAt: DateTime.parse(json['sentAt'] as String),
+      isOwnComment: json['isOwnComment'] as bool,
     );
 
 Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'postId': instance.postId,
       'authorId': instance.authorId,
-      'comment': instance.comment,
+      'interactionType': instance.interactionType,
+      'commentText': instance.commentText,
+      'authorProfilePic': instance.authorProfilePic,
+      'userName': instance.userName,
+      'sentAt': instance.sentAt.toIso8601String(),
+      'isOwnComment': instance.isOwnComment,
     };

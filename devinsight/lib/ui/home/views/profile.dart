@@ -3,7 +3,6 @@ import 'package:devinsight/ui/home/widgets/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/config/providers/conectionsProvider.dart';
-import 'package:devinsight/config/providers/interaction_provider.dart';
 import 'package:devinsight/config/providers/mediaProvider.dart';
 import 'package:devinsight/config/providers/nav_profile_provider.dart';
 import 'package:devinsight/config/routers/app_router.dart';
@@ -39,7 +38,6 @@ class Profile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTab = ref.watch(selectedProfileTabProvider);
-    final interactions = ref.watch(interactionsProvider);
     final feedState = ref.watch(profileFeedControllerProvider);
     final connections = ref.watch(connectionsProvider);
 
@@ -86,25 +84,25 @@ class Profile extends ConsumerWidget {
           ],
           const _PaddedWidget(child: NavProfile()),
           const SliverToBoxAdapter(child: SizedBox(height: 1)),
-          feedState.when(
-            data: (posts) => _buildTabContent(selectedTab, posts, interactions, connections),
-            loading: () => const SliverToBoxAdapter(
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            error: (error, stack) => SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text('Error al cargar publicaciones: $error'),
-              ),
-            ),
-          ),
+          //feedState.when(
+          //data: (posts) => _buildTabContent(selectedTab, //posts, interactions, connections),
+          //loading: () => const SliverToBoxAdapter(
+          //child: Center(child: CircularProgressIndicator()),
+          //),
+          //error: (error, stack) => SliverToBoxAdapter(
+          //child: Padding(
+          // padding: const EdgeInsets.all(16),
+//child: Text('Error al cargar publicaciones: $error'),
+          //),
+          //),
+          //),
         ],
       ),
     );
   }
 
-  Widget _buildTabContent(
-      int selectedTab, List<Post> publications, List interactions, List connections) {
+  Widget _buildTabContent(int selectedTab, List<Post> publications,
+      List interactions, List connections) {
     switch (selectedTab) {
       case 0:
         return _buildSliverList<Post>(
