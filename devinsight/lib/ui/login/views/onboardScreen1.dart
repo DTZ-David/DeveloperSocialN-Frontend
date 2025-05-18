@@ -1,3 +1,4 @@
+import 'package:devinsight/services/login/profile_service.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +18,7 @@ class OnboardingPage1 extends ConsumerStatefulWidget {
 class _OnboardingPage1State extends ConsumerState<OnboardingPage1> {
   final TextEditingController _bioController = TextEditingController();
   XFile? _profileImage;
+  String? imageUrl;
 
   // Common text styles
   static const TextStyle _titleStyle = TextStyle(
@@ -45,7 +47,6 @@ class _OnboardingPage1State extends ConsumerState<OnboardingPage1> {
     fontWeight: FontWeight.bold,
   );
 
-  // Method to select an image
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
@@ -153,12 +154,22 @@ class _OnboardingPage1State extends ConsumerState<OnboardingPage1> {
     );
   }
 
-  void _onContinuePressed() {
+  void _onContinuePressed() async {
     final bio = _bioController.text;
-    final profileImage = _profileImage?.path ?? '';
+    final profileImage = _profileImage;
 
     ref.read(registerProvider.notifier).setBio(bio);
-    ref.read(registerProvider.notifier).setProfilePicture(profileImage);
+
+    if (profileImage != null) {
+      final uploadedUrl = await uploadImageToSupabase(profileImage);
+      if (uploadedUrl != null) {
+        ref.read(registerProvider.notifier).setProfilePicture(uploadedUrl);
+      } else {
+        // Si falló la subida, puedes mostrar un snackbar o alert
+        print('Error al subir la imagen');
+        return;
+      }
+    }
 
     ref.read(appRouterProvider).go(AppRouter.onboard2);
   }

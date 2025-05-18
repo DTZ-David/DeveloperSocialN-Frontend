@@ -1,3 +1,5 @@
+import 'package:devinsight/config/providers/pub_refactor_provider.dart';
+import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +9,8 @@ class Publications extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final posts = ref.watch(postRefactorProvider);
+
     return Scaffold(
       appBar: AppBar(
         shadowColor: AppColors.tertiaryColors,
@@ -31,21 +35,40 @@ class Publications extends ConsumerWidget {
         ],
       ),
       backgroundColor: const Color.fromARGB(255, 21, 20, 20),
-      body: const Center(
+      body: Center(
           child: Padding(
-        padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-        child: Column(
-            // children: [
-            //   PublicationsCard(
-            //     userName: "user_name",
-            //     sentAt: "sent_at",
-            //     userIcon:
-            //         "https://images.squarespace-cdn.com/content/v1/5e10bdc20efb8f0d169f85f9/09943d85-b8c7-4d64-af31-1a27d1b76698/arrow.png",
-            //     description: "description",
-            //   ),
-          //],
-        ),
-      )),
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  await ref.read(postRefactorProvider.notifier).loadPosts();
+
+                  // SnackBar para confirmar la actualización
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Feed actualizado'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
+                child: posts.isEmpty
+                    ? const Center(
+                        child: CircularProgressIndicator()) // o un mensaje
+                    : ListView.builder(
+                        padding: const EdgeInsets.all(10),
+                        itemCount: posts.length,
+                        itemBuilder: (context, index) {
+                          final post = posts[index];
+                          print(post);
+                          return Column(
+                            children: [
+                              PublicationsCard(
+                                  post: post), // Ya usa PostRefactor
+                              const SizedBox(height: 4),
+                            ],
+                          );
+                        },
+                      ),
+              ))),
     );
   }
 }

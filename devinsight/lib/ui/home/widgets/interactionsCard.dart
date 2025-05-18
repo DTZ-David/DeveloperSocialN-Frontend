@@ -1,17 +1,15 @@
+import 'package:devinsight/models/publication/comment_refactor.dart';
 import 'package:devinsight/ui/home/widgets/optionsDialog.dart';
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class InteractionCard extends StatelessWidget {
-  final String tipo;
-  final String id;
-  final String mensaje;
+  final CommentRefactor comment;
 
   const InteractionCard({
     super.key,
-    required this.tipo,
-    required this.id,
-    required this.mensaje,
+    required this.comment,
   });
 
   @override
@@ -19,8 +17,8 @@ class InteractionCard extends StatelessWidget {
     Color color;
     Widget iconWidget;
 
-    switch (tipo.toLowerCase()) {
-      case 'mejora':
+    switch (comment.type.toLowerCase()) {
+      case 'careful':
         color = Colors.amber;
         iconWidget = SvgPicture.asset(
           'assets/icons/careful.svg',
@@ -29,7 +27,7 @@ class InteractionCard extends StatelessWidget {
           color: color,
         );
         break;
-      case 'comentarios':
+      case 'comment':
         color = Colors.lightBlue;
         iconWidget = SvgPicture.asset(
           'assets/icons/comments.svg',
@@ -38,7 +36,7 @@ class InteractionCard extends StatelessWidget {
           color: color,
         );
         break;
-      case 'confirmacion':
+      case 'verify':
         color = Colors.green;
         iconWidget = SvgPicture.asset(
           'assets/icons/verified.svg',
@@ -55,11 +53,10 @@ class InteractionCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       child: Card(
-        color: Colors.black,
+        color: AppColors.thirdColors,
         margin: EdgeInsets.zero,
         elevation: 2,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(
@@ -68,19 +65,22 @@ class InteractionCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  iconWidget,
+                  CircleAvatar(
+                    radius: 14,
+                    backgroundImage: NetworkImage(comment.authorProfilePic),
+                  ),
                   const SizedBox(width: 8),
-                  Text(
-                    tipo,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: color,
-                      fontFamily: 'Montserrat',
+                  Expanded(
+                    child: Text(
+                      comment.authorName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
                   ),
-                  const Spacer(),
                   Text(
-                    '#$id',
+                    '#${comment.commentId}',
                     style: const TextStyle(
                       color: Colors.blueAccent,
                       fontFamily: 'Montserrat',
@@ -99,15 +99,37 @@ class InteractionCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              Text(mensaje,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Montserrat',
-                  )),
+              Row(
+                children: [
+                  iconWidget,
+                  const Spacer(),
+                  Text(
+                    _formatDate(comment.sentAt),
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                comment.description,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  static String _formatDate(DateTime date) {
+    // Simple date formatting, adjust as needed
+    return '${date.day}/${date.month}/${date.year}';
   }
 }

@@ -1,5 +1,7 @@
+import 'package:devinsight/config/providers/comment_refactor_provider.dart';
 import 'package:devinsight/config/providers/interaction_provider.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,7 +11,7 @@ class CommentModal extends ConsumerWidget {
     return await showModalBottomSheet<Map<String, String>>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.thirdColors,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -26,7 +28,7 @@ class CommentModal extends ConsumerWidget {
       'assets/icons/careful.svg': 'Mejora',
       'assets/icons/verified.svg': 'Verificar',
     };
-    final interactions = ref.watch(interactionsProvider);
+    final comments = ref.watch(commentRefactorProvider);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -55,19 +57,38 @@ class CommentModal extends ConsumerWidget {
 
               // Interactions list
               Flexible(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: interactions.length,
-                  itemBuilder: (context, index) {
-                    final interaction = interactions[index];
-                    return InteractionCard(
-                      tipo: interaction['tipo'],
-                      id: interaction['id'],
-                      mensaje: interaction['mensaje'],
+                  child: RefreshIndicator(
+                onRefresh: () async {
+                  // Fuerza la recarga del provider
+                  // ignore: unused_result
+                  await ref.refresh(commentRefactorProvider.future);
+
+                  // SnackBar opcional
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Comentarios actualizados'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
+                child: comments.when(
+                  data: (commentsList) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics:
+                          const AlwaysScrollableScrollPhysics(), // Necesario para que funcione el swipe
+                      itemCount: commentsList.length,
+                      itemBuilder: (context, index) {
+                        final comment = commentsList[index];
+                        return InteractionCard(comment: comment);
+                      },
                     );
                   },
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (error, stack) => Center(child: Text('Error: $error')),
                 ),
-              ),
+              )),
 
               const SizedBox(height: 12),
 
