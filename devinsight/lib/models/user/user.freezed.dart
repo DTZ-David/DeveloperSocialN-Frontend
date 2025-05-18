@@ -20,7 +20,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get profilePicture => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String username,
       String email,
       String profilePicture,
@@ -79,7 +79,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -116,7 +116,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String username,
       String email,
       String profilePicture,
@@ -149,7 +149,7 @@ class __$$UserImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -194,7 +194,7 @@ class _$UserImpl implements _User {
       _$$UserImplFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   @JsonKey()
   final String username;
@@ -260,7 +260,7 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final int id,
+      {required final String id,
       final String username,
       final String email,
       final String profilePicture,
@@ -271,7 +271,7 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get username;
   @override

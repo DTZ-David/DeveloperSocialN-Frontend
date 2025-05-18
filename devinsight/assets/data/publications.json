@@ -1,5 +1,6 @@
 [
   {
+    "id": "404040",
     "authorId": "42",
     "fechaPublicacion": "2025-10-01T12:00:00Z",
     "profilePicture": "https://1millionbot.com/wp-content/uploads/2023/03/ChatGPT_logo.png",
@@ -16,6 +17,7 @@
     "comments": []
   },
   {
+    "id": "404041",
     "authorId": "17",
     "fechaPublicacion": "2025-09-15T09:30:00Z",
     "profilePicture": "https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/check.png",
@@ -32,6 +34,7 @@
     "comments": []
   },
   {
+    "id": "404042",
     "authorId": "23",
     "fechaPublicacion": "2025-08-22T16:45:00Z",
     "profilePicture": "https://static.wikia.nocookie.net/esgta/images/4/46/Luc%C3%ADa_GTA-VI.png/revision/latest?cb=20231205030613",
@@ -48,6 +51,7 @@
     "comments": []
   },
   {
+    "id": "404043",
     "authorId": "8",
     "fechaPublicacion": "2025-07-10T14:20:00Z",
     "profilePicture": "https://static.wikia.nocookie.net/disney/images/6/6a/Miguel.png/revision/latest?cb=20171124050021&path-prefix=es",
@@ -64,6 +68,7 @@
     "comments": []
   },
   {
+    "id": "404044",
     "authorId": "31",
     "fechaPublicacion": "2025-06-05T11:10:00Z",
     "profilePicture": "https://www.onic.org.co/images/noticias/2017/09/IMG_6866.jpg",
