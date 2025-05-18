@@ -27,4 +27,6 @@ class FeedController extends StateNotifier<AsyncValue<List<Post>>> {
       state = AsyncValue.error(e, stackTrace);
     }
   }
+
+  
 }
