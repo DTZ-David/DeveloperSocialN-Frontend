@@ -1,0 +1,62 @@
+[
+  {
+    "commentId": "10202A",
+    "postId": "404040",
+    "authorId": "123123",
+    "type": "careful",
+    "description": "Seria bueno refactorizar la linea del Print",
+    "authorProfilePic": "https://picsum.photos/id/8/367/267",
+    "authorName": "Ssaylem Murillo",
+    "sentAt": "2025-07-10T14:20:00Z"
+  },
+  {
+    "commentId": "10202B",
+    "postId": "404040",
+    "authorId": "456456",
+    "type": "verify",
+    "description": "Buen trabajo, el código es muy limpio.",
+    "authorProfilePic": "https://picsum.photos/id/1/367/267",
+    "authorName": "Ana Torres",
+    "sentAt": "2025-07-10T15:10:00Z"
+  },
+  {
+    "commentId": "10202C",
+    "postId": "404040",
+    "authorId": "789789",
+    "type": "comment",
+    "description": "¿Por qué se eligió este enfoque para la función?",
+    "authorProfilePic": "https://picsum.photos/id/10/367/267",
+    "authorName": "Luis Fernández",
+    "sentAt": "2025-07-10T16:05:00Z"
+  },
+  {
+    "commentId": "10202D",
+    "postId": "404040",
+    "authorId": "321321",
+    "type": "careful",
+    "description": "Quizás podríamos usar un bucle for aquí en vez de while.",
+    "authorProfilePic": "https://picsum.photos/id/11/367/267",
+    "authorName": "María López",
+    "sentAt": "2025-07-10T16:45:00Z"
+  },
+  {
+    "commentId": "10202E",
+    "postId": "404040",
+    "authorId": "654654",
+    "type": "careful",
+    "description": "Cuidado con los posibles valores nulos en esta variable.",
+    "authorProfilePic": "https://picsum.photos/id/12/367/267",
+    "authorName": "Carlos Ruiz",
+    "sentAt": "2025-07-10T17:30:00Z"
+  },
+  {
+    "commentId": "112312A",
+    "postId": "404041",
+    "authorId": "123123",
+    "type": "careful",
+    "description": "Corrige todo el codigo, eso esta muy malo",
+    "authorProfilePic": "https://picsum.photos/id/8/367/267",
+    "authorName": "Ssaylem Murillo",
+    "sentAt": "2025-07-10T14:20:00Z"
+  }
+]

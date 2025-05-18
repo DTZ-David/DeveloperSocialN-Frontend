@@ -85,13 +85,14 @@ class Profile extends ConsumerWidget {
           const _PaddedWidget(child: NavProfile()),
           const SliverToBoxAdapter(child: SizedBox(height: 1)),
           feedState.when(
-            data: (posts) => _buildTabContent(selectedTab, posts, interactions, connections),
+            data: (posts) =>
+                _buildTabContent(selectedTab, posts, interactions, connections),
             loading: () => const SliverToBoxAdapter(
               child: Center(child: CircularProgressIndicator()),
             ),
             error: (error, stack) => SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Text('Error al cargar publicaciones: $error'),
               ),
             ),
@@ -101,8 +102,8 @@ class Profile extends ConsumerWidget {
     );
   }
 
-  Widget _buildTabContent(
-      int selectedTab, List<Post> publications, List interactions, List connections) {
+  Widget _buildTabContent(int selectedTab, List<Post> publications,
+      List interactions, List connections) {
     switch (selectedTab) {
       case 0:
         return _buildSliverList<Post>(
@@ -112,15 +113,15 @@ class Profile extends ConsumerWidget {
           ),
         );
 
-      case 1:
-        return _buildSliverList(
-          interactions,
-          (data) => InteractionCard(
-            tipo: data['tipo'],
-            id: data['id'],
-            mensaje: data['mensaje'],
-          ),
-        );
+      //case 1:
+      //return _buildSliverList(
+      // interactions,
+      //(data) => InteractionCard(
+      //  tipo: data['tipo'],
+      //  id: data['id'],
+      //  mensaje: data['mensaje'],
+      //  ),
+      // );
       case 2:
         return const SliverFillRemaining(
             child: UserList(

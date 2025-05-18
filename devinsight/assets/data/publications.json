@@ -1,66 +1,82 @@
 [
   {
-    "postId": "1",
     "authorId": "42",
-    "sentAt": "2025-10-01T12:00:00Z",
-    "profilePicture": "https://cdn.example.com/avatar.png",
-    "authorUsername": "Ssaylem Murillo",
+    "fechaPublicacion": "2025-10-01T12:00:00Z",
+    "profilePicture": "https://1millionbot.com/wp-content/uploads/2023/03/ChatGPT_logo.png",
+    "userName": "Ssaylem Murillo",
     "description": "Esto es un código de ejemplo.",
     "tags": ["#flutter", "#dart"],
     "codeSnippet": "void main() {\n  final names = ['Alice', 'Bob', 'Charlie', 'David', 'Eve'];\n  for (var name in names) {\n    print('Hola $name');\n  }\n\n  int fibonacci(int n) {\n    if (n <= 1) return n;\n    return fibonacci(n - 1) + fibonacci(n - 2);\n  }\n\n  for (int i = 0; i < 10; i++) {\n    print('fibonacci($i) = ${fibonacci(i)}');\n  }\n\n  var map = {\n    'nombre': 'Ssaylem',\n    'lenguaje': 'Dart',\n    'nivel': 'Avanzado'\n  };\n\n  map.forEach((clave, valor) {\n    print('$clave: $valor');\n  });\n\n  try {\n    throw Exception('Error de ejemplo');\n  } catch (e) {\n    print('Ocurrió un error: $e');\n  }\n}",
     "codeLanguage": "dart",
     "shares": 3,
-    "reactionCounts": {
+    "reactions": {
       "careful": 32,
       "verified": 21
-    }
+    },
+    "comments": []
   },
   {
-    "postId": "2",
-    "authorId": "42",
-    "sentAt": "2025-01-05T14:00:00Z",
-    "profilePicture": "https://cdn.example.com/avatar2.png",
-    "authorUsername": "Ssaylem Murillo",
-    "description": "Un ejemplo de código en Python.",
-    "tags": ["#python", "#example"],
-    "codeSnippet": "def quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)\n\nprint('Quicksort Example:')\nexample_array = [3, 6, 8, 10, 1, 2, 1]\nprint('Original Array:', example_array)\nprint('Sorted Array:', quicksort(example_array))\n\n# Fibonacci sequence generator\ndef fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b\n\nprint('\\nFibonacci Sequence:')\nfor num in fibonacci(10):\n    print(num)\n\n# Factorial calculation\ndef factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)\n\nprint('\\nFactorial Example:')\nnumber = 5\nprint(f'Factorial of {number}:', factorial(number))\n\n# Matrix multiplication example\ndef matrix_multiply(A, B):\n    result = [[sum(a * b for a, b in zip(A_row, B_col)) for B_col in zip(*B)] for A_row in A]\n    return result\n\nmatrix1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nmatrix2 = [[9, 8, 7], [6, 5, 4], [3, 2, 1]]\nprint('\\nMatrix Multiplication Example:')\nprint('Matrix 1:', matrix1)\nprint('Matrix 2:', matrix2)\nprint('Result:', matrix_multiply(matrix1, matrix2))\n\n# Error handling example\ntry:\n    x = 10 / 0\nexcept ZeroDivisionError as e:\n    print('\\nError Handling Example:')\n    print('Caught an exception:', e)\n\n# File handling example\nprint('\\nFile Handling Example:')\nwith open('example.txt', 'w') as file:\n    file.write('This is an example file.')\n\nwith open('example.txt', 'r') as file:\n    content = file.read()\n    print('File Content:', content)\n\n# Cleanup\nimport os\nos.remove('example.txt')",
-    "codeLanguage": "python",
+    "authorId": "17",
+    "fechaPublicacion": "2025-09-15T09:30:00Z",
+    "profilePicture": "https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/check.png",
+    "userName": "Carlos Pérez",
+    "description": "Ejemplo de uso de promesas en JavaScript.",
+    "tags": ["#javascript", "#async"],
+    "codeSnippet": "function fetchData() {\n  return new Promise((resolve, reject) => {\n    setTimeout(() => {\n      resolve('Datos recibidos');\n    }, 1000);\n  });\n}\n\nfetchData().then(data => {\n  console.log(data);\n}).catch(error => {\n  console.error(error);\n});",
+    "codeLanguage": "javascript",
     "shares": 5,
-    "reactionCounts": {
+    "reactions": {
       "careful": 15,
       "verified": 10
-    }
+    },
+    "comments": []
   },
   {
-    "postId": "3",
-    "authorId": "42",
-    "sentAt": "2025-02-03T16:00:00Z",
-    "profilePicture": "https://cdn.example.com/avatar3.png",
-    "authorUsername": "Ssaylem Murillo",
-    "description": "Snippet de JavaScript para principiantes.",
-    "tags": ["#javascript", "#beginner"],
-    "codeSnippet": "console.log('Hello, world!');",
-    "codeLanguage": "javascript",
-    "shares": 8,
-    "reactionCounts": {
-      "careful": 20,
-      "verified": 25
-    }
-  },
-  {
-    "postId": "4",
-    "authorId": "45",
-    "sentAt": "2023-10-04T18:00:00Z",
-    "profilePicture": "https://cdn.example.com/avatar4.png",
-    "authorUsername": "Techie",
-    "description": "Ejemplo de código en Java.",
-    "tags": ["#java", "#example"],
-    "codeSnippet": "System.out.println('Hello, world!');",
-    "codeLanguage": "java",
+    "authorId": "23",
+    "fechaPublicacion": "2025-08-22T16:45:00Z",
+    "profilePicture": "https://static.wikia.nocookie.net/esgta/images/4/46/Luc%C3%ADa_GTA-VI.png/revision/latest?cb=20231205030613",
+    "userName": "Lucía Gómez",
+    "description": "Consulta básica en SQL para obtener usuarios activos.",
+    "tags": ["#sql", "#database"],
+    "codeSnippet": "SELECT id, nombre, email\nFROM usuarios\nWHERE estado = 'activo';",
+    "codeLanguage": "sql",
     "shares": 2,
-    "reactionCounts": {
-      "careful": 12,
-      "verified": 8
-    }
+    "reactions": {
+      "careful": 8,
+      "verified": 14
+    },
+    "comments": []
+  },
+  {
+    "authorId": "8",
+    "fechaPublicacion": "2025-07-10T14:20:00Z",
+    "profilePicture": "https://static.wikia.nocookie.net/disney/images/6/6a/Miguel.png/revision/latest?cb=20171124050021&path-prefix=es",
+    "userName": "Miguel Torres",
+    "description": "Cómo crear un componente funcional en React.",
+    "tags": ["#react", "#javascript"],
+    "codeSnippet": "import React from 'react';\n\nfunction Saludo(props) {\n  return <h1>Hola, {props.nombre}!</h1>;\n}\n\nexport default Saludo;",
+    "codeLanguage": "javascript",
+    "shares": 4,
+    "reactions": {
+      "careful": 19,
+      "verified": 17
+    },
+    "comments": []
+  },
+  {
+    "authorId": "31",
+    "fechaPublicacion": "2025-06-05T11:10:00Z",
+    "profilePicture": "https://www.onic.org.co/images/noticias/2017/09/IMG_6866.jpg",
+    "userName": "Ana Martínez",
+    "description": "Ejemplo de función recursiva en Python.",
+    "tags": ["#python", "#recursion"],
+    "codeSnippet": "def factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n-1)\n\nprint(factorial(5))",
+    "codeLanguage": "python",
+    "shares": 6,
+    "reactions": {
+      "careful": 23,
+      "verified": 20
+    },
+    "comments": []
   }
 ]

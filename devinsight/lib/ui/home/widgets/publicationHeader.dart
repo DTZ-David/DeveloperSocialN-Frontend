@@ -5,16 +5,15 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
 
 String formatSentAt(String sentAtString) {
-  final dateTime = DateFormat('d/M/yyyy HH:mm:ss').parse(sentAtString).toLocal();
+  final dateTime =
+      DateTime.parse(sentAtString).toLocal(); // ✅ Aquí está el cambio
   final now = DateTime.now();
 
   final difference = now.difference(dateTime);
 
   if (difference.inHours < 24) {
-    // Si es hoy, muestra la hora con AM/PM
     return DateFormat('hh:mm a').format(dateTime);
   } else {
-    // Si no, usa timeago
     return timeago.format(dateTime, locale: 'es');
   }
 }
@@ -74,7 +73,8 @@ class PublicationHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3.0),
             child: GestureDetector(
               onTap: () => {
-                showDialog(context: context, builder: (_) => const OptionsDialog()),
+                showDialog(
+                    context: context, builder: (_) => const OptionsDialog()),
               },
               child: SvgPicture.asset(
                 'assets/icons/verticaldots.svg',

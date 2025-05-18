@@ -4,10 +4,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'config/routers/app_router.dart';
 import 'config/themes/theme_storage.dart';
 import 'services/devinsight/storage_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageService.init();
+  await Supabase.initialize(
+    url: 'https://syualocxozmdyoxfqkfn.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5dWFsb2N4b3ptZHlveGZxa2ZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNjIzMDUsImV4cCI6MjA1ODczODMwNX0.ppp723ujDjQMWaoRxYcZqH2AXwJbyTjrbTgUVovR1v8',
+  );
   //await dotenv.load(fileName: '.env');
   runApp(
     const ProviderScope(
