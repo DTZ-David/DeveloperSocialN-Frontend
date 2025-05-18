@@ -17,6 +17,7 @@ import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:devinsight/config/providers/pub_refactor_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../config/providers/auth_provider.dart';
 import '../../../controller/profileFeedController.dart';
 
 const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
@@ -41,6 +42,7 @@ class Profile extends ConsumerWidget {
     final interactions = ref.watch(interactionsProvider);
     final feedState = ref.watch(profileFeedControllerProvider);
     final connections = ref.watch(connectionsProvider);
+
     ref.watch(mediaProvider);
 
     return Scaffold(
@@ -85,8 +87,7 @@ class Profile extends ConsumerWidget {
           const _PaddedWidget(child: NavProfile()),
           const SliverToBoxAdapter(child: SizedBox(height: 1)),
           feedState.when(
-            data: (posts) =>
-                _buildTabContent(selectedTab, posts, interactions, connections),
+            data: (posts) => _buildTabContent(selectedTab, posts, interactions, connections),
             loading: () => const SliverToBoxAdapter(
               child: Center(child: CircularProgressIndicator()),
             ),
@@ -102,8 +103,8 @@ class Profile extends ConsumerWidget {
     );
   }
 
-  Widget _buildTabContent(int selectedTab, List<Post> publications,
-      List interactions, List connections) {
+  Widget _buildTabContent(
+      int selectedTab, List<Post> publications, List interactions, List connections) {
     switch (selectedTab) {
       case 0:
         return _buildSliverList<Post>(
@@ -150,7 +151,7 @@ class Profile extends ConsumerWidget {
   }
 }
 
-class UserProfile extends StatelessWidget {
+class UserProfile extends ConsumerWidget {
   final String bannerUrl;
   final String profileImageUrl;
   final bool showSocialButton;
@@ -163,7 +164,8 @@ class UserProfile extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.read(authProvider).user;
     return SliverToBoxAdapter(
       child: Padding(
         padding: _horizontalPadding,
@@ -189,14 +191,14 @@ class UserProfile extends StatelessWidget {
                 bottom: -40,
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: NetworkImage(profileImageUrl),
+                  backgroundImage: NetworkImage(user.profilePicture),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 bottom: -70,
                 child: Text(
-                  'Ssaylem Murillo',
-                  style: TextStyle(
+                  user.username,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
                     fontSize: 15,

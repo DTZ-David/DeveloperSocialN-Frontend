@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
-
+/*
 String formatSentAt(String sentAtString) {
   final dateTime =
-      DateTime.parse(sentAtString).toLocal(); // ✅ Aquí está el cambio
+      DateTime.parse(sentAtString).toLocal(); 
   final now = DateTime.now();
 
   final difference = now.difference(dateTime);
@@ -16,7 +16,7 @@ String formatSentAt(String sentAtString) {
   } else {
     return timeago.format(dateTime, locale: 'es');
   }
-}
+}*/
 
 class PublicationHeader extends StatelessWidget {
   final String userName;
@@ -57,7 +57,7 @@ class PublicationHeader extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    formatSentAt(sentAt),
+                    (sentAt),
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 12,
@@ -73,8 +73,7 @@ class PublicationHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3.0),
             child: GestureDetector(
               onTap: () => {
-                showDialog(
-                    context: context, builder: (_) => const OptionsDialog()),
+                showDialog(context: context, builder: (_) => const OptionsDialog()),
               },
               child: SvgPicture.asset(
                 'assets/icons/verticaldots.svg',
