@@ -12,7 +12,7 @@ class AuthState {
 }
 
 class AuthNotifier extends StateNotifier<AuthState> {
-  AuthNotifier() : super(AuthState(user: const User(id: 0), token: ''));
+  AuthNotifier() : super(AuthState(user: const User(id: "0"), token: ''));
 
   void setUser(User user) {
     state = AuthState(user: user, token: state.token);
@@ -23,7 +23,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   void clear() {
-    state = AuthState(user: const User(id: 0), token: '');
+    state = AuthState(user: const User(id: "0"), token: '');
   }
 }
 

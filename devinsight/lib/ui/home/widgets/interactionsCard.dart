@@ -1,11 +1,12 @@
-import 'package:devinsight/models/publication/comment_refactor.dart';
+import 'package:devinsight/models/publication/comment.dart';
+import 'package:devinsight/models/publication/comment_request.dart';
 import 'package:devinsight/ui/home/widgets/optionsDialog.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class InteractionCard extends StatelessWidget {
-  final CommentRefactor comment;
+  final Comment comment;
 
   const InteractionCard({
     super.key,
@@ -17,7 +18,7 @@ class InteractionCard extends StatelessWidget {
     Color color;
     Widget iconWidget;
 
-    switch (comment.type.toLowerCase()) {
+    switch (comment.interactionType.toLowerCase()) {
       case 'careful':
         color = Colors.amber;
         iconWidget = SvgPicture.asset(
@@ -70,23 +71,29 @@ class InteractionCard extends StatelessWidget {
                     backgroundImage: NetworkImage(comment.authorProfilePic),
                   ),
                   const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      comment.authorName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat',
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        comment.userName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat',
+                        ),
                       ),
-                    ),
-                  ),
-                  Text(
-                    '#${comment.commentId}',
-                    style: const TextStyle(
-                      color: Colors.blueAccent,
-                      fontFamily: 'Montserrat',
-                    ),
+                      Text(
+                        _formatDate(comment.sentAt),
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(width: 8),
+                  const Spacer(),
                   GestureDetector(
                     onTap: () {
                       showDialog(
@@ -102,24 +109,17 @@ class InteractionCard extends StatelessWidget {
               Row(
                 children: [
                   iconWidget,
-                  const Spacer(),
-                  Text(
-                    _formatDate(comment.sentAt),
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                      fontFamily: 'Montserrat',
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      comment.commentText,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(height: 8),
-              Text(
-                comment.description,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Montserrat',
-                ),
               ),
             ],
           ),

@@ -7,8 +7,14 @@ part 'comment.g.dart';
 class Comment with _$Comment {
   const factory Comment({
     required String id,
-    required String authorId,
-    required String comment,
+      required String postId,
+      required String authorId,
+      required String interactionType,
+      required String commentText,
+      required String authorProfilePic,
+      required String userName,
+      required DateTime sentAt,
+      required bool isOwnComment
   }) = _Comment;
 
   factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
