@@ -17,6 +17,7 @@ import 'package:devinsight/config/providers/pub_refactor_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../config/providers/auth_provider.dart';
+import '../../../config/providers/interactios_provider.dart';
 import '../../../controller/profileFeedController.dart';
 
 const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
@@ -40,7 +41,7 @@ class Profile extends ConsumerWidget {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final feedState = ref.watch(profileFeedControllerProvider);
     final connections = ref.watch(connectionsProvider);
-
+    final interactions = ref.watch(interactionsProvider);
     ref.watch(mediaProvider);
 
     return Scaffold(
@@ -84,25 +85,25 @@ class Profile extends ConsumerWidget {
           ],
           const _PaddedWidget(child: NavProfile()),
           const SliverToBoxAdapter(child: SizedBox(height: 1)),
-          //feedState.when(
-          //data: (posts) => _buildTabContent(selectedTab, //posts, interactions, connections),
-          //loading: () => const SliverToBoxAdapter(
-          //child: Center(child: CircularProgressIndicator()),
-          //),
-          //error: (error, stack) => SliverToBoxAdapter(
-          //child: Padding(
-          // padding: const EdgeInsets.all(16),
-//child: Text('Error al cargar publicaciones: $error'),
-          //),
-          //),
-          //),
+          feedState.when(
+            data: (posts) => _buildTabContent(selectedTab, posts, interactions, connections),
+            loading: () => const SliverToBoxAdapter(
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (error, stack) => SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text('Error al cargar publicaciones: $error'),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 
-  Widget _buildTabContent(int selectedTab, List<Post> publications,
-      List interactions, List connections) {
+  Widget _buildTabContent(
+      int selectedTab, List<Post> publications, List interactions, List connections) {
     switch (selectedTab) {
       case 0:
         return _buildSliverList<Post>(
