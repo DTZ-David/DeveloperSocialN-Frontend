@@ -1,6 +1,5 @@
 import 'package:devinsight/config/providers/auth_provider.dart';
 import 'package:devinsight/config/providers/comment_refactor_provider.dart';
-import 'package:devinsight/models/publication/comment.dart';
 import 'package:devinsight/models/publication/comment_request.dart';
 import 'package:devinsight/models/user/user.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
@@ -9,13 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../config/providers/comment_request_provider.dart';
+
 class CommentModal extends ConsumerWidget {
   final String postId;
 
   const CommentModal({super.key, required this.postId});
 
-  static Future<Map<String, String>?> show(
-      BuildContext context, String postId) {
+  static Future<Map<String, String>?> show(BuildContext context, String postId) {
     return showModalBottomSheet<Map<String, String>>(
       context: context,
       isScrollControlled: true,
@@ -222,7 +222,7 @@ class _CommentModalContentState extends State<_CommentModalContent> {
 
               // Submit button
               GestureDetector(
-                onTap: () {
+                onTap: () async {
                   final comment = widget.commentController.text.trim();
 
                   if (comment.isNotEmpty) {
@@ -239,12 +239,25 @@ class _CommentModalContentState extends State<_CommentModalContent> {
                       commentText: comment,
                     );
 
-                    debugPrint(commentToSend.toString());
+                    final token = widget.ref.read(authProvider).token;
 
-                    // Aquí llamar al provider para enviarlo al backend
-                    // widget.ref.read(sendCommentProvider.notifier).send(commentToSend);
+                    try {
+                      // ⏳ Mostrar loading
+                      await widget.ref
+                          .read(sendCommentProvider.notifier)
+                          .send(commentToSend, token);
 
-                    Navigator.pop(context);
+                      widget.ref.invalidate(commentsByPostIdProvider(widget.postId));
+
+                      Navigator.pop(context);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Error al enviar comentario'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   }
                 },
                 child: Padding(
