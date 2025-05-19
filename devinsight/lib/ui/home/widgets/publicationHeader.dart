@@ -3,21 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
-
+/*
 String formatSentAt(String sentAtString) {
-  final dateTime = DateFormat('d/M/yyyy HH:mm:ss').parse(sentAtString).toLocal();
+  final dateTime =
+      DateTime.parse(sentAtString).toLocal(); 
   final now = DateTime.now();
 
   final difference = now.difference(dateTime);
 
   if (difference.inHours < 24) {
-    // Si es hoy, muestra la hora con AM/PM
     return DateFormat('hh:mm a').format(dateTime);
   } else {
-    // Si no, usa timeago
     return timeago.format(dateTime, locale: 'es');
   }
-}
+}*/
 
 class PublicationHeader extends StatelessWidget {
   final String userName;
@@ -58,7 +57,7 @@ class PublicationHeader extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    formatSentAt(sentAt),
+                    (sentAt),
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 12,

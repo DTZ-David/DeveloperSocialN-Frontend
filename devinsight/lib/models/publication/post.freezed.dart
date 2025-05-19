@@ -20,11 +20,11 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
+  String get id => throw _privateConstructorUsedError;
   String get authorId => throw _privateConstructorUsedError;
   String get fechaPublicacion => throw _privateConstructorUsedError;
   String get codeLanguage => throw _privateConstructorUsedError;
   String get codeSnippet => throw _privateConstructorUsedError;
-  List<Comment> get comments => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   int get shares =>
@@ -48,11 +48,11 @@ abstract class $PostCopyWith<$Res> {
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
   $Res call(
-      {String authorId,
+      {String id,
+      String authorId,
       String fechaPublicacion,
       String codeLanguage,
       String codeSnippet,
-      List<Comment> comments,
       String description,
       List<String> tags,
       int shares,
@@ -76,11 +76,11 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? authorId = null,
     Object? fechaPublicacion = null,
     Object? codeLanguage = null,
     Object? codeSnippet = null,
-    Object? comments = null,
     Object? description = null,
     Object? tags = null,
     Object? shares = null,
@@ -89,6 +89,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? reactions = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       authorId: null == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
@@ -105,10 +109,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.codeSnippet
           : codeSnippet // ignore: cast_nullable_to_non_nullable
               as String,
-      comments: null == comments
-          ? _value.comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -145,11 +145,11 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String authorId,
+      {String id,
+      String authorId,
       String fechaPublicacion,
       String codeLanguage,
       String codeSnippet,
-      List<Comment> comments,
       String description,
       List<String> tags,
       int shares,
@@ -170,11 +170,11 @@ class __$$PostImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? authorId = null,
     Object? fechaPublicacion = null,
     Object? codeLanguage = null,
     Object? codeSnippet = null,
-    Object? comments = null,
     Object? description = null,
     Object? tags = null,
     Object? shares = null,
@@ -183,6 +183,10 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? reactions = null,
   }) {
     return _then(_$PostImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       authorId: null == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
@@ -199,10 +203,6 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.codeSnippet
           : codeSnippet // ignore: cast_nullable_to_non_nullable
               as String,
-      comments: null == comments
-          ? _value._comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -235,24 +235,25 @@ class __$$PostImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PostImpl implements _Post {
   const _$PostImpl(
-      {required this.authorId,
+      {required this.id,
+      required this.authorId,
       required this.fechaPublicacion,
       required this.codeLanguage,
       required this.codeSnippet,
-      required final List<Comment> comments,
       required this.description,
       required final List<String> tags,
       this.shares = 0,
       required this.userName,
       required this.profilePicture,
       final Map<String, int> reactions = const {}})
-      : _comments = comments,
-        _tags = tags,
+      : _tags = tags,
         _reactions = reactions;
 
   factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostImplFromJson(json);
 
+  @override
+  final String id;
   @override
   final String authorId;
   @override
@@ -261,14 +262,6 @@ class _$PostImpl implements _Post {
   final String codeLanguage;
   @override
   final String codeSnippet;
-  final List<Comment> _comments;
-  @override
-  List<Comment> get comments {
-    if (_comments is EqualUnmodifiableListView) return _comments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_comments);
-  }
-
   @override
   final String description;
   final List<String> _tags;
@@ -298,7 +291,7 @@ class _$PostImpl implements _Post {
 
   @override
   String toString() {
-    return 'Post(authorId: $authorId, fechaPublicacion: $fechaPublicacion, codeLanguage: $codeLanguage, codeSnippet: $codeSnippet, comments: $comments, description: $description, tags: $tags, shares: $shares, userName: $userName, profilePicture: $profilePicture, reactions: $reactions)';
+    return 'Post(id: $id, authorId: $authorId, fechaPublicacion: $fechaPublicacion, codeLanguage: $codeLanguage, codeSnippet: $codeSnippet, description: $description, tags: $tags, shares: $shares, userName: $userName, profilePicture: $profilePicture, reactions: $reactions)';
   }
 
   @override
@@ -306,6 +299,7 @@ class _$PostImpl implements _Post {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.authorId, authorId) ||
                 other.authorId == authorId) &&
             (identical(other.fechaPublicacion, fechaPublicacion) ||
@@ -314,7 +308,6 @@ class _$PostImpl implements _Post {
                 other.codeLanguage == codeLanguage) &&
             (identical(other.codeSnippet, codeSnippet) ||
                 other.codeSnippet == codeSnippet) &&
-            const DeepCollectionEquality().equals(other._comments, _comments) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
@@ -331,11 +324,11 @@ class _$PostImpl implements _Post {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       authorId,
       fechaPublicacion,
       codeLanguage,
       codeSnippet,
-      const DeepCollectionEquality().hash(_comments),
       description,
       const DeepCollectionEquality().hash(_tags),
       shares,
@@ -361,11 +354,11 @@ class _$PostImpl implements _Post {
 
 abstract class _Post implements Post {
   const factory _Post(
-      {required final String authorId,
+      {required final String id,
+      required final String authorId,
       required final String fechaPublicacion,
       required final String codeLanguage,
       required final String codeSnippet,
-      required final List<Comment> comments,
       required final String description,
       required final List<String> tags,
       final int shares,
@@ -376,6 +369,8 @@ abstract class _Post implements Post {
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
 
   @override
+  String get id;
+  @override
   String get authorId;
   @override
   String get fechaPublicacion;
@@ -383,8 +378,6 @@ abstract class _Post implements Post {
   String get codeLanguage;
   @override
   String get codeSnippet;
-  @override
-  List<Comment> get comments;
   @override
   String get description;
   @override

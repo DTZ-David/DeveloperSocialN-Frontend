@@ -92,7 +92,7 @@ class PublicationsCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                 ],
-                ReactionsRow(reactionCounts: post.reactions),
+                ReactionsRow(reactionCounts: post.reactions, postId: post.id,),
                 const SizedBox(height: 8),
               ],
             ),

@@ -21,8 +21,14 @@ Comment _$CommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Comment {
   String get id => throw _privateConstructorUsedError;
+  String get postId => throw _privateConstructorUsedError;
   String get authorId => throw _privateConstructorUsedError;
-  String get comment => throw _privateConstructorUsedError;
+  String get interactionType => throw _privateConstructorUsedError;
+  String get commentText => throw _privateConstructorUsedError;
+  String get authorProfilePic => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  DateTime get sentAt => throw _privateConstructorUsedError;
+  bool get isOwnComment => throw _privateConstructorUsedError;
 
   /// Serializes this Comment to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +44,16 @@ abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res, Comment>;
   @useResult
-  $Res call({String id, String authorId, String comment});
+  $Res call(
+      {String id,
+      String postId,
+      String authorId,
+      String interactionType,
+      String commentText,
+      String authorProfilePic,
+      String userName,
+      DateTime sentAt,
+      bool isOwnComment});
 }
 
 /// @nodoc
@@ -57,22 +72,52 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   @override
   $Res call({
     Object? id = null,
+    Object? postId = null,
     Object? authorId = null,
-    Object? comment = null,
+    Object? interactionType = null,
+    Object? commentText = null,
+    Object? authorProfilePic = null,
+    Object? userName = null,
+    Object? sentAt = null,
+    Object? isOwnComment = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      postId: null == postId
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
       authorId: null == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
+      interactionType: null == interactionType
+          ? _value.interactionType
+          : interactionType // ignore: cast_nullable_to_non_nullable
               as String,
+      commentText: null == commentText
+          ? _value.commentText
+          : commentText // ignore: cast_nullable_to_non_nullable
+              as String,
+      authorProfilePic: null == authorProfilePic
+          ? _value.authorProfilePic
+          : authorProfilePic // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      sentAt: null == sentAt
+          ? _value.sentAt
+          : sentAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isOwnComment: null == isOwnComment
+          ? _value.isOwnComment
+          : isOwnComment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -84,7 +129,16 @@ abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
       __$$CommentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String authorId, String comment});
+  $Res call(
+      {String id,
+      String postId,
+      String authorId,
+      String interactionType,
+      String commentText,
+      String authorProfilePic,
+      String userName,
+      DateTime sentAt,
+      bool isOwnComment});
 }
 
 /// @nodoc
@@ -101,22 +155,52 @@ class __$$CommentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? postId = null,
     Object? authorId = null,
-    Object? comment = null,
+    Object? interactionType = null,
+    Object? commentText = null,
+    Object? authorProfilePic = null,
+    Object? userName = null,
+    Object? sentAt = null,
+    Object? isOwnComment = null,
   }) {
     return _then(_$CommentImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      postId: null == postId
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
       authorId: null == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
+      interactionType: null == interactionType
+          ? _value.interactionType
+          : interactionType // ignore: cast_nullable_to_non_nullable
               as String,
+      commentText: null == commentText
+          ? _value.commentText
+          : commentText // ignore: cast_nullable_to_non_nullable
+              as String,
+      authorProfilePic: null == authorProfilePic
+          ? _value.authorProfilePic
+          : authorProfilePic // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      sentAt: null == sentAt
+          ? _value.sentAt
+          : sentAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isOwnComment: null == isOwnComment
+          ? _value.isOwnComment
+          : isOwnComment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -125,7 +209,15 @@ class __$$CommentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CommentImpl implements _Comment {
   const _$CommentImpl(
-      {required this.id, required this.authorId, required this.comment});
+      {required this.id,
+      required this.postId,
+      required this.authorId,
+      required this.interactionType,
+      required this.commentText,
+      required this.authorProfilePic,
+      required this.userName,
+      required this.sentAt,
+      required this.isOwnComment});
 
   factory _$CommentImpl.fromJson(Map<String, dynamic> json) =>
       _$$CommentImplFromJson(json);
@@ -133,13 +225,25 @@ class _$CommentImpl implements _Comment {
   @override
   final String id;
   @override
+  final String postId;
+  @override
   final String authorId;
   @override
-  final String comment;
+  final String interactionType;
+  @override
+  final String commentText;
+  @override
+  final String authorProfilePic;
+  @override
+  final String userName;
+  @override
+  final DateTime sentAt;
+  @override
+  final bool isOwnComment;
 
   @override
   String toString() {
-    return 'Comment(id: $id, authorId: $authorId, comment: $comment)';
+    return 'Comment(id: $id, postId: $postId, authorId: $authorId, interactionType: $interactionType, commentText: $commentText, authorProfilePic: $authorProfilePic, userName: $userName, sentAt: $sentAt, isOwnComment: $isOwnComment)';
   }
 
   @override
@@ -148,14 +252,35 @@ class _$CommentImpl implements _Comment {
         (other.runtimeType == runtimeType &&
             other is _$CommentImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.authorId, authorId) ||
                 other.authorId == authorId) &&
-            (identical(other.comment, comment) || other.comment == comment));
+            (identical(other.interactionType, interactionType) ||
+                other.interactionType == interactionType) &&
+            (identical(other.commentText, commentText) ||
+                other.commentText == commentText) &&
+            (identical(other.authorProfilePic, authorProfilePic) ||
+                other.authorProfilePic == authorProfilePic) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
+            (identical(other.sentAt, sentAt) || other.sentAt == sentAt) &&
+            (identical(other.isOwnComment, isOwnComment) ||
+                other.isOwnComment == isOwnComment));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, authorId, comment);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      postId,
+      authorId,
+      interactionType,
+      commentText,
+      authorProfilePic,
+      userName,
+      sentAt,
+      isOwnComment);
 
   /// Create a copy of Comment
   /// with the given fields replaced by the non-null parameter values.
@@ -176,17 +301,35 @@ class _$CommentImpl implements _Comment {
 abstract class _Comment implements Comment {
   const factory _Comment(
       {required final String id,
+      required final String postId,
       required final String authorId,
-      required final String comment}) = _$CommentImpl;
+      required final String interactionType,
+      required final String commentText,
+      required final String authorProfilePic,
+      required final String userName,
+      required final DateTime sentAt,
+      required final bool isOwnComment}) = _$CommentImpl;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$CommentImpl.fromJson;
 
   @override
   String get id;
   @override
+  String get postId;
+  @override
   String get authorId;
   @override
-  String get comment;
+  String get interactionType;
+  @override
+  String get commentText;
+  @override
+  String get authorProfilePic;
+  @override
+  String get userName;
+  @override
+  DateTime get sentAt;
+  @override
+  bool get isOwnComment;
 
   /// Create a copy of Comment
   /// with the given fields replaced by the non-null parameter values.

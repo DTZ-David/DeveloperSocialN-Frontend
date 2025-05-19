@@ -4,8 +4,10 @@ import 'package:devinsight/ui/home/widgets/showModalBottomSheet.dart';
 
 class ReactionsRow extends StatelessWidget {
   final Map<String, int> reactionCounts;
+  final String postId;
 
-  const ReactionsRow({super.key, required this.reactionCounts});
+  const ReactionsRow(
+      {super.key, required this.reactionCounts, required this.postId});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,12 @@ class ReactionsRow extends StatelessWidget {
         'color': Colors.yellow,
         'label': 'careful',
         'count': reactionCounts['careful'] ?? 0,
+      },
+      {
+        'icon': 'assets/icons/comments.svg',
+        'color': Colors.blue,
+        'label': 'verified',
+        'count': reactionCounts['verified'] ?? 0,
       },
     ];
 
@@ -58,15 +66,7 @@ class ReactionsRow extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () async {
-              final comment = await CommentModal.show(context);
-              if (comment != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Comentario guardado'),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
-              }
+              final comment = await CommentModal.show(context, postId);
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
