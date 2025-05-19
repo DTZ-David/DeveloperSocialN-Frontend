@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devinsight/ui/home/screens/main_screen.dart';
 
+import '../../models/user/user.dart';
 import '../../ui/home/views/explorer.dart';
 import '../../ui/home/views/home.dart';
 import '../../ui/home/views/profile.dart';
@@ -61,8 +62,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: '/users/:id',
             name: 'user_profile',
             builder: (context, state) {
-              final userId = state.pathParameters['id']!;
-              return UsersProfileView(userId: userId);
+              final userMap = state.extra as Map<String, dynamic>;
+              final user = User.fromJson(userMap);
+              return UsersProfileView(user: user);
             },
           ),
         ],

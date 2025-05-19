@@ -10,10 +10,14 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
     _$UserDtoImpl(
       email: json['email'] as String,
       userName: json['userName'] as String,
+      profilePicture: json['profilePicture'] as String,
+      bio: json['bio'] as String,
     );
 
 Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
     <String, dynamic>{
       'email': instance.email,
       'userName': instance.userName,
+      'profilePicture': instance.profilePicture,
+      'bio': instance.bio,
     };

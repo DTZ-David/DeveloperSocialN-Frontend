@@ -22,6 +22,8 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 mixin _$UserDto {
   String get email => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  String get profilePicture => throw _privateConstructorUsedError;
+  String get bio => throw _privateConstructorUsedError;
 
   /// Serializes this UserDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +39,7 @@ abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res, UserDto>;
   @useResult
-  $Res call({String email, String userName});
+  $Res call({String email, String userName, String profilePicture, String bio});
 }
 
 /// @nodoc
@@ -57,6 +59,8 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
   $Res call({
     Object? email = null,
     Object? userName = null,
+    Object? profilePicture = null,
+    Object? bio = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -66,6 +70,14 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      profilePicture: null == profilePicture
+          ? _value.profilePicture
+          : profilePicture // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -78,7 +90,7 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       __$$UserDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String userName});
+  $Res call({String email, String userName, String profilePicture, String bio});
 }
 
 /// @nodoc
@@ -96,6 +108,8 @@ class __$$UserDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? userName = null,
+    Object? profilePicture = null,
+    Object? bio = null,
   }) {
     return _then(_$UserDtoImpl(
       email: null == email
@@ -106,6 +120,14 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      profilePicture: null == profilePicture
+          ? _value.profilePicture
+          : profilePicture // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -113,7 +135,11 @@ class __$$UserDtoImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserDtoImpl implements _UserDto {
-  const _$UserDtoImpl({required this.email, required this.userName});
+  const _$UserDtoImpl(
+      {required this.email,
+      required this.userName,
+      required this.profilePicture,
+      required this.bio});
 
   factory _$UserDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDtoImplFromJson(json);
@@ -122,10 +148,14 @@ class _$UserDtoImpl implements _UserDto {
   final String email;
   @override
   final String userName;
+  @override
+  final String profilePicture;
+  @override
+  final String bio;
 
   @override
   String toString() {
-    return 'UserDto(email: $email, userName: $userName)';
+    return 'UserDto(email: $email, userName: $userName, profilePicture: $profilePicture, bio: $bio)';
   }
 
   @override
@@ -135,12 +165,16 @@ class _$UserDtoImpl implements _UserDto {
             other is _$UserDtoImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.userName, userName) ||
-                other.userName == userName));
+                other.userName == userName) &&
+            (identical(other.profilePicture, profilePicture) ||
+                other.profilePicture == profilePicture) &&
+            (identical(other.bio, bio) || other.bio == bio));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, userName);
+  int get hashCode =>
+      Object.hash(runtimeType, email, userName, profilePicture, bio);
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.
@@ -161,7 +195,9 @@ class _$UserDtoImpl implements _UserDto {
 abstract class _UserDto implements UserDto {
   const factory _UserDto(
       {required final String email,
-      required final String userName}) = _$UserDtoImpl;
+      required final String userName,
+      required final String profilePicture,
+      required final String bio}) = _$UserDtoImpl;
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
 
@@ -169,6 +205,10 @@ abstract class _UserDto implements UserDto {
   String get email;
   @override
   String get userName;
+  @override
+  String get profilePicture;
+  @override
+  String get bio;
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.

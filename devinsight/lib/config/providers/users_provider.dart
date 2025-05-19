@@ -9,7 +9,7 @@ final usersProvider = FutureProvider<List<User>>((ref) async {
   return data.map((json) => User.fromJson(json)).toList();
 });
 
-final userByIdProvider = FutureProvider.family<User, int>((ref, userId) async {
+final userByIdProvider = FutureProvider.family<User, String>((ref, userId) async {
   final allUsers = await ref.watch(usersProvider.future);
-  return allUsers.firstWhere((u) => u.id == userId);
+  return allUsers.firstWhere((u) => u.id == userId.toString());
 });

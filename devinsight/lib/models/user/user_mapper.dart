@@ -9,8 +9,8 @@ extension UserDtoMapper on UserDto {
       id: "0", // Usa el ID real si lo tienes en el UserDto
       username: userName,
       email: email,
-      profilePicture: '',
-      bio: '',
+      profilePicture: profilePicture,
+      bio: bio,
       postsCount: 0,
       followersCount: 0,
     );

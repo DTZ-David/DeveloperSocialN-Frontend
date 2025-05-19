@@ -17,9 +17,10 @@ class CustomUserCard extends ConsumerWidget {
       child: GestureDetector(
         onTap: () {
           ref.read(appRouterProvider).goNamed(
-            'user_profile',
-            pathParameters: {'id': user.id.toString()},
-          );
+                'user_profile',
+                pathParameters: {'id': user.id},
+                extra: user.toJson(),
+              );
         },
         child: Card(
           color: Colors.black,
