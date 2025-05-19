@@ -1,26 +1,18 @@
-import 'package:devinsight/models/publication/post.dart';
-import 'package:devinsight/ui/home/widgets/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:devinsight/config/providers/conectionsProvider.dart';
-import 'package:devinsight/config/providers/mediaProvider.dart';
-import 'package:devinsight/config/providers/nav_profile_provider.dart';
-import 'package:devinsight/config/routers/app_router.dart';
-import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
-import 'package:devinsight/ui/home/widgets/mediaCard.dart';
+import '../../../config/providers/comments_provider.dart';
+import '../../../config/providers/mediaProvider.dart';
+import '../../../config/providers/nav_profile_provider.dart';
+import '../../../controller/profileFeedController.dart';
+import '../../../ui/theme/app_colors.dart';
 import 'package:devinsight/ui/home/widgets/navProfile.dart';
-import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
 import 'package:devinsight/ui/home/widgets/socialButtom.dart';
 import 'package:devinsight/ui/home/widgets/socialFollowers.dart';
-import 'package:devinsight/ui/theme/app_colors.dart';
-import 'package:devinsight/config/providers/pub_refactor_provider.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../config/providers/auth_provider.dart';
-import '../../../config/providers/interactios_provider.dart';
-import '../../../controller/profileFeedController.dart';
-
-const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20.0);
+import '../widgets/profile/message_button.dart';
+import '../widgets/profile/padded_sliver.dart';
+import '../widgets/profile/tab_content.dart';
+import '../widgets/profile/user_profile.dart';
 
 class Profile extends ConsumerWidget {
   final String bannerUrl;
@@ -30,9 +22,8 @@ class Profile extends ConsumerWidget {
   const Profile({
     super.key,
     this.bannerUrl =
-        'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/e40b6ea6361a1abe28f32e7910f63b66/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg',
-    this.profileImageUrl =
-        'https://static.vecteezy.com/system/resources/thumbnails/002/960/590/small/abstract-watercolor-texture-wallpaper-background-free-vector.jpg',
+        'https://img.freepik.com/premium-vector/saturn-planet-watercolor-hand-drawn-vertical-banner_9493-92159.jpg',
+    this.profileImageUrl = 'https://static.vecteezy.com/...jpg',
     required this.showSocialButton,
   });
 
@@ -40,59 +31,45 @@ class Profile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final feedState = ref.watch(profileFeedControllerProvider);
-    final connections = ref.watch(connectionsProvider);
-    final interactions = ref.watch(interactionsProvider);
+    final interactionsState = ref.watch(userInteractionsProvider);
+
     ref.watch(mediaProvider);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(),
-        backgroundColor: AppColors.primaryColors,
-        elevation: 0,
-        onPressed: () => ref.read(appRouterProvider).go(AppRouter.message),
-        child: SvgPicture.asset(
-          'assets/icons/message_profile.svg',
-          width: 24,
-          height: 24,
-        ),
-      ),
-      appBar: AppBar(
-        shadowColor: AppColors.tertiaryColors,
-        elevation: 0.2,
-        backgroundColor: AppColors.primaryColors,
-        title: const Text(
-          "Perfil",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Montserrat',
-          ),
-        ),
-      ),
+      floatingActionButton: const MessageButton(),
+      appBar: _buildAppBar(),
       backgroundColor: AppColors.thirdColors,
       body: CustomScrollView(
         slivers: [
           UserProfile(
             bannerUrl: bannerUrl,
             profileImageUrl: profileImageUrl,
-            showSocialButton: showSocialButton,
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 80)),
           if (showSocialButton) ...[
-            const _PaddedWidget(child: Socialfollowers()),
-            _PaddedWidget(child: SocialButton()),
+            const PaddedSliver(child: Socialfollowers()),
+            PaddedSliver(child: SocialButton()),
           ],
-          const _PaddedWidget(child: NavProfile()),
-          const SliverToBoxAdapter(child: SizedBox(height: 1)),
+          const PaddedSliver(child: NavProfile()),
           feedState.when(
-            data: (posts) => _buildTabContent(selectedTab, posts, interactions, connections),
+            data: (posts) => interactionsState.when(
+              data: (comments) => buildTabContent(selectedTab, posts, comments),
+              loading: () => const SliverToBoxAdapter(
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              error: (error, _) => SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text('Error al cargar interacciones: $error'),
+                ),
+              ),
+            ),
             loading: () => const SliverToBoxAdapter(
               child: Center(child: CircularProgressIndicator()),
             ),
-            error: (error, stack) => SliverToBoxAdapter(
+            error: (error, _) => SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: Text('Error al cargar publicaciones: $error'),
               ),
             ),
@@ -102,127 +79,19 @@ class Profile extends ConsumerWidget {
     );
   }
 
-  Widget _buildTabContent(
-      int selectedTab, List<Post> publications, List interactions, List connections) {
-    switch (selectedTab) {
-      case 0:
-        return _buildSliverList<Post>(
-          publications,
-          (post) => PublicationsCard(
-            post: post,
-          ),
-        );
-
-      //case 1:
-      //return _buildSliverList(
-      // interactions,
-      //(data) => InteractionCard(
-      //  tipo: data['tipo'],
-      //  id: data['id'],
-      //  mensaje: data['mensaje'],
-      //  ),
-      // );
-      case 2:
-        return const SliverFillRemaining(
-            child: UserList(
-          searchQuery: "",
-        ));
-      case 3:
-        return const MediaGallery();
-      default:
-        return const SliverToBoxAdapter();
-    }
-  }
-
-  Widget _buildSliverList<T>(List<T> data, Widget Function(T) itemBuilder) {
-    return SliverPadding(
-      padding: _horizontalPadding,
-      sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) => Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
-            child: itemBuilder(data[index]),
-          ),
-          childCount: data.length,
+  AppBar _buildAppBar() {
+    return AppBar(
+      shadowColor: AppColors.tertiaryColors,
+      elevation: 0.2,
+      backgroundColor: AppColors.primaryColors,
+      title: const Text(
+        "Perfil",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Montserrat',
         ),
-      ),
-    );
-  }
-}
-
-class UserProfile extends ConsumerWidget {
-  final String bannerUrl;
-  final String profileImageUrl;
-  final bool showSocialButton;
-
-  const UserProfile({
-    super.key,
-    required this.bannerUrl,
-    required this.profileImageUrl,
-    required this.showSocialButton,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(authProvider).user;
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: _horizontalPadding,
-        child: SizedBox(
-          width: double.infinity,
-          height: 110,
-          child: Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.bottomCenter,
-            children: [
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(bannerUrl),
-                    fit: BoxFit.cover,
-                  ),
-                  color: AppColors.secondaryColors,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              Positioned(
-                bottom: -40,
-                child: CircleAvatar(
-                  radius: 35,
-                  backgroundImage: NetworkImage(user.profilePicture),
-                ),
-              ),
-              Positioned(
-                bottom: -70,
-                child: Text(
-                  user.username,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _PaddedWidget extends StatelessWidget {
-  final Widget child;
-
-  const _PaddedWidget({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: _horizontalPadding,
-        child: child,
       ),
     );
   }

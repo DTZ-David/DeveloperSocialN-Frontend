@@ -1,5 +1,4 @@
 import 'package:devinsight/config/providers/auth_provider.dart';
-import 'package:devinsight/config/providers/comment_refactor_provider.dart';
 import 'package:devinsight/models/publication/comment_request.dart';
 import 'package:devinsight/models/user/user.dart';
 import 'package:devinsight/ui/home/widgets/interactionsCard.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../config/providers/comment_request_provider.dart';
+import '../../../config/providers/comments_provider.dart';
 
 class CommentModal extends ConsumerWidget {
   final String postId;

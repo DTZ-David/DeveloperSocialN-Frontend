@@ -9,4 +9,8 @@ class CommentController {
   Future<List<Comment>> getComments(String postId, String token) {
     return _repository.fetchComments(postId, token);
   }
+
+  Future<List<Comment>> getUserInteractions(String token) {
+    return _repository.getUserInteractions(token);
+  }
 }

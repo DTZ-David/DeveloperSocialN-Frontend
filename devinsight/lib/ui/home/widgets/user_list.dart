@@ -12,14 +12,17 @@ class UserList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userAsync = ref
-        .watch(userSearchControllerProvider(searchQuery)); // ⚠️ Asumiendo que ya le pasas el nombre
+    // Si la búsqueda está vacía, mostramos una vista amigable
+    if (searchQuery.trim().isEmpty) {
+      return const _SearchPrompt();
+    }
+
+    final userAsync = ref.watch(userSearchControllerProvider(searchQuery));
 
     return userAsync.when(
       data: (user) {
-        // Mostrar solo si el nombre coincide
         if (!user.userName.toLowerCase().contains(searchQuery.toLowerCase())) {
-          return const Center(child: Text("Sin resultados"));
+          return const _EmptyResult();
         }
 
         return SingleChildScrollView(
@@ -28,14 +31,58 @@ class UserList extends ConsumerWidget {
             child: Column(
               children: [
                 CustomUserCard(user: user.toDomain()),
-                // otros widgets si quieres en el futuro
               ],
             ),
           ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, stack) => Center(child: Text('Error: $err')),
+      error: (err, _) {
+        // Si hubo un error pero la búsqueda estaba vacía, igual mostramos la vista amigable
+        return const _EmptyResult();
+      },
+    );
+  }
+}
+
+class _SearchPrompt extends StatelessWidget {
+  const _SearchPrompt();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.search, size: 80, color: Colors.grey),
+          SizedBox(height: 16),
+          Text(
+            'Busca un usuario para comenzar',
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EmptyResult extends StatelessWidget {
+  const _EmptyResult();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.person_off, size: 80, color: Colors.grey),
+          SizedBox(height: 16),
+          Text(
+            'No se encontró ningún usuario',
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+        ],
+      ),
     );
   }
 }

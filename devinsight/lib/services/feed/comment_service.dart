@@ -26,4 +26,24 @@ class CommentService {
       throw Exception('Error al obtener comentarios');
     }
   }
+
+  Future<List<Comment>> getUserInteractions(String token) async {
+    final url = Uri.parse('${AppConfig.baseUrl}/userposts/getuserinteraction');
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final decoded = jsonDecode(response.body);
+      final List<dynamic> data = decoded['data'];
+      return data.map((e) => Comment.fromJson(e)).toList();
+    } else {
+      throw Exception('Error al obtener interacciones del usuario');
+    }
+  }
 }

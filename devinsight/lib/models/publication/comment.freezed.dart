@@ -27,7 +27,9 @@ mixin _$Comment {
   String get commentText => throw _privateConstructorUsedError;
   String get authorProfilePic => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
-  DateTime get sentAt => throw _privateConstructorUsedError;
+  @CustomDateTimeConverter()
+  DateTime get sentAt =>
+      throw _privateConstructorUsedError; // 👈 Aplica el conversor
   bool get isOwnComment => throw _privateConstructorUsedError;
 
   /// Serializes this Comment to a JSON map.
@@ -52,7 +54,7 @@ abstract class $CommentCopyWith<$Res> {
       String commentText,
       String authorProfilePic,
       String userName,
-      DateTime sentAt,
+      @CustomDateTimeConverter() DateTime sentAt,
       bool isOwnComment});
 }
 
@@ -137,7 +139,7 @@ abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
       String commentText,
       String authorProfilePic,
       String userName,
-      DateTime sentAt,
+      @CustomDateTimeConverter() DateTime sentAt,
       bool isOwnComment});
 }
 
@@ -216,7 +218,7 @@ class _$CommentImpl implements _Comment {
       required this.commentText,
       required this.authorProfilePic,
       required this.userName,
-      required this.sentAt,
+      @CustomDateTimeConverter() required this.sentAt,
       required this.isOwnComment});
 
   factory _$CommentImpl.fromJson(Map<String, dynamic> json) =>
@@ -237,7 +239,9 @@ class _$CommentImpl implements _Comment {
   @override
   final String userName;
   @override
+  @CustomDateTimeConverter()
   final DateTime sentAt;
+// 👈 Aplica el conversor
   @override
   final bool isOwnComment;
 
@@ -307,7 +311,7 @@ abstract class _Comment implements Comment {
       required final String commentText,
       required final String authorProfilePic,
       required final String userName,
-      required final DateTime sentAt,
+      @CustomDateTimeConverter() required final DateTime sentAt,
       required final bool isOwnComment}) = _$CommentImpl;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$CommentImpl.fromJson;
@@ -327,7 +331,8 @@ abstract class _Comment implements Comment {
   @override
   String get userName;
   @override
-  DateTime get sentAt;
+  @CustomDateTimeConverter()
+  DateTime get sentAt; // 👈 Aplica el conversor
   @override
   bool get isOwnComment;
 

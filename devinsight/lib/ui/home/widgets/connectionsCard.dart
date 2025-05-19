@@ -14,64 +14,64 @@ class CustomUserCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: Card(
-        color: Colors.black,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        elevation: 3,
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  ref.read(appRouterProvider).goNamed(
-                    'user_profile',
-                    pathParameters: {'id': user.id.toString()},
-                  );
-                },
-                child: CircleAvatar(
+      child: GestureDetector(
+        onTap: () {
+          ref.read(appRouterProvider).goNamed(
+            'user_profile',
+            pathParameters: {'id': user.id.toString()},
+          );
+        },
+        child: Card(
+          color: Colors.black,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          elevation: 3,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                CircleAvatar(
                   backgroundImage: NetworkImage(user.profilePicture),
                   radius: 24,
                 ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      user.username,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        user.username,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Montserrat',
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      user.bio,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                        fontFamily: 'Montserrat',
+                      const SizedBox(height: 4),
+                      Text(
+                        user.bio,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 10),
-              _buildIconContainer(
-                'assets/icons/user_add_profile.svg',
-                AppColors.accent,
-              ),
-              const SizedBox(width: 10),
-              _buildIconContainer(
-                'assets/icons/message_profile.svg',
-                AppColors.secondaryColors,
-              ),
-            ],
+                const SizedBox(width: 10),
+                _buildIconContainer(
+                  'assets/icons/user_add_profile.svg',
+                  AppColors.accent,
+                ),
+                const SizedBox(width: 10),
+                _buildIconContainer(
+                  'assets/icons/message_profile.svg',
+                  AppColors.secondaryColors,
+                ),
+              ],
+            ),
           ),
         ),
       ),

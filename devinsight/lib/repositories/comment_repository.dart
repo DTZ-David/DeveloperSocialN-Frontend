@@ -10,4 +10,8 @@ class CommentRepository {
   Future<List<Comment>> fetchComments(String postId, String token) {
     return _commentService.getCommentsByPostId(postId, token);
   }
+
+  Future<List<Comment>> getUserInteractions(String token) {
+    return _commentService.getUserInteractions(token);
+  }
 }
