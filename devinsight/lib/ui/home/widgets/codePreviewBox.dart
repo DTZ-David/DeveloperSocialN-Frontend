@@ -66,39 +66,39 @@ class CodePreviewBox extends StatelessWidget {
                       maxChildSize: 0.95,
                       expand: false,
                       builder: (_, controller) {
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const SizedBox(height: 12),
-                            // Barra de arrastre (drag handle)
-                            Container(
-                              width: 40,
-                              height: 5,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[700],
-                                borderRadius: BorderRadius.circular(10),
+                        return SizedBox.expand(
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 12),
+                              // Barra de arrastre (drag handle)
+                              Container(
+                                width: 40,
+                                height: 5,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[700],
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 12),
-                            // Código completo scrollable
-                            Expanded(
-                              child: SingleChildScrollView(
-                                controller: controller,
-                                padding: const EdgeInsets.all(16),
-                                child: HighlightView(
-                                  code,
-                                  language: language,
-                                  theme: atomOneDarkTheme,
-                                  padding: EdgeInsets.zero,
-                                  textStyle: const TextStyle(
-                                    fontFamily: 'Courier New',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                              const SizedBox(height: 12),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  controller: controller,
+                                  padding: const EdgeInsets.all(16),
+                                  child: HighlightView(
+                                    code,
+                                    language: language,
+                                    theme: atomOneDarkTheme,
+                                    padding: EdgeInsets.zero,
+                                    textStyle: const TextStyle(
+                                      fontFamily: 'Courier New',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
                     );
