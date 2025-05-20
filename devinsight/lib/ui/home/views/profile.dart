@@ -59,7 +59,7 @@ class Profile extends ConsumerWidget {
               ),
               error: (error, _) => SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Text('Error al cargar interacciones: $error'),
                 ),
               ),
@@ -69,7 +69,7 @@ class Profile extends ConsumerWidget {
             ),
             error: (error, _) => SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Text('Error al cargar publicaciones: $error'),
               ),
             ),
