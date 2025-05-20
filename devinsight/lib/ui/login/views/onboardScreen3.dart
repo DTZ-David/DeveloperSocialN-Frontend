@@ -66,7 +66,7 @@ class OnboardingToolsPage extends ConsumerWidget {
 
           await Future.delayed(const Duration(seconds: 2));
 
-          ref.read(appRouterProvider).go('/onboard3');
+          ref.read(appRouterProvider).go('/main');
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error en el registro: $e')),
