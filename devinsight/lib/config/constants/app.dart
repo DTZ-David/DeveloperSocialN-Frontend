@@ -3,5 +3,5 @@ sealed class AppConfig {
   static const refreshToken = 'refresh';
   static const userData = 'user-data';
   static const String baseUrl =
-      'https://developerwebapi-e5cwfpcef5auhacq.canadacentral-01.azurewebsites.net/es/api';
+      'https://developersocialn-backend-exckg7dvfwfpe6bc.eastus2-01.azurewebsites.net/es/api';
 }

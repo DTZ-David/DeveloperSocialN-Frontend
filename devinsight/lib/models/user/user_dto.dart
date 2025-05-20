@@ -9,7 +9,9 @@ class UserDto with _$UserDto {
       {required String email,
       required String userName,
       required String profilePicture,
-      required String bio}) = _UserDto;
+      required String bio,
+      required int postsCount,
+      required int followersCount}) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
 }

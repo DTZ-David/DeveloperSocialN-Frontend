@@ -47,7 +47,7 @@ class UserProfile extends ConsumerWidget {
               Positioned(
                 bottom: -70,
                 child: Text(
-                  user.username,
+                  user.userName,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',

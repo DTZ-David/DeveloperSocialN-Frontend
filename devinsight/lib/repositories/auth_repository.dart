@@ -13,7 +13,7 @@ class AuthRepository {
       final String token = response['data']['token'];
       final user = User(
         id: '', // Si tienes un campo 'id' en la respuesta, úsalo aquí
-        username: response['data']['username'],
+        userName: response['data']['username'],
         email: username, // Usando el email que pasaste al login
         profilePicture: response['data']['profilePicture'],
         bio: response['data']['bio'],

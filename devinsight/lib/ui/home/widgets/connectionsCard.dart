@@ -40,7 +40,7 @@ class CustomUserCard extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        user.username,
+                        user.userName,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
