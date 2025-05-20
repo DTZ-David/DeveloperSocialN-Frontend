@@ -1,13 +1,16 @@
+import 'package:devinsight/config/providers/register_provider.dart';
 import 'package:devinsight/config/providers/selectedProvider.dart';
+import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/ui/login/widgets/selectable_items_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OnboardingLanguagesPage extends StatelessWidget {
+class OnboardingLanguagesPage extends ConsumerWidget {
   const OnboardingLanguagesPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SelectableItemsPage(
       title: "Veamos tus intereses",
       description:
@@ -44,6 +47,15 @@ class OnboardingLanguagesPage extends StatelessWidget {
       },
       backRoute: "/onboard1",
       nextRoute: "/onboard3",
+      onContinue: (selectedItems) {
+        // Guardar en registerProvider
+        ref
+            .read(registerProvider.notifier)
+            .setProgrammingLanguages(selectedItems.toList());
+
+        // Continuar a la siguiente página
+        ref.read(appRouterProvider).go('/onboard3');
+      },
     );
   }
 }

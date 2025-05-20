@@ -19,6 +19,7 @@ class SelectableItemsPage extends ConsumerStatefulWidget {
   final Map<String, IconData> iconMap;
   final String backRoute;
   final String nextRoute;
+  final void Function(Set<String> selectedItems)? onContinue;
 
   const SelectableItemsPage({
     super.key,
@@ -29,6 +30,7 @@ class SelectableItemsPage extends ConsumerStatefulWidget {
     required this.iconMap,
     required this.backRoute,
     required this.nextRoute,
+    this.onContinue,
   });
 
   @override
@@ -97,16 +99,17 @@ class _SelectableItemsPageState extends ConsumerState<SelectableItemsPage> {
                     child: const Text(
                       "Saltar",
                       style: TextStyle(
-                          color: AppColors.accent,
-                          fontSize: 16,
-                          fontFamily: "Montserrat"),
+                        color: AppColors.accent,
+                        fontSize: 16,
+                        fontFamily: "Montserrat",
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
 
-            // Titles
+            // Título y descripción
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -134,7 +137,7 @@ class _SelectableItemsPageState extends ConsumerState<SelectableItemsPage> {
               ],
             ),
 
-            // SearchBar
+            // Barra de búsqueda
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -166,9 +169,10 @@ class _SelectableItemsPageState extends ConsumerState<SelectableItemsPage> {
                       ),
                       hintText: "Buscar",
                       hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.w600),
+                        color: Colors.grey[400],
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w600,
+                      ),
                       border: InputBorder.none,
                       contentPadding: const EdgeInsets.symmetric(vertical: 15),
                     ),
@@ -178,15 +182,16 @@ class _SelectableItemsPageState extends ConsumerState<SelectableItemsPage> {
             ),
             const SizedBox(height: 20),
 
-            // Items List
+            // Lista de ítems
             Expanded(
               child: filteredItems.isEmpty
                   ? const Center(
                       child: Text(
                         "No hay resultados",
                         style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontWeight: FontWeight.w600),
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     )
                   : SingleChildScrollView(
@@ -215,13 +220,20 @@ class _SelectableItemsPageState extends ConsumerState<SelectableItemsPage> {
                     ),
             ),
 
+            // Botón Continuar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: CustomButton(
                 text: "Continuar",
                 onPressed: () {
-                  print("Selected items: $selectedSet");
-                  ref.read(appRouterProvider).go(widget.nextRoute);
+                  debugPrint("Selected items: $selectedSet");
+
+                  // Si se define onContinue, se usa
+                  if (widget.onContinue != null) {
+                    widget.onContinue!(selectedSet);
+                  } else {
+                    ref.read(appRouterProvider).go(widget.nextRoute);
+                  }
                 },
               ),
             ),

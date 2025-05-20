@@ -122,7 +122,7 @@ class LoginScreen extends ConsumerWidget {
                                   final controller = ref.read(loginControllerProvider);
 
                                   final success =
-                                      await controller.login("dev123@example.com", "SecurePass123");
+                                      await controller.login(username, password);
 
                                   if (success) {
                                     ref.read(feedControllerProvider.notifier).loadFeed();
