@@ -6,7 +6,7 @@ class UserRepository {
 
   UserRepository(this._userService);
 
-  Future<UserDto> getUserByUsername(String username) {
-    return _userService.searchUserByUsername(username);
+  Future<UserDto> getUserByUsername(String username, String token) {
+    return _userService.searchUserByUsername(username, token);
   }
 }

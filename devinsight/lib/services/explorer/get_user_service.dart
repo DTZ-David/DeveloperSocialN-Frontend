@@ -5,10 +5,13 @@ import '../../config/constants/app.dart';
 import '../../models/user/user_dto.dart';
 
 class UserService {
-  Future<UserDto> searchUserByUsername(String username) async {
+  Future<UserDto> searchUserByUsername(String username, String token) async {
     final response = await http.post(
       Uri.parse('${AppConfig.baseUrl}/usersocialinfo/getuserbyusername'),
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
       body: jsonEncode({'username': username}),
     );
 

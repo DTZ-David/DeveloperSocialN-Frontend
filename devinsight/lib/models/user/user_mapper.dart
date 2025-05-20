@@ -7,12 +7,12 @@ extension UserDtoMapper on UserDto {
   User toDomain() {
     return User(
       id: "0", // Usa el ID real si lo tienes en el UserDto
-      username: userName,
+      userName: userName,
       email: email,
       profilePicture: profilePicture,
       bio: bio,
-      postsCount: 0,
-      followersCount: 0,
+      postsCount: postsCount,
+      followersCount: followersCount,
     );
   }
 }

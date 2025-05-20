@@ -24,6 +24,8 @@ mixin _$UserDto {
   String get userName => throw _privateConstructorUsedError;
   String get profilePicture => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
+  int get postsCount => throw _privateConstructorUsedError;
+  int get followersCount => throw _privateConstructorUsedError;
 
   /// Serializes this UserDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +41,13 @@ abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res, UserDto>;
   @useResult
-  $Res call({String email, String userName, String profilePicture, String bio});
+  $Res call(
+      {String email,
+      String userName,
+      String profilePicture,
+      String bio,
+      int postsCount,
+      int followersCount});
 }
 
 /// @nodoc
@@ -61,6 +69,8 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? userName = null,
     Object? profilePicture = null,
     Object? bio = null,
+    Object? postsCount = null,
+    Object? followersCount = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -79,6 +89,14 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      postsCount: null == postsCount
+          ? _value.postsCount
+          : postsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      followersCount: null == followersCount
+          ? _value.followersCount
+          : followersCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -90,7 +108,13 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       __$$UserDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String userName, String profilePicture, String bio});
+  $Res call(
+      {String email,
+      String userName,
+      String profilePicture,
+      String bio,
+      int postsCount,
+      int followersCount});
 }
 
 /// @nodoc
@@ -110,6 +134,8 @@ class __$$UserDtoImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? profilePicture = null,
     Object? bio = null,
+    Object? postsCount = null,
+    Object? followersCount = null,
   }) {
     return _then(_$UserDtoImpl(
       email: null == email
@@ -128,6 +154,14 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      postsCount: null == postsCount
+          ? _value.postsCount
+          : postsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      followersCount: null == followersCount
+          ? _value.followersCount
+          : followersCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -139,7 +173,9 @@ class _$UserDtoImpl implements _UserDto {
       {required this.email,
       required this.userName,
       required this.profilePicture,
-      required this.bio});
+      required this.bio,
+      required this.postsCount,
+      required this.followersCount});
 
   factory _$UserDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDtoImplFromJson(json);
@@ -152,10 +188,14 @@ class _$UserDtoImpl implements _UserDto {
   final String profilePicture;
   @override
   final String bio;
+  @override
+  final int postsCount;
+  @override
+  final int followersCount;
 
   @override
   String toString() {
-    return 'UserDto(email: $email, userName: $userName, profilePicture: $profilePicture, bio: $bio)';
+    return 'UserDto(email: $email, userName: $userName, profilePicture: $profilePicture, bio: $bio, postsCount: $postsCount, followersCount: $followersCount)';
   }
 
   @override
@@ -168,13 +208,17 @@ class _$UserDtoImpl implements _UserDto {
                 other.userName == userName) &&
             (identical(other.profilePicture, profilePicture) ||
                 other.profilePicture == profilePicture) &&
-            (identical(other.bio, bio) || other.bio == bio));
+            (identical(other.bio, bio) || other.bio == bio) &&
+            (identical(other.postsCount, postsCount) ||
+                other.postsCount == postsCount) &&
+            (identical(other.followersCount, followersCount) ||
+                other.followersCount == followersCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, email, userName, profilePicture, bio);
+  int get hashCode => Object.hash(runtimeType, email, userName, profilePicture,
+      bio, postsCount, followersCount);
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.
@@ -197,7 +241,9 @@ abstract class _UserDto implements UserDto {
       {required final String email,
       required final String userName,
       required final String profilePicture,
-      required final String bio}) = _$UserDtoImpl;
+      required final String bio,
+      required final int postsCount,
+      required final int followersCount}) = _$UserDtoImpl;
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
 
@@ -209,6 +255,10 @@ abstract class _UserDto implements UserDto {
   String get profilePicture;
   @override
   String get bio;
+  @override
+  int get postsCount;
+  @override
+  int get followersCount;
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.
