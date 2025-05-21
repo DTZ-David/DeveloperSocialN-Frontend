@@ -1,17 +1,22 @@
 import 'package:devinsight/models/user/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../config/providers/follow_provider.dart';
 import '../../../theme/app_colors.dart';
 import 'stat_card.dart';
 import 'social_buttons_row.dart';
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeader extends ConsumerWidget {
   final User user;
 
   const ProfileHeader({super.key, required this.user});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isFollowing = ref.watch(
+        userFollowControllerProvider((email: user.email, initialFollow: user.currentFollow)));
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -20,8 +25,7 @@ class ProfileHeader extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 40,
-            backgroundImage:
-                user.profilePicture != null ? NetworkImage(user.profilePicture) : null,
+            backgroundImage: user.profilePicture != null ? NetworkImage(user.profilePicture) : null,
             child: user.profilePicture == null
                 ? const Icon(Icons.person, size: 40, color: Colors.white)
                 : null,
@@ -54,7 +58,18 @@ class ProfileHeader extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          const SocialButtonsRow(buttonText: 'Seguir'),
+
+          /// Botón seguir/siguiendo
+          SocialButtonsRow(
+            buttonText: isFollowing ? 'Siguiendo' : 'Seguir',
+            isFollowing: isFollowing,
+            onFollowPressed: () {
+              ref
+                  .read(userFollowControllerProvider(
+                      (email: user.email, initialFollow: user.currentFollow)).notifier)
+                  .toggleFollow();
+            },
+          ),
         ],
       ),
     );

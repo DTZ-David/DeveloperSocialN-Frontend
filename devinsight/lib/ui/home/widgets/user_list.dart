@@ -3,6 +3,7 @@ import 'package:devinsight/ui/home/widgets/connectionsCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../config/providers/follow_provider.dart';
 import '../../../controller/usernameController.dart';
 
 class UserList extends ConsumerWidget {

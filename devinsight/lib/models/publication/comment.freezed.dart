@@ -27,8 +27,7 @@ mixin _$Comment {
   String get commentText => throw _privateConstructorUsedError;
   String get authorProfilePic => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
-  String get sentAt =>
-      throw _privateConstructorUsedError; // 👈 Aplica el conversor
+  String get sentAt => throw _privateConstructorUsedError;
   bool get isOwnComment => throw _privateConstructorUsedError;
 
   /// Serializes this Comment to a JSON map.
@@ -239,7 +238,6 @@ class _$CommentImpl implements _Comment {
   final String userName;
   @override
   final String sentAt;
-// 👈 Aplica el conversor
   @override
   final bool isOwnComment;
 
@@ -329,7 +327,7 @@ abstract class _Comment implements Comment {
   @override
   String get userName;
   @override
-  String get sentAt; // 👈 Aplica el conversor
+  String get sentAt;
   @override
   bool get isOwnComment;
 

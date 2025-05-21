@@ -11,7 +11,8 @@ class UserDto with _$UserDto {
       required String profilePicture,
       required String bio,
       required int postsCount,
-      required int followersCount}) = _UserDto;
+      required int followersCount,
+      required bool currentFollow}) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
 }

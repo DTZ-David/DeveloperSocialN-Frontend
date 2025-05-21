@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
+import '../../../config/providers/follow_provider.dart';
 
 class CustomUserCard extends ConsumerWidget {
   final User user;
@@ -12,6 +13,9 @@ class CustomUserCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isFollowing = ref.watch(
+        userFollowControllerProvider((email: user.email, initialFollow: user.currentFollow)));
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: GestureDetector(
@@ -62,10 +66,23 @@ class CustomUserCard extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                _buildIconContainer(
-                  'assets/icons/user_add_profile.svg',
-                  AppColors.accent,
+
+                /// Botón de seguir o seguido
+                GestureDetector(
+                  onTap: () {
+                    ref
+                        .read(userFollowControllerProvider(
+                            (email: user.email, initialFollow: user.currentFollow)).notifier)
+                        .toggleFollow();
+                  },
+                  child: _buildIconContainer(
+                    isFollowing
+                        ? 'assets/icons/user_add_profile.svg' // usa un ícono distinto para "dejar de seguir"
+                        : 'assets/icons/user_add_profile.svg',
+                    isFollowing ? Colors.red : AppColors.accent,
+                  ),
                 ),
+
                 const SizedBox(width: 10),
                 _buildIconContainer(
                   'assets/icons/message_profile.svg',
