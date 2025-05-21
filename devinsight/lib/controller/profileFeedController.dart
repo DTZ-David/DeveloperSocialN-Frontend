@@ -14,7 +14,8 @@ class FeedController extends StateNotifier<AsyncValue<List<Post>>> {
   final FeedRepository _feedRepository;
   final Ref ref;
 
-  FeedController(this._feedRepository, this.ref) : super(const AsyncValue.loading()) {
+  FeedController(this._feedRepository, this.ref)
+      : super(const AsyncValue.loading()) {
     loadFeed(); // <- esto carga el feed automáticamente al instanciarse
   }
 
