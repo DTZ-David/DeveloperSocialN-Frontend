@@ -17,7 +17,7 @@ class CommentRequestService {
       body: jsonEncode({
         'postId': request.postId,
         'commentText': request.commentText,
-        'interactionType': _mapInteractionType(request.interactionType),
+        'interactionType': request.interactionType,
       }),
     );
 

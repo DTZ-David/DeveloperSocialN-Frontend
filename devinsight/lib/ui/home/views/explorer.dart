@@ -44,16 +44,19 @@ class ExplorerPage extends ConsumerWidget {
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      selectedView == 'Usuarios' ? AppColors.accent : AppColors.primaryColors,
+                  backgroundColor: selectedView == 'Usuarios'
+                      ? AppColors.accent
+                      : AppColors.primaryColors,
                 ),
                 onPressed: () => selectedViewNotifier.state = 'Usuarios',
                 child: const Text(
                   'Usuarios',
-                  style: TextStyle(fontFamily: 'Montserrat', color: Colors.white),
+                  style:
+                      TextStyle(fontFamily: 'Montserrat', color: Colors.white),
                 ),
               ),
               const SizedBox(width: 12),
+              /*
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
@@ -65,6 +68,7 @@ class ExplorerPage extends ConsumerWidget {
                   style: TextStyle(fontFamily: 'Montserrat', color: Colors.white),
                 ),
               ),
+              */
             ],
           ),
           const SizedBox(height: 10),
