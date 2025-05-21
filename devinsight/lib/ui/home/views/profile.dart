@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/providers/comments_provider.dart';
+import '../../../config/providers/connections_provider.dart';
 import '../../../config/providers/mediaProvider.dart';
 import '../../../config/providers/nav_profile_provider.dart';
 import '../../../controller/profileFeedController.dart';
@@ -32,7 +33,7 @@ class Profile extends ConsumerWidget {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final feedState = ref.watch(profileFeedControllerProvider);
     final interactionsState = ref.watch(userInteractionsProvider);
-
+    final connectionsState = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
 
     return Scaffold(
@@ -53,7 +54,18 @@ class Profile extends ConsumerWidget {
           const PaddedSliver(child: NavProfile()),
           feedState.when(
             data: (posts) => interactionsState.when(
-              data: (comments) => buildTabContent(selectedTab, posts, comments),
+              data: (comments) => connectionsState.when(
+                data: (connections) => buildTabContent(selectedTab, posts, comments, connections),
+                loading: () => const SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                error: (error, _) => SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text('Error al cargar conexiones: $error'),
+                  ),
+                ),
+              ),
               loading: () => const SliverToBoxAdapter(
                 child: Center(child: CircularProgressIndicator()),
               ),
