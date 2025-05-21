@@ -15,11 +15,12 @@ class Comment with _$Comment {
     required String commentText,
     required String authorProfilePic,
     required String userName,
-    @CustomDateTimeConverter() required DateTime sentAt, // 👈 Aplica el conversor
+    required String sentAt,
     required bool isOwnComment,
   }) = _Comment;
 
-  factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
+  factory Comment.fromJson(Map<String, dynamic> json) =>
+      _$CommentFromJson(json);
 }
 
 class CustomDateTimeConverter implements JsonConverter<DateTime, String> {

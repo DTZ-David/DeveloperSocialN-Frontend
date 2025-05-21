@@ -15,8 +15,7 @@ _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
       commentText: json['commentText'] as String,
       authorProfilePic: json['authorProfilePic'] as String,
       userName: json['userName'] as String,
-      sentAt:
-          const CustomDateTimeConverter().fromJson(json['sentAt'] as String),
+      sentAt: json['sentAt'] as String,
       isOwnComment: json['isOwnComment'] as bool,
     );
 
@@ -29,6 +28,6 @@ Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
       'commentText': instance.commentText,
       'authorProfilePic': instance.authorProfilePic,
       'userName': instance.userName,
-      'sentAt': const CustomDateTimeConverter().toJson(instance.sentAt),
+      'sentAt': instance.sentAt,
       'isOwnComment': instance.isOwnComment,
     };

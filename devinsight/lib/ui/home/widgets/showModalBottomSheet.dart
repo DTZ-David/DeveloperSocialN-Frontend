@@ -228,9 +228,9 @@ class _CommentModalContentState extends State<_CommentModalContent> {
                   if (comment.isNotEmpty) {
                     final tipo = widget.iconsMap[selectedSvg];
                     final interactionType = {
-                      'Mejora': 'careful',
-                      'Verificar': 'verify',
-                      'Comentario': 'comment',
+                      'Mejora': 0,
+                      'Verificar': 2,
+                      'Comentario': 1,
                     }[tipo]!;
 
                     final commentToSend = CommentRequest(

@@ -58,13 +58,10 @@ class HomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(10),
               itemCount: publications.length,
               itemBuilder: (context, index) {
-                final post = publications[index]; // El tipo 'Post' ahora es más claro
+                final post = publications[index];
 
                 return Column(
                   children: [
-                    // CAMBIAR EL PROVIDER PARA UTILIZAR UN MODELO POSTREFACTOR
-                    // PUBLICATIONSCARD RECIBE UN OBJETO DE TIPO POSTREFACTOR
-
                     PublicationsCard(post: post),
                     const SizedBox(height: 4),
                   ],
@@ -74,7 +71,7 @@ class HomeScreen extends ConsumerWidget {
           },
           loading: () => const Center(child: CircularProgressIndicator()), // Indicador de carga
           error: (e, stackTrace) =>
-              Center(child: Text('Error: $e')), // Muestra el error si ocurre alguno
+              Center(child: Text('Error: $e')),
         ),
       ),
     );

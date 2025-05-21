@@ -22,7 +22,7 @@ CommentRequest _$CommentRequestFromJson(Map<String, dynamic> json) {
 mixin _$CommentRequest {
   String get postId => throw _privateConstructorUsedError;
   String get commentText => throw _privateConstructorUsedError;
-  String get interactionType => throw _privateConstructorUsedError;
+  int get interactionType => throw _privateConstructorUsedError;
 
   /// Serializes this CommentRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $CommentRequestCopyWith<$Res> {
           CommentRequest value, $Res Function(CommentRequest) then) =
       _$CommentRequestCopyWithImpl<$Res, CommentRequest>;
   @useResult
-  $Res call({String postId, String commentText, String interactionType});
+  $Res call({String postId, String commentText, int interactionType});
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$CommentRequestCopyWithImpl<$Res, $Val extends CommentRequest>
       interactionType: null == interactionType
           ? _value.interactionType
           : interactionType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ) as $Val);
   }
 }
@@ -87,7 +87,7 @@ abstract class _$$CommentRequestImplCopyWith<$Res>
       __$$CommentRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String postId, String commentText, String interactionType});
+  $Res call({String postId, String commentText, int interactionType});
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class __$$CommentRequestImplCopyWithImpl<$Res>
       interactionType: null == interactionType
           ? _value.interactionType
           : interactionType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ));
   }
 }
@@ -140,7 +140,7 @@ class _$CommentRequestImpl implements _CommentRequest {
   @override
   final String commentText;
   @override
-  final String interactionType;
+  final int interactionType;
 
   @override
   String toString() {
@@ -185,7 +185,7 @@ abstract class _CommentRequest implements CommentRequest {
   const factory _CommentRequest(
       {required final String postId,
       required final String commentText,
-      required final String interactionType}) = _$CommentRequestImpl;
+      required final int interactionType}) = _$CommentRequestImpl;
 
   factory _CommentRequest.fromJson(Map<String, dynamic> json) =
       _$CommentRequestImpl.fromJson;
@@ -195,7 +195,7 @@ abstract class _CommentRequest implements CommentRequest {
   @override
   String get commentText;
   @override
-  String get interactionType;
+  int get interactionType;
 
   /// Create a copy of CommentRequest
   /// with the given fields replaced by the non-null parameter values.

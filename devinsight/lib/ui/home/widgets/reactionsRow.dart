@@ -15,8 +15,8 @@ class ReactionsRow extends StatelessWidget {
       {
         'icon': 'assets/icons/verified.svg',
         'color': Colors.greenAccent,
-        'label': 'verified',
-        'count': reactionCounts['verified'] ?? 0,
+        'label': 'verify',
+        'count': reactionCounts['verify'] ?? 0,
       },
       {
         'icon': 'assets/icons/careful.svg',
@@ -27,8 +27,8 @@ class ReactionsRow extends StatelessWidget {
       {
         'icon': 'assets/icons/comments.svg',
         'color': Colors.blue,
-        'label': 'verified',
-        'count': reactionCounts['verified'] ?? 0,
+        'label': 'comment',
+        'count': reactionCounts['comment'] ?? 0,
       },
     ];
 
@@ -66,7 +66,7 @@ class ReactionsRow extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () async {
-              final comment = await CommentModal.show(context, postId);
+              await CommentModal.show(context, postId);
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),

@@ -82,7 +82,7 @@ class InteractionCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        _formatDate(comment.sentAt),
+                        comment.sentAt,
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 12,

@@ -55,7 +55,7 @@ class PublicationHeader extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    (sentAt),
+                    sentAt,
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 12,

@@ -7,7 +7,7 @@ class CommentRequest with _$CommentRequest{
   const factory CommentRequest({
     required String postId,
     required String commentText,
-    required String interactionType,
+    required int interactionType,
   }) = _CommentRequest;
 
   factory CommentRequest.fromJson(Map<String, dynamic> json) =>

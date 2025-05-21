@@ -27,8 +27,7 @@ mixin _$Comment {
   String get commentText => throw _privateConstructorUsedError;
   String get authorProfilePic => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
-  @CustomDateTimeConverter()
-  DateTime get sentAt =>
+  String get sentAt =>
       throw _privateConstructorUsedError; // 👈 Aplica el conversor
   bool get isOwnComment => throw _privateConstructorUsedError;
 
@@ -54,7 +53,7 @@ abstract class $CommentCopyWith<$Res> {
       String commentText,
       String authorProfilePic,
       String userName,
-      @CustomDateTimeConverter() DateTime sentAt,
+      String sentAt,
       bool isOwnComment});
 }
 
@@ -115,7 +114,7 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
       sentAt: null == sentAt
           ? _value.sentAt
           : sentAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       isOwnComment: null == isOwnComment
           ? _value.isOwnComment
           : isOwnComment // ignore: cast_nullable_to_non_nullable
@@ -139,7 +138,7 @@ abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
       String commentText,
       String authorProfilePic,
       String userName,
-      @CustomDateTimeConverter() DateTime sentAt,
+      String sentAt,
       bool isOwnComment});
 }
 
@@ -198,7 +197,7 @@ class __$$CommentImplCopyWithImpl<$Res>
       sentAt: null == sentAt
           ? _value.sentAt
           : sentAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       isOwnComment: null == isOwnComment
           ? _value.isOwnComment
           : isOwnComment // ignore: cast_nullable_to_non_nullable
@@ -218,7 +217,7 @@ class _$CommentImpl implements _Comment {
       required this.commentText,
       required this.authorProfilePic,
       required this.userName,
-      @CustomDateTimeConverter() required this.sentAt,
+      required this.sentAt,
       required this.isOwnComment});
 
   factory _$CommentImpl.fromJson(Map<String, dynamic> json) =>
@@ -239,8 +238,7 @@ class _$CommentImpl implements _Comment {
   @override
   final String userName;
   @override
-  @CustomDateTimeConverter()
-  final DateTime sentAt;
+  final String sentAt;
 // 👈 Aplica el conversor
   @override
   final bool isOwnComment;
@@ -311,7 +309,7 @@ abstract class _Comment implements Comment {
       required final String commentText,
       required final String authorProfilePic,
       required final String userName,
-      @CustomDateTimeConverter() required final DateTime sentAt,
+      required final String sentAt,
       required final bool isOwnComment}) = _$CommentImpl;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$CommentImpl.fromJson;
@@ -331,8 +329,7 @@ abstract class _Comment implements Comment {
   @override
   String get userName;
   @override
-  @CustomDateTimeConverter()
-  DateTime get sentAt; // 👈 Aplica el conversor
+  String get sentAt; // 👈 Aplica el conversor
   @override
   bool get isOwnComment;
 
