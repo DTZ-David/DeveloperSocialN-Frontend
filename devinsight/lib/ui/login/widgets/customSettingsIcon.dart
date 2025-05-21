@@ -20,26 +20,49 @@ class CustomSettingsIcon extends ConsumerWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
-              backgroundColor: Colors.black,
+              backgroundColor:
+                  const Color(0xFF181A20), // Example dark background
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               title: const Text(
                 "Cerrar sesión",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
-                    leading:
-                        const Icon(Icons.logout_outlined, color: Colors.blue),
-                    title: const Text('Cerrar sesión',
-                        style: TextStyle(color: Colors.white)),
+                    leading: const Icon(Icons.logout_outlined,
+                        color: Color(0xFF4F8FFF)),
+                    title: const Text(
+                      'Cerrar sesión',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: const Text('Se ha cerrado sesión'),
+                          backgroundColor: const Color(0xFF23262B),
+                          content: const Text(
+                            'Se ha cerrado sesión',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Colors.white,
+                            ),
+                          ),
                           action: SnackBarAction(
                             label: 'Ocultar',
-                            textColor: Colors.black,
+                            textColor: Colors.white,
                             onPressed: () {},
                           ),
                         ),
@@ -54,7 +77,11 @@ class CustomSettingsIcon extends ConsumerWidget {
                 TextButton(
                   child: const Text(
                     "Cerrar",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Color(0xFF4F8FFF),
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
