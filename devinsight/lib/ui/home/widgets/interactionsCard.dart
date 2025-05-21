@@ -1,4 +1,5 @@
 import 'package:devinsight/models/publication/comment.dart';
+import 'package:devinsight/ui/home/widgets/dialogInteractions.dart';
 import 'package:devinsight/ui/home/widgets/optionsDialog.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,12 @@ class InteractionCard extends StatelessWidget {
                     onTap: () {
                       showDialog(
                           context: context,
-                          builder: (_) => const OptionsDialog());
+                          builder: (_) => const InteractionDialog(
+                                title: 'Reportar interacción',
+                                message: 'Deseas reportar esta interacción?',
+                                cancelText: 'Cancelar',
+                                confirmText: 'Reportar',
+                              ));
                     },
                     child: const Icon(Icons.more_vert,
                         size: 20, color: Colors.grey),
