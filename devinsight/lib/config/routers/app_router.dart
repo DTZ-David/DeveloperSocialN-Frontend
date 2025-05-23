@@ -1,7 +1,8 @@
 import 'package:devinsight/ui/home/views/messageProfile.dart';
 import 'package:devinsight/ui/home/views/users_profile.dart';
-import 'package:devinsight/ui/login/screens/loginScreen.dart';
-import 'package:devinsight/ui/login/screens/registerScreen.dart';
+import 'package:devinsight/ui/login/widgets/login_form.dart';
+import 'package:devinsight/ui/login/screens/login_screen.dart';
+import 'package:devinsight/ui/login/widgets/register_form.dart';
 import 'package:devinsight/ui/login/views/onboardScreen1.dart';
 import 'package:devinsight/ui/login/views/onboardScreen2.dart';
 import 'package:devinsight/ui/login/views/onboardScreen3.dart';
@@ -25,11 +26,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.login,
         // CHANGE THIS AGAIN TO LOGIN SCREEN WHENEVER YOURE DONE WITH YOUR TASKS
         builder: (context, state) => const LoginScreen(),
-      ),
-      GoRoute(
-        path: AppRouter.registerUser,
-        name: AppRouter.registerUser,
-        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
         path: AppRouter.initial,

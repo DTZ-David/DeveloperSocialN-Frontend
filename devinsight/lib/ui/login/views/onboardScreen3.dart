@@ -3,6 +3,7 @@ import 'package:devinsight/config/providers/register_provider.dart';
 import 'package:devinsight/config/providers/selectedProvider.dart';
 import 'package:devinsight/config/routers/app_router.dart';
 import 'package:devinsight/services/login/auth_service.dart';
+import 'package:devinsight/ui/login/widgets/modern_snackbar.dart';
 import 'package:devinsight/ui/login/widgets/selectable_items_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -56,21 +57,15 @@ class OnboardingToolsPage extends ConsumerWidget {
             programmingLanguages: registerState.programmingLanguages,
           );
 
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Registro exitoso 🎉'),
-              backgroundColor: Colors.green,
-              duration: Duration(seconds: 2),
-            ),
-          );
-
+          ModernSnackBar.show(context, 'Registro Exitoso, Bienvenido!',
+              isError: false);
           await Future.delayed(const Duration(seconds: 2));
 
           ref.read(appRouterProvider).go('/main');
         } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error en el registro: $e')),
-          );
+          ModernSnackBar.show(
+              context, 'Ocurrio un error al continuar con el registro',
+              isError: true);
         }
       },
     );

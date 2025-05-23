@@ -9,4 +9,9 @@ class AppColors {
   static const Color tertiaryColors = Color(0xFF448AFF);
   static const Color quaternaryColors = Color(0xFF4CAF50);
   static const Color accent = Color(0xFF1ECAFF);
+
+  static const Color errorRed = Color(0xFFE74C3C);
+  static const Color successGreen = Color(0xFF2ECC71);
+  static const Color infoBlue = Color(0xFF3498DB);
+  static const Color warningYellow = Color(0xFFF1C40F);
 }
