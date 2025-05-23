@@ -32,7 +32,7 @@ class OptionsDialog extends StatelessWidget {
               letterSpacing: 0.2,
             ),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6),
           Divider(color: dividerColor, thickness: 1),
         ],
       ),
@@ -64,13 +64,13 @@ class OptionsDialog extends StatelessWidget {
           InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: () => Navigator.of(context).pop(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 12),
               child: Row(
                 children: [
-                  const Icon(Icons.save, color: saveIconColor),
-                  const SizedBox(width: 14),
-                  const Text(
+                  Icon(Icons.save, color: saveIconColor),
+                  SizedBox(width: 14),
+                  Text(
                     'Guardar publicación',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
@@ -88,14 +88,14 @@ class OptionsDialog extends StatelessWidget {
           InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: () => Navigator.of(context).pop(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 12),
               child: Row(
                 children: [
-                  const Icon(Icons.report_problem_sharp,
+                  Icon(Icons.report_problem_sharp,
                       color: reportIconColor),
-                  const SizedBox(width: 14),
-                  const Text(
+                  SizedBox(width: 14),
+                  Text(
                     'Reportar publicación',
                     style: TextStyle(
                       fontFamily: 'Montserrat',

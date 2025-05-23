@@ -9,13 +9,13 @@ class InteractionDialog extends ConsumerWidget {
   final String cancelText;
 
   const InteractionDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.message,
     this.onConfirm,
     this.confirmText = 'OK',
     this.cancelText = 'Cancel',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
