@@ -1,4 +1,5 @@
 import 'package:devinsight/services/login/profile_service.dart';
+import 'package:devinsight/ui/login/widgets/modern_snackbar.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -165,8 +166,8 @@ class _OnboardingPage1State extends ConsumerState<OnboardingPage1> {
       if (uploadedUrl != null) {
         ref.read(registerProvider.notifier).setProfilePicture(uploadedUrl);
       } else {
-        // Si falló la subida, puedes mostrar un snackbar o alert
-        print('Error al subir la imagen');
+        ModernSnackBar.show(context, 'Ocurrio un error al subir la imagen',
+            isError: true);
         return;
       }
     }
