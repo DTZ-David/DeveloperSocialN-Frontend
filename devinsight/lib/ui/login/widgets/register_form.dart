@@ -67,6 +67,15 @@ class RegisterForm extends ConsumerWidget {
               return;
             }
 
+            if (email.isEmpty ||
+                !RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                    .hasMatch(email)) {
+              ModernSnackBar.show(
+                  context, 'El formato utilizado en el correo no es valido',
+                  isError: true);
+              return;
+            }
+
             ref.read(registerProvider.notifier).setUsername(username);
             ref.read(registerProvider.notifier).setEmail(email);
             ref.read(registerProvider.notifier).setPassword(password);
