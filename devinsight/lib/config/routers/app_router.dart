@@ -1,8 +1,7 @@
+import 'package:devinsight/ui/home/screens/profile_edit.dart';
 import 'package:devinsight/ui/home/views/messageProfile.dart';
 import 'package:devinsight/ui/home/views/users_profile.dart';
-import 'package:devinsight/ui/login/widgets/login_form.dart';
 import 'package:devinsight/ui/login/screens/login_screen.dart';
-import 'package:devinsight/ui/login/widgets/register_form.dart';
 import 'package:devinsight/ui/login/views/onboardScreen1.dart';
 import 'package:devinsight/ui/login/views/onboardScreen2.dart';
 import 'package:devinsight/ui/login/views/onboardScreen3.dart';
@@ -85,6 +84,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: AppRouter.message,
         builder: (context, state) => const MessageProfile(),
       ),
+      GoRoute(
+        path: AppRouter.editProfile,
+        name: AppRouter.editProfile,
+        builder: (context, state) => const EditProfileScreen(),
+      ),
     ],
   );
 });
@@ -105,4 +109,5 @@ sealed class AppRouter {
   static const explorer = '/explorer';
   static const profile = '/profile';
   static const message = '/message';
+  static const editProfile = '/edit_profile';
 }
