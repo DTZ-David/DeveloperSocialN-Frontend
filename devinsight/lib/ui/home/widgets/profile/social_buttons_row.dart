@@ -5,30 +5,40 @@ import '../../../theme/app_colors.dart';
 
 class SocialButtonsRow extends StatelessWidget {
   final String buttonText;
+  final VoidCallback onFollowPressed;
+  final bool isFollowing;
 
-  const SocialButtonsRow({super.key, required this.buttonText});
+  const SocialButtonsRow({
+    super.key,
+    required this.buttonText,
+    required this.onFollowPressed,
+    required this.isFollowing,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-          onPressed: () => print('Follow Action'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF1ABCFE),
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          child: ElevatedButton(
+            onPressed: onFollowPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: isFollowing ? Colors.red : const Color(0xFF1ABCFE),
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
-          ),
-          child: Text(
-            buttonText,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontFamily: "Montserrat",
-              fontWeight: FontWeight.bold,
+            child: Text(
+              buttonText,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),

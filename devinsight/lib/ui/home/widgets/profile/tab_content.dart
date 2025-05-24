@@ -5,13 +5,15 @@ import 'package:devinsight/ui/home/widgets/user_list.dart';
 import 'package:devinsight/ui/home/widgets/mediaCard.dart';
 
 import '../../../../models/publication/comment.dart';
+import '../../../../models/user/user_dto.dart';
 import '../interactionsCard.dart';
+import 'connectios_user_card.dart';
 
 Widget buildTabContent(
   int selectedTab,
   List<Post> posts,
   List<Comment> comments,
-  //List connections,
+  List<UserDto> connections,
 ) {
   switch (selectedTab) {
     case 0:
@@ -25,8 +27,9 @@ Widget buildTabContent(
         (comments) => InteractionCard(comment: comments),
       );
     case 2:
-      return const SliverFillRemaining(
-        child: UserList(searchQuery: ""),
+      return _buildSliverList<UserDto>(
+        connections,
+        (user) => ConnectionsUserCard(user: user),
       );
     case 3:
       return const MediaGallery();

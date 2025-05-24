@@ -26,6 +26,7 @@ mixin _$UserDto {
   String get bio => throw _privateConstructorUsedError;
   int get postsCount => throw _privateConstructorUsedError;
   int get followersCount => throw _privateConstructorUsedError;
+  bool get currentFollow => throw _privateConstructorUsedError;
 
   /// Serializes this UserDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +48,8 @@ abstract class $UserDtoCopyWith<$Res> {
       String profilePicture,
       String bio,
       int postsCount,
-      int followersCount});
+      int followersCount,
+      bool currentFollow});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? bio = null,
     Object? postsCount = null,
     Object? followersCount = null,
+    Object? currentFollow = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -97,6 +100,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      currentFollow: null == currentFollow
+          ? _value.currentFollow
+          : currentFollow // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       String profilePicture,
       String bio,
       int postsCount,
-      int followersCount});
+      int followersCount,
+      bool currentFollow});
 }
 
 /// @nodoc
@@ -136,6 +144,7 @@ class __$$UserDtoImplCopyWithImpl<$Res>
     Object? bio = null,
     Object? postsCount = null,
     Object? followersCount = null,
+    Object? currentFollow = null,
   }) {
     return _then(_$UserDtoImpl(
       email: null == email
@@ -162,6 +171,10 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      currentFollow: null == currentFollow
+          ? _value.currentFollow
+          : currentFollow // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -175,7 +188,8 @@ class _$UserDtoImpl implements _UserDto {
       required this.profilePicture,
       required this.bio,
       required this.postsCount,
-      required this.followersCount});
+      required this.followersCount,
+      required this.currentFollow});
 
   factory _$UserDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDtoImplFromJson(json);
@@ -192,10 +206,12 @@ class _$UserDtoImpl implements _UserDto {
   final int postsCount;
   @override
   final int followersCount;
+  @override
+  final bool currentFollow;
 
   @override
   String toString() {
-    return 'UserDto(email: $email, userName: $userName, profilePicture: $profilePicture, bio: $bio, postsCount: $postsCount, followersCount: $followersCount)';
+    return 'UserDto(email: $email, userName: $userName, profilePicture: $profilePicture, bio: $bio, postsCount: $postsCount, followersCount: $followersCount, currentFollow: $currentFollow)';
   }
 
   @override
@@ -212,13 +228,15 @@ class _$UserDtoImpl implements _UserDto {
             (identical(other.postsCount, postsCount) ||
                 other.postsCount == postsCount) &&
             (identical(other.followersCount, followersCount) ||
-                other.followersCount == followersCount));
+                other.followersCount == followersCount) &&
+            (identical(other.currentFollow, currentFollow) ||
+                other.currentFollow == currentFollow));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, email, userName, profilePicture,
-      bio, postsCount, followersCount);
+      bio, postsCount, followersCount, currentFollow);
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.
@@ -243,7 +261,8 @@ abstract class _UserDto implements UserDto {
       required final String profilePicture,
       required final String bio,
       required final int postsCount,
-      required final int followersCount}) = _$UserDtoImpl;
+      required final int followersCount,
+      required final bool currentFollow}) = _$UserDtoImpl;
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
 
@@ -259,6 +278,8 @@ abstract class _UserDto implements UserDto {
   int get postsCount;
   @override
   int get followersCount;
+  @override
+  bool get currentFollow;
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.

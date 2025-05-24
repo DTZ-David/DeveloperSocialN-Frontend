@@ -27,6 +27,7 @@ mixin _$User {
   String get bio => throw _privateConstructorUsedError;
   int get postsCount => throw _privateConstructorUsedError;
   int get followersCount => throw _privateConstructorUsedError;
+  bool get currentFollow => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $UserCopyWith<$Res> {
       String profilePicture,
       String bio,
       int postsCount,
-      int followersCount});
+      int followersCount,
+      bool currentFollow});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? bio = null,
     Object? postsCount = null,
     Object? followersCount = null,
+    Object? currentFollow = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -104,6 +107,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      currentFollow: null == currentFollow
+          ? _value.currentFollow
+          : currentFollow // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String profilePicture,
       String bio,
       int postsCount,
-      int followersCount});
+      int followersCount,
+      bool currentFollow});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? bio = null,
     Object? postsCount = null,
     Object? followersCount = null,
+    Object? currentFollow = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -174,6 +183,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      currentFollow: null == currentFollow
+          ? _value.currentFollow
+          : currentFollow // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -188,7 +201,8 @@ class _$UserImpl implements _User {
       this.profilePicture = '',
       this.bio = '',
       this.postsCount = 0,
-      this.followersCount = 0});
+      this.followersCount = 0,
+      this.currentFollow = false});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -213,10 +227,13 @@ class _$UserImpl implements _User {
   @override
   @JsonKey()
   final int followersCount;
+  @override
+  @JsonKey()
+  final bool currentFollow;
 
   @override
   String toString() {
-    return 'User(id: $id, userName: $userName, email: $email, profilePicture: $profilePicture, bio: $bio, postsCount: $postsCount, followersCount: $followersCount)';
+    return 'User(id: $id, userName: $userName, email: $email, profilePicture: $profilePicture, bio: $bio, postsCount: $postsCount, followersCount: $followersCount, currentFollow: $currentFollow)';
   }
 
   @override
@@ -234,13 +251,15 @@ class _$UserImpl implements _User {
             (identical(other.postsCount, postsCount) ||
                 other.postsCount == postsCount) &&
             (identical(other.followersCount, followersCount) ||
-                other.followersCount == followersCount));
+                other.followersCount == followersCount) &&
+            (identical(other.currentFollow, currentFollow) ||
+                other.currentFollow == currentFollow));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, userName, email,
-      profilePicture, bio, postsCount, followersCount);
+      profilePicture, bio, postsCount, followersCount, currentFollow);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -266,7 +285,8 @@ abstract class _User implements User {
       final String profilePicture,
       final String bio,
       final int postsCount,
-      final int followersCount}) = _$UserImpl;
+      final int followersCount,
+      final bool currentFollow}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -284,6 +304,8 @@ abstract class _User implements User {
   int get postsCount;
   @override
   int get followersCount;
+  @override
+  bool get currentFollow;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

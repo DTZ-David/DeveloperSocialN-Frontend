@@ -14,6 +14,7 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
       bio: json['bio'] as String,
       postsCount: (json['postsCount'] as num).toInt(),
       followersCount: (json['followersCount'] as num).toInt(),
+      currentFollow: json['currentFollow'] as bool,
     );
 
 Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
       'bio': instance.bio,
       'postsCount': instance.postsCount,
       'followersCount': instance.followersCount,
+      'currentFollow': instance.currentFollow,
     };
