@@ -18,76 +18,96 @@ class CustomSettingsIcon extends ConsumerWidget {
       onPressed: () {
         showDialog(
           context: context,
+          barrierDismissible: true,
           builder: (context) {
-            return AlertDialog(
-              backgroundColor:
-                  const Color(0xFF181A20), // Example dark background
+            return Dialog(
+              backgroundColor: const Color(0xFF1F2228),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              title: const Text(
-                "Cerrar sesión",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.logout_outlined,
-                        color: Color(0xFF4F8FFF)),
-                    title: const Text(
-                      'Cerrar sesión',
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Cerrar sesión",
                       style: TextStyle(
                         color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
                         fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
                       ),
                     ),
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: const Color(0xFF23262B),
-                          content: const Text(
-                            'Se ha cerrado sesión',
+                    const SizedBox(height: 16),
+                    Text(
+                      "¿Estás seguro que deseas cerrar sesión?",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white70,
+                          ),
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text("Cancelar"),
+                        ),
+                        const SizedBox(width: 8),
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4F8FFF),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            elevation: 0,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 16),
+                          ),
+                          icon: const Icon(Icons.logout_outlined, size: 18),
+                          label: const Text(
+                            "Cerrar sesión",
                             style: TextStyle(
+                              fontWeight: FontWeight.w600,
                               fontFamily: 'Montserrat',
-                              color: Colors.white,
                             ),
                           ),
-                          action: SnackBarAction(
-                            label: 'Ocultar',
-                            textColor: Colors.white,
-                            onPressed: () {},
-                          ),
-                        ),
-                      );
+                          onPressed: () {
+                            Navigator.of(context).pop(); // cerrar diálogo
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: const Color(0xFF23262B),
+                                content: const Text(
+                                  'Se ha cerrado sesión',
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                action: SnackBarAction(
+                                  label: 'Ocultar',
+                                  textColor: Colors.white,
+                                  onPressed: () {},
+                                ),
+                              ),
+                            );
 
-                      ref.read(appRouterProvider).go(AppRouter.login);
-                    },
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  child: const Text(
-                    "Cerrar",
-                    style: TextStyle(
-                      color: Color(0xFF4F8FFF),
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w500,
+                            ref.read(appRouterProvider).go(AppRouter.login);
+                          },
+                        ),
+                      ],
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                  ],
                 ),
-              ],
+              ),
             );
           },
         );
