@@ -39,9 +39,9 @@ class MyApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData.light(), // Tema claro
-      darkTheme: ThemeData.dark(), // Tema oscuro
-      themeMode: themeMode, // Aplica el modo almacenado
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeMode,
       routerConfig: ref.watch(appRouterProvider),
     );
   }

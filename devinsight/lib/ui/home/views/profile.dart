@@ -1,5 +1,8 @@
+import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/ui/login/widgets/svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../config/providers/comments_provider.dart';
 import '../../../config/providers/connections_provider.dart';
 import '../../../config/providers/mediaProvider.dart';
@@ -33,12 +36,14 @@ class Profile extends ConsumerWidget {
     final selectedTab = ref.watch(selectedProfileTabProvider);
     final feedState = ref.watch(profileFeedControllerProvider);
     final interactionsState = ref.watch(userInteractionsProvider);
+    final router = ref.read(appRouterProvider);
+
     final connectionsState = ref.watch(connectionsProvider);
     ref.watch(mediaProvider);
 
     return Scaffold(
       floatingActionButton: const MessageButton(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(router),
       backgroundColor: AppColors.thirdColors,
       body: CustomScrollView(
         slivers: [
@@ -91,7 +96,7 @@ class Profile extends ConsumerWidget {
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(GoRouter router) {
     return AppBar(
       shadowColor: AppColors.tertiaryColors,
       elevation: 0.2,
@@ -105,6 +110,19 @@ class Profile extends ConsumerWidget {
           fontFamily: 'Montserrat',
         ),
       ),
+      actions: [
+        IconButton(
+          icon: const SvgIcon(
+            assetName: 'assets/icons/pencil.svg',
+            color: Colors.white,
+            width: 24,
+            height: 24,
+          ),
+          onPressed: () {
+            router.go(AppRouter.editProfile);
+          },
+        ),
+      ],
     );
   }
 }
