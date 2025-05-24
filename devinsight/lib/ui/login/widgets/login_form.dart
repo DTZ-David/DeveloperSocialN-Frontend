@@ -1,4 +1,3 @@
-// login_form.dart
 import 'package:devinsight/ui/login/widgets/customButton.dart';
 import 'package:devinsight/ui/login/widgets/customTextField.dart';
 import 'package:devinsight/ui/login/widgets/modern_snackbar.dart';
@@ -9,82 +8,120 @@ import '../../../controller/feedController.dart';
 import '../../../controller/loginController.dart';
 import '../../../config/routers/app_router.dart';
 
-class LoginForm extends ConsumerWidget {
+class LoginForm extends ConsumerStatefulWidget {
   const LoginForm({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final userController = TextEditingController();
-    final passwordController = TextEditingController();
+  ConsumerState<LoginForm> createState() => _LoginFormState();
+}
 
-    return Column(
-      children: [
-        CustomTextField(
-          label: "Usuario",
-          icon: const SvgIcon(
-            assetName: 'assets/icons/login_user.svg',
-            color: Colors.white70,
-            height: 8,
-            width: 8,
+class _LoginFormState extends ConsumerState<LoginForm>
+    with SingleTickerProviderStateMixin {
+  late final TextEditingController userController;
+  late final TextEditingController passwordController;
+  late final AnimationController _animationController;
+  late final Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    userController = TextEditingController();
+    passwordController = TextEditingController();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeIn,
+    );
+
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    userController.dispose();
+    passwordController.dispose();
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: _fadeAnimation,
+      child: Column(
+        children: [
+          CustomTextField(
+            label: "Usuario",
+            icon: const SvgIcon(
+              assetName: 'assets/icons/login_user.svg',
+              color: Colors.white70,
+              height: 8,
+              width: 8,
+            ),
+            controller: userController,
           ),
-          controller: userController,
-        ),
-        const SizedBox(height: 20),
-        CustomTextField(
-          label: "Contraseña",
-          icon: const SvgIcon(
-            assetName: 'assets/icons/login_lock.svg',
-            color: Colors.white70,
-            height: 8,
-            width: 8,
+          const SizedBox(height: 20),
+          CustomTextField(
+            label: "Contraseña",
+            icon: const SvgIcon(
+              assetName: 'assets/icons/login_lock.svg',
+              color: Colors.white70,
+              height: 8,
+              width: 8,
+            ),
+            isPassword: true,
+            controller: passwordController,
           ),
-          isPassword: true,
-          controller: passwordController,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 16.0, top: 8, bottom: 8),
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {},
-              child: const Text(
-                "¿Olvidaste tu contraseña?",
-                style: TextStyle(
-                  color: Color(0xFF1ABCFE),
-                  fontFamily: "Montserrat",
-                  fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0, top: 8, bottom: 8),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "¿Olvidaste tu contraseña?",
+                  style: TextStyle(
+                    color: Color(0xFF1ABCFE),
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 10),
-        CustomButton(
-          text: "Iniciar Sesión",
-          onPressed: () async {
-            final username = userController.text;
-            final password = passwordController.text;
+          const SizedBox(height: 10),
+          CustomButton(
+            text: "Iniciar Sesión",
+            onPressed: () async {
+              final username = userController.text;
+              final password = passwordController.text;
 
-            if (username.isEmpty || password.isEmpty) {
-              ModernSnackBar.show(
-                  context, 'Completa todos los campos antes de continuar',
-                  isError: true);
-              return;
-            }
+              if (username.isEmpty || password.isEmpty) {
+                ModernSnackBar.show(
+                    context, 'Completa todos los campos antes de continuar',
+                    isError: true);
+                return;
+              }
 
-            final controller = ref.read(loginControllerProvider);
-            final success = await controller.login(username, password);
+              final controller = ref.read(loginControllerProvider);
+              final success = await controller.login(username, password);
 
-            if (success) {
-              ref.read(feedControllerProvider.notifier).loadFeed();
-              ref.read(appRouterProvider).go(AppRouter.initial);
-            } else {
-              ModernSnackBar.show(context, 'No fue posible iniciar sesión',
-                  isError: true);
-            }
-          },
-        ),
-      ],
+              if (success) {
+                ref.read(feedControllerProvider.notifier).loadFeed();
+                ref.read(appRouterProvider).go(AppRouter.initial);
+              } else {
+                ModernSnackBar.show(context, 'No fue posible iniciar sesión',
+                    isError: true);
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }
