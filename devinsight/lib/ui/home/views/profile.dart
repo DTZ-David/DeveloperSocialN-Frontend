@@ -42,7 +42,7 @@ class Profile extends ConsumerWidget {
     ref.watch(mediaProvider);
 
     return Scaffold(
-      floatingActionButton: const MessageButton(),
+      //floatingActionButton: const MessageButton(),
       appBar: _buildAppBar(router),
       backgroundColor: AppColors.thirdColors,
       body: CustomScrollView(
@@ -60,7 +60,8 @@ class Profile extends ConsumerWidget {
           feedState.when(
             data: (posts) => interactionsState.when(
               data: (comments) => connectionsState.when(
-                data: (connections) => buildTabContent(selectedTab, posts, comments, connections),
+                data: (connections) =>
+                    buildTabContent(selectedTab, posts, comments, connections),
                 loading: () => const SliverToBoxAdapter(
                   child: Center(child: CircularProgressIndicator()),
                 ),

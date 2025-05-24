@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:devinsight/config/providers/auth_provider.dart';
 import 'package:devinsight/config/providers/edit_profile_provider.dart';
 import 'package:devinsight/config/routers/app_router.dart';
+import 'package:devinsight/ui/home/widgets/profile/ConfirmSaveButton.dart';
 import 'package:devinsight/ui/login/widgets/modern_snackbar.dart';
 import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -88,16 +89,11 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         ),
         actions: [
           if (hasChanges)
-            TextButton(
-              onPressed: () => _saveChanges(context),
-              child: const Text(
-                "Guardar cambios",
-                style: TextStyle(
-                  color: Color(0xFF1ABCFE),
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Montserrat",
-                ),
-              ),
+            ConfirmSaveButton(
+              onSave: () {
+                // BASE DE DATOS
+                _saveChanges(context);
+              },
             ),
         ],
       ),
