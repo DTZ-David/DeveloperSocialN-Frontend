@@ -30,7 +30,7 @@ class CustomNotificationIcon extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Notificaciones",
                       style: TextStyle(
                         color: Colors.white,
@@ -42,7 +42,7 @@ class CustomNotificationIcon extends StatelessWidget {
                     const SizedBox(height: 16),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.email,
                         color: AppColors.tertiaryColors,
                       ),

@@ -60,7 +60,8 @@ class Profile extends ConsumerWidget {
           feedState.when(
             data: (posts) => interactionsState.when(
               data: (comments) => connectionsState.when(
-                data: (connections) => buildTabContent(selectedTab, posts, comments, connections),
+                data: (connections) =>
+                    buildTabContent(selectedTab, posts, comments, connections),
                 loading: () => const SliverToBoxAdapter(
                   child: Center(child: CircularProgressIndicator()),
                 ),

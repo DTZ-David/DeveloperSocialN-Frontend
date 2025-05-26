@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:devinsight/models/publication/post.dart';
 import 'package:devinsight/ui/home/widgets/publicationsCard.dart';
-import 'package:devinsight/ui/home/widgets/user_list.dart';
 import 'package:devinsight/ui/home/widgets/mediaCard.dart';
 
 import '../../../../models/publication/comment.dart';

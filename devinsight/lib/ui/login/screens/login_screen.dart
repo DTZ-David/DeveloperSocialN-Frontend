@@ -1,6 +1,5 @@
 import 'package:devinsight/ui/login/widgets/auth_tabbed_widget.dart';
 import 'package:devinsight/ui/login/widgets/svg_icon.dart';
-import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

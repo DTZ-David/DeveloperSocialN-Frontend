@@ -2,7 +2,6 @@ import 'package:devinsight/models/user/user_dto.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../config/constants/app.dart';
-import '../../models/user/user.dart';
 
 class ConnectionsService {
   Future<List<UserDto>> fetchConnections(String token) async {
