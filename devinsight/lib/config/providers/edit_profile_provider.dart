@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'package:devinsight/repositories/user_profile_repository.dart';
+import 'package:devinsight/services/profile/user_profile_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../config/providers/auth_provider.dart';
 
 // Modelo de estado para la edición del perfil
 class EditProfileState {
@@ -32,7 +36,9 @@ class EditProfileState {
 
 // Lógica de negocio
 class EditProfileNotifier extends StateNotifier<EditProfileState> {
-  EditProfileNotifier() : super(EditProfileState());
+  final Ref ref;
+
+  EditProfileNotifier(this.ref) : super(EditProfileState());
 
   void loadInitialData({
     required String username,
@@ -63,23 +69,37 @@ class EditProfileNotifier extends StateNotifier<EditProfileState> {
   }
 
   Future<void> saveChanges() async {
-    final updatedUsername = state.username;
-    final updatedEmail = state.email;
-    final updatedImage = state.profileImage;
+    final token = ref.read(authProvider).token;
+    final repository = ref.read(userRepositoryProvider);
 
-    // Aquí normalmente harías llamadas a un repositorio o servicio
-    // Por ejemplo:
-    // await userRepository.updateUserProfile(...);
+    try {
+      // Actualizar username
+      if (state.username.isNotEmpty) {
+        await repository.updateUsername(token, state.username);
+      }
 
-    // Simulamos un delay como si fuera una API
-    await Future.delayed(const Duration(seconds: 1));
+      // Subir imagen si hay una nueva seleccionada
+      if (state.profileImage != null) {
+        final bytes = await state.profileImage!.readAsBytes();
+        final base64Image = base64Encode(bytes);
+        await repository.updateProfilePicture(token, base64Image);
+      }
 
-    // Aquí podrías limpiar la imagen seleccionada, si ya fue subida
-    state = state.copyWith(profileImage: null);
+      // Limpiar imagen seleccionada tras subida
+      state = state.copyWith(profileImage: null);
+    } catch (e) {
+      print('Error al guardar cambios: $e');
+      // Puedes manejar errores aquí si necesitas mostrar en UI
+    }
   }
 }
 
-final editProfileProvider =
-    StateNotifierProvider<EditProfileNotifier, EditProfileState>(
-  (ref) => EditProfileNotifier(),
+// Proveedor de repositorio
+final userRepositoryProvider = Provider<UserProfileRepository>((ref) {
+  return UserProfileRepository(UserProfileService());
+});
+
+// Proveedor del controlador de edición de perfil
+final editProfileProvider = StateNotifierProvider<EditProfileNotifier, EditProfileState>(
+  (ref) => EditProfileNotifier(ref),
 );

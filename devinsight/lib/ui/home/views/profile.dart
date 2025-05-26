@@ -42,7 +42,7 @@ class Profile extends ConsumerWidget {
     ref.watch(mediaProvider);
 
     return Scaffold(
-      floatingActionButton: const MessageButton(),
+      //floatingActionButton: const MessageButton(),
       appBar: _buildAppBar(router),
       backgroundColor: AppColors.thirdColors,
       body: CustomScrollView(

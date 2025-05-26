@@ -11,8 +11,8 @@ class AuthService {
       url,
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
-        'email': "dev123@example.com",
-        'password': "SecurePass123",
+        'email': username,
+        'password': password,
       }),
     );
 
