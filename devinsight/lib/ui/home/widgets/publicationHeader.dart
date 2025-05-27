@@ -1,4 +1,5 @@
 import 'package:devinsight/ui/home/widgets/optionsDialog.dart';
+import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 /*
@@ -38,7 +39,12 @@ class PublicationHeader extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage(userIcon),
+                backgroundColor: userIcon == "" || userIcon.isEmpty
+                    ? AppColors.accent
+                    : null,
+                backgroundImage: (userIcon != "" && userIcon.isNotEmpty)
+                    ? NetworkImage(userIcon)
+                    : null,
                 radius: 20, // Adjust the size as needed
               ),
               const SizedBox(width: 10), // Space between icon and text
@@ -71,7 +77,8 @@ class PublicationHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3.0),
             child: GestureDetector(
               onTap: () => {
-                showDialog(context: context, builder: (_) => const OptionsDialog()),
+                showDialog(
+                    context: context, builder: (_) => const OptionsDialog()),
               },
               child: SvgPicture.asset(
                 'assets/icons/verticaldots.svg',

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:devinsight/repositories/user_profile_repository.dart';
+import 'package:devinsight/services/login/profile_service.dart';
 import 'package:devinsight/services/profile/user_profile_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -44,11 +45,13 @@ class EditProfileNotifier extends StateNotifier<EditProfileState> {
     required String username,
     required String email,
     required String profileImageUrl,
+    XFile? profileImage,
   }) {
     state = state.copyWith(
       username: username,
       email: email,
       profileImageUrl: profileImageUrl,
+      profileImage: profileImage,
     );
   }
 
@@ -62,6 +65,10 @@ class EditProfileNotifier extends StateNotifier<EditProfileState> {
 
   void updateProfileImage(XFile image) {
     state = state.copyWith(profileImage: image);
+  }
+
+  void updateProfileImageUrl(String url) {
+    state = state.copyWith(profileImageUrl: url);
   }
 
   void clearChanges() {
@@ -78,11 +85,11 @@ class EditProfileNotifier extends StateNotifier<EditProfileState> {
         await repository.updateUsername(token, state.username);
       }
 
-      // Subir imagen si hay una nueva seleccionada
       if (state.profileImage != null) {
-        final bytes = await state.profileImage!.readAsBytes();
-        final base64Image = base64Encode(bytes);
-        await repository.updateProfilePicture(token, base64Image);
+        final uploadedUrl = await uploadImageToSupabase(state.profileImage!);
+        if (uploadedUrl != null) {
+          await repository.updateProfilePicture(token, uploadedUrl);
+        }
       }
 
       // Limpiar imagen seleccionada tras subida
@@ -100,6 +107,7 @@ final userRepositoryProvider = Provider<UserProfileRepository>((ref) {
 });
 
 // Proveedor del controlador de edición de perfil
-final editProfileProvider = StateNotifierProvider<EditProfileNotifier, EditProfileState>(
+final editProfileProvider =
+    StateNotifierProvider<EditProfileNotifier, EditProfileState>(
   (ref) => EditProfileNotifier(ref),
 );

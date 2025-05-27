@@ -8,6 +8,7 @@ import 'package:devinsight/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:devinsight/services/login/profile_service.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key});
@@ -174,7 +175,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: const TextStyle(color: Colors.white54),
+            hintStyle: const TextStyle(
+                color: Colors.white54, fontFamily: "Montserrat"),
             filled: true,
             fillColor: AppColors.background,
             border: OutlineInputBorder(
@@ -190,20 +192,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   void _saveChanges(BuildContext context) async {
     try {
       final editNotifier = ref.read(editProfileProvider.notifier);
-      // Guardamos los cambios (simulado)
       await editNotifier.saveChanges();
-
-      final username = ref.read(editProfileProvider).username;
-      final email = ref.read(editProfileProvider).email;
-      final profileImage =
-          _profileImage != null ? File(_profileImage!.path) : null;
-
       ModernSnackBar.show(
         context,
-        "Cambios guardados exitosamente para $username con correo $email con imagen ${profileImage?.path ?? 'sin cambios'}",
+        "Cambios guardados exitosamente",
         isError: false,
       );
-
       setState(() {
         originalUsername = _usernameController.text;
         originalEmail = _emailController.text;
