@@ -27,7 +27,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   void clear() {
-    state = AuthState(user: const User(id: "0", currentFollow: false), token: '');
+    state =
+        AuthState(user: const User(id: "0", currentFollow: false), token: '');
   }
 }
 

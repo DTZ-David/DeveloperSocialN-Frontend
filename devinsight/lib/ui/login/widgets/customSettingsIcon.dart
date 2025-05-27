@@ -31,7 +31,7 @@ class CustomSettingsIcon extends ConsumerWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Cerrar sesión",
                       style: TextStyle(
                         color: Colors.white,
@@ -41,7 +41,7 @@ class CustomSettingsIcon extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Text(
+                    const Text(
                       "¿Estás seguro que deseas cerrar sesión?",
                       textAlign: TextAlign.center,
                       style: TextStyle(

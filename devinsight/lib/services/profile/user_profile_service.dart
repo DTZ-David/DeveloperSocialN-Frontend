@@ -17,12 +17,14 @@ class UserProfileService {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Error al actualizar el nombre de usuario: ${response.body}');
+      throw Exception(
+          'Error al actualizar el nombre de usuario: ${response.body}');
     }
   }
 
-  Future<void> updateProfilePicture(String token, String base64Image) async {
-    final url = Uri.parse('${AppConfig.baseUrl}/usersocialinfo/updateprofilepic');
+  Future<void> updateProfilePicture(String token, String imageUrl) async {
+    final url =
+        Uri.parse('${AppConfig.baseUrl}/usersocialinfo/updateprofilepic');
 
     final response = await http.put(
       url,
@@ -30,11 +32,12 @@ class UserProfileService {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
-      body: jsonEncode({'profilePicture': base64Image}),
+      body: jsonEncode({'profilePicture': imageUrl}),
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Error al actualizar la foto de perfil: ${response.body}');
+      throw Exception(
+          'Error al actualizar la foto de perfil: ${response.body}');
     }
   }
 }
