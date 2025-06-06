@@ -11,6 +11,8 @@ class AuthState {
   });
 }
 
+final isLoadingProvider = StateProvider<bool>((ref) => false);
+
 class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier()
       : super(AuthState(

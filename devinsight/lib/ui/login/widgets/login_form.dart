@@ -4,6 +4,7 @@ import 'package:devinsight/ui/login/widgets/modern_snackbar.dart';
 import 'package:devinsight/ui/login/widgets/svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../config/providers/auth_provider.dart';
 import '../../../controller/feedController.dart';
 import '../../../controller/loginController.dart';
 import '../../../config/routers/app_router.dart';
@@ -25,6 +26,7 @@ class _LoginFormState extends ConsumerState<LoginForm>
   @override
   void initState() {
     super.initState();
+
     userController = TextEditingController();
     passwordController = TextEditingController();
 
@@ -51,6 +53,8 @@ class _LoginFormState extends ConsumerState<LoginForm>
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(isLoadingProvider);
+
     return FadeTransition(
       opacity: _fadeAnimation,
       child: Column(
@@ -97,6 +101,7 @@ class _LoginFormState extends ConsumerState<LoginForm>
           const SizedBox(height: 10),
           CustomButton(
             text: "Iniciar Sesión",
+            isLoading: isLoading,
             onPressed: () async {
               final username = userController.text;
               final password = passwordController.text;
@@ -108,8 +113,12 @@ class _LoginFormState extends ConsumerState<LoginForm>
                 return;
               }
 
+              ref.read(isLoadingProvider.notifier).state = true;
+
               final controller = ref.read(loginControllerProvider);
               final success = await controller.login(username, password);
+
+              ref.read(isLoadingProvider.notifier).state = false;
 
               if (success) {
                 ref.read(feedControllerProvider.notifier).loadFeed();
@@ -119,7 +128,7 @@ class _LoginFormState extends ConsumerState<LoginForm>
                     isError: true);
               }
             },
-          ),
+          )
         ],
       ),
     );
